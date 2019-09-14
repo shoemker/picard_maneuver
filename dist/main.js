@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/game_view.js":
+/*!**************************!*\
+  !*** ./src/game_view.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx = ctx;\n\t\tthis.game = new Game(width, height, map);\n\t}\n\n\tstart() {\n\t\tthis.lastTime = 0;\n\n\t\t// start the animation\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\n\tanimate(time) {\n\t\tconst timeDelta = time - this.lastTime;\n\t\tthis.game.draw(this.ctx);\n\t\tthis.game.step(timeDelta);\n\t\tthis.lastTime = time;\n\n\t\t// every call to animate requests causes another call to animate\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t}\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -93,18 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const MovingObject = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\n\nwindow.MovingObject = MovingObject;\nconsole.log(\"Webpack  is working!\")\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n\tconst canvasEl = document.getElementsByTagName(\"canvas\")[0];\n\tcanvasEl.width = 750;\n\n\tcanvasEl.height = 750;\n\n\tconst ctxMain = canvasEl.getContext(\"2d\");\n})\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/ship.js":
-/*!*********************!*\
-  !*** ./src/ship.js ***!
-  \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("class MovingObject {\n\tconstructor(options) {\n\n\t\tthis.pos = options.pos;\n\t\tthis.vel = options.vel;\n\t\tthis.loadShipImg();\n\n\t}\n\t\n\tmove() {\n\t\tthis.pos[0] += this.vel[0];\n\t\tthis.pos[1] += this.vel[1];\n\t}\n\t\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 15, 15,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = './images/uss-enterprise-png-view-original-669.png';\n\t}\n}\n\nmodule.exports = MovingObject\n\n//# sourceURL=webpack:///./src/ship.js?");
+eval("const GameView = __webpack_require__(/*! ./game_view */ \"./src/game_view.js\");\n\n\n// window.MovingObject = MovingObject;\n// console.log(\"Webpack  is working!\")\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n\tconst canvasEl = document.getElementsByTagName(\"canvas\")[0];\n\tcanvasEl.width = 750;\n\n\tcanvasEl.height = 750;\n\tlet g = new GameView(ctxMain, canvasEl.width, canvasEl.height);\n\tg.start(ctxMain)\n\n\tconst ctxMain = canvasEl.getContext(\"2d\");\n})\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
