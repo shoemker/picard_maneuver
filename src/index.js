@@ -9,8 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	canvasEl.width = 750;
 
 	canvasEl.height = 750;
-	let g = new GameView(ctxMain, canvasEl.width, canvasEl.height);
-	g.start(ctxMain)
 
 	const ctxMain = canvasEl.getContext("2d");
+
+	let g = new GameView(ctxMain, canvasEl.width, canvasEl.height);
+
+
+	g.start(ctxMain);
+
 })

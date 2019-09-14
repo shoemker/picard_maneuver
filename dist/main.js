@@ -86,14 +86,36 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/enterprise.js":
+/*!***************************!*\
+  !*** ./src/enterprise.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclass Enterprise extends Ship {\n\tconstructor(options) {\n\t\tsuper(options);\n\t\tthis.width = 100;\n\t\tthis.height = 50\n\t\tthis.loadShipImg();\n\t\n\t}\n\n\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 1000, 500,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';\n\t}\n}\n\n\nmodule.exports = Enterprise\n\n//# sourceURL=webpack:///./src/enterprise.js?");
+
+/***/ }),
+
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\nclass Game {\n\n\tconstructor(dim_x, dim_y) {\n\t\tthis.dim_x = dim_x;\n\t\tthis.dim_y = dim_y;\n\n\t}\n\n\taddEnterprise(enterprise){\n\t\tthis.enterprise = enterprise;\n\t}\n\n\tstep(timeDelta) {\n\t\tthis.moveObjects(timeDelta);\n\t}\n\n\tdraw(ctx){\n\t\tctx.clearRect(0, 0, this.dim_x, this.dim_y);\n\t\tctx.fillStyle = \"black\";\n\t\tctx.fillRect(0, 0, this.dim_x, this.dim_y);\n\t\tthis.enterprise.draw(ctx);\n\t}\n\n\tmoveObjects(timeDelta) {\n\t\tthis.enterprise.move(timeDelta);\n\t}\n\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+
+/***/ }),
+
 /***/ "./src/game_view.js":
 /*!**************************!*\
   !*** ./src/game_view.js ***!
   \**************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx = ctx;\n\t\tthis.game = new Game(width, height, map);\n\t}\n\n\tstart() {\n\t\tthis.lastTime = 0;\n\n\t\t// start the animation\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\n\tanimate(time) {\n\t\tconst timeDelta = time - this.lastTime;\n\t\tthis.game.draw(this.ctx);\n\t\tthis.game.step(timeDelta);\n\t\tthis.lastTime = time;\n\n\t\t// every call to animate requests causes another call to animate\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t}\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
+eval("const  Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Enterprise = __webpack_require__(/*! ./enterprise */ \"./src/enterprise.js\");\n\n\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx = ctx;\n\t\tthis.game = new Game(width, height);\n\t\tthis.game.addEnterprise(new Enterprise({\n\t\t\tpos: [50, 50],\n\t\t\tvel: [1, 1]\n\t\t}));\n\t}\n\n\tstart() {\n\t\tthis.lastTime = 0;\n\n\t\t// start the animation\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\n\tanimate(time) {\n\t\tconst timeDelta = time - this.lastTime;\n\t\tthis.game.step(timeDelta);\n\t\tthis.game.draw(this.ctx);\n\n\t\tthis.lastTime = time;\n\n\t\t// every call to animate requests causes another call to animate\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\t\n\tbindKeyHandlers() {\n\n\t\tconst MOVES = {\n\t\t\tw: [0, -1],\n\t\t\ta: [-1, 0],\n\t\t\ts: [0, 1],\n\t\t\td: [1, 0],\n\t\t};\n\n\t\tconst ship = this.game.enterprise;\n\n\t\tObject.keys(MOVES).forEach(function (k) {\n\t\t\tconst move = MOVES[k];\n\t\t\tkey(k, function () { ship.power(move); });\n\t\t});\n\n\t\t// key(\"space\", function () { ship.fireBullet(); });\n\n\t}\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
 
 /***/ }),
 
@@ -104,7 +126,18 @@ eval("\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const GameView = __webpack_require__(/*! ./game_view */ \"./src/game_view.js\");\n\n\n// window.MovingObject = MovingObject;\n// console.log(\"Webpack  is working!\")\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n\tconst canvasEl = document.getElementsByTagName(\"canvas\")[0];\n\tcanvasEl.width = 750;\n\n\tcanvasEl.height = 750;\n\tlet g = new GameView(ctxMain, canvasEl.width, canvasEl.height);\n\tg.start(ctxMain)\n\n\tconst ctxMain = canvasEl.getContext(\"2d\");\n})\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const GameView = __webpack_require__(/*! ./game_view */ \"./src/game_view.js\");\n\n\n// window.MovingObject = MovingObject;\n// console.log(\"Webpack  is working!\")\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n\tconst canvasEl = document.getElementsByTagName(\"canvas\")[0];\n\tcanvasEl.width = 750;\n\n\tcanvasEl.height = 750;\n\n\tconst ctxMain = canvasEl.getContext(\"2d\");\n\n\tlet g = new GameView(ctxMain, canvasEl.width, canvasEl.height);\n\n\n\tg.start(ctxMain);\n\n})\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/ship.js":
+/*!*********************!*\
+  !*** ./src/ship.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("class Ship {\n\tconstructor(options) {\n\n\t\tthis.pos = options.pos;\n\t\tthis.vel = options.vel;\n\n\n\n\t}\n\t\n\tmove() {\n\t\tthis.pos[0] += this.vel[0];\n\t\tthis.pos[1] += this.vel[1];\n\t};\n\t\n\tpower(impulse) {\n\t\tthis.vel[0] += impulse[0];\n\t\tthis.vel[1] += impulse[1];\n\t};\n\n}\n\nmodule.exports = Ship\n\n//# sourceURL=webpack:///./src/ship.js?");
 
 /***/ })
 
