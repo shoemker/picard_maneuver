@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclass D7 extends Ship {\n\tconstructor(options) {\n\t\tsuper(options);\n\t\tthis.width = 100;\n\t\tthis.height = 50\n\t\tthis.loadShipImg();\n\n\t}\n\n\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 1000, 500,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = '../images/D7.png';\n\n\t}\n\n\trotateCC() { console.log(\"cc\") }\n\trotateCL() { console.log(\"cl\") }\n}\n\n\nmodule.exports = D7\n\n//# sourceURL=webpack:///./src/D7.js?");
+eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclass D7 extends Ship {\n\tconstructor(options) {\n\t\tsuper(options);\n\t\tthis.width = 100;\n\t\tthis.height = 50\n\t\tthis.loadShipImg();\n\n\t}\n\n\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 1000, 500,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = '../images/D7.png';\n\n\t}\n\n\trotateCC() { console.log(\"cc\") }\n\trotateCL() { console.log(\"cl\") }\n}\n\n\nmodule.exports = D7\n\n//# sourceURL=webpack:///./src/D7.js?");
 
 /***/ }),
 

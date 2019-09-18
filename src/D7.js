@@ -17,7 +17,6 @@ class D7 extends Ship {
 			this.pos[1],
 			this.width,
 			this.height);
-
 	}
 
 
