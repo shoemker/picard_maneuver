@@ -8,14 +8,14 @@ class Game {
 		this.dim_x = dim_x;
 		this.dim_y = dim_y;
 
-		this.D7 = new D7({
-			pos: [0, 0],
-			directionIndex: 0
-		})
 	}
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
+	}
+
+	addEnemy(enemy){
+		this.enemy = enemy
 	}
 
 	step(timeDelta) {
@@ -28,7 +28,7 @@ class Game {
 		ctx.fillStyle = "black";
 		ctx.fillRect(0, 0, this.dim_x, this.dim_y);
 		this.enterprise.draw(ctx);
-		this.D7.draw(ctx);
+		this.enemy.draw(ctx);
 	}
 
 	moveObjects(timeDelta) {

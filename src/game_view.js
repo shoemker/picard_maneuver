@@ -8,9 +8,15 @@ class GameView {
 
 		this.ctx = ctx;
 		this.game = new Game(width, height);
+
 		this.game.addEnterprise(new Enterprise({
 			pos: [300, 300],
 			directionIndex: 12
+		}));
+
+		this.game.addEnemy( new D7({
+			pos: [0, 0],
+			directionIndex: 0
 		}));
 
 		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
@@ -52,18 +58,21 @@ class GameView {
 		}
 
 		const ship = this.game.enterprise;
+		const enemy = this.game.enemy;
 
 		Object.keys(MOVES).forEach(function (k) {
 			const move = MOVES[k];
 			key(k, function () { ship.power(move); });
 		});
 
-		const that = this;
 		// key("space", function () { ship.fireBullet(); });
 		
 		//call to rotate ship image
-		key("a", function () { that.game.enterprise.rotateCC(); });
-		key("d", function () { that.game.enterprise.rotateCL();; });
+		key("a", function () { ship.rotateCC(); });
+		key("d", function () { ship.rotateCL(); });
+
+		key("j", function () { enemy.rotateCC(); });
+		key("l", function () { enemy.rotateCL(); });
 
 	}
 }

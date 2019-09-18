@@ -11,32 +11,33 @@ class Ship {
 
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 12;
+		
 
 		this.directionArray = [
 			[3,0],
-			[3,1],
-			[3,2],
-			[3,3],
-			[2,3],
-			[1,3],
-			[0,3],
-			[-1,3],
-			[-2,3],
-			[-3,3],
-			[-3,2],
-			[-3,1],
-			[-3,0],
-			[-3,-1],
-			[-3,-2],
-			[-3,-3],
-			[-2,-3],
-			[-1,-3],
-			[0,-3],
-			[1,-3],
-			[2,-3],
-			[3,-3],
+			[3,-1],
 			[3,-2],
-			[3,-1]
+			[3,-3],
+			[2,-3],
+			[1,-3],
+			[0,-3],
+			[-1,-3],
+			[-2,-3],
+			[-3,-3],
+			[-3,-2],
+			[-3,-1],
+			[-3,0],
+			[-3,1],
+			[-3,2],
+			[-3,3],
+			[-2,3],
+			[-1,3],
+			[0,3],
+			[1,3],
+			[2,3],
+			[3,3],
+			[3,2],
+			[3,1]
 		];
 
 	}
@@ -48,8 +49,11 @@ class Ship {
 	};
 	
 	move() {
-		this.pos[0] += this.vel*this.directionArray[this.directionIndex][0];
-		this.pos[1] -= this.vel *this.directionArray[this.directionIndex][1];
+
+			this.pos[0] += this.vel*this.directionArray[this.directionIndex][0];
+			this.pos[1] += this.vel *this.directionArray[this.directionIndex][1];
+			this.wait = true;
+
 		
 	};
 	
@@ -63,7 +67,6 @@ class Ship {
 		this.rotationOffset -= this.increment;
 		if (this.directionIndex === 23) this.directionIndex = 0;
 		else this.directionIndex++;
-		console.log(this.directionArray[this.directionIndex]);
 
 	};
 
@@ -71,7 +74,6 @@ class Ship {
 		this.rotationOffset += this.increment;
 		if (this.directionIndex === 0) this.directionIndex = 23;
 		else this.directionIndex--;
-		console.log(this.directionArray[this.directionIndex]);
 
 	};
 }
