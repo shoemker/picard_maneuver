@@ -8,9 +8,9 @@ class Game {
 		this.dim_x = dim_x;
 		this.dim_y = dim_y;
 
-		this.D7 = new Enterprise({
+		this.D7 = new D7({
 			pos: [0, 0],
-			vel: [0, 0]
+			directionIndex: 0
 		})
 	}
 

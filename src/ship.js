@@ -2,8 +2,10 @@ class Ship {
 	constructor(options) {
 
 		this.pos = options.pos;
-		this.vel = options.vel;
+	
+		this.directionIndex = options.directionIndex;
 
+		this.vel = 0;
 		this.width = 50;
 		this.height = 25
 
@@ -29,7 +31,7 @@ class Ship {
 			[-3,-3],
 			[-2,-3],
 			[-1,-3],
-			[0,-3]
+			[0,-3],
 			[1,-3],
 			[2,-3],
 			[3,-3],
@@ -43,26 +45,34 @@ class Ship {
 		ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
 		ctx.rotate(this.rotationOffset);
 		ctx.translate(-(this.pos[0] + this.width / 2), -(this.pos[1] + this.height / 2));
-	}
+	};
 	
 	move() {
-		this.pos[0] += this.vel[0];
-		this.pos[1] += this.vel[1];
+		this.pos[0] += this.vel*this.directionArray[this.directionIndex][0];
+		this.pos[1] -= this.vel *this.directionArray[this.directionIndex][1];
+		
 	};
 	
 	power(impulse) {
 	
-		this.vel[0] += impulse[0];
-		this.vel[1] += impulse[1];
-		console.log(this.vel);
+		this.vel += impulse;
+		
 	};
 
 	rotateCC() { 
-		this.rotationOffset -= this.increment 
+		this.rotationOffset -= this.increment;
+		if (this.directionIndex === 23) this.directionIndex = 0;
+		else this.directionIndex++;
+		console.log(this.directionArray[this.directionIndex]);
+
 	};
 
 	rotateCL() {
-		this.rotationOffset += this.increment
+		this.rotationOffset += this.increment;
+		if (this.directionIndex === 0) this.directionIndex = 23;
+		else this.directionIndex--;
+		console.log(this.directionArray[this.directionIndex]);
+
 	};
 }
 

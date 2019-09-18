@@ -13,7 +13,9 @@ class Enterprise extends Ship {
 	}
 
 	draw(ctx) {
+		ctx.save();
 
+		this.rotateCanvas(ctx);
 
 		ctx.drawImage(this.shipImg, 0, 0, 660, 300,
 			this.pos[0],
@@ -21,6 +23,7 @@ class Enterprise extends Ship {
 			this.width,
 			this.height);
 
+		ctx.restore();
 	}
 
 

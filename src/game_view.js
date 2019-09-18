@@ -8,9 +8,9 @@ class GameView {
 
 		this.ctx = ctx;
 		this.game = new Game(width, height);
-		this.game.addEnterprise(new D7({
+		this.game.addEnterprise(new Enterprise({
 			pos: [300, 300],
-			vel: [0,0]
+			directionIndex: 12
 		}));
 
 		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
@@ -39,12 +39,17 @@ class GameView {
 	
 	bindKeyHandlers() {
 
+		// const MOVES = {
+		// 	w: [0, -1],
+		// 	a: [-1, 0],
+		// 	s: [0, 1],
+		// 	d: [1, 0],
+		// };
+
 		const MOVES = {
-			w: [0, -1],
-			// a: [-1, 0],
-			s: [0, 1],
-			// d: [1, 0],
-		};
+			w: 1,
+			s:-1
+		}
 
 		const ship = this.game.enterprise;
 
