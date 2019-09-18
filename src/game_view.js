@@ -56,6 +56,7 @@ class GameView {
 		const that = this;
 		// key("space", function () { ship.fireBullet(); });
 		
+		//call to rotate ship image
 		key("a", function () { that.game.enterprise.rotateCC(); });
 		key("d", function () { that.game.enterprise.rotateCL();; });
 
