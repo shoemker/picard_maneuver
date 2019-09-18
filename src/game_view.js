@@ -12,9 +12,13 @@ class GameView {
 			pos: [50, 50],
 			vel: [1, 1]
 		}));
+
+		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
 	}
 
 	start() {
+		this.bindKeyHandlers();
+
 		this.lastTime = 0;
 
 		// start the animation
@@ -36,9 +40,9 @@ class GameView {
 
 		const MOVES = {
 			w: [0, -1],
-			a: [-1, 0],
+			// a: [-1, 0],
 			s: [0, 1],
-			d: [1, 0],
+			// d: [1, 0],
 		};
 
 		const ship = this.game.enterprise;
@@ -48,7 +52,11 @@ class GameView {
 			key(k, function () { ship.power(move); });
 		});
 
+		const that = this;
 		// key("space", function () { ship.fireBullet(); });
+		debugger
+		key("a", function () { that.game.enterprise.rotateCC(); });
+		key("d", function () { that.game.enterprise.rotateCL();; });
 
 	}
 }

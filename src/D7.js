@@ -1,12 +1,12 @@
 const Ship = require("./ship");
 
-class Enterprise extends Ship {
+class D7 extends Ship {
 	constructor(options) {
 		super(options);
 		this.width = 100;
 		this.height = 50
 		this.loadShipImg();
-	
+
 	}
 
 
@@ -24,13 +24,13 @@ class Enterprise extends Ship {
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
-		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
+		this.shipImg.src = '../images/D7.png';
 
 	}
 
-	rotateCC() {console.log("cc")}
+	rotateCC() { console.log("cc") }
 	rotateCL() { console.log("cl") }
 }
 
 
-module.exports = Enterprise
+module.exports = D7
