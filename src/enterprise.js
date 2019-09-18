@@ -9,8 +9,12 @@ class Enterprise extends Ship {
 	
 	}
 
+	center() {
+		
+	}
 
 	draw(ctx) {
+
 
 		ctx.drawImage(this.shipImg, 0, 0, 1000, 500,
 			this.pos[0],
@@ -28,8 +32,6 @@ class Enterprise extends Ship {
 
 	}
 
-	rotateCC() {console.log("cc")}
-	rotateCL() { console.log("cl") }
 }
 
 

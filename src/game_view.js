@@ -9,11 +9,12 @@ class GameView {
 		this.ctx = ctx;
 		this.game = new Game(width, height);
 		this.game.addEnterprise(new D7({
-			pos: [50, 50],
-			vel: [1, 1]
+			pos: [300, 300],
+			vel: [0,0]
 		}));
 
 		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
+	
 	}
 
 	start() {

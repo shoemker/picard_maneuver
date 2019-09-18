@@ -4,7 +4,8 @@ class Ship {
 		this.pos = options.pos;
 		this.vel = options.vel;
 
-
+		this.rotationOffset = 0;
+		this.increment = 2;
 
 	}
 	
@@ -19,6 +20,13 @@ class Ship {
 		this.vel[1] += impulse[1];
 	};
 
+	rotateCC() { 
+		this.rotationOffset -= this.increment 
+	};
+
+	rotateCL() {
+		this.rotationOffset += this.increment
+	};
 }
 
 module.exports = Ship
