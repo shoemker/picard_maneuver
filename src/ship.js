@@ -4,17 +4,44 @@ class Ship {
 		this.pos = options.pos;
 		this.vel = options.vel;
 
-		this.width = 100;
-		this.height = 50
+		this.width = 50;
+		this.height = 25
 
 		this.rotationOffset = 0;
-		this.increment = 2;
+		this.increment = Math.PI / 12;
+
+		this.directionArray = [
+			[3,0],
+			[3,1],
+			[3,2],
+			[3,3],
+			[2,3],
+			[1,3],
+			[0,3],
+			[-1,3],
+			[-2,3],
+			[-3,3],
+			[-3,2],
+			[-3,1],
+			[-3,0],
+			[-3,-1],
+			[-3,-2],
+			[-3,-3],
+			[-2,-3],
+			[-1,-3],
+			[0,-3]
+			[1,-3],
+			[2,-3],
+			[3,-3],
+			[3,-2],
+			[3,-1]
+		];
 
 	}
 
 	rotateCanvas(ctx) {
 		ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
-		ctx.rotate((Math.PI / 180) * this.rotationOffset);
+		ctx.rotate(this.rotationOffset);
 		ctx.translate(-(this.pos[0] + this.width / 2), -(this.pos[1] + this.height / 2));
 	}
 	
@@ -40,3 +67,23 @@ class Ship {
 }
 
 module.exports = Ship
+
+
+// this.directionArray = [
+// 	[2, 0],
+// 	[2, 1],
+// 	[2, 2],
+// 	[1, 2],
+// 	[0, 2],
+// 	[-1, 2],
+// 	[-2, 2],
+// 	[-2, 1],
+// 	[-2, 0],
+// 	[-2, -1],
+// 	[-2, -2],
+// 	[-1, -2],
+// 	[0, -2],
+// 	[1, -2],
+// 	[2, -2],
+// 	[2, -1]
+// ];
