@@ -1,6 +1,6 @@
 const  Game = require("./game");
 const Enterprise = require("./enterprise");
-
+const D7 = require("./d7");
 
 class GameView {
 
@@ -8,7 +8,7 @@ class GameView {
 
 		this.ctx = ctx;
 		this.game = new Game(width, height);
-		this.game.addEnterprise(new Enterprise({
+		this.game.addEnterprise(new D7({
 			pos: [50, 50],
 			vel: [1, 1]
 		}));
@@ -54,7 +54,7 @@ class GameView {
 
 		const that = this;
 		// key("space", function () { ship.fireBullet(); });
-		debugger
+		
 		key("a", function () { that.game.enterprise.rotateCC(); });
 		key("d", function () { that.game.enterprise.rotateCL();; });
 

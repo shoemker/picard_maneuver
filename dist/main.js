@@ -86,14 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/D7.js":
+/***/ "./src/d7.js":
 /*!*******************!*\
-  !*** ./src/D7.js ***!
+  !*** ./src/d7.js ***!
   \*******************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclass D7 extends Ship {\n\tconstructor(options) {\n\t\tsuper(options);\n\t\tthis.width = 100;\n\t\tthis.height = 50\n\t\tthis.loadShipImg();\n\n\t}\n\n\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 1000, 500,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = '../images/D7.png';\n\n\t}\n\n\trotateCC() { console.log(\"cc\") }\n\trotateCL() { console.log(\"cl\") }\n}\n\n\nmodule.exports = D7\n\n//# sourceURL=webpack:///./src/D7.js?");
+eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclass D7 extends Ship {\n\tconstructor(options) {\n\t\tsuper(options);\n\t\tthis.width = 100;\n\t\tthis.height = 50\n\t\tthis.loadShipImg();\n\t\tthis.rotationOffset = 0;\n\t\tthis.increment = 1;\n\t}\n\n\n\tdraw(ctx) {\n\n\t\tctx.drawImage(this.shipImg, 0, 0, 380, 275,\n\t\t\tthis.pos[0],\n\t\t\tthis.pos[1],\n\t\t\tthis.width,\n\t\t\tthis.height);\n\t}\n\n\n\tloadShipImg() {\n\t\tthis.shipImg = new Image();\n\t\tthis.shipImg.onload = () => { return true; }\n\t\tthis.shipImg.src = '../images/D7.png';\n\n\t}\n\n\trotateCC() { console.log(\"cc\") }\n\trotateCL() { console.log(\"cl\") }\n}\n\n\nmodule.exports = D7\n\n//# sourceURL=webpack:///./src/d7.js?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\n\nclas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const D7 = __webpack_require__(/*! ./D7 */ \"./src/D7.js\");\n\n\nclass Game {\n\n\tconstructor(dim_x, dim_y) {\n\t\tthis.dim_x = dim_x;\n\t\tthis.dim_y = dim_y;\n\n\t\t\n\t}\n\n\taddEnterprise(enterprise){\n\t\tthis.enterprise = enterprise;\n\t}\n\n\tstep(timeDelta) {\n\t\tthis.moveObjects(timeDelta);\n\t}\n\n\tdraw(ctx){\n\t\tctx.clearRect(0, 0, this.dim_x, this.dim_y);\n\t\tctx.fillStyle = \"black\";\n\t\tctx.fillRect(0, 0, this.dim_x, this.dim_y);\n\t\tthis.enterprise.draw(ctx);\n\t}\n\n\tmoveObjects(timeDelta) {\n\t\tthis.enterprise.move(timeDelta);\n\t}\n\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const D7 = __webpack_require__(/*! ./d7 */ \"./src/d7.js\");\n\n\nclass Game {\n\n\tconstructor(dim_x, dim_y) {\n\t\tthis.dim_x = dim_x;\n\t\tthis.dim_y = dim_y;\n\n\n\t}\n\n\taddEnterprise(enterprise){\n\t\tthis.enterprise = enterprise;\n\t}\n\n\tstep(timeDelta) {\n\t\tthis.moveObjects(timeDelta);\n\t}\n\n\tdraw(ctx){\n\t\tctx.clearRect(0, 0, this.dim_x, this.dim_y);\n\t\tctx.fillStyle = \"black\";\n\t\tctx.fillRect(0, 0, this.dim_x, this.dim_y);\n\t\tthis.enterprise.draw(ctx);\n\t}\n\n\tmoveObjects(timeDelta) {\n\t\tthis.enterprise.move(timeDelta);\n\t}\n\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ eval("const D7 = __webpack_require__(/*! ./D7 */ \"./src/D7.js\");\n\n\nclass Ga
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const  Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Enterprise = __webpack_require__(/*! ./enterprise */ \"./src/enterprise.js\");\n\n\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx = ctx;\n\t\tthis.game = new Game(width, height);\n\t\tthis.game.addEnterprise(new Enterprise({\n\t\t\tpos: [50, 50],\n\t\t\tvel: [1, 1]\n\t\t}));\n\n\t\tthis.bindKeyHandlers = this.bindKeyHandlers.bind(this);\n\t}\n\n\tstart() {\n\t\tthis.bindKeyHandlers();\n\n\t\tthis.lastTime = 0;\n\n\t\t// start the animation\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\n\tanimate(time) {\n\t\tconst timeDelta = time - this.lastTime;\n\t\tthis.game.step(timeDelta);\n\t\tthis.game.draw(this.ctx);\n\n\t\tthis.lastTime = time;\n\n\t\t// every call to animate requests causes another call to animate\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\t\n\tbindKeyHandlers() {\n\n\t\tconst MOVES = {\n\t\t\tw: [0, -1],\n\t\t\t// a: [-1, 0],\n\t\t\ts: [0, 1],\n\t\t\t// d: [1, 0],\n\t\t};\n\n\t\tconst ship = this.game.enterprise;\n\n\t\tObject.keys(MOVES).forEach(function (k) {\n\t\t\tconst move = MOVES[k];\n\t\t\tkey(k, function () { ship.power(move); });\n\t\t});\n\n\t\tconst that = this;\n\t\t// key(\"space\", function () { ship.fireBullet(); });\n\t\tdebugger\n\t\tkey(\"a\", function () { that.game.enterprise.rotateCC(); });\n\t\tkey(\"d\", function () { that.game.enterprise.rotateCL();; });\n\n\t}\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
+eval("const  Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst Enterprise = __webpack_require__(/*! ./enterprise */ \"./src/enterprise.js\");\nconst D7 = __webpack_require__(/*! ./d7 */ \"./src/d7.js\");\n\nclass GameView {\n\n\tconstructor(ctx, width, height) {\n\n\t\tthis.ctx = ctx;\n\t\tthis.game = new Game(width, height);\n\t\tthis.game.addEnterprise(new D7({\n\t\t\tpos: [50, 50],\n\t\t\tvel: [1, 1]\n\t\t}));\n\n\t\tthis.bindKeyHandlers = this.bindKeyHandlers.bind(this);\n\t}\n\n\tstart() {\n\t\tthis.bindKeyHandlers();\n\n\t\tthis.lastTime = 0;\n\n\t\t// start the animation\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\n\tanimate(time) {\n\t\tconst timeDelta = time - this.lastTime;\n\t\tthis.game.step(timeDelta);\n\t\tthis.game.draw(this.ctx);\n\n\t\tthis.lastTime = time;\n\n\t\t// every call to animate requests causes another call to animate\n\t\trequestAnimationFrame(this.animate.bind(this));\n\t};\n\t\n\tbindKeyHandlers() {\n\n\t\tconst MOVES = {\n\t\t\tw: [0, -1],\n\t\t\t// a: [-1, 0],\n\t\t\ts: [0, 1],\n\t\t\t// d: [1, 0],\n\t\t};\n\n\t\tconst ship = this.game.enterprise;\n\n\t\tObject.keys(MOVES).forEach(function (k) {\n\t\t\tconst move = MOVES[k];\n\t\t\tkey(k, function () { ship.power(move); });\n\t\t});\n\n\t\tconst that = this;\n\t\t// key(\"space\", function () { ship.fireBullet(); });\n\t\t\n\t\tkey(\"a\", function () { that.game.enterprise.rotateCC(); });\n\t\tkey(\"d\", function () { that.game.enterprise.rotateCL();; });\n\n\t}\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/game_view.js?");
 
 /***/ }),
 
