@@ -1,5 +1,4 @@
-const D7 = require("./d7");
-const Enterprise = require("./enterprise");
+
 const BackgroundObject = require("./backgroundObject");
 
 class Game {
@@ -45,6 +44,11 @@ class Game {
 		// debugger
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
+
+		// ctx.beginPath();
+		// ctx.arc(200, 200, 10, 0, 2*Math.PI);
+		// ctx.fillStyle = "red";
+		// ctx.fill();
 		
 	}
 

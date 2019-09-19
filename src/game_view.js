@@ -20,8 +20,6 @@ class GameView {
 			directionIndex: 0,
 			direction: [3, 0]
 		}));
-
-		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
 	
 	}
 
@@ -59,22 +57,24 @@ class GameView {
 			s:-1
 		}
 
-		const ship = this.game.enterprise;
-		const enemy = this.game.enemy;
+		const that = this;
+		
 
 		Object.keys(MOVES).forEach(function (k) {
 			const move = MOVES[k];
-			key(k, function () { ship.power(move); });
+			key(k, function () { that.game.enterprise.power(move); });
 		});
 
-		// key("space", function () { ship.fireBullet(); });
+		key("space", function () { 
+			that.game.enterprise.firePhasor(that.game.enemy, that.ctx); 
+		});
 		
 		//call to rotate ship image
-		key("a", function () { ship.changeDirection(-1); });
-		key("d", function () { ship.changeDirection(1); });
+		key("a", function () {that.game.enterprise.changeDirection(-1); });
+		key("d", function () { that.game.enterprise.changeDirection(1); });
 
-		key("j", function () { enemy.changeDirection(-1); });
-		key("l", function () { enemy.changeDirection(1); });
+		key("j", function () { that.game.enemy.changeDirection(-1); });
+		key("l", function () { that.game.enemy.changeDirection(1); });
 
 	}
 }

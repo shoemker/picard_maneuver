@@ -9,6 +9,7 @@ class Ship {
 		this.vel = 0;
 		this.width = 50;
 		this.height = 25
+		this.phasorCounter = 0;
 
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
@@ -23,15 +24,19 @@ class Ship {
 		return this.vel;
 	}
 
+	center() {
+		return[this.pos[0] + this.width/2, this.pos[1] +this.height/2];
+	}
+
 	shift(direction, vel) {
 		this.pos[0] -= vel * direction[0];
 		this.pos[1] += vel * direction[1];
 	};
 
 	rotateCanvas(ctx) {
-		ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
+		ctx.translate(this.center()[0], this.center()[1]);
 		ctx.rotate(this.rotationOffset);
-		ctx.translate(-(this.pos[0] + this.width / 2), -(this.pos[1] + this.height / 2));
+		ctx.translate(-(this.center()[0]), -(this.center()[1]));
 	};
 	
 
@@ -41,10 +46,13 @@ class Ship {
 	};
 	
 	power(impulse) {
-	
 		this.vel += impulse;
-		
 	};
+
+	firePhasor(enemy) {
+		this.enemy = enemy;
+		this.phasorCounter = 1;
+	}
 
 	changeDirection(dir) { 
 		const directionArray = [
