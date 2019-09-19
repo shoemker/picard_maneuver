@@ -11,7 +11,7 @@ class Ship {
 		this.height = 25
 
 		this.rotationOffset = 0;
-		this.increment = Math.PI / 12;
+		this.increment = Math.PI / 18;
 
 	}
 
@@ -34,6 +34,11 @@ class Ship {
 		ctx.translate(-(this.pos[0] + this.width / 2), -(this.pos[1] + this.height / 2));
 	};
 	
+
+	move() {
+		this.pos[0] += this.vel * this.direction[0];
+		this.pos[1] -= this.vel * this.direction[1];
+	};
 	
 	power(impulse) {
 	
@@ -43,35 +48,47 @@ class Ship {
 
 	changeDirection(dir) { 
 		const directionArray = [
-			[3, 0],
-			[3, -1],
-			[3, -2],
-			[3, -3],
-			[2, -3],
-			[1, -3],
-			[0, -3],
-			[-1, -3],
-			[-2, -3],
-			[-3, -3],
-			[-3, -2],
-			[-3, -1],
-			[-3, 0],
-			[-3, 1],
-			[-3, 2],
-			[-3, 3],
-			[-2, 3],
-			[-1, 3],
-			[0, 3],
-			[1, 3],
-			[2, 3],
-			[3, 3],
-			[3, 2],
-			[3, 1]
+			[7, 0],
+			[7, -1],
+			[7, -2],
+			[6, -3],
+			[5, -4],
+			[4, -5],
+			[3, -6],
+			[2, -7],
+			[1, -7],
+			[0, -7],
+			[-1, -7],
+			[-2, -7],
+			[-3, -6],
+			[-4, -5],
+			[-5, -4],
+			[-6, -3],
+			[-7, -2],
+			[-7, -1],
+			[-7, 0],
+			[-7, 1],
+			[-7, 2],
+			[-6, 3],
+			[-5, 4],
+			[-4, 5],
+			[-3, 6],
+			[-2, 7],
+			[-1, 7],
+			[0, 7],
+			[1, 7],
+			[2, 7],
+			[3, 6],
+			[4, 5],
+			[5, 4],
+			[6, 3],
+			[7, 2],
+			[7, 1]
 		];
 
 		this.rotationOffset += dir*this.increment;
-		if (dir > 0 && this.directionIndex === 23) this.directionIndex = 0;
-		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 23;
+		if (dir > 0 && this.directionIndex === 35) this.directionIndex = 0;
+		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 35;
 		else this.directionIndex += dir;
 
 		this.direction = directionArray[this.directionIndex];
@@ -100,4 +117,33 @@ module.exports = Ship
 // 	[1, -2],
 // 	[2, -2],
 // 	[2, -1]
+// ];
+
+
+
+// const directionArray = [
+// 	[4, 0],
+// 	[4, -1],
+// 	[4, -2],
+// 	[3, -3],
+// 	[2, -4],
+// 	[1, -4],
+// 	[0, -4],
+// 	[-1, -4],
+// 	[-2, -4],
+// 	[-3, -3],
+// 	[-4, -2],
+// 	[-4, -1],
+// 	[-4, 0],
+// 	[-4, 1],
+// 	[-4, 2],
+// 	[-3, 3],
+// 	[-2, 4],
+// 	[-1, 4],
+// 	[0, 4],
+// 	[1, 4],
+// 	[2, 4],
+// 	[3, 3],
+// 	[4, 2],
+// 	[4, 1]
 // ];

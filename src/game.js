@@ -26,12 +26,14 @@ class Game {
 
 	moveObjects(timeDelta) {
 		// this.enterprise.move(timeDelta);
-		
+		const shift_x = this.enterprise.getDirection()[0] / 3;
+		const shift_y = this.enterprise.getDirection()[1] / 3;
+
 		for (let i = 0; i < this.stars.length; i++) {
-			this.stars[i].shift(this.enterprise.getDirection(), this.enterprise.getVelocity());
+			this.stars[i].shift([shift_x, shift_y], this.enterprise.getVelocity());
 		}
 
-		this.enemy.shift(this.enterprise.getDirection(), this.enterprise.getVelocity());
+		this.enemy.shift([shift_x, shift_y], this.enterprise.getVelocity());
 	}
 
 	draw(ctx){
@@ -54,7 +56,7 @@ class Game {
 
 	// a version of this comes from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
-		const stars = 400;
+		const stars = 300;
 		const	colorrange = [0, 60, 240];
 		let x;
 		let y;
@@ -65,7 +67,7 @@ class Game {
 		for (var i = 0; i < stars; i++) {
 			x = Math.random() * this.canvas_width;
 			y = Math.random() * this.canvas_height;
-			radius = Math.random() * 1.2;
+			radius = Math.random() * 1.6;
 				hue = colorrange[this.getRandom(0, colorrange.length - 1)];
 				sat = this.getRandom(50, 100);
 

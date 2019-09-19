@@ -8,10 +8,6 @@ class Enterprise extends Ship {
 	
 	}
 
-	center() {
-		
-	}
-
 	draw(ctx) {
 		ctx.save();
 
@@ -25,11 +21,6 @@ class Enterprise extends Ship {
 
 		ctx.restore();
 	}
-
-	move() {
-		this.pos[0] += this.vel * this.direction[0];
-		this.pos[1] -= this.vel * this.direction[1];
-	};
 
 
 	loadShipImg() {

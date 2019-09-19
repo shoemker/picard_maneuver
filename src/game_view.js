@@ -10,8 +10,8 @@ class GameView {
 		this.game = new Game(width, height);
 
 		this.game.addEnterprise(new Enterprise({
-			pos: [width/2, height/2],
-			directionIndex: 12,
+			pos: [width/2-100, height/2],
+			directionIndex: 18,
 			direction: [-3,0]
 		}));
 
@@ -38,7 +38,7 @@ class GameView {
 		const timeDelta = time - this.lastTime;
 		this.game.step(timeDelta);
 		this.game.draw(this.ctx);
-		
+
 		this.lastTime = time;
 
 		// every call to animate requests causes another call to animate
