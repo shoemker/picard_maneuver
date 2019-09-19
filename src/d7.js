@@ -8,8 +8,7 @@ class D7 extends Ship {
 
 	}
 
-
-
+	
 	draw(ctx) {
 		ctx.save();
 
@@ -23,6 +22,12 @@ class D7 extends Ship {
 
 		ctx.restore();
 	}
+
+
+	move() {
+		this.pos[0] += this.vel * this.direction[0];
+		this.pos[1] -= this.vel * this.direction[1];
+	};
 
 
 	loadShipImg() {

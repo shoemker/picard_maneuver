@@ -10,13 +10,15 @@ class GameView {
 		this.game = new Game(width, height);
 
 		this.game.addEnterprise(new Enterprise({
-			pos: [300, 300],
-			directionIndex: 12
+			pos: [width/2, height/2],
+			directionIndex: 12,
+			direction: [-3,0]
 		}));
 
 		this.game.addEnemy( new D7({
 			pos: [0, 0],
-			directionIndex: 0
+			directionIndex: 0,
+			direction: [3, 0]
 		}));
 
 		this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
@@ -68,11 +70,11 @@ class GameView {
 		// key("space", function () { ship.fireBullet(); });
 		
 		//call to rotate ship image
-		key("a", function () { ship.rotateCC(); });
-		key("d", function () { ship.rotateCL(); });
+		key("a", function () { ship.changeDirection(-1); });
+		key("d", function () { ship.changeDirection(1); });
 
-		key("j", function () { enemy.rotateCC(); });
-		key("l", function () { enemy.rotateCL(); });
+		key("j", function () { enemy.changeDirection(-1); });
+		key("l", function () { enemy.changeDirection(1); });
 
 	}
 }

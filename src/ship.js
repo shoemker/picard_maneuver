@@ -4,6 +4,7 @@ class Ship {
 		this.pos = options.pos;
 	
 		this.directionIndex = options.directionIndex;
+		this.direction = options.direction;
 
 		this.vel = 0;
 		this.width = 50;
@@ -11,34 +12,6 @@ class Ship {
 
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 12;
-		
-
-		this.directionArray = [
-			[3,0],
-			[3,-1],
-			[3,-2],
-			[3,-3],
-			[2,-3],
-			[1,-3],
-			[0,-3],
-			[-1,-3],
-			[-2,-3],
-			[-3,-3],
-			[-3,-2],
-			[-3,-1],
-			[-3,0],
-			[-3,1],
-			[-3,2],
-			[-3,3],
-			[-2,3],
-			[-1,3],
-			[0,3],
-			[1,3],
-			[2,3],
-			[3,3],
-			[3,2],
-			[3,1]
-		];
 
 	}
 
@@ -48,14 +21,6 @@ class Ship {
 		ctx.translate(-(this.pos[0] + this.width / 2), -(this.pos[1] + this.height / 2));
 	};
 	
-	move() {
-
-			this.pos[0] += this.vel*this.directionArray[this.directionIndex][0];
-			this.pos[1] += this.vel *this.directionArray[this.directionIndex][1];
-			this.wait = true;
-
-		
-	};
 	
 	power(impulse) {
 	
@@ -63,19 +28,43 @@ class Ship {
 		
 	};
 
-	rotateCC() { 
-		this.rotationOffset -= this.increment;
-		if (this.directionIndex === 23) this.directionIndex = 0;
-		else this.directionIndex++;
+	changeDirection(dir) { 
+		const directionArray = [
+			[3, 0],
+			[3, -1],
+			[3, -2],
+			[3, -3],
+			[2, -3],
+			[1, -3],
+			[0, -3],
+			[-1, -3],
+			[-2, -3],
+			[-3, -3],
+			[-3, -2],
+			[-3, -1],
+			[-3, 0],
+			[-3, 1],
+			[-3, 2],
+			[-3, 3],
+			[-2, 3],
+			[-1, 3],
+			[0, 3],
+			[1, 3],
+			[2, 3],
+			[3, 3],
+			[3, 2],
+			[3, 1]
+		];
 
+		this.rotationOffset += dir*this.increment;
+		if (dir > 0 && this.directionIndex === 23) this.directionIndex = 0;
+		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 23;
+		else this.directionIndex += dir;
+
+		this.direction = directionArray[this.directionIndex];
 	};
 
-	rotateCL() {
-		this.rotationOffset += this.increment;
-		if (this.directionIndex === 0) this.directionIndex = 23;
-		else this.directionIndex--;
 
-	};
 }
 
 module.exports = Ship
