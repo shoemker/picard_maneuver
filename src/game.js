@@ -4,9 +4,9 @@ const BackgroundObject = require("./backgroundObject");
 
 class Game {
 
-	constructor(dim_x, dim_y) {
-		this.dim_x = dim_x;
-		this.dim_y = dim_y;
+	constructor(canvas_width, canvas_height) {
+		this.canvas_width = canvas_width;
+		this.canvas_height = canvas_height;
 		this.stars = [];
 
 		this.createStarField();
@@ -25,15 +25,22 @@ class Game {
 	}
 
 	moveObjects(timeDelta) {
-		this.enterprise.move(timeDelta);
+		// this.enterprise.move(timeDelta);
+		
+		for (let i = 0; i < this.stars.length; i++) {
+			this.stars[i].shift(this.enterprise.getDirection(), this.enterprise.getVelocity());
+		}
+
+		this.enemy.shift(this.enterprise.getDirection(), this.enterprise.getVelocity());
 	}
 
 	draw(ctx){
 		ctx.beginPath();
-		ctx.clearRect(0, 0, this.dim_x, this.dim_y);
+		ctx.clearRect(0, 0, this.canvas_width, this.canvas_height);
 		ctx.fillStyle = "black";
-		ctx.fillRect(0, 0, this.dim_x, this.dim_y);
+		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 		this.drawStars(ctx);
+		// debugger
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 		
@@ -47,16 +54,17 @@ class Game {
 
 	// a version of this comes from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
-		const stars = 500;
+		const stars = 400;
 		const	colorrange = [0, 60, 240];
 		let x;
 		let y;
 		let radius;
 		let hue;
 		let sat;
+		
 		for (var i = 0; i < stars; i++) {
-			x = Math.random() * this.dim_x;
-			y = Math.random() * this.dim_y;
+			x = Math.random() * this.canvas_width;
+			y = Math.random() * this.canvas_height;
 			radius = Math.random() * 1.2;
 				hue = colorrange[this.getRandom(0, colorrange.length - 1)];
 				sat = this.getRandom(50, 100);
@@ -65,7 +73,10 @@ class Game {
 				pos: [x,y],
 				radius,
 				hue,
-				sat
+				sat,
+				canvas_width: this.canvas_width,
+				canvas_height: this.canvas_height
+				
 			}))
 		}
 	}

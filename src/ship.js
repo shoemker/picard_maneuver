@@ -15,6 +15,19 @@ class Ship {
 
 	}
 
+	getDirection(){
+		return this.direction;
+	}
+
+	getVelocity() {
+		return this.vel;
+	}
+
+	shift(direction, vel) {
+		this.pos[0] -= vel * direction[0];
+		this.pos[1] += vel * direction[1];
+	};
+
 	rotateCanvas(ctx) {
 		ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
 		ctx.rotate(this.rotationOffset);
