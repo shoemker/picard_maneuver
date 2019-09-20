@@ -13,7 +13,7 @@ class Enterprise extends Ship {
 
 		this.rotateCanvas(ctx);
 
-		ctx.drawImage(this.shipImg, 0, 0, 660, 300,
+		ctx.drawImage(this.shipImg, 22, 0, 660, 300,
 			this.pos[0],
 			this.pos[1],
 			this.width,
@@ -37,7 +37,7 @@ class Enterprise extends Ship {
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
-		this.shipImg.src = '../images/enterprise-refit.png';
+		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
 
 	}
 

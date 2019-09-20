@@ -10,7 +10,7 @@ class GameView {
 		this.game = new Game(width, height);
 
 		this.game.addEnterprise(new Enterprise({
-			pos: [width/2-100, height/2],
+			pos: [width/2 - 50, height/2],
 			directionIndex: 18,
 			direction: [-3,0]
 		}));

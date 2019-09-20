@@ -25,14 +25,14 @@ class Game {
 
 	moveObjects(timeDelta) {
 		// this.enterprise.move(timeDelta);
-		const shift_x = this.enterprise.getDirection()[0] / 3;
-		const shift_y = this.enterprise.getDirection()[1] / 3;
+		const shift_x = this.enterprise.getDirection()[0];
+		const shift_y = this.enterprise.getDirection()[1];
 
 		for (let i = 0; i < this.stars.length; i++) {
-			this.stars[i].shift([shift_x, shift_y], this.enterprise.getVelocity());
+			this.stars[i].shift([shift_x/2.5, shift_y/2.5], this.enterprise.getVelocity());
 		}
 
-		this.enemy.shift([shift_x, shift_y], this.enterprise.getVelocity());
+		this.enemy.shift([shift_x/2, shift_y/2], this.enterprise.getVelocity());
 	}
 
 	draw(ctx){
@@ -41,7 +41,7 @@ class Game {
 		ctx.fillStyle = "black";
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 		this.drawStars(ctx);
-		// debugger
+		
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 

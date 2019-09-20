@@ -11,7 +11,7 @@ class Ship {
 		this.height = 25
 		this.phasorCounter = 0;
 
-		this.rotationOffset = 0;
+		this.rotationOffset = Math.PI;
 		this.increment = Math.PI / 18;
 
 	}
@@ -100,6 +100,7 @@ class Ship {
 		else this.directionIndex += dir;
 
 		this.direction = directionArray[this.directionIndex];
+		console.log(this.rotationOffset);
 	};
 
 
