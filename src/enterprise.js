@@ -6,6 +6,9 @@ class Enterprise extends Ship {
  
 		this.loadShipImg();
 		this.loadSSDImg();
+
+		this.rotationOffset = Math.PI;
+
 	}
 
 	draw(ctx) {
@@ -26,10 +29,10 @@ class Enterprise extends Ship {
 		ctx.drawImage(this.shipSSD, 0, 0, 54, 129,
 			900,
 			550,
-			75,
-			150);
+			60,
+			120);
 		
-
+		// draw phasor
 		if (this.phasorCounter > 0) {
 			ctx.beginPath();
 			ctx.moveTo(this.center()[0], this.center()[1]);

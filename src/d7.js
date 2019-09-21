@@ -4,6 +4,7 @@ class D7 extends Ship {
 	constructor(options) {
 		super(options);
 
+		// this.speed = 1;
 		this.loadShipImg();
 		this.loadSSDImg();
 	}
@@ -26,8 +27,8 @@ class D7 extends Ship {
 		ctx.drawImage(this.shipSSD, 0, 0, 170, 175,
 			50,
 			550,
-			85,
-			150);
+			70,
+			120);
 
 	}
 

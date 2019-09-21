@@ -6,12 +6,12 @@ class Ship {
 		this.directionIndex = options.directionIndex;
 		this.direction = options.direction;
 
-		this.vel = 0;
+		this.speed = 0;
 		this.width = 60;
 		this.height = 30
 		this.phasorCounter = 0;
 
-		this.rotationOffset = Math.PI;
+		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
 
 	}
@@ -20,17 +20,17 @@ class Ship {
 		return this.direction;
 	}
 
-	getVelocity() {
-		return this.vel;
+	getSpeed() {
+		return this.speed;
 	}
 
 	center() {
 		return[this.pos[0] + this.width/2, this.pos[1] +this.height/2];
 	}
 
-	shift(direction, vel) {
-		this.pos[0] -= vel * direction[0];
-		this.pos[1] += vel * direction[1];
+	shift(direction, speed) {
+		this.pos[0] -= speed * direction[0];
+		this.pos[1] += speed * direction[1];
 	};
 
 	rotateCanvas(ctx) {
@@ -41,12 +41,12 @@ class Ship {
 	
 
 	move() {
-		this.pos[0] += this.vel * this.direction[0];
-		this.pos[1] -= this.vel * this.direction[1];
+		this.pos[0] += this.speed * this.direction[0];
+		this.pos[1] -= this.speed * this.direction[1];
 	};
 	
 	power(impulse) {
-		this.vel += impulse;
+		this.speed += impulse;
 	};
 
 	firePhasor(enemy) {
