@@ -14,8 +14,9 @@ class Ship {
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
 
-		this.shieldHIt;
-
+		this.shieldHit;
+		this.shieldHitPoints = [100,100,100,100];
+		this.shieldColor = ["white", "white", "white", "white"];
 	}
 
 	getDirection(){
@@ -71,7 +72,48 @@ class Ship {
 		this.phasorCounter++;
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
 	}
-	
+
+	drawShields(ctx, x, y) {
+		ctx.lineWidth = 3;
+
+		// forward shield
+		let shieldPercentage = this.shieldHitPoints[0] / 100;
+		ctx.beginPath();
+		ctx.arc(x, y+25, 100, 1.4 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
+											 1.6 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
+		ctx.strokeStyle = this.shieldColor[0];
+		ctx.stroke();
+
+
+		// starboard shield
+		shieldPercentage = this.shieldHitPoints[1] / 100;
+		ctx.beginPath();
+		ctx.arc(x - 30, y+5, 100, 1.8 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
+														  .2 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
+		ctx.strokeStyle = this.shieldColor[1];
+		ctx.stroke();
+
+
+		// rear shield
+		shieldPercentage = this.shieldHitPoints[2] / 100;
+		ctx.beginPath();
+		ctx.arc(x, y-23, 100, 0.4 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
+															.6 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
+		ctx.strokeStyle = this.shieldColor[2];
+		ctx.stroke();
+		
+		
+		// port shield
+		shieldPercentage = this.shieldHitPoints[3]/100;
+		ctx.beginPath();
+		ctx.arc(x + 30, y+5, 100, 0.8 * Math.PI + .2 * Math.PI * (1-shieldPercentage), 
+									1.2 * Math.PI - .2 * Math.PI * (1-shieldPercentage));
+		ctx.strokeStyle = this.shieldColor[3];
+		ctx.stroke();
+
+
+
+	}
 
 	receivePhasorHit(attacker) {
 		let angle;

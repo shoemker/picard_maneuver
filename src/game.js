@@ -1,4 +1,3 @@
-
 const Star = require("./star");
 
 class Game {
@@ -23,14 +22,12 @@ class Game {
 		this.moveObjects(timeDelta);
 	}
 
-	moveObjects(timeDelta) {
+	moveObjects() {
 		// this.enterprise.move(timeDelta);
 		const shift_x = this.enterprise.getDirection()[0];
 		const shift_y = this.enterprise.getDirection()[1];
 
-		for (let i = 0; i < this.stars.length; i++) {
-			this.stars[i].shift([shift_x/2.5, shift_y/2.5], this.enterprise.getSpeed());
-		}
+		this.stars.forEach((star) => star.shift([shift_x/2.5, shift_y/2.5], this.enterprise.getSpeed()));
 
 		this.enemy.shift([shift_x/2.5, shift_y/2.5], this.enterprise.getSpeed());
 
@@ -47,11 +44,6 @@ class Game {
 		
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
-
-		// ctx.beginPath();
-		// ctx.arc(200, 200, 10, 0, 2*Math.PI);
-		// ctx.fillStyle = "red";
-		// ctx.fill();
 		
 	}
 

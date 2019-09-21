@@ -24,11 +24,17 @@ class D7 extends Ship {
 		ctx.restore();
 
 		//draw ship systems display
+		const ssd_x = 50;
+		const ssd_y = 550;
+		const ssd_width = 70;
+		const ssd_height = 120;
 		ctx.drawImage(this.shipSSD, 0, 0, 170, 175,
-			50,
-			550,
-			70,
-			120);
+			ssd_x,
+			ssd_y,
+			ssd_width,
+			ssd_height);
+
+		this.drawShields(ctx, ssd_x + ssd_width / 2, ssd_y + ssd_height / 2);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
