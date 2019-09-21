@@ -7,8 +7,8 @@ class Ship {
 		this.direction = options.direction;
 
 		this.vel = 0;
-		this.width = 50;
-		this.height = 25
+		this.width = 60;
+		this.height = 30
 		this.phasorCounter = 0;
 
 		this.rotationOffset = Math.PI;
@@ -99,8 +99,11 @@ class Ship {
 		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 35;
 		else this.directionIndex += dir;
 
+		if (this.rotationOffset > 6.2) this.rotationOffset -= Math.PI *2;
+		else if (this.rotationOffset < -.0000000000001) this.rotationOffset += Math.PI * 2;
+
 		this.direction = directionArray[this.directionIndex];
-		console.log(this.rotationOffset);
+		// console.log(this.rotationOffset);
 	};
 
 

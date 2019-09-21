@@ -5,7 +5,7 @@ class Enterprise extends Ship {
 		super(options);
  
 		this.loadShipImg();
-	
+		this.loadSSDImg();
 	}
 
 	draw(ctx) {
@@ -13,6 +13,7 @@ class Enterprise extends Ship {
 
 		this.rotateCanvas(ctx);
 
+		//draw ship
 		ctx.drawImage(this.shipImg, 22, 0, 660, 300,
 			this.pos[0],
 			this.pos[1],
@@ -20,7 +21,15 @@ class Enterprise extends Ship {
 			this.height);
 
 		ctx.restore();
+
+		//draw ship systems display
+		ctx.drawImage(this.shipSSD, 0, 0, 54, 129,
+			900,
+			550,
+			75,
+			150);
 		
+
 		if (this.phasorCounter > 0) {
 			ctx.beginPath();
 			ctx.moveTo(this.center()[0], this.center()[1]);
@@ -34,10 +43,20 @@ class Enterprise extends Ship {
 
 	}
 
+
+
+
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
+
+	}
+
+	loadSSDImg() {
+		this.shipSSD = new Image();
+		this.shipSSD.onload = () => { return true; }
+		this.shipSSD.src = '../images/enterprise-refit-ssd.png';
 
 	}
 
