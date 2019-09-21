@@ -7,6 +7,7 @@ class Enterprise extends Ship {
 		this.loadShipImg();
 		this.loadSSDImg();
 
+		// rotates image 180 degrees so it faces left at start
 		this.rotationOffset = Math.PI;
 
 	}
@@ -32,17 +33,8 @@ class Enterprise extends Ship {
 			60,
 			120);
 		
-		// draw phasor
-		if (this.phasorCounter > 0) {
-			ctx.beginPath();
-			ctx.moveTo(this.center()[0], this.center()[1]);
-			ctx.lineTo(this.enemy.center()[0], this.enemy.center()[1]);
-			ctx.strokeStyle = 'red';
-			ctx.lineWidth = 2;
-			ctx.stroke();
-			this.phasorCounter++;
-			if (this.phasorCounter > 20) this.phasorCounter = 0;
-		}
+
+		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
 	}
 

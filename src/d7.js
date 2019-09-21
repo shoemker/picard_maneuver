@@ -30,6 +30,8 @@ class D7 extends Ship {
 			70,
 			120);
 
+		if (this.phasorCounter > 0) this.drawPhasor(ctx);
+
 	}
 
 
