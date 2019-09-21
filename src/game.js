@@ -1,5 +1,5 @@
 
-const BackgroundObject = require("./backgroundObject");
+const Star = require("./star");
 
 class Game {
 
@@ -42,7 +42,7 @@ class Game {
 		ctx.clearRect(0, 0, this.canvas_width, this.canvas_height);
 		ctx.fillStyle = "black";
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
-		
+
 		this.drawStars(ctx);
 		
 		this.enterprise.draw(ctx);
@@ -61,31 +61,20 @@ class Game {
 
 
 
-	// a version of this comes from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
+	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
-		const stars = 250;
+		const starCount = 250;
 		const	colorrange = [0, 60, 240];
-		let x;
-		let y;
-		let radius;
-		let hue;
-		let sat;
 		
-		for (var i = 0; i < stars; i++) {
-			x = Math.random() * this.canvas_width;
-			y = Math.random() * this.canvas_height;
-			radius = Math.random() * 1.6;
-				hue = colorrange[this.getRandom(0, colorrange.length - 1)];
-				sat = this.getRandom(50, 100);
-
-			this.stars.push(new BackgroundObject({
-				pos: [x,y],
-				radius,
-				hue,
-				sat,
+		for (var i = 0; i < starCount; i++) {
+	
+			this.stars.push(new Star({
+				pos: [Math.random() * this.canvas_width, Math.random() * this.canvas_height],
+				radius: Math.random() * 1.6,
+				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
+				sat: this.getRandom(50, 100),
 				canvas_width: this.canvas_width,
-				canvas_height: this.canvas_height
-				
+				canvas_height: this.canvas_height				
 			}))
 		}
 	}

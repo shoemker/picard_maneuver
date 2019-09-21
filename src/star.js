@@ -1,4 +1,4 @@
-class BackgroundObject {
+class Star {
 	constructor(options){
 		this.pos = options.pos;
 
@@ -29,4 +29,4 @@ class BackgroundObject {
 
 }
 
-module.exports = BackgroundObject
+module.exports = Star
