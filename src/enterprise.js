@@ -1,6 +1,4 @@
 const Ship = require("./ship");
-const Shield = require("./shield");
-
 
 class Enterprise extends Ship {
 	constructor(options) {

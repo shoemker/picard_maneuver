@@ -13,6 +13,7 @@ class Ship extends SpaceObject{
 		this.width = 60;
 		this.height = 30
 		this.phasorCounter = 0;
+		this.torpExplosionCounter = 0;
 
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
@@ -57,8 +58,15 @@ class Ship extends SpaceObject{
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
-		if (true) {
-			
+		if (this.torpExplosionCounter) {
+			ctx.drawImage(this.explosionImg, 606, 295, 100, 100,
+				this.center()[0],
+				this.center()[1]-5,
+				10,
+				10);
+
+			this.torpExplosionCounter++;
+			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 	};
 
@@ -109,7 +117,7 @@ class Ship extends SpaceObject{
 
 		if (this.shields[shieldHit].getHitpoints() > 0) this.shields[shieldHit].hit();
 
-		// this.explosionImgCounter = 1;
+		this.torpExplosionCounter = 1;
 	};
 
 
@@ -193,7 +201,7 @@ class Ship extends SpaceObject{
 		this.explosionImg = new Image();
 		this.explosionImg.onload = () => { return true; }
 		this.explosionImg.src = 
-			'../images/428-4289579_unity-sprite-sheet-explosion-hd-png-download.png';
+			'../images/explosion-sprite-sheet.png';
 	};
 
 }
