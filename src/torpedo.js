@@ -29,9 +29,6 @@ class Torpedo extends SpaceObject {
 		this.pos[1] -= this.speed * this.direction[1];
 	};
 
-
-
-
 };
 
 module.exports = Torpedo;

@@ -22,7 +22,7 @@ class GameView {
 			direction: [3, 0]
 		}));
 	
-	}
+	};
 
 	start() {
 		this.bindKeyHandlers();
@@ -82,7 +82,7 @@ class GameView {
 		key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 		key("p", function () { that.pauseGame(); });
-	}
+	};
 
 	pauseGame() {
 		if (!this.pause) this.pause = true;
@@ -90,7 +90,7 @@ class GameView {
 			this.pause = false;
 			requestAnimationFrame(this.animate.bind(this));
 		}
-	}
+	};
 }
 
 module.exports = GameView;

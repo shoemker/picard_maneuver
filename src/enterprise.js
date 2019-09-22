@@ -19,7 +19,7 @@ class Enterprise extends Ship {
 		this.ssd_height = 120
 		
 		this.raiseShields(this.ssd_x+this.ssd_width/2, this.ssd_y + this.ssd_height/2);
-	}
+	};
 
 	draw(ctx) {
 		ctx.save();
@@ -42,10 +42,8 @@ class Enterprise extends Ship {
 			this.ssd_width,
 			this.ssd_height);
 		
-		this.drawShields(ctx);
-
-		if (this.phasorCounter > 0) this.drawPhasor(ctx);
-	}
+		super.draw(ctx);
+	};
 
 
 
@@ -54,13 +52,13 @@ class Enterprise extends Ship {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
-	}
+	};
 
 	loadSSDImg() {
 		this.shipSSD = new Image();
 		this.shipSSD.onload = () => { return true; }
 		this.shipSSD.src = '../images/enterprise-refit-ssd.png';
-	}
+	};
 
 }
 

@@ -15,7 +15,7 @@ class D7 extends Ship {
 		this.ssd_height = 120
 
 		this.raiseShields(this.ssd_x + this.ssd_width / 2, this.ssd_y + this.ssd_height / 2);
-	}
+	};
 
 
 	draw(ctx) {
@@ -39,10 +39,8 @@ class D7 extends Ship {
 			this.ssd_width,
 			this.ssd_height);
 
-		this.drawShields(ctx);
-		
-		if (this.phasorCounter > 0) this.drawPhasor(ctx);
-	}
+		super.draw(ctx);
+	};
 
 
 
@@ -50,13 +48,13 @@ class D7 extends Ship {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/D7.png';
-	}
+	};
 
 	loadSSDImg() {
 		this.shipSSD = new Image();
 		this.shipSSD.onload = () => { return true; }
 		this.shipSSD.src = '../images/D7-SSD.png';
-	}
+	};
 
 
 }

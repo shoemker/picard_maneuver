@@ -9,14 +9,14 @@ class Star extends SpaceObject {
 		this.sat = options.sat;
 		this.canvas_width = options.canvas_width;
 		this.canvas_height = options.canvas_height;
-	}
+	};
 
 	draw(ctx) {
 		ctx.beginPath();
 		ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 360);
 		ctx.fillStyle = "hsl(" + this.hue + ", " + this.sat + "%, 88%)";
 		ctx.fill();
-	}
+	};
 	
 	shift(direction, speed) {
 		super.shift(direction, speed);

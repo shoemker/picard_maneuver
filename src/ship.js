@@ -18,7 +18,9 @@ class Ship extends SpaceObject{
 		this.increment = Math.PI / 18;
 
 		this.shields = [];
-		this.torpedos = []
+		this.torpedos = [];
+
+		this.loadExplosionImg();
 	}
 
 	getDirection(){
@@ -48,7 +50,18 @@ class Ship extends SpaceObject{
 		this.pos[0] += this.speed * this.direction[0];
 		this.pos[1] -= this.speed * this.direction[1];
 	};
+
 	
+	draw(ctx) {
+		this.drawShields(ctx);
+
+		if (this.phasorCounter > 0) this.drawPhasor(ctx);
+
+		if (true) {
+			
+		}
+	};
+
 
 	power(impulse) {
 		this.speed += impulse;
@@ -59,7 +72,7 @@ class Ship extends SpaceObject{
 		this.target = target;
 		this.phasorCounter = 1;
 		this.target.receivePhasorHit(this);
-	}
+	};
 
 
 	drawPhasor(ctx) {
@@ -71,66 +84,33 @@ class Ship extends SpaceObject{
 		ctx.stroke();
 		this.phasorCounter++;
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
-	}
+	};
 
 
 	drawShields(ctx) {
 		ctx.lineWidth = 3;
 
 		this.shields.forEach((shield) => shield.draw(ctx))
-	}
+	};
 
-	// factory method to create shield objects
-	raiseShields(x,y) {
-
-		// forward shield
-		this.shields.push(new Shield({
-			pos: [x, y + 25],
-			start: 1.4,
-			end: 1.6,
-			multiplier: .1
-		}))
-
-		// starboard shield
-		this.shields.push(new Shield({
-			pos: [x-30, y + 5],
-			start: 1.8,
-			end: 2.2,
-			multiplier: .2
-		}))
-
-		// rear shield
-		this.shields.push(new Shield({
-			pos: [x, y -23],
-			start: .4,
-			end: .6,
-			multiplier: .1,
-		}))
-
-		// port shield
-		this.shields.push(new Shield({
-			pos: [x+30, y + 5],
-			start: .8,
-			end: 1.2,
-			multiplier: .2
-		}))
-
-	}
 
 	receivePhasorHit(attacker) {
 
 		let shieldHit = this.whichShieldWasHit(attacker);
 
 		if (this.shields[shieldHit].getHitpoints() > 0 ) this.shields[shieldHit].hit();
-	}
+	};
 
-	torpHit(attacker) {
+
+	receiveTorpHit(attacker) {
 		console.log("hit");
 
 		let shieldHit = this.whichShieldWasHit(attacker);
 
 		if (this.shields[shieldHit].getHitpoints() > 0) this.shields[shieldHit].hit();
-	}
+
+		// this.explosionImgCounter = 1;
+	};
 
 
 	whichShieldWasHit(attacker) {
@@ -156,7 +136,7 @@ class Ship extends SpaceObject{
 		else shieldHit = 3;
 
 		return shieldHit;
-	}
+	};
 
 
 	changeDirection(dir) { 
@@ -172,6 +152,49 @@ class Ship extends SpaceObject{
 		// console.log(this.rotationOffset*180/Math.PI);
 	};
 
+
+	// factory method to create shield objects
+	raiseShields(x, y) {
+
+		// forward shield
+		this.shields.push(new Shield({
+			pos: [x, y + 25],
+			start: 1.4,
+			end: 1.6,
+			multiplier: .1
+		}))
+
+		// starboard shield
+		this.shields.push(new Shield({
+			pos: [x - 30, y + 5],
+			start: 1.8,
+			end: 2.2,
+			multiplier: .2
+		}))
+
+		// rear shield
+		this.shields.push(new Shield({
+			pos: [x, y - 23],
+			start: .4,
+			end: .6,
+			multiplier: .1,
+		}))
+
+		// port shield
+		this.shields.push(new Shield({
+			pos: [x + 30, y + 5],
+			start: .8,
+			end: 1.2,
+			multiplier: .2
+		}))
+	};
+
+	loadExplosionImg() {
+		this.explosionImg = new Image();
+		this.explosionImg.onload = () => { return true; }
+		this.explosionImg.src = 
+			'../images/428-4289579_unity-sprite-sheet-explosion-hd-png-download.png';
+	};
 
 }
 

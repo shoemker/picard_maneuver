@@ -45,7 +45,7 @@ class SpaceObject {
 			[7, 2],
 			[7, 1]
 		];
-	}
+	};
 
 	// shifts to account for main ship movement
 	shift(direction, speed) {
@@ -56,7 +56,7 @@ class SpaceObject {
 
 	center() {
 		return [this.pos[0] + this.width / 2, this.pos[1] + this.height / 2];
-	}
+	};
 
 }
 

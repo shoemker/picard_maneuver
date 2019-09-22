@@ -10,7 +10,6 @@ class Game {
 
 		this.createStarField();
 		this.loadTorpImg();
-;
 	}
 
 	addEnterprise(enterprise){
@@ -27,8 +26,8 @@ class Game {
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 	}
 
-	moveObjects() {
-		
+
+	moveObjects() {		
 		this.shift();
 
 		// now give ships and objects their own movement
@@ -43,7 +42,6 @@ class Game {
 					center[1] < 0 || center [1] > this.canvas_height)
 				this.enterprise.getTorpedos().splice(i,1);
 		});
-		// console.log(this.enterprise.getTorpedos());
 	}
 
 
@@ -56,13 +54,13 @@ class Game {
 
 
 		this.stars.forEach((star) =>
-			star.shift([shift_x / base_speed_inverse,
-									shift_y / base_speed_inverse],
-				this.enterprise.getSpeed()));
+					star.shift([shift_x / base_speed_inverse,
+											shift_y / base_speed_inverse],
+											this.enterprise.getSpeed()));
 
 		this.enemy.shift([shift_x / base_speed_inverse,
 											shift_y / base_speed_inverse],
-			this.enterprise.getSpeed());
+											this.enterprise.getSpeed());
 	}
 
 
@@ -85,7 +83,7 @@ class Game {
 	}
 
 
-
+	// factory method to create stars
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
 		const starCount = 250;
@@ -115,6 +113,7 @@ class Game {
 		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex() + 1));
 	}
 
+
 	checkTorpCollisions(ship, torpedos) {
 		let distance;
 
@@ -124,8 +123,8 @@ class Game {
 			distance = Math.sqrt(distance_x*distance_x + distance_y*distance_y);
 			if (distance < 30) {
 				torpedos.splice(i, 1);
-				if (ship === this.enterprise) ship.torpHit(this.enemy);
-				else ship.torpHit(this.enterprise)
+				if (ship === this.enterprise) ship.receiveTorpHit(this.enemy);
+				else ship.receiveTorpHit(this.enterprise)
 			}
 		})
 	}
