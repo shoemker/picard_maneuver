@@ -124,7 +124,8 @@ class Game {
 			distance = Math.sqrt(distance_x*distance_x + distance_y*distance_y);
 			if (distance < 30) {
 				torpedos.splice(i, 1);
-				ship.torpHit(torpedo);
+				if (ship === this.enterprise) ship.torpHit(this.enemy);
+				else ship.torpHit(this.enterprise)
 			}
 		})
 	}
