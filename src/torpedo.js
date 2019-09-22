@@ -1,9 +1,10 @@
 const SpaceObject = require("./space_object");
 
 class Torpedo extends SpaceObject {
-	constructor(pos, directionIndex) {
+	constructor(pos, torpImg, directionIndex) {
 		super(pos);
 
+		this.torpImg = torpImg;
 		
 		if (directionIndex === 36) directionIndex = 0;
 		else if (directionIndex === -1) directionIndex = 35;
@@ -12,8 +13,6 @@ class Torpedo extends SpaceObject {
 		this.speed = 3;
 		this.height = 10;
 		this.width = 10;
-
-		this.loadTorpImg();
 	};
 	
 	draw(ctx) {
@@ -31,11 +30,7 @@ class Torpedo extends SpaceObject {
 	};
 
 
-	loadTorpImg() {
-		this.torpImg = new Image();
-		this.torpImg.onload = () => { return true; }
-		this.torpImg.src = '../images/torpedo.png';
-	};
+
 
 };
 

@@ -9,7 +9,8 @@ class Game {
 		this.stars = [];
 
 		this.createStarField();
-		this.torpedos = [];
+		this.loadTorpImg();
+;
 	}
 
 	addEnterprise(enterprise){
@@ -20,41 +21,50 @@ class Game {
 		this.enemy = enemy
 	}
 
-	step(timeDelta) {
-		this.moveObjects(timeDelta);
+	step() {
+		this.moveObjects();
+		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
+		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 	}
 
 	moveObjects() {
-	
-		const base_speed_inverse = 5;
-
-		const shift_x = this.enterprise.getDirection()[0];
-		const shift_y = this.enterprise.getDirection()[1];
-
-		// shift the stars and enemy ship for main ship movement
-		this.stars.forEach((star) => 
-			star.shift([shift_x / base_speed_inverse, 
-									shift_y / base_speed_inverse], 
-									this.enterprise.getSpeed()));
-
-		this.enemy.shift([shift_x / base_speed_inverse, 
-											shift_y / base_speed_inverse], 
-											this.enterprise.getSpeed());
+		
+		this.shift();
 
 		// now give ships and objects their own movement
 		this.enemy.move();
 
-		this.torpedos.forEach((torpedo, i) => {
+		this.enterprise.getTorpedos().forEach((torpedo, i) => {
 			torpedo.move();
 
 			// delete torpedo when it moves offscreen
 			let center = torpedo.center();
 			if (center[0] < 0 || center [0] > this.canvas_width ||
 					center[1] < 0 || center [1] > this.canvas_height)
-				this.torpedos.splice(i,1);
+				this.enterprise.getTorpedos().splice(i,1);
 		});
-
+		// console.log(this.enterprise.getTorpedos());
 	}
+
+
+	// shift moves everything but main ship to show main ship's movement
+	shift() {
+		const base_speed_inverse = 5;
+
+		const shift_x = this.enterprise.getDirection()[0];
+		const shift_y = this.enterprise.getDirection()[1];
+
+
+		this.stars.forEach((star) =>
+			star.shift([shift_x / base_speed_inverse,
+									shift_y / base_speed_inverse],
+				this.enterprise.getSpeed()));
+
+		this.enemy.shift([shift_x / base_speed_inverse,
+											shift_y / base_speed_inverse],
+			this.enterprise.getSpeed());
+	}
+
 
 	draw(ctx){
 		ctx.beginPath();
@@ -66,7 +76,7 @@ class Game {
 		this.drawStars(ctx);
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
-		this.torpedos.forEach((torpedo) => torpedo.draw(ctx));
+		this.enterprise.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
 		
 	}
 
@@ -100,10 +110,31 @@ class Game {
 
 
 	fireTorpedos(ship) {
-		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex() - 1));
-		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex()));
-		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex() + 1));
+		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex() - 1));
+		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex()));
+		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex() + 1));
 	}
+
+	checkTorpCollisions(ship, torpedos) {
+		let distance;
+
+		torpedos.forEach((torpedo,i) => {
+			let distance_x = ship.center()[0] - torpedo.center()[0];
+			let distance_y = ship.center()[1] - torpedo.center()[1];
+			distance = Math.sqrt(distance_x*distance_x + distance_y*distance_y);
+			if (distance < 30) {
+				torpedos.splice(i, 1);
+				ship.torpHit(torpedo);
+			}
+		})
+	}
+
+
+	loadTorpImg() {
+		this.torpImg = new Image();
+		this.torpImg.onload = () => { return true; }
+		this.torpImg.src = '../images/torpedo.png';
+	};
 
 }
 

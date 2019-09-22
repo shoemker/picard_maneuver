@@ -18,6 +18,7 @@ class Ship extends SpaceObject{
 		this.increment = Math.PI / 18;
 
 		this.shields = [];
+		this.torpedos = []
 	}
 
 	getDirection(){
@@ -32,7 +33,9 @@ class Ship extends SpaceObject{
 		return this.speed;
 	}
 
-
+	getTorpedos() {
+		return this.torpedos;
+	}
 
 	rotateCanvas(ctx) {
 		ctx.translate(this.center()[0], this.center()[1]);
@@ -136,6 +139,15 @@ class Ship extends SpaceObject{
 		else shieldHit = 3;
 
 		if (this.shields[shieldHit].getHitpoints() > 0 ) this.shields[shieldHit].hit();
+	}
+
+	whichShieldWasHit() {
+
+		
+	}
+
+	torpHit(torpedo){
+		console.log("hit");
 	}
 
 
