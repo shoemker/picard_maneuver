@@ -18,7 +18,6 @@ class Ship {
 
 		this.shields = [];
 
-		this.shieldHit;
 
 
 	}
@@ -121,6 +120,7 @@ class Ship {
 
 	receivePhasorHit(attacker) {
 		let angle;
+		let shieldHit;
 		const xDelta = attacker.center()[0] - this.center()[0];
 		const yDelta = attacker.center()[1] - this.center()[1];
 
@@ -134,12 +134,14 @@ class Ship {
 		angle -= this.rotationOffset;
 		if (angle < 0) angle += Math.PI *2;
 
-		if (angle <= .25*Math.PI || angle >= 1.75*Math.PI) this.shieldHit = 0;
-		else if (angle > .25*Math.PI && angle < .75* Math.PI) this.shieldHit = 1;
-		else if (angle >= .75*Math.PI && angle <= 1.25*Math.PI) this.shieldHit = 2;
-		else this.shieldHit = 3;
+		if (angle <= .25*Math.PI || angle >= 1.75*Math.PI) shieldHit = 0;
+		else if (angle > .25*Math.PI && angle < .75* Math.PI) shieldHit = 1;
+		else if (angle >= .75*Math.PI && angle <= 1.25*Math.PI) shieldHit = 2;
+		else shieldHit = 3;
 
-		console.log(this.shieldHit);
+		if (this.shields[shieldHit].getHitpoints() > 0 ) this.shields[shieldHit].hit();
+
+		console.log(shieldHit);
 	}
 
 

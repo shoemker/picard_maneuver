@@ -10,7 +10,17 @@ class Shield {
 		this.timer = 0;
 	}
 
+	getHitpoints() {
+		return this.hitpoints;
+	}
+
 	draw(ctx) {
+		this.timer++;
+		if (this.timer === 20) {
+			this.timer = 0;
+			this.color = "white";
+		}
+
 		let shieldPercentage = this.hitpoints / 100;
 		// debugger
 		ctx.beginPath();
@@ -25,6 +35,13 @@ class Shield {
 	}
 
 
+	hit() {
+		this.timer = 1;
+		this.color = "red";
+
+		this.hitpoints -= 20;
+		if (this.hitpoints < 0) this.hitpoints = 0;
+	}
 }
 
 module.exports = Shield;

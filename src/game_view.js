@@ -8,6 +8,7 @@ class GameView {
 
 		this.ctx = ctx;
 		this.game = new Game(width, height);
+		this.pause = false;
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2],
@@ -33,14 +34,16 @@ class GameView {
 	};
 
 	animate(time) {
-		const timeDelta = time - this.lastTime;
-		this.game.step(timeDelta);
-		this.game.draw(this.ctx);
+		if (!this.pause) {
+			const timeDelta = time - this.lastTime;
+			this.game.step(timeDelta);
+			this.game.draw(this.ctx);
 
-		this.lastTime = time;
+			this.lastTime = time;
 
-		// every call to animate requests causes another call to animate
-		requestAnimationFrame(this.animate.bind(this));
+			// every call to animate requests causes another call to animate
+			requestAnimationFrame(this.animate.bind(this));
+		}
 	};
 	
 	bindKeyHandlers() {
@@ -76,6 +79,15 @@ class GameView {
 		key("j", function () { that.game.enemy.changeDirection(-1); });
 		key("l", function () { that.game.enemy.changeDirection(1); });
 
+		key("p", function () { that.pauseGame(); });
+	}
+
+	pauseGame() {
+		if (!this.pause) this.pause = true;
+		else { 
+			this.pause = false;
+			requestAnimationFrame(this.animate.bind(this));
+		}
 	}
 }
 
