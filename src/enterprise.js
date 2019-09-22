@@ -45,7 +45,6 @@ class Enterprise extends Ship {
 		this.drawShields(ctx);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
-
 	}
 
 
@@ -55,14 +54,12 @@ class Enterprise extends Ship {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
-
 	}
 
 	loadSSDImg() {
 		this.shipSSD = new Image();
 		this.shipSSD.onload = () => { return true; }
 		this.shipSSD.src = '../images/enterprise-refit-ssd.png';
-
 	}
 
 }

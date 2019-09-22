@@ -1,4 +1,5 @@
 const Star = require("./star");
+const Torpedo = require("./torpedo");
 
 class Game {
 
@@ -8,6 +9,7 @@ class Game {
 		this.stars = [];
 
 		this.createStarField();
+		this.torpedo = null;
 	}
 
 	addEnterprise(enterprise){
@@ -40,6 +42,7 @@ class Game {
 											this.enterprise.getSpeed());
 
 		this.enemy.move();
+		if (this.torpedo) this.torpedo.move();
 	}
 
 	draw(ctx){
@@ -52,6 +55,7 @@ class Game {
 		this.drawStars(ctx);
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
+		if (this.torpedo) this.torpedo.draw(ctx);
 		
 	}
 
@@ -82,6 +86,11 @@ class Game {
 	getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	} 
+
+
+	fireTorpedo(ship) {
+		this.torpedo = new Torpedo(ship.center(), ship.getDirection());
+	}
 
 }
 
