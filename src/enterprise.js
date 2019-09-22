@@ -1,4 +1,6 @@
 const Ship = require("./ship");
+const Shield = require("./shield");
+
 
 class Enterprise extends Ship {
 	constructor(options) {
@@ -10,6 +12,13 @@ class Enterprise extends Ship {
 		// rotates image 180 degrees so it faces left at start
 		this.rotationOffset = Math.PI;
 
+		// ssd is the ship systems display in the corner of the screen
+		this.ssd_x = 880;
+		this.ssd_y = 550;
+		this.ssd_width = 60;
+		this.ssd_height = 120
+		
+		this.raiseShields(this.ssd_x+this.ssd_width/2, this.ssd_y + this.ssd_height/2);
 	}
 
 	draw(ctx) {
@@ -27,20 +36,16 @@ class Enterprise extends Ship {
 		ctx.restore();
 
 		//draw ship systems display
-		const ssd_x = 880;
-		const ssd_y = 550;
-		const ssd_width = 60;
-		const ssd_height = 120;
 		ctx.drawImage(this.shipSSD, 0, 0, 54, 129,
-			ssd_x,
-			ssd_y,
-			ssd_width,
-			ssd_height);
-
-		this.drawShields(ctx, ssd_x + ssd_width / 2, ssd_y + ssd_height / 2);
+			this.ssd_x,
+			this.ssd_y,
+			this.ssd_width,
+			this.ssd_height);
 		
+		this.drawShields(ctx);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
+		ctx.lineWidth = 3;
 
 	}
 

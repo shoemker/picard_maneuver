@@ -1,3 +1,5 @@
+const Shield = require("./shield");
+
 class Ship {
 	constructor(options) {
 
@@ -14,9 +16,11 @@ class Ship {
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
 
+		this.shields = [];
+
 		this.shieldHit;
-		this.shieldHitPoints = [100,100,100,100];
-		this.shieldColor = ["white", "white", "white", "white"];
+
+
 	}
 
 	getDirection(){
@@ -73,45 +77,45 @@ class Ship {
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
 	}
 
-	drawShields(ctx, x, y) {
+	drawShields(ctx) {
 		ctx.lineWidth = 3;
 
-		// forward shield
-		let shieldPercentage = this.shieldHitPoints[0] / 100;
-		ctx.beginPath();
-		ctx.arc(x, y+25, 100, 1.4 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
-											 1.6 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
-		ctx.strokeStyle = this.shieldColor[0];
-		ctx.stroke();
+		this.shields.forEach((shield) => shield.draw(ctx))
+	}
 
+
+	raiseShields(x,y) {
+		// forward shield
+		this.shields.push(new Shield({
+			pos: [x, y + 25],
+			start: 1.4,
+			end: 1.6,
+			multiplier: .1
+		}))
 
 		// starboard shield
-		shieldPercentage = this.shieldHitPoints[1] / 100;
-		ctx.beginPath();
-		ctx.arc(x - 30, y+5, 100, 1.8 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
-														  .2 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
-		ctx.strokeStyle = this.shieldColor[1];
-		ctx.stroke();
-
+		this.shields.push(new Shield({
+			pos: [x-30, y + 5],
+			start: 1.8,
+			end: .2,
+			multiplier: .2
+		}))
 
 		// rear shield
-		shieldPercentage = this.shieldHitPoints[2] / 100;
-		ctx.beginPath();
-		ctx.arc(x, y-23, 100, 0.4 * Math.PI + .2 * Math.PI * (1 - shieldPercentage),
-															.6 * Math.PI - .2 * Math.PI * (1 - shieldPercentage));
-		ctx.strokeStyle = this.shieldColor[2];
-		ctx.stroke();
-		
-		
+		this.shields.push(new Shield({
+			pos: [x, y -23],
+			start: .4,
+			end: .6,
+			multiplier: .1,
+		}))
+
 		// port shield
-		shieldPercentage = this.shieldHitPoints[3]/100;
-		ctx.beginPath();
-		ctx.arc(x + 30, y+5, 100, 0.8 * Math.PI + .2 * Math.PI * (1-shieldPercentage), 
-									1.2 * Math.PI - .2 * Math.PI * (1-shieldPercentage));
-		ctx.strokeStyle = this.shieldColor[3];
-		ctx.stroke();
-
-
+		this.shields.push(new Shield({
+			pos: [x+30, y + 5],
+			start: .8,
+			end: 1.2,
+			multiplier: .2
+		}))
 
 	}
 
@@ -186,7 +190,7 @@ class Ship {
 		else this.directionIndex += dir;
 
 		if (this.rotationOffset > 6.2) this.rotationOffset -= Math.PI *2;
-		else if (this.rotationOffset < -.0000000000001) this.rotationOffset += Math.PI * 2;
+		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
 		this.direction = directionArray[this.directionIndex];
 		// console.log(this.rotationOffset*180/Math.PI);
