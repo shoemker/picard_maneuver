@@ -23,13 +23,21 @@ class Game {
 	}
 
 	moveObjects() {
-		// this.enterprise.move(timeDelta);
+	
+		const base_speed_inv = 5;
+
 		const shift_x = this.enterprise.getDirection()[0];
 		const shift_y = this.enterprise.getDirection()[1];
 
-		this.stars.forEach((star) => star.shift([shift_x/2.5, shift_y/2.5], this.enterprise.getSpeed()));
+		// shift the stars and enemy ship for main ship movement
+		this.stars.forEach((star) => 
+			star.shift([shift_x / base_speed_inv, 
+									shift_y / base_speed_inv], 
+									this.enterprise.getSpeed()));
 
-		this.enemy.shift([shift_x/2.5, shift_y/2.5], this.enterprise.getSpeed());
+		this.enemy.shift([shift_x / base_speed_inv, 
+											shift_y / base_speed_inv], 
+											this.enterprise.getSpeed());
 
 		this.enemy.move();
 	}
@@ -40,8 +48,8 @@ class Game {
 		ctx.fillStyle = "black";
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
+		// draw all of the objects
 		this.drawStars(ctx);
-		
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 		

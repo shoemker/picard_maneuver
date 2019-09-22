@@ -45,7 +45,6 @@ class Enterprise extends Ship {
 		this.drawShields(ctx);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
-		ctx.lineWidth = 3;
 
 	}
 

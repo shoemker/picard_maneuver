@@ -6,7 +6,7 @@ class Shield {
 		this.multiplier = options.multiplier
 
 		this.hitpoints = 100;
-		this.color = "white";
+		this.color = "#ADD8E6";
 		this.timer = 0;
 	}
 
@@ -18,11 +18,11 @@ class Shield {
 		this.timer++;
 		if (this.timer === 20) {
 			this.timer = 0;
-			this.color = "white";
+			this.color = "#ADD8E6";
 		}
 
 		let shieldPercentage = this.hitpoints / 100;
-		// debugger
+
 		ctx.beginPath();
 		ctx.arc(this.pos[0], 
 						this.pos[1], 

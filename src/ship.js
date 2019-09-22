@@ -17,9 +17,6 @@ class Ship {
 		this.increment = Math.PI / 18;
 
 		this.shields = [];
-
-
-
 	}
 
 	getDirection(){
@@ -76,14 +73,16 @@ class Ship {
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
 	}
 
+	
 	drawShields(ctx) {
 		ctx.lineWidth = 3;
 
 		this.shields.forEach((shield) => shield.draw(ctx))
 	}
 
-
+	// factory method to create shield objects
 	raiseShields(x,y) {
+
 		// forward shield
 		this.shields.push(new Shield({
 			pos: [x, y + 25],
@@ -96,7 +95,7 @@ class Ship {
 		this.shields.push(new Shield({
 			pos: [x-30, y + 5],
 			start: 1.8,
-			end: .2,
+			end: 2.2,
 			multiplier: .2
 		}))
 
@@ -140,8 +139,6 @@ class Ship {
 		else shieldHit = 3;
 
 		if (this.shields[shieldHit].getHitpoints() > 0 ) this.shields[shieldHit].hit();
-
-		console.log(shieldHit);
 	}
 
 

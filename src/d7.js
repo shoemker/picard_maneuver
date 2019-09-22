@@ -24,6 +24,7 @@ class D7 extends Ship {
 
 		this.rotateCanvas(ctx);
 
+		//draw ship
 		ctx.drawImage(this.shipImg, 0, 0, 380, 275,
 			this.pos[0],
 			this.pos[1],
@@ -33,7 +34,6 @@ class D7 extends Ship {
 		ctx.restore();
 
 		//draw ship systems display
-
 		ctx.drawImage(this.shipSSD, 0, 0, 170, 175,
 			this.ssd_x,
 			this.ssd_y,
