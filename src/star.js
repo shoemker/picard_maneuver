@@ -1,6 +1,8 @@
-class Star {
+const SpaceObject = require("./space_object");
+
+class Star extends SpaceObject {
 	constructor(options){
-		this.pos = options.pos;
+		super(options.pos);
 
 		this.radius = options.radius;
 		this.hue = options.hue;
@@ -16,9 +18,8 @@ class Star {
 		ctx.fill();
 	}
 	
-	shift(direction, vel) {
-		this.pos[0] -= vel * direction[0];
-		this.pos[1] += vel * direction[1];
+	shift(direction, speed) {
+		super.shift(direction, speed);
 
 		if (this.pos[0] > this.canvas_width) this.pos[0] = 0;
 		else if (this.pos[0] < 0) this.pos[0] = this.canvas_width;
@@ -29,4 +30,4 @@ class Star {
 
 }
 
-module.exports = Star
+module.exports = Star;

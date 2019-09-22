@@ -24,19 +24,19 @@ class Game {
 
 	moveObjects() {
 	
-		const base_speed_inv = 5;
+		const base_speed_inverse = 5;
 
 		const shift_x = this.enterprise.getDirection()[0];
 		const shift_y = this.enterprise.getDirection()[1];
 
 		// shift the stars and enemy ship for main ship movement
 		this.stars.forEach((star) => 
-			star.shift([shift_x / base_speed_inv, 
-									shift_y / base_speed_inv], 
+			star.shift([shift_x / base_speed_inverse, 
+									shift_y / base_speed_inverse], 
 									this.enterprise.getSpeed()));
 
-		this.enemy.shift([shift_x / base_speed_inv, 
-											shift_y / base_speed_inv], 
+		this.enemy.shift([shift_x / base_speed_inverse, 
+											shift_y / base_speed_inverse], 
 											this.enterprise.getSpeed());
 
 		this.enemy.move();

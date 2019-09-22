@@ -2,7 +2,7 @@ const GameView = require("./game_view");
 
 
 // window.MovingObject = MovingObject;
-// console.log("Webpack  is working!")
+
 
 document.addEventListener("DOMContentLoaded", function () {
 	const canvasEl = document.getElementsByTagName("canvas")[0];
@@ -18,3 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	g.start(ctxMain);
 
 })
+
+window.addEventListener('keydown', function (e) {
+	if (e.keyCode == 32 && e.target == document.body) {
+		e.preventDefault();
+	}
+});

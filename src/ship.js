@@ -1,10 +1,11 @@
+
+const SpaceObject = require("./space_object");
 const Shield = require("./shield");
 
-class Ship {
+class Ship extends SpaceObject{
 	constructor(options) {
+		super(options.pos);
 
-		this.pos = options.pos;
-	
 		this.directionIndex = options.directionIndex;
 		this.direction = options.direction;
 
@@ -31,11 +32,6 @@ class Ship {
 		return[this.pos[0] + this.width/2, this.pos[1] +this.height/2];
 	}
 
-	// shifts to account for main ship movement
-	shift(direction, speed) {
-		this.pos[0] -= speed * direction[0];
-		this.pos[1] += speed * direction[1];
-	};
 
 	rotateCanvas(ctx) {
 		ctx.translate(this.center()[0], this.center()[1]);
@@ -73,7 +69,7 @@ class Ship {
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
 	}
 
-	
+
 	drawShields(ctx) {
 		ctx.lineWidth = 3;
 
