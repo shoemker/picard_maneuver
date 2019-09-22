@@ -9,7 +9,7 @@ class Game {
 		this.stars = [];
 
 		this.createStarField();
-		this.torpedo = null;
+		this.torpedos = [];
 	}
 
 	addEnterprise(enterprise){
@@ -41,8 +41,19 @@ class Game {
 											shift_y / base_speed_inverse], 
 											this.enterprise.getSpeed());
 
+		// now give ships and objects their own movement
 		this.enemy.move();
-		if (this.torpedo) this.torpedo.move();
+
+		this.torpedos.forEach((torpedo, i) => {
+			torpedo.move();
+
+			// delete torpedo when it moves offscreen
+			let center = torpedo.center();
+			if (center[0] < 0 || center [0] > this.canvas_width ||
+					center[1] < 0 || center [1] > this.canvas_height)
+				this.torpedos.splice(i,1);
+		});
+
 	}
 
 	draw(ctx){
@@ -55,7 +66,7 @@ class Game {
 		this.drawStars(ctx);
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
-		if (this.torpedo) this.torpedo.draw(ctx);
+		this.torpedos.forEach((torpedo) => torpedo.draw(ctx));
 		
 	}
 
@@ -88,8 +99,10 @@ class Game {
 	} 
 
 
-	fireTorpedo(ship) {
-		this.torpedo = new Torpedo(ship.center(), ship.getDirection());
+	fireTorpedos(ship) {
+		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex() - 1));
+		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex()));
+		this.torpedos.push(new Torpedo(ship.center(), ship.getDirectionIndex() + 1));
 	}
 
 }

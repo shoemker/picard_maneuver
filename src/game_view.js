@@ -79,7 +79,7 @@ class GameView {
 		key("j", function () { that.game.enemy.changeDirection(-1); });
 		key("l", function () { that.game.enemy.changeDirection(1); });
 
-		key("f", function () { that.game.fireTorpedo(that.game.enterprise); });
+		key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 		key("p", function () { that.pauseGame(); });
 	}

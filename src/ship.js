@@ -24,13 +24,14 @@ class Ship extends SpaceObject{
 		return this.direction;
 	}
 
+	getDirectionIndex(){
+		return this.directionIndex;
+	}
+
 	getSpeed() {
 		return this.speed;
 	}
 
-	center() {
-		return[this.pos[0] + this.width/2, this.pos[1] +this.height/2];
-	}
 
 
 	rotateCanvas(ctx) {
@@ -139,46 +140,6 @@ class Ship extends SpaceObject{
 
 
 	changeDirection(dir) { 
-		// this array contains all of the directions (36 of them)
-		const directionArray = [
-			[7, 0],
-			[7, -1],
-			[7, -2],
-			[6, -3],
-			[5, -4],
-			[4, -5],
-			[3, -6],
-			[2, -7],
-			[1, -7],
-			[0, -7],
-			[-1, -7],
-			[-2, -7],
-			[-3, -6],
-			[-4, -5],
-			[-5, -4],
-			[-6, -3],
-			[-7, -2],
-			[-7, -1],
-			[-7, 0],
-			[-7, 1],
-			[-7, 2],
-			[-6, 3],
-			[-5, 4],
-			[-4, 5],
-			[-3, 6],
-			[-2, 7],
-			[-1, 7],
-			[0, 7],
-			[1, 7],
-			[2, 7],
-			[3, 6],
-			[4, 5],
-			[5, 4],
-			[6, 3],
-			[7, 2],
-			[7, 1]
-		];
-
 		this.rotationOffset += dir*this.increment;
 		if (dir > 0 && this.directionIndex === 35) this.directionIndex = 0;
 		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 35;
@@ -187,7 +148,7 @@ class Ship extends SpaceObject{
 		if (this.rotationOffset > 6.2) this.rotationOffset -= Math.PI *2;
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
-		this.direction = directionArray[this.directionIndex];
+		this.direction = this.directionArray[this.directionIndex];
 		// console.log(this.rotationOffset*180/Math.PI);
 	};
 
