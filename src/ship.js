@@ -70,6 +70,8 @@ class Ship extends SpaceObject{
 
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
+
+		// recharge weapons
 		if (this.phasorRecharge !== this.phasorRechargeMax) this.phasorRecharge++;
 		if (this.torpedoReload !== this.torpedoReloadMax) this.torpedoReload++;
 
@@ -100,7 +102,8 @@ class Ship extends SpaceObject{
 
 
 	power(impulse) {
-		this.speed += impulse;
+		if (impulse > 0 && this.speed < 3) this.speed += impulse;
+		else if (impulse < 0 && this.speed > -1) this.speed += impulse;
 	};
 
 
