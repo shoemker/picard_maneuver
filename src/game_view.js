@@ -63,7 +63,7 @@ class GameView {
 		});
 
 		key("space", function () { 
-			that.game.enterprise.firePhasor(that.game.enemy, that.ctx); 
+			that.game.firePhasors(that.game.enterprise); 
 		});
 		
 

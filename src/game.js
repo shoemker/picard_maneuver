@@ -1,4 +1,5 @@
 const Star = require("./star");
+const AI = require("./ai");
 
 class Game {
 
@@ -21,8 +22,11 @@ class Game {
 
 	step() {
 		this.moveObjects();
+
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
+
+		AI.checkForMoves(this.enemy,this.enterprise);
 	}
 
 
@@ -109,6 +113,23 @@ class Game {
 
 	fireTorpedos(ship) {
 		ship.fireTorpedos(this.torpImg);
+	}
+
+
+	firePhasors(ship) {
+		let target;
+		if(ship === this.enterprise) {
+			target = this.enemy;
+		
+			const center = target.center();
+
+			if (center[0] > 0 && center[0] < this.canvas_width &&
+				center[1] > 0 && center[1] < this.canvas_height)  ship.firePhasors(target);
+		}
+		else { 
+			target = this.enterprise;
+			ship.firePhasors(target);
+		}
 	}
 
 

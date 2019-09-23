@@ -35,10 +35,6 @@ class Ship extends SpaceObject{
 		return this.direction;
 	}
 
-	getDirectionIndex(){
-		return this.directionIndex;
-	}
-
 	getSpeed() {
 		return this.speed;
 	}
@@ -107,7 +103,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	firePhasor(target) {
+	firePhasors(target) {
 		if (this.phasorRecharge === this.phasorRechargeMax) {
 			this.target = target;
 			this.phasorCounter = 1;
@@ -184,7 +180,6 @@ class Ship extends SpaceObject{
 		this.direction = this.directionArray[this.directionIndex];
 		// console.log(this.rotationOffset*180/Math.PI);
 	};
-
 
 
 	loadExplosionImg() {
