@@ -1,22 +1,24 @@
 const Ship = require("./ship");
+const SSD = require("./ssd");
 
 class Enterprise extends Ship {
 	constructor(options) {
 		super(options);
  
 		this.loadShipImg();
-		this.loadSSDImg();
 
 		// rotates image 180 degrees so it faces left at start
 		this.rotationOffset = Math.PI;
 
 		// ssd is the ship systems display in the corner of the screen
-		this.ssd_x = 880;
-		this.ssd_y = 550;
-		this.ssd_width = 60;
-		this.ssd_height = 120
-		
-		this.raiseShields(this.ssd_x+this.ssd_width/2, this.ssd_y + this.ssd_height/2);
+		this.ssd = new SSD({
+			ssd_x: 880,
+			ssd_y: 550,
+			ssd_width: 60,
+			ssd_height: 120,
+			imgName: '../images/enterprise-refit-ssd.png',
+			imgCoords: [0, 0, 54, 129]
+		});
 	};
 
 	draw(ctx) {
@@ -32,31 +34,17 @@ class Enterprise extends Ship {
 			this.height);
 
 		ctx.restore();
-
-		//draw ship systems display
-		ctx.drawImage(this.shipSSD, 0, 0, 54, 129,
-			this.ssd_x,
-			this.ssd_y,
-			this.ssd_width,
-			this.ssd_height);
 		
 		super.draw(ctx);
 	};
 
-
-
-
+	
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
 	};
 
-	loadSSDImg() {
-		this.shipSSD = new Image();
-		this.shipSSD.onload = () => { return true; }
-		this.shipSSD.src = '../images/enterprise-refit-ssd.png';
-	};
 
 }
 

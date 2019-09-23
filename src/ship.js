@@ -1,6 +1,6 @@
 
 const SpaceObject = require("./space_object");
-const Shield = require("./shield");
+
 
 class Ship extends SpaceObject{
 	constructor(options) {
@@ -18,8 +18,8 @@ class Ship extends SpaceObject{
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
 
-		this.shields = [];
 		this.torpedos = [];
+		this.ssd;
 
 		this.loadExplosionImg();
 	}
@@ -54,8 +54,11 @@ class Ship extends SpaceObject{
 
 	
 	draw(ctx) {
-		this.drawShields(ctx);
 
+
+		//draw ship systems display
+		this.ssd.draw(ctx);
+		
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
 		if (this.torpExplosionCounter) {
@@ -95,18 +98,11 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawShields(ctx) {
-		ctx.lineWidth = 3;
-
-		this.shields.forEach((shield) => shield.draw(ctx))
-	};
-
-
 	receivePhasorHit(attacker) {
-
 		let shieldHit = this.whichShieldWasHit(attacker);
 
-		if (this.shields[shieldHit].getHitpoints() > 0 ) this.shields[shieldHit].hit();
+		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0 ) 
+						this.ssd.getShields()[shieldHit].hit();
 	};
 
 
@@ -115,7 +111,8 @@ class Ship extends SpaceObject{
 
 		let shieldHit = this.whichShieldWasHit(attacker);
 
-		if (this.shields[shieldHit].getHitpoints() > 0) this.shields[shieldHit].hit();
+		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) 
+						this.ssd.getShields()[shieldHit].hit();
 
 		this.torpExplosionCounter = 1;
 	};
@@ -161,41 +158,6 @@ class Ship extends SpaceObject{
 	};
 
 
-	// factory method to create shield objects
-	raiseShields(x, y) {
-
-		// forward shield
-		this.shields.push(new Shield({
-			pos: [x, y + 25],
-			start: 1.4,
-			end: 1.6,
-			multiplier: .1
-		}))
-
-		// starboard shield
-		this.shields.push(new Shield({
-			pos: [x - 30, y + 5],
-			start: 1.8,
-			end: 2.2,
-			multiplier: .2
-		}))
-
-		// rear shield
-		this.shields.push(new Shield({
-			pos: [x, y - 23],
-			start: .4,
-			end: .6,
-			multiplier: .1,
-		}))
-
-		// port shield
-		this.shields.push(new Shield({
-			pos: [x + 30, y + 5],
-			start: .8,
-			end: 1.2,
-			multiplier: .2
-		}))
-	};
 
 	loadExplosionImg() {
 		this.explosionImg = new Image();
