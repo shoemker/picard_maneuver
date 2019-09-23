@@ -65,6 +65,7 @@ class Game {
 
 
 	draw(ctx){
+		// clear canvas and draw black background
 		ctx.beginPath();
 		ctx.clearRect(0, 0, this.canvas_width, this.canvas_height);
 		ctx.fillStyle = "black";
@@ -76,7 +77,6 @@ class Game {
 		this.enemy.draw(ctx);
 		this.enterprise.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
 		this.enemy.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
-
 	}
 
 	drawStars(ctx) {

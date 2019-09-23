@@ -15,12 +15,13 @@ class SSD {
 		this.raiseShields();
 	}
 
+
 	getShields() {
 		return this.shields;
 	}
 
 
-	draw(ctx, phaserRechargePercent, torpedoReloadPercent) {
+	draw(ctx, phasorRechargePercent, torpedoReloadPercent) {
 
 		ctx.lineWidth = 3;
 
@@ -34,8 +35,11 @@ class SSD {
 
 		this.drawShields(ctx);
 
-		this.drawPhasorRecharge(ctx, phaserRechargePercent);
-		this.drawTorpedoReload(ctx, torpedoReloadPercent);
+		// draw phasor recharge bar
+		this.drawRechargeBar(ctx, this.ssd_x - 60, phasorRechargePercent);
+
+		// draw torpedo reload
+		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);
 	};
 
 
@@ -44,28 +48,20 @@ class SSD {
 	};
 
 
-	drawPhasorRecharge(ctx){
-		ctx.beginPath(); 
-		ctx.rect(this.ssd_x - 60, this.ssd_y, 10, this.ssd_height);
-		ctx.strokeStyle = "grey";
-		ctx.stroke();	
-
-		ctx.beginPath(); 
-		ctx.fillStyle = "grey";
-		ctx.fillRect(this.ssd_x - 57, this.ssd_y + 3, 4, this.ssd_height - 6);
-	};
-
-	drawTorpedoReload(ctx){
-		ctx.beginPath();
-
-		ctx.rect(this.ssd_x + this.ssd_width + 50, this.ssd_y, 10, this.ssd_height);
-		ctx.strokeStyle = "grey";
-		ctx.stroke();	
+	drawRechargeBar(ctx, x, percentage) {
+		let bar_height = this.ssd_height - 6;
 
 		ctx.beginPath();
-		ctx.fillStyle = "grey";
-		ctx.fillRect(this.ssd_x + this.ssd_width + 53, this.ssd_y + 3, 4, this.ssd_height - 6);
-	};
+		ctx.rect(x, this.ssd_y, 10, this.ssd_height);
+		ctx.strokeStyle = "grey";
+		ctx.stroke();
+
+		ctx.beginPath();
+		if (percentage === 1) ctx.fillStyle = "green";
+		else ctx.fillStyle = "grey";
+		ctx.fillRect(x+3, this.ssd_y + 3 + bar_height*(1-percentage), 4, bar_height*percentage);
+	}
+
 
 	// factory method to create shield objects
 	raiseShields() {
