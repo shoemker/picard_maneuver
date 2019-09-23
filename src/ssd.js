@@ -20,49 +20,52 @@ class SSD {
 	}
 
 
-	draw(ctx) {
+	draw(ctx, phaserRechargePercent, torpedoReloadPercent) {
+
+		ctx.lineWidth = 3;
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			this.ssd_x,
 			this.ssd_y,
 			this.ssd_width,
 			this.ssd_height);
-		ctx.beginPath(); 
 
+		ctx.beginPath(); 
 
 		this.drawShields(ctx);
 
-		this.drawPhasorRecharge(ctx);
-		this.drawTorpedoReload(ctx);
+		this.drawPhasorRecharge(ctx, phaserRechargePercent);
+		this.drawTorpedoReload(ctx, torpedoReloadPercent);
 	};
 
 
 	drawShields(ctx) {
-		ctx.lineWidth = 3;
-
 		this.shields.forEach((shield) => shield.draw(ctx))
 	};
 
 
 	drawPhasorRecharge(ctx){
 		ctx.beginPath(); 
-
 		ctx.rect(this.ssd_x - 60, this.ssd_y, 10, this.ssd_height);
-		
 		ctx.strokeStyle = "grey";
+		ctx.stroke();	
 
-		ctx.stroke();		
-	}
+		ctx.beginPath(); 
+		ctx.fillStyle = "grey";
+		ctx.fillRect(this.ssd_x - 57, this.ssd_y + 3, 4, this.ssd_height - 6);
+	};
 
 	drawTorpedoReload(ctx){
 		ctx.beginPath();
 
-		ctx.rect(this.ssd_x +this.ssd_width+ 50, this.ssd_y, 10, this.ssd_height);
-
+		ctx.rect(this.ssd_x + this.ssd_width + 50, this.ssd_y, 10, this.ssd_height);
 		ctx.strokeStyle = "grey";
-
 		ctx.stroke();	
-	}
+
+		ctx.beginPath();
+		ctx.fillStyle = "grey";
+		ctx.fillRect(this.ssd_x + this.ssd_width + 53, this.ssd_y + 3, 4, this.ssd_height - 6);
+	};
 
 	// factory method to create shield objects
 	raiseShields() {

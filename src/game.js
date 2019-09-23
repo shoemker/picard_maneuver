@@ -75,7 +75,8 @@ class Game {
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 		this.enterprise.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
-		
+		this.enemy.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
+
 	}
 
 	drawStars(ctx) {
