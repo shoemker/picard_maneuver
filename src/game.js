@@ -1,5 +1,4 @@
 const Star = require("./star");
-const Torpedo = require("./torpedo");
 
 class Game {
 
@@ -109,9 +108,7 @@ class Game {
 
 
 	fireTorpedos(ship) {
-		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex() - 1));
-		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex()));
-		ship.getTorpedos().push(new Torpedo(ship.center(), this.torpImg, ship.getDirectionIndex() + 1));
+		ship.fireTorpedos(this.torpImg);
 	}
 
 

@@ -79,6 +79,7 @@ class GameView {
 		key("p", function () { that.pauseGame(); });
 	};
 
+	
 	pauseGame() {
 		if (!this.pause) this.pause = true;
 		else { 

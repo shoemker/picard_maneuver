@@ -1,6 +1,6 @@
 
 const SpaceObject = require("./space_object");
-
+const Torpedo = require("./torpedo");
 
 class Ship extends SpaceObject{
 
@@ -71,6 +71,7 @@ class Ship extends SpaceObject{
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 		if (this.phasorRecharge !== this.phasorRechargeMax) this.phasorRecharge++;
+		if (this.torpedoReload !== this.torpedoReloadMax) this.torpedoReload++;
 
 		//shows torpedo hit
 		if (this.torpExplosionCounter) {
@@ -96,7 +97,7 @@ class Ship extends SpaceObject{
 		this.phasorCounter++;
 		if (this.phasorCounter > 20) this.phasorCounter = 0;
 	};
-	
+
 
 	power(impulse) {
 		this.speed += impulse;
@@ -111,6 +112,16 @@ class Ship extends SpaceObject{
 			this.phasorRecharge = 0;
 		}
 	};
+
+
+	fireTorpedos(torpImg) {
+		if (this.torpedoReload === this.torpedoReloadMax) {
+			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex - 1));
+			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex));
+			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex + 1));
+			this.torpedoReload = 0;
+		}
+	}
 
 
 	receivePhasorHit(attacker) {
