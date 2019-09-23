@@ -14,6 +14,7 @@ class Ship extends SpaceObject{
 		this.width = 60;
 		this.height = 30
 		this.phasorCounter = 0;
+		this.phasorColor = options.phasorColor;
 		this.torpExplosionCounter = 0;
 
 		this.rotationOffset = 0;
@@ -43,6 +44,14 @@ class Ship extends SpaceObject{
 		return this.torpedos;
 	}
 
+	phasorReady() {
+		return this.phasorRecharge === this.phasorRechargeMax;
+	}
+
+	torpedoReady() {
+		return this.torpedoReload === this.torpedoReloadMax;
+	}
+
 
 	rotateCanvas(ctx) {
 		ctx.translate(this.center()[0], this.center()[1]);
@@ -51,9 +60,9 @@ class Ship extends SpaceObject{
 	};
 	
 
-	move() {
-		this.pos[0] += this.speed * this.direction[0];
-		this.pos[1] -= this.speed * this.direction[1];
+	move(base_speed_inverse) {
+		this.pos[0] += (this.direction[0] / base_speed_inverse) * this.speed ;
+		this.pos[1] -= (this.direction[1] / base_speed_inverse) * this.speed ;
 	};
 
 	
@@ -89,7 +98,7 @@ class Ship extends SpaceObject{
 		ctx.beginPath();
 		ctx.moveTo(this.center()[0], this.center()[1]);
 		ctx.lineTo(this.target.center()[0], this.target.center()[1]);
-		ctx.strokeStyle = 'red';
+		ctx.strokeStyle = this.phasorColor;
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		this.phasorCounter++;
@@ -178,7 +187,13 @@ class Ship extends SpaceObject{
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
 		this.direction = this.directionArray[this.directionIndex];
-		// console.log(this.rotationOffset*180/Math.PI);
+	};
+
+
+	onscreen(canvas_width, canvas_height) {
+		const center = this.center();
+		return (center[0] > 0 && center[0] < canvas_width &&
+						center[1] > 0 && center[1] < canvas_height)  
 	};
 
 

@@ -1,5 +1,5 @@
 const Star = require("./star");
-const AI = require("./ai");
+const EnemyAI = require("./enemyAI");
 
 class Game {
 
@@ -7,6 +7,7 @@ class Game {
 		this.canvas_width = canvas_width;
 		this.canvas_height = canvas_height;
 		this.stars = [];
+		this.base_speed_inverse = 5;
 
 		this.createStarField();
 		this.loadTorpImg();
@@ -26,7 +27,8 @@ class Game {
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-		AI.checkForMoves(this.enemy,this.enterprise);
+		EnemyAI.checkForMoves(this.enemy,this.enterprise, 
+													this.canvas_width, this.canvas_height);
 	}
 
 
@@ -34,7 +36,7 @@ class Game {
 		this.shift();
 
 		// now give ships and objects their own movement
-		this.enemy.move();
+		this.enemy.move(this.base_speed_inverse);
 
 		this.enterprise.getTorpedos().forEach((torpedo, i) => {
 			torpedo.move();
@@ -50,19 +52,18 @@ class Game {
 
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
-		const base_speed_inverse = 5;
 
 		const shift_x = this.enterprise.getDirection()[0];
 		const shift_y = this.enterprise.getDirection()[1];
 
 
 		this.stars.forEach((star) =>
-					star.shift([shift_x / base_speed_inverse,
-											shift_y / base_speed_inverse],
+					star.shift([shift_x / this.base_speed_inverse,
+											shift_y / this.base_speed_inverse],
 											this.enterprise.getSpeed()));
 
-		this.enemy.shift([shift_x / base_speed_inverse,
-											shift_y / base_speed_inverse],
+		this.enemy.shift([shift_x / this.base_speed_inverse,
+											shift_y / this.base_speed_inverse],
 											this.enterprise.getSpeed());
 	}
 
@@ -108,29 +109,23 @@ class Game {
 
 	getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
-	} 
+	};
 
 
 	fireTorpedos(ship) {
 		ship.fireTorpedos(this.torpImg);
-	}
+	};
 
 
 	firePhasors(ship) {
-		let target;
-		if(ship === this.enterprise) {
-			target = this.enemy;
-		
-			const center = target.center();
-
-			if (center[0] > 0 && center[0] < this.canvas_width &&
-				center[1] > 0 && center[1] < this.canvas_height)  ship.firePhasors(target);
+		const enemyOnScreen = this.enemy.onscreen(this.canvas_width, this.canvas_height);
+		if (ship === this.enterprise && enemyOnScreen) {
+			ship.firePhasors(this.enemy);
 		}
-		else { 
-			target = this.enterprise;
-			ship.firePhasors(target);
+		else if (enemyOnScreen) { 
+			ship.firePhasors(this.enterprise);
 		}
-	}
+	};
 
 
 	checkTorpCollisions(ship, torpedos) {
@@ -146,7 +141,7 @@ class Game {
 				else ship.receiveTorpHit(this.enterprise)
 			}
 		})
-	}
+	};
 
 
 	loadTorpImg() {

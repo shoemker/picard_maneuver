@@ -13,13 +13,15 @@ class GameView {
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2-50],
 			directionIndex: 18,
-			direction: [-3,0]
+			direction: [-3,0],
+			phasorColor: "red"
 		}));
 
 		this.game.addEnemy( new D7({
 			pos: [0, 100],
 			directionIndex: 0,
-			direction: [3, 0]
+			direction: [3, 0],
+			phasorColor: "green"
 		}));
 	
 	};

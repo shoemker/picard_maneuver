@@ -74,7 +74,7 @@ class SSD {
 			start: 1.4,
 			end: 1.6,
 			multiplier: .1
-		}))
+		}));
 
 		// starboard shield
 		this.shields.push(new Shield({
@@ -82,7 +82,7 @@ class SSD {
 			start: 1.8,
 			end: 2.2,
 			multiplier: .2
-		}))
+		}));
 
 		// rear shield
 		this.shields.push(new Shield({
@@ -90,7 +90,7 @@ class SSD {
 			start: .4,
 			end: .6,
 			multiplier: .1,
-		}))
+		}));
 
 		// port shield
 		this.shields.push(new Shield({
@@ -98,7 +98,7 @@ class SSD {
 			start: .8,
 			end: 1.2,
 			multiplier: .2
-		}))
+		}));
 	};
 
 

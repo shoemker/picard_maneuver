@@ -5,7 +5,6 @@ class D7 extends Ship {
 	constructor(options) {
 		super(options);
 
-		// this.speed = 1;
 		this.loadShipImg();
 
 		// ssd is the ship systems display in the corner of the screen
