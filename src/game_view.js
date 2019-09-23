@@ -11,18 +11,19 @@ class GameView {
 		this.pause = false;
 
 		this.game.addEnterprise(new Enterprise({
-			pos: [width/2 - 50, height/2],
+			pos: [width/2 - 50, height/2-50],
 			directionIndex: 18,
 			direction: [-3,0]
 		}));
 
 		this.game.addEnemy( new D7({
-			pos: [0, 0],
+			pos: [0, 100],
 			directionIndex: 0,
 			direction: [3, 0]
 		}));
 	
 	};
+	
 
 	start() {
 		this.bindKeyHandlers();
@@ -32,6 +33,7 @@ class GameView {
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
 	};
+
 
 	animate(time) {
 		if (!this.pause) {
@@ -48,13 +50,6 @@ class GameView {
 	
 	bindKeyHandlers() {
 
-		// const MOVES = {
-		// 	w: [0, -1],
-		// 	a: [-1, 0],
-		// 	s: [0, 1],
-		// 	d: [1, 0],
-		// };
-
 		const MOVES = {
 			w: 1,
 			s:-1
@@ -62,7 +57,6 @@ class GameView {
 
 		const that = this;
 		
-
 		Object.keys(MOVES).forEach(function (k) {
 			const move = MOVES[k];
 			key(k, function () { that.game.enterprise.power(move); });
@@ -72,6 +66,7 @@ class GameView {
 			that.game.enterprise.firePhasor(that.game.enemy, that.ctx); 
 		});
 		
+
 		//call to rotate ship image
 		key("a", function () { that.game.enterprise.changeDirection(-1); });
 		key("d", function () { that.game.enterprise.changeDirection(1); });

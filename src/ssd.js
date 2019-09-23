@@ -19,6 +19,7 @@ class SSD {
 		return this.shields;
 	}
 
+
 	draw(ctx) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
@@ -26,8 +27,13 @@ class SSD {
 			this.ssd_y,
 			this.ssd_width,
 			this.ssd_height);
+		ctx.beginPath(); 
 
-		this.drawShields(ctx)
+
+		this.drawShields(ctx);
+
+		this.drawPhasorRecharge(ctx);
+		this.drawTorpedoReload(ctx);
 	};
 
 
@@ -37,6 +43,26 @@ class SSD {
 		this.shields.forEach((shield) => shield.draw(ctx))
 	};
 
+
+	drawPhasorRecharge(ctx){
+		ctx.beginPath(); 
+
+		ctx.rect(this.ssd_x - 60, this.ssd_y, 10, this.ssd_height);
+		
+		ctx.strokeStyle = "grey";
+
+		ctx.stroke();		
+	}
+
+	drawTorpedoReload(ctx){
+		ctx.beginPath();
+
+		ctx.rect(this.ssd_x +this.ssd_width+ 50, this.ssd_y, 10, this.ssd_height);
+
+		ctx.strokeStyle = "grey";
+
+		ctx.stroke();	
+	}
 
 	// factory method to create shield objects
 	raiseShields() {
@@ -76,7 +102,7 @@ class SSD {
 		}))
 	};
 
-	
+
 	loadSSDImg(imgName) {
 		this.SSDimg = new Image();
 		this.SSDimg.onload = () => { return true; }

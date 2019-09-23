@@ -12,7 +12,7 @@ class Enterprise extends Ship {
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
-			ssd_x: 880,
+			ssd_x: 830,
 			ssd_y: 550,
 			ssd_width: 60,
 			ssd_height: 120,
@@ -38,7 +38,7 @@ class Enterprise extends Ship {
 		super.draw(ctx);
 	};
 
-	
+
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }

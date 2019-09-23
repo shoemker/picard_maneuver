@@ -55,12 +55,12 @@ class Ship extends SpaceObject{
 	
 	draw(ctx) {
 
-
 		//draw ship systems display
 		this.ssd.draw(ctx);
-		
+
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
+		//shows torpedo hit
 		if (this.torpExplosionCounter) {
 			ctx.drawImage(this.explosionImg, 606, 295, 100, 100,
 				this.center()[0],
@@ -71,7 +71,8 @@ class Ship extends SpaceObject{
 			this.torpExplosionCounter++;
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
-	};
+
+	}
 
 
 	power(impulse) {
