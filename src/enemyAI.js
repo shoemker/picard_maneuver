@@ -15,7 +15,7 @@ const EnemyAI = {
 		// fire phasors
 		if (enemy.phasorReady() && onscreen) enemy.firePhasors(enterprise);
 
-		if (!onscreen || enemy.torpedoReady) {
+		if (!onscreen || enemy.torpedoReady()) {
 			if (angleOfEnterprise > Math.PI *.0625 && angleOfEnterprise <= Math.PI) enemy.changeDirection(1);
 			else if (angleOfEnterprise < Math.PI * 1.9375 && angleOfEnterprise > Math.PI) enemy.changeDirection(-1);
 			else enemy.fireTorpedos(torpImg);

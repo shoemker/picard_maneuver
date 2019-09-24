@@ -1,4 +1,5 @@
 const Star = require("./star");
+const Planet = require("./planet");
 const EnemyAI = require("./enemyAI");
 const Utils = require("./utils");
 
@@ -12,6 +13,14 @@ class Game {
 
 		this.createStarField();
 		this.loadTorpImg();
+
+		this.planet8 = new Planet({
+			pos: [300, 300],
+			img: this.loadPlanet('../images/planets/planet_08.png'),
+			width: 200,
+			height: 200,
+			sheetCoords: [20, 20, 460, 480]
+		});
 	}
 
 	addEnterprise(enterprise){
@@ -48,18 +57,18 @@ class Game {
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
 
-		const shift_x = this.enterprise.getDirection()[0];
-		const shift_y = this.enterprise.getDirection()[1];
+		const shift_x = this.enterprise.getDirection()[0] / this.base_speed_inverse;
+		const shift_y = this.enterprise.getDirection()[1] / this.base_speed_inverse;
 
 
 		this.stars.forEach((star) =>
-					star.shift([shift_x / this.base_speed_inverse,
-											shift_y / this.base_speed_inverse],
-											this.enterprise.getSpeed()));
+					star.shift([shift_x , shift_y], this.enterprise.getSpeed()));
 
-		this.enemy.shift([shift_x / this.base_speed_inverse,
-											shift_y / this.base_speed_inverse],
-											this.enterprise.getSpeed());
+		this.enemy.shift([shift_x, shift_y], this.enterprise.getSpeed());
+										
+		this.planet8.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
+												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
+												this.enterprise.getSpeed());	
 	}
 
 
@@ -72,6 +81,7 @@ class Game {
 
 		// draw all of the objects
 		this.drawStars(ctx);
+		this.planet8.draw(ctx);
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 		this.enterprise.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
@@ -156,6 +166,30 @@ class Game {
 		this.torpImg.src = '../images/torpedo.png';
 	};
 
+	loadPlanet(file) {
+		let img = new Image();
+		img.onload = () => { return true; }
+		img.src = file;
+		return img;
+	};
+
 }
 
 module.exports = Game;
+
+
+		// this.planet1 = new Planet({
+		// 	pos:[300,300], 
+		// 	img: this.loadPlanet('../images/planets/planet_01.png'),
+		// 	width:200,
+		// 	height:200,
+		// 	sheetCoords: [20, 10, 480, 470]
+		// });
+
+		// this.planet9 = new Planet({
+		// 	pos: [300, 300],
+		// 	img: this.loadPlanet('../images/planets/planet_09.png'),
+		// 	width: 200,
+		// 	height: 200,
+		// 	sheetCoords: [20, 20, 580, 580]
+		// });

@@ -25,10 +25,10 @@ class Ship extends SpaceObject{
 		this.ssd;
 
 		this.phasorRecharge = 0;
-		this.phasorRechargeMax = 100;
+		this.phasorRechargeMax = 150;
 
 		this.torpedoReload = 0;
-		this.torpedoReloadMax= 120;
+		this.torpedoReloadMax= 200;
 
 		this.loadExplosionImg();
 	}
