@@ -28,9 +28,9 @@ class Game {
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-		// EnemyAI.checkForMoves(this.enemy,this.enterprise, 
-		// 											this.canvas_width, this.canvas_height,
-		// 											this.torpImg);
+		EnemyAI.checkForMoves(this.enemy,this.enterprise, 
+													this.canvas_width, this.canvas_height,
+													this.torpImg);
 	}
 
 

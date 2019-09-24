@@ -45,6 +45,10 @@ class Ship extends SpaceObject{
 		return this.torpedos;
 	}
 
+	getRotation() {
+		return this.rotationOffset;
+	}
+
 	phasorReady() {
 		return this.phasorRecharge === this.phasorRechargeMax;
 	}
@@ -165,13 +169,14 @@ class Ship extends SpaceObject{
 	whichShieldWasHit(attacker) {
 		let shieldHit;
 
-		const angle = Utils.angleToOtherShip(this, attacker, this.rotationOffset)
+		const angle = Utils.angleToOtherShip(this, attacker)
 
 		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) shieldHit = 0;
 		else if (angle > .25 * Math.PI && angle < .75 * Math.PI) shieldHit = 1;
 		else if (angle >= .75 * Math.PI && angle <= 1.25 * Math.PI) shieldHit = 2;
 		else shieldHit = 3;
 
+		// console.log(shieldHit);
 		return shieldHit;
 	};
 

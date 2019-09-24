@@ -7,7 +7,7 @@ const Utils = {
 		return Math.sqrt(distance_x * distance_x + distance_y * distance_y);
 	},
 
-	angleToOtherShip(ship, otherShip, rotation) {
+	angleToOtherShip(ship, otherShip) {
 		const xDelta = otherShip.center()[0] - ship.center()[0];
 		const yDelta = otherShip.center()[1] - ship.center()[1];
 
@@ -18,7 +18,7 @@ const Utils = {
 			else angle = arcTangent;
 
 		// take the rotation of the hit ship into account
-		angle -= rotation;
+		angle -= ship.getRotation();
 		if (angle < 0) angle += Math.PI * 2;
 		return angle;
 	}
