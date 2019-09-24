@@ -1,4 +1,4 @@
-const  Game = require("./game");
+const Game = require("./game");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
 

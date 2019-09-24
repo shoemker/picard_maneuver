@@ -2,8 +2,7 @@
 const Utils = require("./utils");
 
 const EnemyAI = {
-	checkForMoves(enemy, enterprise, canvas_width, canvas_height, turnCounter, torpImg){
-		console.log(turnCounter);
+	consultAI(enemy, enterprise, canvas_width, canvas_height, turnCounter, torpImg){
 		let onscreen = enemy.onscreen(canvas_width, canvas_height);
 		let angleOfEnterprise = Utils.angleToOtherShip(enemy, enterprise);
 		let timerMax = 5;
@@ -14,6 +13,7 @@ const EnemyAI = {
 		// fire phasors
 		if (enemy.phasorReady() && onscreen) enemy.firePhasors(enterprise);
 
+		// turning and torpedos
 		if (!onscreen || enemy.torpedoReady()) {
 			if (angleOfEnterprise > Math.PI *.0625 && angleOfEnterprise <= Math.PI) {
 				if(turnCounter === timerMax) enemy.changeDirection(1);

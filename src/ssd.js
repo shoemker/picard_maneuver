@@ -8,6 +8,7 @@ class SSD {
 		this.ssd_width = options.ssd_width;
 		this.ssd_height = options.ssd_height;
 		this.imgCoords = options.imgCoords;
+		this.beamWeaponName = options.beamWeaponName;
 		
 		this.loadSSDImg(options.imgName);
 

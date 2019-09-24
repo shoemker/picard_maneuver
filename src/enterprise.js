@@ -17,6 +17,7 @@ class Enterprise extends Ship {
 			ssd_width: 60,
 			ssd_height: 120,
 			imgName: '../images/enterprise-refit-ssd.png',
+			beamWeaponName: "Phasor",
 			imgCoords: [0, 0, 54, 129]
 		});
 	};

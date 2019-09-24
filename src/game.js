@@ -22,6 +22,14 @@ class Game {
 			height: 200,
 			sheetCoords: [20, 20, 460, 480]
 		});
+
+		this.moon1 = new Planet({
+			pos:[510, 290],
+			img: this.loadPlanet('../images/planets/moon_01.png'),
+			width: 50,
+			height: 50,
+			sheetCoords: [3,3,58,58]
+		})
 	}
 
 	addEnterprise(enterprise){
@@ -39,7 +47,7 @@ class Game {
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-		EnemyAI.checkForMoves(this.enemy, this.enterprise, 
+		EnemyAI.consultAI(this.enemy, this.enterprise, 
 													this.canvas_width, this.canvas_height,
 													this.D7turnCounter,
 													this.torpImg);
@@ -74,6 +82,10 @@ class Game {
 										
 		this.planet8.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
 												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
+												this.enterprise.getSpeed());
+												
+		this.moon1.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse - 1.8),
+												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 1.8)],
 												this.enterprise.getSpeed());	
 	}
 
@@ -87,6 +99,8 @@ class Game {
 
 		// draw all of the objects
 		this.drawStars(ctx);
+		this.moon1.draw(ctx);
+
 		this.planet8.draw(ctx);
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);

@@ -14,6 +14,7 @@ class D7 extends Ship {
 			ssd_width: 70,
 			ssd_height: 120,
 			imgName: '../images/D7-SSD.png',
+			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 170, 175]
 		});
 	};
