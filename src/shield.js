@@ -30,6 +30,7 @@ class Shield {
 						this.start * Math.PI + this.multiplier * Math.PI * (1 - shieldPercentage),
 						this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage));
 	
+		ctx.lineWidth = 5;
 		ctx.strokeStyle = this.color;
 		ctx.stroke();
 	}
