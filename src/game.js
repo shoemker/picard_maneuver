@@ -13,6 +13,7 @@ class Game {
 
 		this.createStarField();
 		this.loadTorpImg();
+		this.D7turnCounter = 0;
 
 		this.planet8 = new Planet({
 			pos: [300, 300],
@@ -32,14 +33,19 @@ class Game {
 	}
 
 	step() {
+		const turnCounterMax = 5;
 		this.moveObjects();
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-		EnemyAI.checkForMoves(this.enemy,this.enterprise, 
+		EnemyAI.checkForMoves(this.enemy, this.enterprise, 
 													this.canvas_width, this.canvas_height,
+													this.D7turnCounter,
 													this.torpImg);
+		
+		this.D7turnCounter++;
+		if (this.D7turnCounter > turnCounterMax) this.D7turnCounter = 0;
 	}
 
 
