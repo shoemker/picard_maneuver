@@ -14,16 +14,15 @@ class SSD {
 
 		this.shields = [];
 		this.raiseShields();
-	}
+	};
 
 
 	getShields() {
 		return this.shields;
-	}
+	};
 
 
-	draw(ctx, phasorRechargePercent, torpedoReloadPercent) {
-
+	draw(ctx, phasorRechargePercent, torpedoReloadPercent, hullPercentage) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			this.ssd_x,
@@ -42,20 +41,7 @@ class SSD {
 		// draw torpedo reload
 		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);
 
-		ctx.beginPath();
-		ctx.font = "20px Arial";
-		ctx.fillStyle = "white";
-
-		let x_coord;
-		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
-		else x_coord = this.ssd_x - 88;
-
-		ctx.fillText(this.beamWeaponName, x_coord, 700);
-		ctx.fillText("Recharge", this.ssd_x - 95, 725);
-
-		ctx.fillText("Torp", this.ssd_x+this.ssd_width + 35, 700);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, 725);
-
+		this.drawLabels(ctx);
 	};
 
 
@@ -76,7 +62,23 @@ class SSD {
 		if (percentage === 1) ctx.fillStyle = "green";
 		else ctx.fillStyle = "grey";
 		ctx.fillRect(x+3, this.ssd_y + 3 + bar_height*(1-percentage), 4, bar_height*percentage);
-	}
+	};
+
+
+	drawLabels(ctx) {
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "white";
+
+		let x_coord;
+		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
+		else x_coord = this.ssd_x - 85;
+
+		ctx.fillText(this.beamWeaponName, x_coord, 700);
+		ctx.fillText("Recharge", this.ssd_x - 95, 725);
+
+		ctx.fillText("Torp", this.ssd_x+this.ssd_width + 35, 700);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, 725);
+	};
 
 
 	// factory method to create shield objects

@@ -15,7 +15,7 @@ class Game {
 		this.loadTorpImg();
 		this.D7turnCounter = 0;
 
-		this.planet8 = new Planet({
+		this.planet_08 = new Planet({
 			pos: [300, 300],
 			img: this.loadPlanet('../images/planets/planet_08.png'),
 			width: 200,
@@ -23,7 +23,7 @@ class Game {
 			sheetCoords: [20, 20, 460, 480]
 		});
 
-		this.moon1 = new Planet({
+		this.moon_01 = new Planet({
 			pos:[260, 410],
 			img: this.loadPlanet('../images/planets/moon_01.png'),
 			width: 50,
@@ -81,11 +81,11 @@ class Game {
 		this.enemy.shift([shift_x, shift_y], this.enterprise.getSpeed());
 										
 		// the planet and moon shift differently than the stars to give a layered background
-		this.planet8.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
+		this.planet_08.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
 												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
 												this.enterprise.getSpeed());
 												
-		this.moon1.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
+		this.moon_01.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
 												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2.5)],
 												this.enterprise.getSpeed());	
 	}
@@ -101,8 +101,8 @@ class Game {
 		// draw all of the objects
 		this.drawStars(ctx);
 
-		this.planet8.draw(ctx);
-		this.moon1.draw(ctx);
+		this.planet_08.draw(ctx);
+		this.moon_01.draw(ctx);
 
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
