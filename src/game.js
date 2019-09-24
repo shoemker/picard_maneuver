@@ -29,7 +29,8 @@ class Game {
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
 		EnemyAI.checkForMoves(this.enemy,this.enterprise, 
-													this.canvas_width, this.canvas_height);
+													this.canvas_width, this.canvas_height,
+													this.torpImg);
 	}
 
 
@@ -39,15 +40,8 @@ class Game {
 		// now give ships and objects their own movement
 		this.enemy.move(this.base_speed_inverse);
 
-		this.enterprise.getTorpedos().forEach((torpedo, i) => {
-			torpedo.move();
-
-			// delete torpedo when it moves offscreen
-			let center = torpedo.center();
-			if (center[0] < 0 || center [0] > this.canvas_width ||
-					center[1] < 0 || center [1] > this.canvas_height)
-				this.enterprise.getTorpedos().splice(i,1);
-		});
+		this.moveTorpedos(this.enterprise);
+		this.moveTorpedos(this.enemy);
 	}
 
 
@@ -106,6 +100,19 @@ class Game {
 				canvas_height: this.canvas_height				
 			}))
 		}
+	}
+
+
+	moveTorpedos(ship) {
+		ship.getTorpedos().forEach((torpedo, i) => {
+			torpedo.move();
+
+			// delete torpedo when it moves offscreen
+			let center = torpedo.center();
+			if (center[0] < 0 || center[0] > this.canvas_width ||
+				center[1] < 0 || center[1] > this.canvas_height)
+				ship.getTorpedos().splice(i, 1);
+		});
 	}
 
 	getRandom(min, max) {
