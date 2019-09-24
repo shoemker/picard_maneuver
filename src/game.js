@@ -1,5 +1,6 @@
 const Star = require("./star");
 const EnemyAI = require("./enemyAI");
+const Utils = require("./utils");
 
 class Game {
 
@@ -132,9 +133,7 @@ class Game {
 		let distance;
 
 		torpedos.forEach((torpedo,i) => {
-			let distance_x = ship.center()[0] - torpedo.center()[0];
-			let distance_y = ship.center()[1] - torpedo.center()[1];
-			distance = Math.sqrt(distance_x*distance_x + distance_y*distance_y);
+			distance = Utils.distance(ship, torpedo);
 			if (distance < 30) {
 				torpedos.splice(i, 1);
 				if (ship === this.enterprise) ship.receiveTorpHit(this.enemy);

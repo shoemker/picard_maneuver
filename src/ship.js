@@ -1,6 +1,7 @@
 
 const SpaceObject = require("./space_object");
 const Torpedo = require("./torpedo");
+const Utils = require("./utils");
 
 class Ship extends SpaceObject{
 
@@ -93,16 +94,27 @@ class Ship extends SpaceObject{
 		}
 	}
 
-
+	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
+	// then stays there for phasorDrawMax frames
 	drawPhasor(ctx) {
+		const phasorDrawMax = 10;
+		const xDelta = this.target.center()[0] - this.center()[0];
+		const yDelta = this.target.center()[1] - this.center()[1];
+
+		let ratio = this.phasorCounter/ phasorDrawMax;
+		if (ratio > 1) ratio = 1;
+
+		const xProgress = ratio * xDelta + this.center()[0];
+		const yProgress = ratio * yDelta + this.center()[1];
+
 		ctx.beginPath();
 		ctx.moveTo(this.center()[0], this.center()[1]);
-		ctx.lineTo(this.target.center()[0], this.target.center()[1]);
+		ctx.lineTo(xProgress, yProgress);
 		ctx.strokeStyle = this.phasorColor;
-		ctx.lineWidth = 2;
+		ctx.lineWidth = 3;
 		ctx.stroke();
 		this.phasorCounter++;
-		if (this.phasorCounter > 20) this.phasorCounter = 0;
+		if (this.phasorCounter > phasorDrawMax*2) this.phasorCounter = 0;
 	};
 
 
