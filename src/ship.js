@@ -68,7 +68,6 @@ class Ship extends SpaceObject{
 
 	
 	draw(ctx) {
-
 		//draw ship systems display
 		this.ssd.draw(ctx,
 									this.phasorRecharge/this.phasorRechargeMax,
@@ -164,21 +163,9 @@ class Ship extends SpaceObject{
 
 
 	whichShieldWasHit(attacker) {
-		let angle;
 		let shieldHit;
 
-		const xDelta = attacker.center()[0] - this.center()[0];
-		const yDelta = attacker.center()[1] - this.center()[1];
-
-		// find the angle between the 2 objects
-		const arcTangent = Math.atan(yDelta / xDelta);
-		if (xDelta < 0) angle = arcTangent + Math.PI;
-		else if (xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
-		else angle = arcTangent;
-
-		// take the rotation of the hit ship into account
-		angle -= this.rotationOffset;
-		if (angle < 0) angle += Math.PI * 2;
+		const angle = Utils.angleToOtherShip(this, attacker, this.rotationOffset)
 
 		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) shieldHit = 0;
 		else if (angle > .25 * Math.PI && angle < .75 * Math.PI) shieldHit = 1;
