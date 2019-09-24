@@ -7,6 +7,9 @@ const EnemyAI = {
 		let angleOfEnterprise = Utils.angleToOtherShip(enemy, enterprise);
 		let timerMax = 5;
 
+		turnLeftLength = 0;
+		turnRightLength = 0;
+
 		// speed
 		if (enemy.getSpeed() < 2) enemy.power(1);
 
@@ -16,15 +19,24 @@ const EnemyAI = {
 		// turning and torpedos
 		if (!onscreen || enemy.torpedoReady()) {
 			if (angleOfEnterprise > Math.PI *.0625 && angleOfEnterprise <= Math.PI) {
-				if(turnCounter === timerMax) enemy.changeDirection(1);
+				if(turnCounter === timerMax) {
+					enemy.changeDirection(1);
+					// turnRightLength++;
+					// turnLeftLength = 0;
+				}
 			}
 			else if (angleOfEnterprise < Math.PI * 1.9375 && 
 							 angleOfEnterprise > Math.PI) {
-				if (turnCounter === timerMax) enemy.changeDirection(-1);
+				if (turnCounter === timerMax) {
+					enemy.changeDirection(-1);
+					// turnLeftLength++;
+					// turnRightLength = 0;
+				}
 		 	}
 			else enemy.fireTorpedos(torpImg);
 		}
 
+		// console.log("left: " + turnLeftLength + ", right: " +turnRightLength);
 	}
 }
 

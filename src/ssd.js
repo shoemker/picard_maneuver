@@ -41,6 +41,21 @@ class SSD {
 
 		// draw torpedo reload
 		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);
+
+		ctx.beginPath();
+		ctx.font = "20px Arial";
+		ctx.fillStyle = "white";
+
+		let x_coord;
+		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
+		else x_coord = this.ssd_x - 88;
+
+		ctx.fillText(this.beamWeaponName, x_coord, 700);
+		ctx.fillText("Recharge", this.ssd_x - 95, 725);
+
+		ctx.fillText("Torp", this.ssd_x+this.ssd_width + 35, 700);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, 725);
+
 	};
 
 

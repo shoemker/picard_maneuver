@@ -30,6 +30,9 @@ class Ship extends SpaceObject{
 		this.torpedoReload = 0;
 		this.torpedoReloadMax= 200;
 
+		this.hullIntegrity = 200;
+		this.hullIntegrityMax = 200;
+
 		this.loadExplosionImg();
 	}
 
@@ -74,8 +77,9 @@ class Ship extends SpaceObject{
 	draw(ctx) {
 		//draw ship systems display
 		this.ssd.draw(ctx,
-									this.phasorRecharge/this.phasorRechargeMax,
-									this.torpedoReload/this.torpedoReloadMax);
+									this.phasorRecharge / this.phasorRechargeMax,
+									this.torpedoReload / this.torpedoReloadMax,
+									this.hullIntegrity / this.hullIntegrityMax);
 
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
@@ -100,7 +104,7 @@ class Ship extends SpaceObject{
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
 	// then stays there for phasorDrawMax frames
 	drawPhasor(ctx) {
-		const phasorDrawMax = 10;
+		const phasorDrawMax = 12;
 		const xDelta = this.target.center()[0] - this.center()[0];
 		const yDelta = this.target.center()[1] - this.center()[1];
 
@@ -117,7 +121,7 @@ class Ship extends SpaceObject{
 		ctx.lineWidth = 3;
 		ctx.stroke();
 		this.phasorCounter++;
-		if (this.phasorCounter > phasorDrawMax*2) this.phasorCounter = 0;
+		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
 	};
 
 

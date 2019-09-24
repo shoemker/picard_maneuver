@@ -24,7 +24,7 @@ class Game {
 		});
 
 		this.moon1 = new Planet({
-			pos:[480, 290],
+			pos:[260, 410],
 			img: this.loadPlanet('../images/planets/moon_01.png'),
 			width: 50,
 			height: 50,

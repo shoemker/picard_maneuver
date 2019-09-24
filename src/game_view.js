@@ -23,7 +23,6 @@ class GameView {
 			direction: [3, 0],
 			phasorColor: "green"
 		}));
-	
 	};
 	
 
@@ -39,8 +38,8 @@ class GameView {
 
 	animate(time) {
 		if (!this.pause) {
-			const timeDelta = time - this.lastTime;
-			this.game.step(timeDelta);
+			// const timeDelta = time - this.lastTime;
+			this.game.step();
 			this.game.draw(this.ctx);
 
 			this.lastTime = time;
@@ -73,10 +72,11 @@ class GameView {
 		key("a", function () { that.game.enterprise.changeDirection(-1); });
 		key("d", function () { that.game.enterprise.changeDirection(1); });
 
-		key("j", function () { that.game.enemy.changeDirection(-1); });
-		key("l", function () { that.game.enemy.changeDirection(1); });
+		// key("j", function () { that.game.enemy.changeDirection(-1); });
+		// key("l", function () { that.game.enemy.changeDirection(1); });
 
 		key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
+		key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 		key("p", function () { that.pauseGame(); });
 	};
