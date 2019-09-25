@@ -41,6 +41,8 @@ class SSD {
 		// draw torpedo reload
 		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);
 
+		this.drawHullIntegrity(ctx, hullPercentage);
+
 		this.drawLabels(ctx);
 	};
 
@@ -65,8 +67,17 @@ class SSD {
 	};
 
 
+	drawHullIntegrity(ctx, hullPercentage) {
+		ctx.font = "18px Arial";
+		if (hullPercentage >= .85) ctx.fillStyle = "white";
+		else if (hullPercentage >= .35) ctx.fillStyle = "yellow";
+		else ctx.fillStyle = "red";
+
+		ctx.fillText("Hull Integrity: " + Math.floor(hullPercentage*100) + "%", this.ssd_x-40, this.ssd_y - 30);
+	}
+
 	drawLabels(ctx) {
-		ctx.font = "20px Arial";
+		ctx.font = "18px Arial";
 		ctx.fillStyle = "white";
 
 		let x_coord;

@@ -102,7 +102,7 @@ class Ship extends SpaceObject{
 	}
 
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
-	// then stays there for phasorDrawMax frames
+	// then stays there
 	drawPhasor(ctx) {
 		const phasorDrawMax = 12;
 		const xDelta = this.target.center()[0] - this.center()[0];
@@ -152,19 +152,22 @@ class Ship extends SpaceObject{
 
 
 	receivePhasorHit(attacker) {
+		const phasorPower = 18;
 		let shieldHit = this.whichShieldWasHit(attacker);
 
 		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0 ) 
-						this.ssd.getShields()[shieldHit].hit();
+						this.ssd.getShields()[shieldHit].hit(phasorPower);
+		else this.hullIntegrity -= phasorPower;
 	};
 
 
 	receiveTorpHit(attacker) {
-
+		const torpedoPower = 20;
 		let shieldHit = this.whichShieldWasHit(attacker);
 
 		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) 
-						this.ssd.getShields()[shieldHit].hit();
+					this.ssd.getShields()[shieldHit].hit(torpedoPower);
+		else this.hullIntegrity -= torpedoPower;
 
 		this.torpExplosionCounter = 1;
 	};
@@ -180,7 +183,6 @@ class Ship extends SpaceObject{
 		else if (angle >= .75 * Math.PI && angle <= 1.25 * Math.PI) shieldHit = 2;
 		else shieldHit = 3;
 
-		// console.log(shieldHit);
 		return shieldHit;
 	};
 
@@ -203,7 +205,12 @@ class Ship extends SpaceObject{
 		return (center[0] > 0 && center[0] < canvas_width &&
 						center[1] > 0 && center[1] < canvas_height)  
 	};
+	
 
+	shipExplodes() {
+
+	}
+	
 
 	loadExplosionImg() {
 		this.explosionImg = new Image();

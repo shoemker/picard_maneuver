@@ -8,8 +8,8 @@ const EnemyAI = {
 		let timerMax = 5;
 
 		// set static variables
-		if (typeof turnLeftLength == 'undefined') turnLeftLength = 0;
-		if (typeof turnRightLength == 'undefined') turnRightLength = 0;
+		// if (typeof turnLeftLength == 'undefined') turnLeftLength = 0;
+		// if (typeof turnRightLength == 'undefined') turnRightLength = 0;
 			
 		// speed
 		if (enemy.getSpeed() < 1) enemy.power(1);
@@ -22,16 +22,16 @@ const EnemyAI = {
 			if (angleOfEnterprise > Math.PI *.0625 && angleOfEnterprise <= Math.PI) {
 				if(turnCounter === timerMax) {
 					enemy.changeDirection(1);
-					turnRightLength++;
-					turnLeftLength = 0;
+					// turnRightLength++;
+					// turnLeftLength = 0;
 				}
 			}
 			else if (angleOfEnterprise < Math.PI * 1.9375 && 
 							 angleOfEnterprise > Math.PI) {
 				if (turnCounter === timerMax) {
 					enemy.changeDirection(-1);
-					turnLeftLength++;
-					turnRightLength = 0;
+					// turnLeftLength++;
+					// turnRightLength = 0;
 				}
 		 	}
 			else enemy.fireTorpedos(torpImg);

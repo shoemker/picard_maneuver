@@ -36,11 +36,11 @@ class Shield {
 	}
 
 
-	hit() {
+	hit(damage) {
 		this.timer = 1;
 		this.color = "red";
 
-		this.hitpoints -= 20;
+		this.hitpoints -= damage;
 		if (this.hitpoints < 0) this.hitpoints = 0;
 	}
 }
