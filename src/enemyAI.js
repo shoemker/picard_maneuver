@@ -7,11 +7,12 @@ const EnemyAI = {
 		let angleOfEnterprise = Utils.angleToOtherShip(enemy, enterprise);
 		let timerMax = 5;
 
-		turnLeftLength = 0;
-		turnRightLength = 0;
-
+		// set static variables
+		if (typeof turnLeftLength == 'undefined') turnLeftLength = 0;
+		if (typeof turnRightLength == 'undefined') turnRightLength = 0;
+			
 		// speed
-		if (enemy.getSpeed() < 2) enemy.power(1);
+		if (enemy.getSpeed() < 1) enemy.power(1);
 
 		// fire phasors
 		if (enemy.phasorReady() && onscreen) enemy.firePhasors(enterprise);
@@ -21,16 +22,16 @@ const EnemyAI = {
 			if (angleOfEnterprise > Math.PI *.0625 && angleOfEnterprise <= Math.PI) {
 				if(turnCounter === timerMax) {
 					enemy.changeDirection(1);
-					// turnRightLength++;
-					// turnLeftLength = 0;
+					turnRightLength++;
+					turnLeftLength = 0;
 				}
 			}
 			else if (angleOfEnterprise < Math.PI * 1.9375 && 
 							 angleOfEnterprise > Math.PI) {
 				if (turnCounter === timerMax) {
 					enemy.changeDirection(-1);
-					// turnLeftLength++;
-					// turnRightLength = 0;
+					turnLeftLength++;
+					turnRightLength = 0;
 				}
 		 	}
 			else enemy.fireTorpedos(torpImg);
