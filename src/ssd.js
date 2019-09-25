@@ -69,16 +69,17 @@ class SSD {
 
 	drawHullIntegrity(ctx, hullPercentage) {
 		ctx.font = "18px Arial";
-		if (hullPercentage >= .85) ctx.fillStyle = "white";
+		if (hullPercentage >= .85) ctx.fillStyle = "#FAFAD2";
 		else if (hullPercentage >= .35) ctx.fillStyle = "yellow";
 		else ctx.fillStyle = "red";
 
 		ctx.fillText("Hull Integrity: " + Math.floor(hullPercentage*100) + "%", this.ssd_x-40, this.ssd_y - 30);
-	}
+	};
+
 
 	drawLabels(ctx) {
 		ctx.font = "18px Arial";
-		ctx.fillStyle = "white";
+		ctx.fillStyle = "	#FAFAD2";
 
 		let x_coord;
 		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
@@ -87,7 +88,7 @@ class SSD {
 		ctx.fillText(this.beamWeaponName, x_coord, 700);
 		ctx.fillText("Recharge", this.ssd_x - 95, 725);
 
-		ctx.fillText("Torp", this.ssd_x+this.ssd_width + 35, 700);
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_width + 20, 700);
 		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, 725);
 	};
 
