@@ -87,7 +87,7 @@ class Ship extends SpaceObject{
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 
-		if (this.hullIntegrity === 0)	this.drawShipExplosion(ctx);
+		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
 
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,

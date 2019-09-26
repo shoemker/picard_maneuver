@@ -26,12 +26,14 @@ class D7 extends Ship {
 		this.rotateCanvas(ctx);
 
 		//draw ship
-		ctx.drawImage(this.shipImg, 0, 0, 380, 275,
-			this.pos[0],
-			this.pos[1],
-			this.width,
-			this.height);
-
+		if (this.shipExplosionCounter < 34) {
+			ctx.drawImage(this.shipImg, 0, 0, 380, 275,
+				this.pos[0],
+				this.pos[1],
+				this.width,
+				this.height);
+		}
+		
 		ctx.restore();
 
 		super.draw(ctx);
