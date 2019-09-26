@@ -56,7 +56,7 @@ class Ship extends SpaceObject{
 		return this.phasorRecharge === this.phasorRechargeMax;
 	}
 
-	torpedoReady() {
+	torpedosReady() {
 		return this.torpedoReload === this.torpedoReloadMax;
 	}
 
@@ -210,7 +210,7 @@ class Ship extends SpaceObject{
 	shipExplodes() {
 
 	}
-	
+
 
 	loadExplosionImg() {
 		this.explosionImg = new Image();
