@@ -81,12 +81,7 @@ class Ship extends SpaceObject{
 
 		//shows torpedo hit
 		if (this.torpExplosionCounter) {
-			ctx.drawImage(this.explosionImg, 606, 295, 100, 100,
-				this.center()[0],
-				this.center()[1]-5,
-				10,
-				10);
-
+			this.drawTorpExplosion(ctx);
 			this.torpExplosionCounter++;
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
@@ -98,7 +93,6 @@ class Ship extends SpaceObject{
 	// then stays there for a few frames
 	drawPhasor(ctx) {
 
-	
 		const phasorDrawMax = 12;
 		let xDelta = this.target.center()[0] - this.center()[0];
 		let yDelta = this.target.center()[1] - this.center()[1];
@@ -132,6 +126,29 @@ class Ship extends SpaceObject{
 		}
 
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
+	};
+	
+
+	drawTorpExplosion(ctx) {	
+			
+		let x;
+		let y;
+		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
+			let xDelta = this.attacker.center()[0] - this.center()[0];
+			let yDelta = this.attacker.center()[1] - this.center()[1];
+			let distance = Utils.distance(this, this.attacker);
+			let percentage = 1 - ((distance - 35) / distance);
+			x = this.center()[0] + xDelta * percentage;
+			y = this.center()[1] - 8 + yDelta * percentage;
+
+			this.drawShieldOnHit(ctx, this.shieldHit);
+		}
+		else {
+			x =	this.center()[0];
+			y =	this.center()[1] - 5;
+		}
+
+		ctx.drawImage(this.explosionImg, 606, 295, 100, 100, x, y, 10, 10);
 	};
 
 
@@ -215,7 +232,7 @@ class Ship extends SpaceObject{
 	
 	whichShieldWasHit(attacker) {
 
-		const angle = Utils.angleToOtherShip(this, attacker)
+		const angle = Utils.angleToOtherShip(this, attacker);
 
 		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) this.shieldHit = 0;
 		else if (angle > .25 * Math.PI && angle < .75 * Math.PI) this.shieldHit = 1;
