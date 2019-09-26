@@ -63,6 +63,10 @@ class Ship extends SpaceObject{
 
 	
 	draw(ctx) {
+
+		// draw torpedos if any
+		this.torpedos.forEach((torpedo) => torpedo.draw(ctx));
+
 		//draw ship systems display
 		this.ssd.draw(ctx,
 									this.phasorRecharge / this.phasorRechargeMax,
@@ -86,6 +90,8 @@ class Ship extends SpaceObject{
 			this.torpExplosionCounter++;
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
+
+		this.drawShieldOnHit(ctx,3);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
@@ -111,6 +117,29 @@ class Ship extends SpaceObject{
 		ctx.stroke();
 		this.phasorCounter++;
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
+	};
+
+
+	drawShieldOnHit(ctx,shieldNum){
+		const startAndEnd = [
+			[1.75,  .25],
+			[ .25,  .75],
+			[ .75, 1.25],
+			[1.25, 1.75]
+		];
+
+		ctx.beginPath();
+		ctx.arc(
+			this.center()[0],
+			this.center()[1],
+			35,
+			startAndEnd[shieldNum][0] * Math.PI + this.rotationOffset,
+			startAndEnd[shieldNum][1] * Math.PI + this.rotationOffset
+		);
+
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = this.phasorColor;
+		ctx.stroke();
 	};
 
 
@@ -154,8 +183,9 @@ class Ship extends SpaceObject{
 	takeDamage(attacker, damage){
 		let shieldHit = this.whichShieldWasHit(attacker);
 
-		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0)
+		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) {
 				this.ssd.getShields()[shieldHit].hit(damage);
+		}
 		else this.hullIntegrity -= damage;
 
 		if (this.hullIntegrity < 0) this.hullIntegrity = 0;
@@ -188,12 +218,6 @@ class Ship extends SpaceObject{
 		this.direction = this.directionArray[this.directionIndex];
 	};
 
-
-	onscreen(canvas_width, canvas_height) {
-		const center = this.center();
-		return (center[0] > 0 && center[0] < canvas_width &&
-						center[1] > 0 && center[1] < canvas_height)  
-	};
 	
 
 	drawShipExplosion(ctx) {

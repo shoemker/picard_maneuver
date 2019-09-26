@@ -14,6 +14,11 @@ class Shield {
 		return this.hitpoints;
 	}
 
+	up() {
+		return this.hitpoints > 0;
+	}
+
+
 	draw(ctx) {
 		this.timer++;
 		if (this.timer === 20) {
@@ -28,7 +33,8 @@ class Shield {
 						this.pos[1], 
 						100, 
 						this.start * Math.PI + this.multiplier * Math.PI * (1 - shieldPercentage),
-						this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage));
+						this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage)
+		);
 	
 		ctx.lineWidth = 7;
 		ctx.strokeStyle = this.color;

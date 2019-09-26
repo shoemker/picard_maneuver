@@ -53,6 +53,11 @@ class SpaceObject {
 		this.pos[1] += speed * direction[1];
 	};
 
+	onscreen(canvas_width, canvas_height) {
+		const center = this.center();
+		return (center[0] > 0 && center[0] < canvas_width &&
+						center[1] > 0 && center[1] < canvas_height)
+	};
 
 	center() {
 		return [this.pos[0] + this.width / 2, this.pos[1] + this.height / 2];

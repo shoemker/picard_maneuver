@@ -3,6 +3,7 @@ class Explosion {
 		this.img = img;
 		this.index = 0;
 
+		// these are the x,y coords for different sprites on the sheet
 		this.sheet = [
 			[ 380, 854,  30,  26],
 			[ 250, 852,  30,  30],
