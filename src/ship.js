@@ -91,22 +91,20 @@ class Ship extends SpaceObject{
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 
-		// this.drawShieldOnHit(ctx,3);
-
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
 
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
-	// then stays there
+	// then stays there for a few frames
 	drawPhasor(ctx) {
-		const shieldNum = this.target.whichShieldWasHit(this);
 
+	
 		const phasorDrawMax = 12;
 		let xDelta = this.target.center()[0] - this.center()[0];
 		let yDelta = this.target.center()[1] - this.center()[1];
 
 		// beam should stop if it hits a shield
-		if (this.target.ssd.getShields()[shieldNum].getHitpoints() > 0) {
+		if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
 			let distance = Utils.distance(this, this.target);
 			let distanceRatio = (distance-35)/distance
 			xDelta = xDelta * distanceRatio;
@@ -129,8 +127,8 @@ class Ship extends SpaceObject{
 		this.phasorCounter++;
 
 		if (this.phasorCounter >= phasorDrawMax && 
-								this.target.ssd.getShields()[shieldNum].getHitpoints() > 0){
-			this.target.drawShieldOnHit(ctx, shieldNum);
+			  this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0){
+			this.target.drawShieldOnHit(ctx, this.target.shieldHit);
 		}
 
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
@@ -204,10 +202,10 @@ class Ship extends SpaceObject{
 	takeDamage(attacker, damage){
 		this.attacker = attacker;
 
-		let shieldHit = this.whichShieldWasHit(attacker);
+		this.whichShieldWasHit(attacker);
 
-		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) {
-				this.ssd.getShields()[shieldHit].hit(damage);
+		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
+			this.ssd.getShields()[this.shieldHit].hit(damage);
 		}
 		else this.hullIntegrity -= damage;
 
@@ -216,16 +214,13 @@ class Ship extends SpaceObject{
 
 	
 	whichShieldWasHit(attacker) {
-		let shieldHit;
 
 		const angle = Utils.angleToOtherShip(this, attacker)
 
-		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) shieldHit = 0;
-		else if (angle > .25 * Math.PI && angle < .75 * Math.PI) shieldHit = 1;
-		else if (angle >= .75 * Math.PI && angle <= 1.25 * Math.PI) shieldHit = 2;
-		else shieldHit = 3;
-
-		return shieldHit;
+		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) this.shieldHit = 0;
+		else if (angle > .25 * Math.PI && angle < .75 * Math.PI) this.shieldHit = 1;
+		else if (angle >= .75 * Math.PI && angle <= 1.25 * Math.PI) this.shieldHit = 2;
+		else this.shieldHit = 3;
 	};
 
 

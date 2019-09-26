@@ -56,15 +56,19 @@ class Explosion {
 
 
 	draw(ctx, pos) {
-		ctx.drawImage(this.img, 
-			this.sheet[this.index][0], this.sheet[this.index][1], this.sheet[this.index][2], this.sheet[this.index][3],
-			pos[0]-this.index/2,
-			pos[1] - 5-this.index/2,
-			15+this.index,
-			15+this.index);
+		// console.log(this.index, this.sheet.length);
+		if (this.index < this.sheet.length) {
+			ctx.drawImage(this.img, 
+				this.sheet[this.index][0], this.sheet[this.index][1], this.sheet[this.index][2], this.sheet[this.index][3],
+				pos[0]-this.index/2,
+				pos[1] - 5-this.index/2,
+				15+this.index,
+				15+this.index
+			);
 
-		if(this.index < this.sheet.length-1 ) this.index++;
-
+			this.index++;
+		}
+		
 		return this.index
 	};
 }
