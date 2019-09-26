@@ -1,6 +1,7 @@
 
 const SpaceObject = require("./space_object");
 const Torpedo = require("./torpedo");
+const Explosion = require("./explosion")
 const Utils = require("./utils");
 
 class Ship extends SpaceObject{
@@ -35,6 +36,7 @@ class Ship extends SpaceObject{
 		this.hullIntegrityMax = 200;
 
 		this.loadExplosionImg();
+		this.explosion = new Explosion(this.explosionImg);
 	}
 
 	// getter methods
@@ -83,9 +85,9 @@ class Ship extends SpaceObject{
 
 			this.torpExplosionCounter++;
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
-
-			if (this.hullIntegrity === 0) this.drawShipExplosion(ctx);
 		}
+
+		if (this.hullIntegrity === 0)	this.drawShipExplosion(ctx);
 	}
 
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
@@ -194,16 +196,15 @@ class Ship extends SpaceObject{
 	};
 	
 
-	shipExplodes() {
-
-	}
+	drawShipExplosion(ctx) {
+		this.explosion.draw(ctx, this.center());
+	};
 
 
 	loadExplosionImg() {
 		this.explosionImg = new Image();
 		this.explosionImg.onload = () => { return true; }
-		this.explosionImg.src = 
-			'../images/explosion-sprite-sheet.png';
+		this.explosionImg.src = '../images/explosion-sprite-sheet.png';
 	};
 
 }

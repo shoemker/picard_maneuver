@@ -15,7 +15,7 @@ const Utils = {
 		const arcTangent = Math.atan(yDelta / xDelta);
 		if(xDelta < 0) angle = arcTangent + Math.PI;
 		else if(xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
-			else angle = arcTangent;
+		else angle = arcTangent;
 
 		// take the rotation of the hit ship into account
 		angle -= ship.getRotation();
