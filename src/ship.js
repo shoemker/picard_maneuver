@@ -17,6 +17,7 @@ class Ship extends SpaceObject{
 		this.phasorCounter = 0;
 		this.phasorColor = options.phasorColor;
 		this.torpExplosionCounter = 0;
+		this.shipExplosionCounter = 0;
 
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
@@ -82,6 +83,8 @@ class Ship extends SpaceObject{
 
 			this.torpExplosionCounter++;
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
+
+			if (this.hullIntegrity === 0) this.drawShipExplosion(ctx);
 		}
 	}
 
