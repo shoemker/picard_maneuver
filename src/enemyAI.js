@@ -5,7 +5,7 @@ const EnemyAI = {
 	consultAI(enemy, enterprise, onscreen,  torpImg){
 		const angleOfEnterprise = Utils.angleToOtherShip(enemy, enterprise);
 		const turnCounterMax = 5;
-		const turnCircleMax = 30;
+		const turnCircleMax = 50;
 
 		// speed
 		if ((enemy.getSpeed() < 2 && enemy.getSpeed() < enterprise.getSpeed()) || 
