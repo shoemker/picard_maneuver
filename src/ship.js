@@ -91,7 +91,7 @@ class Ship extends SpaceObject{
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 
-		this.drawShieldOnHit(ctx,3);
+		// this.drawShieldOnHit(ctx,3);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
@@ -99,9 +99,19 @@ class Ship extends SpaceObject{
 	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
 	// then stays there
 	drawPhasor(ctx) {
+		const shieldNum = this.target.whichShieldWasHit(this);
+
 		const phasorDrawMax = 12;
-		const xDelta = this.target.center()[0] - this.center()[0];
-		const yDelta = this.target.center()[1] - this.center()[1];
+		let xDelta = this.target.center()[0] - this.center()[0];
+		let yDelta = this.target.center()[1] - this.center()[1];
+
+		// beam should stop if it hits a shield
+		if (this.target.ssd.getShields()[shieldNum].getHitpoints() > 0) {
+			let distance = Utils.distance(this, this.target);
+			let distanceRatio = (distance-35)/distance
+			xDelta = xDelta * distanceRatio;
+			yDelta = yDelta * distanceRatio;
+		}
 
 		let ratio = this.phasorCounter/ phasorDrawMax;
 		if (ratio > 1) ratio = 1;
@@ -115,20 +125,26 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = this.phasorColor;
 		ctx.lineWidth = 3;
 		ctx.stroke();
+
 		this.phasorCounter++;
-		// if (this.phasorCounter >= phasorDrawMax ) this.target.drawShieldOnHit(ctx);
+
+		if (this.phasorCounter >= phasorDrawMax && 
+								this.target.ssd.getShields()[shieldNum].getHitpoints() > 0){
+			this.target.drawShieldOnHit(ctx, shieldNum);
+		}
+
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
 	};
 
 
-	drawShieldOnHit(ctx,shieldNum){
+	drawShieldOnHit(ctx, shieldNum){
 		const startAndEnd = [
 			[1.75,  .25],
 			[ .25,  .75],
 			[ .75, 1.25],
 			[1.25, 1.75]
 		];
-
+		
 		ctx.beginPath();
 		ctx.arc(
 			this.center()[0],
@@ -140,7 +156,7 @@ class Ship extends SpaceObject{
 
 		ctx.lineWidth = 1;
 
-		let color = "red";
+		let color = "#ADD8E6";
 
 		ctx.strokeStyle = color;
 		ctx.stroke();
