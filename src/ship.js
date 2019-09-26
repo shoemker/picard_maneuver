@@ -116,6 +116,7 @@ class Ship extends SpaceObject{
 		ctx.lineWidth = 3;
 		ctx.stroke();
 		this.phasorCounter++;
+		// if (this.phasorCounter >= phasorDrawMax ) this.target.drawShieldOnHit(ctx);
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
 	};
 
@@ -138,7 +139,10 @@ class Ship extends SpaceObject{
 		);
 
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = this.phasorColor;
+
+		let color = "red";
+
+		ctx.strokeStyle = color;
 		ctx.stroke();
 	};
 
@@ -152,8 +156,9 @@ class Ship extends SpaceObject{
 	firePhasors(target) {
 		if (this.phasorRecharge === this.phasorRechargeMax) {
 			this.target = target;
-			this.phasorCounter = 1;
 			this.target.receivePhasorHit(this);
+			this.phasorCounter = 1;
+
 			this.phasorRecharge = 0;
 		}
 	};
@@ -181,6 +186,8 @@ class Ship extends SpaceObject{
 
 
 	takeDamage(attacker, damage){
+		this.attacker = attacker;
+
 		let shieldHit = this.whichShieldWasHit(attacker);
 
 		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) {
