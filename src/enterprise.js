@@ -33,7 +33,8 @@ class Enterprise extends Ship {
 				this.pos[0],
 				this.pos[1],
 				this.width,
-				this.height);
+				this.height
+			);
 		}
 
 		ctx.restore();
@@ -47,8 +48,6 @@ class Enterprise extends Ship {
 		this.shipImg.onload = () => { return true; }
 		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
 	};
-
-
 }
 
 

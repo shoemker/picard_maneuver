@@ -31,9 +31,10 @@ class D7 extends Ship {
 				this.pos[0],
 				this.pos[1],
 				this.width,
-				this.height);
+				this.height
+			);
 		}
-		
+
 		ctx.restore();
 
 		super.draw(ctx);

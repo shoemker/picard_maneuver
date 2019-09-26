@@ -130,9 +130,11 @@ class Ship extends SpaceObject{
 	
 
 	drawTorpExplosion(ctx) {	
-			
+
 		let x;
 		let y;
+
+		// if it hits a shield, it explodes there
 		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
 			let xDelta = this.attacker.center()[0] - this.center()[0];
 			let yDelta = this.attacker.center()[1] - this.center()[1];
