@@ -29,20 +29,19 @@ class GameView {
 	start() {
 		this.bindKeyHandlers();
 
-		this.lastTime = 0;
 
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
 	};
 
 
-	animate(time) {
+	animate() {
 		if (!this.pause) {
-			// const timeDelta = time - this.lastTime;
-			this.game.step();
-			this.game.draw(this.ctx);
 
-			this.lastTime = time;
+			if(this.game.enterprise.getHull() > 0 && this.game.enemy.getHull() > 0)
+						this.game.step();
+
+			this.game.draw(this.ctx);
 
 			// every call to animate requests causes another call to animate
 			requestAnimationFrame(this.animate.bind(this));
@@ -58,27 +57,30 @@ class GameView {
 
 		const that = this;
 		
-		Object.keys(MOVES).forEach(function (k) {
-			const move = MOVES[k];
-			key(k, function () { that.game.enterprise.power(move); });
-		});
+		if (this.game.enterprise.getHull() > 0) {
+			
+			Object.keys(MOVES).forEach(function (k) {
+				const move = MOVES[k];
+				key(k, function () { that.game.enterprise.power(move); });
+			});
 
-		key("space", function () { 
-			that.game.firePhasors(that.game.enterprise); 
-		});
-		
+			key("space", function () { 
+				that.game.firePhasors(that.game.enterprise); 
+			});
+			
 
-		//call to rotate ship image
-		key("a", function () { that.game.enterprise.changeDirection(-1); });
-		key("d", function () { that.game.enterprise.changeDirection(1); });
+			//call to rotate ship image
+			key("a", function () { that.game.enterprise.changeDirection(-1); });
+			key("d", function () { that.game.enterprise.changeDirection(1); });
 
-		// key("j", function () { that.game.enemy.changeDirection(-1); });
-		// key("l", function () { that.game.enemy.changeDirection(1); });
+			// key("j", function () { that.game.enemy.changeDirection(-1); });
+			// key("l", function () { that.game.enemy.changeDirection(1); });
 
-		key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
-		key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
+			key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
+			key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
 
-		key("p", function () { that.pauseGame(); });
+			key("p", function () { that.pauseGame(); });
+		}
 	};
 
 	

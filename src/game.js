@@ -13,7 +13,6 @@ class Game {
 
 		this.createStarField();
 		this.loadTorpImg();
-		this.D7turnCounter = 0;
 
 		this.planet_08 = new Planet({
 			pos: [300, 300],
@@ -41,19 +40,16 @@ class Game {
 	}
 
 	step() {
-		const turnCounterMax = 5;
+
 		this.moveObjects();
+
+		EnemyAI.consultAI(this.enemy, this.enterprise,
+				this.enemy.onscreen(this.canvas_width, this.canvas_height),
+				this.torpImg);
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-		EnemyAI.consultAI(this.enemy, this.enterprise, 
-											this.canvas_width, this.canvas_height,
-											this.D7turnCounter,
-											this.torpImg);
-		
-		this.D7turnCounter++;
-		if (this.D7turnCounter > turnCounterMax) this.D7turnCounter = 0;
 	}
 
 
@@ -108,11 +104,12 @@ class Game {
 		this.enemy.draw(ctx);
 		this.enterprise.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
 		this.enemy.getTorpedos().forEach((torpedo) => torpedo.draw(ctx));
-	}
+	};
+
 
 	drawStars(ctx) {
 		this.stars.forEach((star) => star.draw(ctx));
-	}
+	};
 
 
 	// factory method to create stars

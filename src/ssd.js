@@ -79,7 +79,7 @@ class SSD {
 
 	drawLabels(ctx) {
 		ctx.font = "18px Arial";
-		ctx.fillStyle = "	#FAFAD2";
+		ctx.fillStyle = "#FAFAD2";
 
 		let x_coord;
 		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;

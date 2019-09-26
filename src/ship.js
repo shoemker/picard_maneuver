@@ -36,29 +36,14 @@ class Ship extends SpaceObject{
 		this.loadExplosionImg();
 	}
 
-	getDirection(){
-		return this.direction;
-	}
-
-	getSpeed() {
-		return this.speed;
-	}
-
-	getTorpedos() {
-		return this.torpedos;
-	}
-
-	getRotation() {
-		return this.rotationOffset;
-	}
-
-	phasorReady() {
-		return this.phasorRecharge === this.phasorRechargeMax;
-	}
-
-	torpedosReady() {
-		return this.torpedoReload === this.torpedoReloadMax;
-	}
+	// getter methods
+	getDirection()	{ return this.direction; }
+	getSpeed() 			{	return this.speed; }
+	getTorpedos() 	{ return this.torpedos; }
+	getRotation() 	{ return this.rotationOffset; }
+	phasorReady() 	{ return this.phasorRecharge === this.phasorRechargeMax; }
+	getHull() 			{ return this.hullIntegrity; }
+	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 
 
 	rotateCanvas(ctx) {
@@ -80,7 +65,6 @@ class Ship extends SpaceObject{
 									this.phasorRecharge / this.phasorRechargeMax,
 									this.torpedoReload / this.torpedoReloadMax,
 									this.hullIntegrity / this.hullIntegrityMax);
-
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
@@ -152,27 +136,27 @@ class Ship extends SpaceObject{
 
 
 	receivePhasorHit(attacker) {
-		const phasorPower = 18;
-		let shieldHit = this.whichShieldWasHit(attacker);
-
-		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0 ) 
-						this.ssd.getShields()[shieldHit].hit(phasorPower);
-		else this.hullIntegrity -= phasorPower;
+		this.takeDamage(attacker, 18);
 	};
 
 
 	receiveTorpHit(attacker) {
-		const torpedoPower = 20;
-		let shieldHit = this.whichShieldWasHit(attacker);
-
-		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0) 
-					this.ssd.getShields()[shieldHit].hit(torpedoPower);
-		else this.hullIntegrity -= torpedoPower;
-
+		this.takeDamage(attacker, 20);
 		this.torpExplosionCounter = 1;
 	};
 
 
+	takeDamage(attacker, damage){
+		let shieldHit = this.whichShieldWasHit(attacker);
+
+		if (this.ssd.getShields()[shieldHit].getHitpoints() > 0)
+				this.ssd.getShields()[shieldHit].hit(damage);
+		else this.hullIntegrity -= damage;
+
+		if (this.hullIntegrity < 0) this.hullIntegrity = 0;
+	};
+
+	
 	whichShieldWasHit(attacker) {
 		let shieldHit;
 
