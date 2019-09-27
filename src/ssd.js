@@ -73,7 +73,7 @@ class SSD {
 		else if (hullPercentage >= .35) ctx.fillStyle = "yellow";
 		else ctx.fillStyle = "red";
 
-		ctx.fillText("Hull Integrity: " + Math.floor(hullPercentage*100) + "%", this.ssd_x-40, this.ssd_y - 30);
+		ctx.fillText("Hull Integrity: " + Math.floor(hullPercentage*100) + "%", this.ssd_x-43, this.ssd_y - 30);
 	};
 
 

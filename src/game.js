@@ -127,7 +127,11 @@ class Game {
 				canvas_height: this.canvas_height				
 			}))
 		}
-	}
+	};
+
+	getRandom(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	};
 
 
 	moveTorpedos(ship) {
@@ -140,10 +144,6 @@ class Game {
 				center[1] < 0 || center[1] > this.canvas_height)
 				ship.getTorpedos().splice(i, 1);
 		});
-	}
-
-	getRandom(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
 
 

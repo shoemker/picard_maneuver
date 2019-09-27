@@ -99,8 +99,8 @@ class Ship extends SpaceObject{
 
 		// beam should stop if it hits a shield
 		if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
-			let distance = Utils.distance(this, this.target);
-			let distanceRatio = (distance-35)/distance
+			const distance = Utils.distance(this, this.target);
+			const distanceRatio = (distance-35)/distance
 			xDelta = xDelta * distanceRatio;
 			yDelta = yDelta * distanceRatio;
 		}
@@ -136,10 +136,10 @@ class Ship extends SpaceObject{
 
 		// if it hits a shield, it explodes there
 		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
-			let xDelta = this.attacker.center()[0] - this.center()[0];
-			let yDelta = this.attacker.center()[1] - this.center()[1];
-			let distance = Utils.distance(this, this.attacker);
-			let percentage = 1 - ((distance - 35) / distance);
+			const xDelta = this.attacker.center()[0] - this.center()[0];
+			const yDelta = this.attacker.center()[1] - this.center()[1];
+			const distance = Utils.distance(this, this.attacker);
+			const percentage = 1 - ((distance - 35) / distance);
 			x = this.center()[0] + xDelta * percentage;
 			y = this.center()[1] - 8 + yDelta * percentage;
 
@@ -173,9 +173,7 @@ class Ship extends SpaceObject{
 
 		ctx.lineWidth = 1;
 
-		let color = "#ADD8E6";
-
-		ctx.strokeStyle = color;
+		ctx.strokeStyle = "#ADD8E6";
 		ctx.stroke();
 	};
 

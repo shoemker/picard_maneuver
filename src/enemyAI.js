@@ -21,7 +21,6 @@ const EnemyAI = {
 		if (typeof turnRightLength == 'undefined') turnRightLength = 0;
 		if (typeof turnCounter == 'undefined') turnCounter = 0;
 
-
 		// turning and torpedos
 		if (!onscreen || enemy.torpedosReady()) {
 			if (angleOfEnterprise > Math.PI * .0625 && angleOfEnterprise <= Math.PI) {

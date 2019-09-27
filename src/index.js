@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	canvasEl.height = 750;
 
-	const ctxMain = canvasEl.getContext("2d");
+	const ctx = canvasEl.getContext("2d");
 
-	let g = new GameView(ctxMain, canvasEl.width, canvasEl.height);
+	let g = new GameView(ctx, canvasEl.width, canvasEl.height);
 
 
-	g.start(ctxMain);
+	g.start(ctx);
 
+	// canvasEl.onclick = function () { g.openingOff(); }
 })
 
 window.addEventListener('keydown', function (e) {
