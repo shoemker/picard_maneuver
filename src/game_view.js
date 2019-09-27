@@ -38,8 +38,9 @@ class GameView {
 	animate() {
 		if (!this.pause) {
 
-			if(this.game.enterprise.getHull() > 0 && this.game.enemy.getHull() > 0)
-						this.game.step();
+			if(this.game.enterprise.getHull() === 0) this.game.lose = true;
+			else if (this.game.enemy.getHull() === 0) this.game.win = true;
+			else this.game.step();
 
 			this.game.draw(this.ctx);
 

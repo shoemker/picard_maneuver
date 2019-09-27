@@ -32,8 +32,8 @@ class Ship extends SpaceObject{
 		this.torpedoReload = 0;
 		this.torpedoReloadMax= 200;
 
-		this.hullIntegrity = 200;
 		this.hullIntegrityMax = 200;
+		this.hullIntegrity = this.hullIntegrityMax;
 
 		this.loadExplosionImg();
 		this.explosion = new Explosion(this.explosionImg);
@@ -71,7 +71,8 @@ class Ship extends SpaceObject{
 		this.ssd.draw(ctx,
 									this.phasorRecharge / this.phasorRechargeMax,
 									this.torpedoReload / this.torpedoReloadMax,
-									this.hullIntegrity / this.hullIntegrityMax);
+									this.hullIntegrity / this.hullIntegrityMax
+		);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
 
@@ -178,6 +179,11 @@ class Ship extends SpaceObject{
 	};
 
 
+	drawShipExplosion(ctx) {
+		this.explosion.draw(ctx, this.center());
+	};
+
+
 	power(impulse) {
 		if (impulse > 0 && this.speed < 3) this.speed += impulse;
 		else if (impulse < 0 && this.speed > -1) this.speed += impulse;
@@ -251,12 +257,6 @@ class Ship extends SpaceObject{
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
 		this.direction = this.directionArray[this.directionIndex];
-	};
-
-	
-
-	drawShipExplosion(ctx) {
-		this.explosion.draw(ctx, this.center());
 	};
 
 

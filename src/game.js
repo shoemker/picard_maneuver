@@ -11,6 +11,9 @@ class Game {
 		this.stars = [];
 		this.base_speed_inverse = 5;
 
+		this.win = false;
+		this.lose = false;
+
 		this.createStarField();
 		this.loadTorpImg();
 
@@ -44,8 +47,9 @@ class Game {
 		this.moveObjects();
 
 		EnemyAI.consultAI(this.enemy, this.enterprise,
-				this.enemy.onscreen(this.canvas_width, this.canvas_height),
-				this.torpImg);
+			this.enemy.onscreen(this.canvas_width, this.canvas_height),
+			this.torpImg
+		);
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
@@ -78,12 +82,12 @@ class Game {
 										
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet_08.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
-												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
-												this.enterprise.getSpeed());
+			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
+			this.enterprise.getSpeed());
 												
 		this.moon_01.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
-												this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2.5)],
-												this.enterprise.getSpeed());	
+			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2.5)],
+			this.enterprise.getSpeed());	
 	}
 
 
@@ -102,6 +106,9 @@ class Game {
 
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
+
+		if (this.lose) this.drawMessage(ctx,  "Sorry, You Lose");
+		if (this.win) this.drawMessage(ctx, "Wow, You Win!.");
 	};
 
 
@@ -109,6 +116,14 @@ class Game {
 		this.stars.forEach((star) => star.draw(ctx));
 	};
 
+
+	drawMessage(ctx, message) {
+		ctx.font = "72px FINALOLD";
+
+		ctx.fillText(message, this.canvas_width/2-200, this.canvas_height/3);
+		ctx.fillText("Refresh to Play Again", this.canvas_width / 2 - 270, this.canvas_height / 3+80);
+
+	}
 
 	// factory method to create stars
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
@@ -197,7 +212,7 @@ module.exports = Game;
 
 		// this.planet1 = new Planet({
 		// 	pos:[300,300], 
-		// 	img: this.loadPlanet('../images/planets/planet_01.png'),
+		// 	img: this.loadPlanet('./images/planets/planet_01.png'),
 		// 	width:200,
 		// 	height:200,
 		// 	sheetCoords: [20, 10, 480, 470]
@@ -205,7 +220,7 @@ module.exports = Game;
 
 		// this.planet9 = new Planet({
 		// 	pos: [300, 300],
-		// 	img: this.loadPlanet('../images/planets/planet_09.png'),
+		// 	img: this.loadPlanet('./images/planets/planet_09.png'),
 		// 	width: 200,
 		// 	height: 200,
 		// 	sheetCoords: [20, 20, 580, 580]

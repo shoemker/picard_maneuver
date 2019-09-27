@@ -85,11 +85,11 @@ class SSD {
 		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
 		else x_coord = this.ssd_x - 85;
 
-		ctx.fillText(this.beamWeaponName, x_coord, 700);
-		ctx.fillText("Recharge", this.ssd_x - 95, 725);
+		ctx.fillText(this.beamWeaponName, x_coord, this.ssd_y + 150);
+		ctx.fillText("Recharge", this.ssd_x - 95, this.ssd_y + 175);
 
-		ctx.fillText("Torpedo", this.ssd_x + this.ssd_width + 20, 700);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, 725);
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_width + 20, this.ssd_y + 150);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, this.ssd_y + 175);
 	};
 
 
