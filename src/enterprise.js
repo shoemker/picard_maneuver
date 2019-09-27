@@ -16,7 +16,7 @@ class Enterprise extends Ship {
 			ssd_y: 550,
 			ssd_width: 60,
 			ssd_height: 120,
-			imgName: '../images/enterprise-refit-ssd.png',
+			imgName: './images/enterprise-refit-ssd.png',
 			beamWeaponName: "Phasor",
 			imgCoords: [0, 0, 54, 129]
 		});
@@ -46,7 +46,7 @@ class Enterprise extends Ship {
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
-		this.shipImg.src = '../images/uss-enterprise-png-view-original-669.png';
+		this.shipImg.src = './images/uss-enterprise-png-view-original-669.png';
 	};
 }
 

@@ -13,7 +13,7 @@ class D7 extends Ship {
 			ssd_y: 550,
 			ssd_width: 70,
 			ssd_height: 120,
-			imgName: '../images/D7-SSD.png',
+			imgName: './images/D7-SSD.png',
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 170, 175]
 		});
@@ -44,7 +44,7 @@ class D7 extends Ship {
 	loadShipImg() {
 		this.shipImg = new Image();
 		this.shipImg.onload = () => { return true; }
-		this.shipImg.src = '../images/D7.png';
+		this.shipImg.src = './images/D7.png';
 	};
 }
 

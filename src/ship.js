@@ -263,7 +263,7 @@ class Ship extends SpaceObject{
 	loadExplosionImg() {
 		this.explosionImg = new Image();
 		this.explosionImg.onload = () => { return true; }
-		this.explosionImg.src = '../images/explosion-sprite-sheet.png';
+		this.explosionImg.src = './images/explosion-sprite-sheet.png';
 	};
 
 }

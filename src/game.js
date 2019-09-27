@@ -16,7 +16,7 @@ class Game {
 
 		this.planet_08 = new Planet({
 			pos: [300, 300],
-			img: this.loadPlanet('../images/planets/planet_08.png'),
+			img: this.loadPlanet('./images/planets/planet_08.png'),
 			width: 200,
 			height: 200,
 			sheetCoords: [20, 20, 460, 480]
@@ -24,7 +24,7 @@ class Game {
 
 		this.moon_01 = new Planet({
 			pos:[260, 410],
-			img: this.loadPlanet('../images/planets/moon_01.png'),
+			img: this.loadPlanet('./images/planets/moon_01.png'),
 			width: 50,
 			height: 50,
 			sheetCoords: [3,3,58,58]
@@ -180,7 +180,7 @@ class Game {
 	loadTorpImg() {
 		this.torpImg = new Image();
 		this.torpImg.onload = () => { return true; }
-		this.torpImg.src = '../images/torpedo.png';
+		this.torpImg.src = './images/torpedo.png';
 	};
 
 	loadPlanet(file) {
