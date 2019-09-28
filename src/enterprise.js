@@ -21,6 +21,7 @@ class Enterprise extends Ship {
 			imgCoords: [0, 0, 54, 129]
 		});
 	};
+	
 
 	draw(ctx) {
 		ctx.save();

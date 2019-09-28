@@ -1,4 +1,5 @@
 const Game = require("./game");
+const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
 
@@ -8,6 +9,9 @@ class GameView {
 
 		this.ctx = ctx;
 		this.game = new Game(width, height);
+		this.gameOpening = new GameOpening(width, height);
+
+		this.opening = true;
 		this.pause = false;
 
 		this.game.addEnterprise(new Enterprise({
@@ -38,11 +42,14 @@ class GameView {
 	animate() {
 		if (!this.pause) {
 
-			if(this.game.enterprise.getHull() === 0) this.game.lose = true;
-			else if (this.game.enemy.getHull() === 0) this.game.win = true;
-			else this.game.step();
+			if (this.opening) this.gameOpening.loop(this.ctx);
+			else {
+				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
+				else if (this.game.enemy.getHull() === 0) this.game.win = true;
+				else this.game.step();
 
-			this.game.draw(this.ctx);
+				this.game.draw(this.ctx);
+			}
 
 			// every call to animate requests causes another call to animate
 			requestAnimationFrame(this.animate.bind(this));
@@ -90,6 +97,11 @@ class GameView {
 			requestAnimationFrame(this.animate.bind(this));
 		}
 	};
+
+
+	openingOff() {
+		this.opening = false;
+	}
 }
 
 module.exports = GameView;
