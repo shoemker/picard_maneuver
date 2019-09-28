@@ -48,7 +48,7 @@ class Ship extends SpaceObject{
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 
-	
+
 	rotateCanvas(ctx) {
 		ctx.translate(this.center()[0], this.center()[1]);
 		ctx.rotate(this.rotationOffset);
@@ -121,9 +121,11 @@ class Ship extends SpaceObject{
 
 		this.phasorCounter++;
 
-		if (this.phasorCounter >= phasorDrawMax && 
-			  this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0){
-			this.target.drawShieldOnHit(ctx, this.target.shieldHit);
+		if (this.phasorCounter >= phasorDrawMax) {
+			if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
+				this.target.drawShieldOnHit(ctx, this.target.shieldHit);
+			}
+			else this.target.drawHullPhasorHit(ctx,this.phasorColor);
 		}
 
 		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
@@ -177,6 +179,14 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = "#ADD8E6";
 		ctx.stroke();
 	};
+
+	drawHullPhasorHit(ctx, color) {
+		ctx.beginPath();
+
+		ctx.arc(this.center()[0], this.center()[1], 10, 0, Math.PI * 2);
+		ctx.fillStyle = color;
+		ctx.fill();
+	}
 
 
 	drawShipExplosion(ctx) {

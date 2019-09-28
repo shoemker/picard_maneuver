@@ -57,7 +57,6 @@ class Game {
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
-
 	};
 
 
@@ -124,8 +123,8 @@ class Game {
 	drawMessage(ctx, message) {
 		ctx.font = "72px FINALOLD";
 
-		ctx.fillText(message, this.canvas_width/2-200, this.canvas_height/3);
-		ctx.fillText("Refresh to Play Again", this.canvas_width / 2 - 270, this.canvas_height / 3+80);
+		ctx.fillText(message, this.canvas_width/2-200, this.canvas_height/3 - 100);
+		ctx.fillText("Refresh to Play Again", this.canvas_width / 2 - 270, this.canvas_height / 3 - 20);
 
 	}
 
