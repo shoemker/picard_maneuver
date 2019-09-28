@@ -42,7 +42,8 @@ class GameView {
 	animate() {
 		if (!this.pause) {
 
-			if (this.opening) this.gameOpening.loop(this.ctx);
+			// if unpaused this steps and draws either the game or the gameOpening
+			if (this.opening) this.gameOpening.step(this.ctx);
 			else {
 				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemy.getHull() === 0) this.game.win = true;

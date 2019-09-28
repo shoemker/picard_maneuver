@@ -1,5 +1,5 @@
 
-
+// a version of this came from http://codentronix.com/2011/07/22/html5-canvas-3d-starfield/
 class GameOpening {
 
 	constructor(canvas_width, canvas_height) {
@@ -20,11 +20,10 @@ class GameOpening {
 				y: this.randomRange(-25, 25),
 				z: this.randomRange(1, this.max_depth)
 			}
-			// console.log(this.stars[i].x)
 		}
 	}
 
-	loop(ctx) {
+	step(ctx) {
 		var halfWidth = this.canvas_width / 2;
 		var halfHeight = this.canvas_height / 2;
 
@@ -55,22 +54,6 @@ class GameOpening {
 
 	randomRange(minVal, maxVal) {
 		return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
-	}
-
-	step() {
-		this.moveObjects();
-
-	}
-
-
-	moveObjects() {		
-
-	}
-
-
-	draw(ctx) {
-
-
 	}
 }
 
