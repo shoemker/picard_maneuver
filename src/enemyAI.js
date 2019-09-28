@@ -53,6 +53,7 @@ class EnemyAI  {
 			}
 			else this.controlledShip.fireTorpedos(this.torpImg);
 		}
+		// ai gets some randomness
 		else if (this.randomness) {
 			const random = Math.random();
 			if (random < .01) this.controlledShip.changeDirection(1);

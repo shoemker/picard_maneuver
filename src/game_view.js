@@ -9,16 +9,15 @@ class GameView {
 	constructor(ctx, width, height) {
 
 		this.ctx = ctx;
-		this.opening = true;
 		this.pause = false;
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
 		this.game.addEnterprise(new Enterprise({
-			pos: [width/2 - 50, height/2-50],
+			pos: [width/2 - 50, height/2 - 50],
 			directionIndex: 18,
-			direction: [-3,0],
+			direction: [-3, 0],
 			phasorColor: "red"
 		}));
 
@@ -36,7 +35,6 @@ class GameView {
 	start() {
 		this.bindKeyHandlers();
 
-
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
 	};
@@ -46,7 +44,7 @@ class GameView {
 		if (!this.pause) {
 
 			// if unpaused this steps and draws either the game or the gameOpening
-			if (this.opening) this.gameOpening.stepAndDraw(this.ctx);
+			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
 				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemy.getHull() === 0) this.game.win = true;
@@ -60,12 +58,13 @@ class GameView {
 		}
 	};
 	
+	
 	bindKeyHandlers() {
 
 		const MOVES = {
 			w: 1,
 			s:-1
-		}
+		};
 
 		const that = this;
 		
@@ -104,8 +103,8 @@ class GameView {
 
 
 	openingOff() {
-		this.opening = false;
-	}
+		this.gameOpening = null;
+	};
 }
 
 module.exports = GameView;

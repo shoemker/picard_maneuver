@@ -30,10 +30,10 @@ class Shield {
 
 		ctx.beginPath();
 		ctx.arc(this.pos[0], 
-						this.pos[1], 
-						100, 
-						this.start * Math.PI + this.multiplier * Math.PI * (1 - shieldPercentage),
-						this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage)
+			this.pos[1], 
+			100, 
+			this.start * Math.PI + this.multiplier * Math.PI * (1 - shieldPercentage),
+			this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage)
 		);
 	
 		ctx.lineWidth = 7;

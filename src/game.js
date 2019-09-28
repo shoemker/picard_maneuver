@@ -136,7 +136,6 @@ class Game {
 		const	colorrange = [0, 60, 240];
 		
 		for (let i = 0; i < starCount; i++) {
-	
 			this.stars.push(new Star({
 				pos: [Math.random() * this.canvas_width, Math.random() * this.canvas_height],
 				radius: Math.random() * 2.0,

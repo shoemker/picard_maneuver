@@ -56,7 +56,7 @@ class SpaceObject {
 	onscreen(canvas_width, canvas_height) {
 		const center = this.center();
 		return (center[0] > 0 && center[0] < canvas_width &&
-						center[1] > 0 && center[1] < canvas_height)
+						center[1] > 0 && center[1] < canvas_height);
 	};
 
 	center() {

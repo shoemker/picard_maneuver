@@ -40,15 +40,15 @@ class Ship extends SpaceObject{
 	}
 
 	// getter methods
-	getDirection()	{ return this.direction; }
-	getSpeed() 			{	return this.speed; }
-	getTorpedos() 	{ return this.torpedos; }
-	getRotation() 	{ return this.rotationOffset; }
-	phasorReady() 	{ return this.phasorRecharge === this.phasorRechargeMax; }
-	getHull() 			{ return this.hullIntegrity; }
+	getDirection() { return this.direction; }
+	getSpeed() {	return this.speed; }
+	getTorpedos() { return this.torpedos; }
+	getRotation() { return this.rotationOffset; }
+	phasorReady() { return this.phasorRecharge === this.phasorRechargeMax; }
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
+	getHull() { return this.hullIntegrity; }
 
-
+	
 	rotateCanvas(ctx) {
 		ctx.translate(this.center()[0], this.center()[1]);
 		ctx.rotate(this.rotationOffset);
