@@ -2,11 +2,12 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, opponent, torpImg) {
+	constructor(controlledShip, opponent, randomness, torpImg,) {
 		this.controlledShip = controlledShip;
 		this.opponent = opponent;
 		this.torpImg = torpImg;
-		
+		this.randomness = randomness;
+
 		this.turnLeftLength = 0;
 		this.turnRightLength = 0;
 		this.turnCounter = 0;
@@ -51,6 +52,11 @@ class EnemyAI  {
 				}
 			}
 			else this.controlledShip.fireTorpedos(this.torpImg);
+		}
+		else if (this.randomness) {
+			const random = Math.random();
+			if (random < .01) this.controlledShip.changeDirection(1);
+			else if (random > .99) this.controlledShip.changeDirection(-1);
 		}
 
 		this.turnCounter++;

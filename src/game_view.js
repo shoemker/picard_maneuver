@@ -3,6 +3,7 @@ const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
 
+
 class GameView {
 
 	constructor(ctx, width, height) {
@@ -27,6 +28,8 @@ class GameView {
 			direction: [3, 0],
 			phasorColor: "green"
 		}));
+
+		this.game.addAI();
 	};
 	
 

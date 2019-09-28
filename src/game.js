@@ -36,23 +36,29 @@ class Game {
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
-	}
+	};
 
 	addEnemy(enemy){
 		this.enemy = enemy;
-		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, this.torpImg);
-	}
+	};
+
+	addAI() {
+		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, true, this.torpImg);
+		// this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this.torpImg);
+	};
 
 	step() {
 
 		this.moveObjects();
 
 		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
+		// this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
+
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
 
-	}
+	};
 
 
 	moveObjects() {		
