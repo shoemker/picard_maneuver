@@ -1,54 +1,60 @@
 
 const Utils = require("./utils");
 
-const EnemyAI = {
-	consultAI(controlledShip, opponent, onscreen,  torpImg){
-		const angleOfOponent = Utils.angleToOtherShip(controlledShip, opponent);
+class EnemyAI  {
+	constructor(controlledShip, opponent, torpImg) {
+		this.controlledShip = controlledShip;
+		this.opponent = opponent;
+		this.torpImg = torpImg;
+		
+		this.turnLeftLength = 0;
+		this.turnRightLength = 0;
+		this.turnCounter = 0;
+	}
+
+	consultAI(onscreen){
+		const angleOfOponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
 		const turnCounterMax = 5;
 		const turnCircleMax = 50;
 
 		// speed
-		if ((controlledShip.getSpeed() < 2 && controlledShip.getSpeed() < opponent.getSpeed()) || 
-					controlledShip.getSpeed() < 1) {
-						controlledShip.power(1);
+		if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 
+				this.controlledShip.getSpeed() < 1) {
+			this.controlledShip.power(1);
 		}
 
 		// fire phasors
-		if (controlledShip.phasorReady() && onscreen) controlledShip.firePhasors(opponent);
+		if (this.controlledShip.phasorReady() && onscreen) this.controlledShip.firePhasors(this.opponent);
 
-		// set static variables
-		if (typeof turnLeftLength == 'undefined') turnLeftLength = 0;
-		if (typeof turnRightLength == 'undefined') turnRightLength = 0;
-		if (typeof turnCounter == 'undefined') turnCounter = 0;
 
 		// turning and torpedos
-		if (!onscreen || controlledShip.torpedosReady()) {
+		if (!onscreen || this.controlledShip.torpedosReady()) {
 			if (angleOfOponent > Math.PI * .0625 && angleOfOponent <= Math.PI) {
-				if (turnCounter === turnCounterMax) {
-					if(turnRightLength < turnCircleMax) {
-						controlledShip.changeDirection(1);
-						turnRightLength++;
-						turnLeftLength = 0;
+				if (this.turnCounter === turnCounterMax) {
+					if(this.turnRightLength < turnCircleMax) {
+						this.controlledShip.changeDirection(1);
+						this.turnRightLength++;
+						this.turnLeftLength = 0;
 					}
-					else controlledShip.changeDirection(-1);
+					else this.controlledShip.changeDirection(-1);
 				}
 			}
 			else if (angleOfOponent < Math.PI * 1.9375 &&
 				angleOfOponent > Math.PI) {
-				if (turnCounter === turnCounterMax) {
-					if (turnLeftLength < turnCircleMax) {
-						controlledShip.changeDirection(-1);
-						turnLeftLength++;
-						turnRightLength = 0;
+				if (this.turnCounter === turnCounterMax) {
+					if (this.turnLeftLength < turnCircleMax) {
+						this.controlledShip.changeDirection(-1);
+						this.turnLeftLength++;
+						this.turnRightLength = 0;
 					}
-					else controlledShip.changeDirection(1);
+					else this.controlledShip.changeDirection(1);
 				}
 			}
-			else controlledShip.fireTorpedos(torpImg);
+			else this.controlledShip.fireTorpedos(this.torpImg);
 		}
 
-		turnCounter++;
-		if (turnCounter > turnCounterMax) turnCounter = 0;
+		this.turnCounter++;
+		if (this.turnCounter > turnCounterMax) this.turnCounter = 0;
 	}
 }
 

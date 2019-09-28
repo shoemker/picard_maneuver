@@ -8,11 +8,11 @@ class GameView {
 	constructor(ctx, width, height) {
 
 		this.ctx = ctx;
-		this.game = new Game(width, height);
-		this.gameOpening = new GameOpening(width, height);
-
 		this.opening = true;
 		this.pause = false;
+
+		this.game = new Game(width, height);
+		this.gameOpening = new GameOpening(width, height);
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2-50],
@@ -43,7 +43,7 @@ class GameView {
 		if (!this.pause) {
 
 			// if unpaused this steps and draws either the game or the gameOpening
-			if (this.opening) this.gameOpening.step(this.ctx);
+			if (this.opening) this.gameOpening.stepAndDraw(this.ctx);
 			else {
 				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemy.getHull() === 0) this.game.win = true;

@@ -16,14 +16,14 @@ class GameOpening {
 	initStars() {
 		for (var i = 0; i < this.stars.length; i++) {
 			this.stars[i] = {
-				x: this.randomRange(-25, 25),
-				y: this.randomRange(-25, 25),
+				x: this.randomRange(-32, 32),
+				y: this.randomRange(-32, 32),
 				z: this.randomRange(1, this.max_depth)
 			}
 		}
 	}
 
-	step(ctx) {
+	stepAndDraw(ctx) {
 		var halfWidth = this.canvas_width / 2;
 		var halfHeight = this.canvas_height / 2;
 
@@ -31,11 +31,11 @@ class GameOpening {
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
 		for (var i = 0; i < this.stars.length; i++) {
-			this.stars[i].z -= 0.2;
+			this.stars[i].z -= 0.1;
 
 			if (this.stars[i].z <= 0) {
-				this.stars[i].x = this.randomRange(-25, 25);
-				this.stars[i].y = this.randomRange(-25, 25);
+				this.stars[i].x = this.randomRange(-32, 32);
+				this.stars[i].y = this.randomRange(-32, 32);
 				this.stars[i].z = this.max_depth;
 			}
 

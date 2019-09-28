@@ -39,17 +39,15 @@ class Game {
 	}
 
 	addEnemy(enemy){
-		this.enemy = enemy
+		this.enemy = enemy;
+		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, this.torpImg);
 	}
 
 	step() {
 
 		this.moveObjects();
 
-		EnemyAI.consultAI(this.enemy, this.enterprise,
-			this.enemy.onscreen(this.canvas_width, this.canvas_height),
-			this.torpImg
-		);
+		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
@@ -128,14 +126,14 @@ class Game {
 	// factory method to create stars
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
-		const starCount = 250;
+		const starCount = 300;
 		const	colorrange = [0, 60, 240];
 		
 		for (let i = 0; i < starCount; i++) {
 	
 			this.stars.push(new Star({
 				pos: [Math.random() * this.canvas_width, Math.random() * this.canvas_height],
-				radius: Math.random() * 1.6,
+				radius: Math.random() * 2.0,
 				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
 				sat: this.getRandom(50, 100),
 				canvas_width: this.canvas_width,
