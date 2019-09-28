@@ -84,11 +84,13 @@ class Game {
 		this.enemy.shift([shift_x, shift_y], this.enterprise.getSpeed());
 										
 		// the planet and moon shift differently than the stars to give a layered background
-		this.planet_08.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
+		this.planet_08.shift(
+			[this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
 			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
 			this.enterprise.getSpeed());
 												
-		this.moon_01.shift([this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
+		this.moon_01.shift(
+			[this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
 			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2.5)],
 			this.enterprise.getSpeed());	
 	}

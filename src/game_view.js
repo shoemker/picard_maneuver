@@ -27,6 +27,7 @@ class GameView {
 			direction: [3, 0],
 			phasorColor: "green"
 		}));
+		
 
 		this.game.addAI();
 	};
@@ -57,7 +58,7 @@ class GameView {
 			requestAnimationFrame(this.animate.bind(this));
 		}
 	};
-	
+
 	
 	bindKeyHandlers() {
 

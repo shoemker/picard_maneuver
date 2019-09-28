@@ -183,7 +183,7 @@ class Ship extends SpaceObject{
 	drawHullPhasorHit(ctx, color) {
 		ctx.beginPath();
 
-		ctx.arc(this.center()[0], this.center()[1], 10, 0, Math.PI * 2);
+		ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
 		ctx.fillStyle = color;
 		ctx.fill();
 	}
