@@ -69,9 +69,9 @@ class Ship extends SpaceObject{
 
 		//draw ship systems display
 		this.ssd.draw(ctx,
-									this.phasorRecharge / this.phasorRechargeMax,
-									this.torpedoReload / this.torpedoReloadMax,
-									this.hullIntegrity / this.hullIntegrityMax
+			this.phasorRecharge / this.phasorRechargeMax,
+			this.torpedoReload / this.torpedoReloadMax,
+			this.hullIntegrity / this.hullIntegrityMax
 		);
 
 		if (this.phasorCounter > 0) this.drawPhasor(ctx);
@@ -179,6 +179,7 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = "#ADD8E6";
 		ctx.stroke();
 	};
+	
 
 	drawHullPhasorHit(ctx, color) {
 		ctx.beginPath();
@@ -186,7 +187,7 @@ class Ship extends SpaceObject{
 		ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
 		ctx.fillStyle = color;
 		ctx.fill();
-	}
+	};
 
 
 	drawShipExplosion(ctx) {
@@ -247,7 +248,6 @@ class Ship extends SpaceObject{
 
 	
 	whichShieldWasHit(attacker) {
-
 		const angle = Utils.angleToOtherShip(this, attacker);
 
 		if (angle <= .25 * Math.PI || angle >= 1.75 * Math.PI) this.shieldHit = 0;

@@ -6,9 +6,10 @@ const D7 = require("./d7");
 
 class GameView {
 
-	constructor(ctx, width, height) {
+	constructor(ctx, width, height, audioElement) {
 
 		this.ctx = ctx;
+		this.audioElement = audioElement;
 		this.pause = false;
 
 		this.game = new Game(width, height);
@@ -27,7 +28,6 @@ class GameView {
 			direction: [3, 0],
 			phasorColor: "green"
 		}));
-		
 
 		this.game.addAI();
 	};
@@ -86,7 +86,10 @@ class GameView {
 			key("d", function () { that.game.enterprise.changeDirection(1); });
 			
 
-			key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
+			key("f", function () { 
+				that.game.fireTorpedos(that.game.enterprise); 
+				that.audioElement.play();
+			});
 			key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 			key("p", function () { that.pauseGame(); });
