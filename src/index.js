@@ -9,14 +9,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	const audioContext = new AudioContext();
 	const gainNode = audioContext.createGain();
-	gainNode.gain.value = .5;
+	gainNode.gain.value = .3;
+
+	const phasSound = document.getElementById("phaser");
+	const track1 = audioContext.createMediaElementSource(phasSound);
+	track1.connect(gainNode).connect(audioContext.destination);
+
+	const disruptSound = document.getElementById("disruptor");
+	const track2 = audioContext.createMediaElementSource(disruptSound);
+	track2.connect(gainNode).connect(audioContext.destination);
 
 	const torpSound = document.getElementById("torpedo");
-	const track = audioContext.createMediaElementSource(torpSound);
-	// track.connect(audioContext.destination);
-	track.connect(gainNode).connect(audioContext.destination);
+	const track3 = audioContext.createMediaElementSource(torpSound);
+	track3.connect(gainNode).connect(audioContext.destination);
+	
+	const exploSound = document.getElementById("explosion");
+	const track4 = audioContext.createMediaElementSource(exploSound);
+	track4.connect(gainNode).connect(audioContext.destination);
 
-	let g = new GameView(ctx, canvasEl.width, canvasEl.height, torpSound);
+	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
+		phasSound,
+		disruptSound,
+		torpSound,
+		exploSound
+		});
 
 	g.start(ctx);
 

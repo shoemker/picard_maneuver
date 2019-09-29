@@ -17,6 +17,7 @@ class Ship extends SpaceObject{
 		this.height = 30
 		this.phaserCounter = 0;
 		this.phaserColor = options.phaserColor;
+		this.beamSound = options.beamSound;
 		this.torpSound = options.torpSound;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
@@ -209,6 +210,7 @@ class Ship extends SpaceObject{
 			this.phaserCounter = 1;
 
 			this.phaserRecharge = 0;
+			this.beamSound.play();
 		}
 	};
 

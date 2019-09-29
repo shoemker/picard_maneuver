@@ -6,12 +6,12 @@ const D7 = require("./d7");
 
 class GameView {
 
-	constructor(ctx, width, height, torpSound) {
+	constructor(ctx, width, height, sounds) {
 
 		this.ctx = ctx;
 		this.pause = false;
 
-		this.game = new Game(width, height, torpSound);
+		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
 		this.game.addEnterprise(new Enterprise({
@@ -19,7 +19,8 @@ class GameView {
 			directionIndex: 18,
 			direction: [-3, 0],
 			phaserColor: "red",
-			torpSound
+			torpSound: sounds.torpSound,
+			beamSound: sounds.phasSound
 		}));
 
 		this.game.addEnemy( new D7({
@@ -27,7 +28,8 @@ class GameView {
 			directionIndex: 0,
 			direction: [3, 0],
 			phaserColor: "green",
-			torpSound
+			torpSound: sounds.torpSound,
+			beamSound: sounds.disruptSound
 		}));
 
 		this.game.addAI();
