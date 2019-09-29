@@ -111,8 +111,10 @@ class Game {
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 
-		if (this.lose) this.drawMessage(ctx,  "Sorry, You Lose");
-		if (this.win) this.drawMessage(ctx, "Wow, You Win!.");
+		// this.drawMute(ctx);
+
+		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
+		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
 	};
 
 
@@ -124,10 +126,21 @@ class Game {
 	drawMessage(ctx, message) {
 		ctx.font = "72px FINALOLD";
 
-		ctx.fillText(message, this.canvas_width/2-200, this.canvas_height/3 - 100);
-		ctx.fillText("Refresh to Play Again", this.canvas_width / 2 - 270, this.canvas_height / 3 - 20);
+		ctx.fillText(message, this.canvas_width/2-315, this.canvas_height/3 - 100);
+		ctx.fillText("Refresh to play again", this.canvas_width / 2 - 270, this.canvas_height / 3 - 20);
+	};
 
-	}
+
+	drawMute(ctx) {
+		ctx.beginPath();
+		ctx.rect(this.canvas_width - 150, 30, 20, 20);
+		ctx.strokeStyle = "white";
+		ctx.stroke();
+
+		ctx.font = "24px Arial";
+		ctx.fillStyle = "white";
+		ctx.fillText("Mute", this.canvas_width-120, 48);
+	};
 
 	// factory method to create stars
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
