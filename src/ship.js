@@ -17,6 +17,7 @@ class Ship extends SpaceObject{
 		this.height = 30
 		this.phasorCounter = 0;
 		this.phasorColor = options.phasorColor;
+		this.torpSound = options.torpSound;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
 
@@ -218,6 +219,7 @@ class Ship extends SpaceObject{
 			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex));
 			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex + 1));
 			this.torpedoReload = 0;
+			this.torpSound.play();
 		}
 	}
 

@@ -6,27 +6,28 @@ const D7 = require("./d7");
 
 class GameView {
 
-	constructor(ctx, width, height, audioElement) {
+	constructor(ctx, width, height, torpSound) {
 
 		this.ctx = ctx;
-		this.audioElement = audioElement;
 		this.pause = false;
 
-		this.game = new Game(width, height);
+		this.game = new Game(width, height, torpSound);
 		this.gameOpening = new GameOpening(width, height);
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2 - 50],
 			directionIndex: 18,
 			direction: [-3, 0],
-			phasorColor: "red"
+			phasorColor: "red",
+			torpSound
 		}));
 
 		this.game.addEnemy( new D7({
 			pos: [0, 100],
 			directionIndex: 0,
 			direction: [3, 0],
-			phasorColor: "green"
+			phasorColor: "green",
+			torpSound
 		}));
 
 		this.game.addAI();
@@ -86,10 +87,7 @@ class GameView {
 			key("d", function () { that.game.enterprise.changeDirection(1); });
 			
 
-			key("f", function () { 
-				that.game.fireTorpedos(that.game.enterprise); 
-				that.audioElement.play();
-			});
+			key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
 			key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 			key("p", function () { that.pauseGame(); });

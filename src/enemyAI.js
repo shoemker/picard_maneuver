@@ -2,7 +2,7 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, opponent, randomness, torpImg,) {
+	constructor(controlledShip, opponent, randomness, torpImg) {
 		this.controlledShip = controlledShip;
 		this.opponent = opponent;
 		this.torpImg = torpImg;

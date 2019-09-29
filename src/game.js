@@ -8,6 +8,7 @@ class Game {
 	constructor(canvas_width, canvas_height) {
 		this.canvas_width = canvas_width;
 		this.canvas_height = canvas_height;
+
 		this.stars = [];
 		this.base_speed_inverse = 5;
 
@@ -48,12 +49,10 @@ class Game {
 	};
 
 	step() {
-
 		this.moveObjects();
 
 		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 		// this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
-
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
