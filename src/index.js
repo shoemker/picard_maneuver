@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (x > 1107 && x < 1132 && y > 46 && y < 69) {
 				g.game.muteToggle();
-				if (gainNode.gain.value === 0) gainNode.gain.value = .2;
+				
+				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .2;
 				else gainNode.gain.value = 0;
-				console.log(gainNode.gain.value);
 			}
 		}
 	});

@@ -135,7 +135,6 @@ class Ship extends SpaceObject{
 	
 
 	drawTorpExplosion(ctx) {	
-
 		let x;
 		let y;
 
