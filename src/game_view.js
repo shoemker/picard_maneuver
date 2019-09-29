@@ -10,6 +10,7 @@ class GameView {
 
 		this.ctx = ctx;
 		this.pause = false;
+		this.theme = sounds.theme;
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
@@ -108,6 +109,7 @@ class GameView {
 
 	openingOff() {
 		this.gameOpening = null;
+		this.theme.play();
 	};
 }
 

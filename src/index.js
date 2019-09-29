@@ -28,11 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	const track4 = audioContext.createMediaElementSource(exploSound);
 	track4.connect(gainNode).connect(audioContext.destination);
 
+	const theme = document.getElementById("theme");
+	const track5 = audioContext.createMediaElementSource(theme);
+	track5.connect(gainNode).connect(audioContext.destination);
+
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
 		phasSound,
 		disruptSound,
 		torpSound,
-		exploSound
+		exploSound,
+		theme,
 		});
 
 	g.start(ctx);
@@ -48,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (x > 1107 && x < 1132 && y > 46 && y < 69) {
 				g.game.muteToggle();
-				
+
 				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .2;
 				else gainNode.gain.value = 0;
 			}
