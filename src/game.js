@@ -127,6 +127,7 @@ class Game {
 
 	drawMessage(ctx, message) {
 		ctx.font = "72px FINALOLD";
+		ctx.fillStyle = "#FAFAD2";
 
 		ctx.fillText(message, this.canvas_width/2-315, this.canvas_height/3 - 100);
 		ctx.fillText("Refresh to play again", this.canvas_width / 2 - 270, this.canvas_height / 3 - 20);
@@ -163,7 +164,7 @@ class Game {
 	// factory method to create stars
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
-		const starCount = 300;
+		const starCount = 250;
 		const	colorrange = [0, 60, 240];
 		
 		for (let i = 0; i < starCount; i++) {
