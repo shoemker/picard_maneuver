@@ -88,7 +88,6 @@ class GameView {
 			//call to rotate ship image
 			key("a", function () { that.game.enterprise.changeDirection(-1); });
 			key("d", function () { that.game.enterprise.changeDirection(1); });
-			
 
 			key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
 			key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
@@ -106,9 +105,6 @@ class GameView {
 		}
 	};
 
-	muteToggle() {
-		// this.game.muteToggle()
-	}
 
 	openingOff() {
 		this.gameOpening = null;

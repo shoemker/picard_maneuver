@@ -14,6 +14,7 @@ class Game {
 
 		this.win = false;
 		this.lose = false;
+		this.muted = false;
 
 		this.createStarField();
 		this.loadTorpImg();
@@ -141,6 +142,22 @@ class Game {
 		ctx.font = "24px Arial";
 		ctx.fillStyle = "white";
 		ctx.fillText("Mute", this.canvas_width - 80, 48);
+
+		if (this.muted) {
+			ctx.beginPath();
+			ctx.moveTo(this.canvas_width - 110,40);
+			ctx.lineTo(this.canvas_width - 100,50);
+			ctx.lineTo(this.canvas_width - 85, 30)
+			ctx.strokeStyle = 'red';
+			ctx.lineWidth = 5;
+			ctx.stroke();
+		}
+	};
+
+
+	muteToggle() {
+		if (this.muted) this.muted = false;
+		else this.muted = true;
 	};
 
 	// factory method to create stars
@@ -225,20 +242,3 @@ class Game {
 }
 
 module.exports = Game;
-
-
-		// this.planet1 = new Planet({
-		// 	pos:[300,300], 
-		// 	img: this.loadPlanet('./images/planets/planet_01.png'),
-		// 	width:200,
-		// 	height:200,
-		// 	sheetCoords: [20, 10, 480, 470]
-		// });
-
-		// this.planet9 = new Planet({
-		// 	pos: [300, 300],
-		// 	img: this.loadPlanet('./images/planets/planet_09.png'),
-		// 	width: 200,
-		// 	height: 200,
-		// 	sheetCoords: [20, 20, 580, 580]
-		// });

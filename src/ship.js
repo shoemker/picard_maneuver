@@ -11,17 +11,17 @@ class Ship extends SpaceObject{
 
 		this.directionIndex = options.directionIndex;
 		this.direction = options.direction;
+		this.phaserColor = options.phaserColor;
+		this.beamSound = options.beamSound;
+		this.torpSound = options.torpSound;
 
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30
 		this.phaserCounter = 0;
-		this.phaserColor = options.phaserColor;
-		this.beamSound = options.beamSound;
-		this.torpSound = options.torpSound;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
-
+		
 		this.rotationOffset = 0;
 		this.increment = Math.PI / 18;
 
@@ -29,10 +29,10 @@ class Ship extends SpaceObject{
 		this.ssd;
 
 		this.phaserRecharge = 0;
-		this.phaserRechargeMax = 150;
+		this.phaserRechargeMax = 180;
 
 		this.torpedoReload = 0;
-		this.torpedoReloadMax= 200;
+		this.torpedoReloadMax= 220;
 
 		this.hullIntegrityMax = 200;
 		this.hullIntegrity = this.hullIntegrityMax;
