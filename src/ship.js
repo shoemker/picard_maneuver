@@ -1,7 +1,6 @@
 
 const SpaceObject = require("./space_object");
 const Torpedo = require("./torpedo");
-const Explosion = require("./explosion")
 const Utils = require("./utils");
 
 class Ship extends SpaceObject{
@@ -14,6 +13,8 @@ class Ship extends SpaceObject{
 		this.phaserColor = options.phaserColor;
 		this.beamSound = options.beamSound;
 		this.torpSound = options.torpSound;
+		this.explosion = options.explosion;
+		this.explosionImg = options.explosionImg;
 
 		this.speed = 0;
 		this.width = 60;
@@ -36,9 +37,6 @@ class Ship extends SpaceObject{
 
 		this.hullIntegrityMax = 200;
 		this.hullIntegrity = this.hullIntegrityMax;
-
-		this.loadExplosionImg();
-		this.explosion = new Explosion(this.explosionImg, options.exploSound);
 	}
 
 	// getter methods
@@ -270,13 +268,6 @@ class Ship extends SpaceObject{
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
 		this.direction = this.directionArray[this.directionIndex];
-	};
-
-
-	loadExplosionImg() {
-		this.explosionImg = new Image();
-		this.explosionImg.onload = () => { return true; }
-		this.explosionImg.src = './images/explosion-sprite-sheet.png';
 	};
 
 }

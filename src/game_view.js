@@ -2,6 +2,7 @@ const Game = require("./game");
 const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
+const Explosion = require("./explosion")
 
 
 class GameView {
@@ -15,6 +16,9 @@ class GameView {
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
+		this.loadExplosionImg();
+		this.explosion = new Explosion(this.explosionImg, sounds.exploSound);
+
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2 - 50],
 			directionIndex: 18,
@@ -22,7 +26,8 @@ class GameView {
 			phaserColor: "red",
 			torpSound: sounds.torpSound,
 			beamSound: sounds.phasSound,
-			exploSound: sounds.exploSound
+			explosion: this.explosion,
+			explosionImg: this.explosionImg
 		}));
 
 		this.game.addEnemy( new D7({
@@ -31,7 +36,9 @@ class GameView {
 			direction: [3, 0],
 			phaserColor: "green",
 			torpSound: sounds.torpSound,
-			beamSound: sounds.disruptSound
+			beamSound: sounds.disruptSound,
+			explosion: this.explosion,
+			explosionImg: this.explosionImg
 		}));
 
 		this.game.addAI();
@@ -111,6 +118,14 @@ class GameView {
 		this.gameOpening = null;
 		this.theme.play();
 	};
+
+
+	loadExplosionImg() {
+		this.explosionImg = new Image();
+		this.explosionImg.onload = () => { return true; }
+		this.explosionImg.src = './images/explosion-sprite-sheet.png';
+	};
+	
 }
 
 module.exports = GameView;

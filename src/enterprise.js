@@ -7,8 +7,12 @@ class Enterprise extends Ship {
  
 		this.loadShipImg();
 
+		// this.hullIntegrity = 5;
+
+
 		// rotates image 180 degrees so it faces left at start
 		this.rotationOffset = Math.PI;
+
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({

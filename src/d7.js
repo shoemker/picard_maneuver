@@ -7,6 +7,8 @@ class D7 extends Ship {
 
 		this.loadShipImg();
 
+		// this.hullIntegrity = 50;
+
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssd_x: 100,
