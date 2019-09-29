@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// sounds
 	const audioContext = new AudioContext();
 	const gainNode = audioContext.createGain();
-	gainNode.gain.value = .2;
+	gainNode.gain.value = 0;
 
 	const phasSound = document.getElementById("phaser");
 	const track1 = audioContext.createMediaElementSource(phasSound);
