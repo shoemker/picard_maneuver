@@ -22,7 +22,7 @@ class SSD {
 	};
 
 
-	draw(ctx, phasorRechargePercent, torpedoReloadPercent, hullPercentage) {
+	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			this.ssd_x,
@@ -35,8 +35,8 @@ class SSD {
 		this.drawShields(ctx);
 		ctx.lineWidth = 3;
 
-		// draw phasor recharge bar
-		this.drawRechargeBar(ctx, this.ssd_x - 60, phasorRechargePercent);
+		// draw phaser recharge bar
+		this.drawRechargeBar(ctx, this.ssd_x - 60, phaserRechargePercent);
 
 		// draw torpedo reload
 		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);

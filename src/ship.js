@@ -15,8 +15,8 @@ class Ship extends SpaceObject{
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30
-		this.phasorCounter = 0;
-		this.phasorColor = options.phasorColor;
+		this.phaserCounter = 0;
+		this.phaserColor = options.phaserColor;
 		this.torpSound = options.torpSound;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
@@ -27,8 +27,8 @@ class Ship extends SpaceObject{
 		this.torpedos = [];
 		this.ssd;
 
-		this.phasorRecharge = 0;
-		this.phasorRechargeMax = 150;
+		this.phaserRecharge = 0;
+		this.phaserRechargeMax = 150;
 
 		this.torpedoReload = 0;
 		this.torpedoReloadMax= 200;
@@ -45,7 +45,7 @@ class Ship extends SpaceObject{
 	getSpeed() {	return this.speed; }
 	getTorpedos() { return this.torpedos; }
 	getRotation() { return this.rotationOffset; }
-	phasorReady() { return this.phasorRecharge === this.phasorRechargeMax; }
+	phaserReady() { return this.phaserRecharge === this.phaserRechargeMax; }
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 
@@ -70,15 +70,15 @@ class Ship extends SpaceObject{
 
 		//draw ship systems display
 		this.ssd.draw(ctx,
-			this.phasorRecharge / this.phasorRechargeMax,
+			this.phaserRecharge / this.phaserRechargeMax,
 			this.torpedoReload / this.torpedoReloadMax,
 			this.hullIntegrity / this.hullIntegrityMax
 		);
 
-		if (this.phasorCounter > 0) this.drawPhasor(ctx);
+		if (this.phaserCounter > 0) this.drawPhaser(ctx);
 
 		// recharge weapons
-		if (this.phasorRecharge !== this.phasorRechargeMax) this.phasorRecharge++;
+		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
 		if (this.torpedoReload !== this.torpedoReloadMax) this.torpedoReload++;
 
 		//shows torpedo hit
@@ -91,11 +91,11 @@ class Ship extends SpaceObject{
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
 
-	// draw the phasor fire. The line extends toward the target over phasorDrawMax frames,
+	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhasor(ctx) {
+	drawPhaser(ctx) {
 
-		const phasorDrawMax = 12;
+		const phaserDrawMax = 12;
 		let xDelta = this.target.center()[0] - this.center()[0];
 		let yDelta = this.target.center()[1] - this.center()[1];
 
@@ -107,7 +107,7 @@ class Ship extends SpaceObject{
 			yDelta = yDelta * distanceRatio;
 		}
 
-		let ratio = this.phasorCounter/ phasorDrawMax;
+		let ratio = this.phaserCounter/ phaserDrawMax;
 		if (ratio > 1) ratio = 1;
 
 		const xProgress = ratio * xDelta + this.center()[0];
@@ -116,20 +116,20 @@ class Ship extends SpaceObject{
 		ctx.beginPath();
 		ctx.moveTo(this.center()[0], this.center()[1]);
 		ctx.lineTo(xProgress, yProgress);
-		ctx.strokeStyle = this.phasorColor;
+		ctx.strokeStyle = this.phaserColor;
 		ctx.lineWidth = 3;
 		ctx.stroke();
 
-		this.phasorCounter++;
+		this.phaserCounter++;
 
-		if (this.phasorCounter >= phasorDrawMax) {
+		if (this.phaserCounter >= phaserDrawMax) {
 			if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
 				this.target.drawShieldOnHit(ctx, this.target.shieldHit);
 			}
-			else this.target.drawHullPhasorHit(ctx,this.phasorColor);
+			else this.target.drawHullPhaserHit(ctx,this.phaserColor);
 		}
 
-		if (this.phasorCounter > (phasorDrawMax+10)) this.phasorCounter = 0;
+		if (this.phaserCounter > (phaserDrawMax+10)) this.phaserCounter = 0;
 	};
 	
 
@@ -182,7 +182,7 @@ class Ship extends SpaceObject{
 	};
 	
 
-	drawHullPhasorHit(ctx, color) {
+	drawHullPhaserHit(ctx, color) {
 		ctx.beginPath();
 
 		ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
@@ -202,13 +202,13 @@ class Ship extends SpaceObject{
 	};
 
 
-	firePhasors(target) {
-		if (this.phasorRecharge === this.phasorRechargeMax) {
+	firePhasers(target) {
+		if (this.phaserRecharge === this.phaserRechargeMax) {
 			this.target = target;
-			this.target.receivePhasorHit(this);
-			this.phasorCounter = 1;
+			this.target.receivePhaserHit(this);
+			this.phaserCounter = 1;
 
-			this.phasorRecharge = 0;
+			this.phaserRecharge = 0;
 		}
 	};
 
@@ -224,7 +224,7 @@ class Ship extends SpaceObject{
 	}
 
 
-	receivePhasorHit(attacker) {
+	receivePhaserHit(attacker) {
 		this.takeDamage(attacker, 18);
 	};
 

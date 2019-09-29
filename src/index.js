@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	const ctx = canvasEl.getContext("2d");
 
 	const audioContext = new AudioContext();
+	const gainNode = audioContext.createGain();
+
 	const torpSound = document.getElementById("torpedo");
 	const track = audioContext.createMediaElementSource(torpSound);
-	track.connect(audioContext.destination);
+	// track.connect(audioContext.destination);
+	track.connect(gainNode).connect(audioContext.destination);
 
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, torpSound);
 
@@ -18,11 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	canvasEl.onclick = function () { 
 		g.openingOff(); 
-		audioContext.resume().then(() => {
-			console.log('Playback resumed successfully');
-			// torpSound.play();
-
-		});
+		audioContext.resume().then(() => { });
 	}
 })
 

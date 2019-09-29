@@ -18,7 +18,7 @@ class GameView {
 			pos: [width/2 - 50, height/2 - 50],
 			directionIndex: 18,
 			direction: [-3, 0],
-			phasorColor: "red",
+			phaserColor: "red",
 			torpSound
 		}));
 
@@ -26,7 +26,7 @@ class GameView {
 			pos: [0, 100],
 			directionIndex: 0,
 			direction: [3, 0],
-			phasorColor: "green",
+			phaserColor: "green",
 			torpSound
 		}));
 
@@ -78,7 +78,7 @@ class GameView {
 			});
 
 			key("space", function () { 
-				that.game.firePhasors(that.game.enterprise); 
+				that.game.firePhasers(that.game.enterprise); 
 			});
 			
 

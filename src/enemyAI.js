@@ -24,8 +24,8 @@ class EnemyAI  {
 			this.controlledShip.power(1);
 		}
 
-		// fire phasors
-		if (this.controlledShip.phasorReady() && onscreen) this.controlledShip.firePhasors(this.opponent);
+		// fire phasers
+		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.opponent);
 
 
 		// turning and torpedos

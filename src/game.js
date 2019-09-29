@@ -170,13 +170,13 @@ class Game {
 	};
 
 
-	firePhasors(ship) {
+	firePhasers(ship) {
 		const enemyOnScreen = this.enemy.onscreen(this.canvas_width, this.canvas_height);
 		if (ship === this.enterprise && enemyOnScreen) {
-			ship.firePhasors(this.enemy);
+			ship.firePhasers(this.enemy);
 		}
 		else if (enemyOnScreen) { 
-			ship.firePhasors(this.enterprise);
+			ship.firePhasers(this.enterprise);
 		}
 	};
 
