@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	const torpSound = document.getElementById("torpedo");
 	const track = audioContext.createMediaElementSource(torpSound);
-	// track.connect(audioContext.destination);
+	track.connect(audioContext.destination);
 	track.connect(gainNode).connect(audioContext.destination);
 
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, torpSound);
