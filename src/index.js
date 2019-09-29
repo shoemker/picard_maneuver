@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	const audioContext = new AudioContext();
 	const gainNode = audioContext.createGain();
+	gainNode.gain.value = .5;
 
 	const torpSound = document.getElementById("torpedo");
 	const track = audioContext.createMediaElementSource(torpSound);
