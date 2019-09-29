@@ -111,7 +111,8 @@ class Game {
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 
-		// this.drawMute(ctx);
+		// draw mute box
+		this.drawMute(ctx);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
@@ -133,13 +134,13 @@ class Game {
 
 	drawMute(ctx) {
 		ctx.beginPath();
-		ctx.rect(this.canvas_width - 150, 30, 20, 20);
+		ctx.rect(this.canvas_width - 110, 30, 20, 20);
 		ctx.strokeStyle = "white";
 		ctx.stroke();
 
 		ctx.font = "24px Arial";
 		ctx.fillStyle = "white";
-		ctx.fillText("Mute", this.canvas_width-120, 48);
+		ctx.fillText("Mute", this.canvas_width - 80, 48);
 	};
 
 	// factory method to create stars

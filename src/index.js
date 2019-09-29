@@ -37,13 +37,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	g.start(ctx);
 
-	canvasEl.onclick = function () { 
-		g.openingOff(); 
-		audioContext.resume().then(() => { });
-	}
-})
+	canvasEl.addEventListener("click", (event) => {
+		if (g.gameOpening !== null) {
+			g.openingOff();
+			audioContext.resume().then(() => { });
+		}
+		else{
+			const x = event.pageX;
+			const y = event.pageY;
 
+			if (x > 1107 && x < 1132 && y > 46 && y < 69) {
+				g.muteToggle();
+				if (gainNode.gain.value === 0) gainNode.gain.value = .2;
+				else gainNode.gain.value = 0;
+				console.log(gainNode.gain.value);
+			}
+		}
+	});
+	
+});
 
+// console.log(event.pageX + ", " + event.pageY)
 window.addEventListener('keydown', function (e) {
 	if (e.keyCode == 32 && e.target == document.body) {
 		e.preventDefault();

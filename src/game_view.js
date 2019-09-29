@@ -106,6 +106,9 @@ class GameView {
 		}
 	};
 
+	muteToggle() {
+		// this.game.muteToggle()
+	}
 
 	openingOff() {
 		this.gameOpening = null;
