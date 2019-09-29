@@ -7,9 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	canvasEl.height = 900;
 	const ctx = canvasEl.getContext("2d");
 
+	// sounds
 	const audioContext = new AudioContext();
 	const gainNode = audioContext.createGain();
-	gainNode.gain.value = .3;
+	gainNode.gain.value = .2;
 
 	const phasSound = document.getElementById("phaser");
 	const track1 = audioContext.createMediaElementSource(phasSound);

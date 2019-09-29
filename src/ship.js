@@ -38,7 +38,7 @@ class Ship extends SpaceObject{
 		this.hullIntegrity = this.hullIntegrityMax;
 
 		this.loadExplosionImg();
-		this.explosion = new Explosion(this.explosionImg);
+		this.explosion = new Explosion(this.explosionImg, options.exploSound);
 	}
 
 	// getter methods

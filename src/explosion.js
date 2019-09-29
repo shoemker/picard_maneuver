@@ -1,6 +1,7 @@
 class Explosion {
-	constructor(img) {
+	constructor(img, sound) {
 		this.img = img;
+		this.sound = sound;
 		this.index = 0;
 
 		// these are the x,y coords for different sprites on the sheet
@@ -56,7 +57,8 @@ class Explosion {
 
 
 	draw(ctx, pos) {
-		// console.log(this.index, this.sheet.length);
+		if (this.index === 0) this.sound.play();
+		
 		if (this.index < this.sheet.length) {
 			ctx.drawImage(this.img, 
 				this.sheet[this.index][0], this.sheet[this.index][1], this.sheet[this.index][2], this.sheet[this.index][3],

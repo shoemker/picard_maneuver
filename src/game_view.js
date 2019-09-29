@@ -20,7 +20,8 @@ class GameView {
 			direction: [-3, 0],
 			phaserColor: "red",
 			torpSound: sounds.torpSound,
-			beamSound: sounds.phasSound
+			beamSound: sounds.phasSound,
+			exploSound: sounds.exploSound
 		}));
 
 		this.game.addEnemy( new D7({
