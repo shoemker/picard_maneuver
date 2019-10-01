@@ -59,5 +59,8 @@ p {
 	font-family: 'FINALOLD';
 	color:lightblue;
 	font-size: 48px;
+}
 
+.instr-desc {
+	color: LightCyan;
 }

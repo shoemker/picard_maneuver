@@ -41,14 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
 		kTorpSound, torpSound,
 		exploSound,
 		theme,
-		});
+		}
+	);
 
 	g.start(ctx);
 
 	canvasEl.addEventListener("click", (event) => {
 		if (g.gameOpening !== null) {
 			g.openingOff();
-			audioContext.resume().then(() => { });
+			audioContext.resume().then(() => { return true; });
 		}
 		else{
 			const x = event.pageX;

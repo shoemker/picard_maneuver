@@ -50,7 +50,7 @@ class Enterprise extends Ship {
 
 	loadShipImg() {
 		this.shipImg = new Image();
-		this.shipImg.onload = () => { return true; }
+		this.shipImg.onload = () => { return true; };
 		this.shipImg.src = './images/uss-enterprise-png-view-original-669.png';
 	};
 }

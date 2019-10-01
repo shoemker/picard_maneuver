@@ -45,7 +45,7 @@ class D7 extends Ship {
 
 	loadShipImg() {
 		this.shipImg = new Image();
-		this.shipImg.onload = () => { return true; }
+		this.shipImg.onload = () => { return true; };
 		this.shipImg.src = './images/D7.png';
 	};
 }
