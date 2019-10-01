@@ -7,6 +7,8 @@ class D7 extends Ship {
 
 		this.loadShipImg();
 
+		this.phaserRechargeMax = 210;
+
 		// this.hullIntegrity = 50;
 
 		// ssd is the ship systems display in the corner of the screen

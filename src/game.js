@@ -15,6 +15,7 @@ class Game {
 		this.win = false;
 		this.lose = false;
 		this.muted = false;
+		this.autopilot = false;
 
 		this.createStarField();
 		this.loadTorpImg();
@@ -46,14 +47,15 @@ class Game {
 
 	addAI() {
 		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, true, this.torpImg);
-		// this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this.torpImg);
+		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this.torpImg);
 	};
 
 	step() {
 		this.moveObjects();
 
 		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
-		// this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
+		if ( this.autopilot) 
+			this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
 		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
@@ -114,6 +116,7 @@ class Game {
 
 		// draw mute box
 		this.drawMute(ctx);
+		this.drawAutopilot(ctx);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
@@ -136,19 +139,41 @@ class Game {
 
 	drawMute(ctx) {
 		ctx.beginPath();
-		ctx.rect(this.canvas_width - 110, 30, 20, 20);
+		ctx.rect(this.canvas_width - 130, 30, 20, 20);
 		ctx.strokeStyle = "white";
 		ctx.stroke();
 
 		ctx.font = "24px Arial";
 		ctx.fillStyle = "white";
-		ctx.fillText("Mute", this.canvas_width - 80, 48);
+		ctx.fillText("Mute", this.canvas_width - 100, 48);
 
 		if (this.muted) {
 			ctx.beginPath();
-			ctx.moveTo(this.canvas_width - 110,40);
-			ctx.lineTo(this.canvas_width - 100,50);
-			ctx.lineTo(this.canvas_width - 85, 30)
+			ctx.moveTo(this.canvas_width - 130,40);
+			ctx.lineTo(this.canvas_width - 120,50);
+			ctx.lineTo(this.canvas_width - 105, 30)
+			ctx.strokeStyle = 'red';
+			ctx.lineWidth = 5;
+			ctx.stroke();
+		}
+	};
+
+
+	drawAutopilot(ctx) {
+		ctx.beginPath();
+		ctx.rect(this.canvas_width - 130, 70, 20, 20);
+		ctx.strokeStyle = "white";
+		ctx.stroke();
+
+		ctx.font = "24px Arial";
+		ctx.fillStyle = "white";
+		ctx.fillText("Autopilot", this.canvas_width - 100, 88);
+
+		if (this.autopilot) {
+			ctx.beginPath();
+			ctx.moveTo(this.canvas_width - 130, 80);
+			ctx.lineTo(this.canvas_width - 120, 90);
+			ctx.lineTo(this.canvas_width - 105, 70)
 			ctx.strokeStyle = 'red';
 			ctx.lineWidth = 5;
 			ctx.stroke();
@@ -159,6 +184,12 @@ class Game {
 	muteToggle() {
 		if (this.muted) this.muted = false;
 		else this.muted = true;
+	};
+
+
+	autoPilotToggle() {
+		if (this.autopilot) this.autopilot = false;
+		else this.autopilot = true;
 	};
 
 	// factory method to create stars

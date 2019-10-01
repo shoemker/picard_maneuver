@@ -54,13 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		else{
 			const x = event.pageX;
 			const y = event.pageY;
-
-			if (x > 1107 && x < 1132 && y > 46 && y < 69) {
+			console.log(x + "," + y);
+			if (x > 1085 && x < 1112 && y > 46 && y < 71) {
 				g.game.muteToggle();
 
 				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
 				else gainNode.gain.value = 0;
 			}
+			else if (x > 1085 && x < 1112 && y > 85 && y < 112) g.game.autoPilotToggle();
 		}
 	});
 });

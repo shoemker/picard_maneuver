@@ -71,7 +71,7 @@ class GameOpening {
 		ctx.font = "72px FINALOLD";
 		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 3+ 80);
 
-		ctx.fillStyle = "LightCyan";
+		ctx.fillStyle = "white";
 		ctx.font = "54px FINALOLD"; 
 		ctx.fillText("Click Here To Start", this.canvas_width / 2 - 170, this.canvas_height / 3+ 200);
 	}

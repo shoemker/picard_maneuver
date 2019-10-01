@@ -141,7 +141,7 @@ class Ship extends SpaceObject{
 			const xDelta = this.attacker.center()[0] - this.center()[0];
 			const yDelta = this.attacker.center()[1] - this.center()[1];
 			const distance = Utils.distance(this, this.attacker);
-			const percentage = 1 - ((distance - 35) / distance);
+			const percentage = 35 / distance;
 			x = this.center()[0] + xDelta * percentage;
 			y = this.center()[1] - 8 + yDelta * percentage;
 
