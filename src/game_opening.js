@@ -52,12 +52,25 @@ class GameOpening {
 				ctx.fillRect(px, py, size, size);
 			}
 		});
+
+		this.drawText(ctx);
 	};
 
 
 	randomRange(minVal, maxVal) {
 		return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
 	};
+
+
+	drawText(ctx) {
+		ctx.fillStyle = "lightblue";
+
+		ctx.font = "108px FINALOLD";
+		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 355, this.canvas_height / 3);
+		
+		ctx.font = "54px FINALOLD";
+		ctx.fillText("Click Here To Start", this.canvas_width / 2 - 170, this.canvas_height / 3+ 150);
+	}
 
 }
 
