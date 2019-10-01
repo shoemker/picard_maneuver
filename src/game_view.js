@@ -35,7 +35,7 @@ class GameView {
 			directionIndex: 0,
 			direction: [3, 0],
 			phaserColor: "green",
-			torpSound: sounds.torpSound,
+			torpSound: sounds.kTorpSound,
 			beamSound: sounds.disruptSound,
 			explosion: this.explosion,
 			explosionImg: this.explosionImg

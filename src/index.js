@@ -23,19 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	const torpSound = document.getElementById("torpedo");
 	const track3 = audioContext.createMediaElementSource(torpSound);
 	track3.connect(gainNode).connect(audioContext.destination);
-	
-	const exploSound = document.getElementById("explosion");
-	const track4 = audioContext.createMediaElementSource(exploSound);
+
+	const kTorpSound = document.getElementById("klingonTorpedo");
+	const track4 = audioContext.createMediaElementSource(kTorpSound);
 	track4.connect(gainNode).connect(audioContext.destination);
 
-	const theme = document.getElementById("theme");
-	const track5 = audioContext.createMediaElementSource(theme);
+	const exploSound = document.getElementById("explosion");
+	const track5= audioContext.createMediaElementSource(exploSound);
 	track5.connect(gainNode).connect(audioContext.destination);
 
+	const theme = document.getElementById("theme");
+	const track6 = audioContext.createMediaElementSource(theme);
+	track6.connect(gainNode).connect(audioContext.destination);
+
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
-		phasSound,
-		disruptSound,
-		torpSound,
+		phasSound, disruptSound,
+		kTorpSound, torpSound,
 		exploSound,
 		theme,
 		});
