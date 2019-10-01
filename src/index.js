@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// sounds
 	const audioContext = new AudioContext();
 	const gainNode = audioContext.createGain();
-	gainNode.gain.value = .2;
+	gainNode.gain.value = .25;
 
 	const phasSound = document.getElementById("phaser");
 	const track1 = audioContext.createMediaElementSource(phasSound);
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (x > 1107 && x < 1132 && y > 46 && y < 69) {
 				g.game.muteToggle();
 
-				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .2;
+				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
 				else gainNode.gain.value = 0;
 			}
 		}
