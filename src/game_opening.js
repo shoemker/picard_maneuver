@@ -66,10 +66,14 @@ class GameOpening {
 		ctx.fillStyle = "lightblue";
 
 		ctx.font = "108px FINALOLD";
-		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 355, this.canvas_height / 3);
-		
-		ctx.font = "54px FINALOLD";
-		ctx.fillText("Click Here To Start", this.canvas_width / 2 - 160, this.canvas_height / 3+ 150);
+		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 365, this.canvas_height / 3);
+
+		ctx.font = "72px FINALOLD";
+		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 3+ 80);
+
+		ctx.fillStyle = "LightCyan";
+		ctx.font = "54px FINALOLD"; 
+		ctx.fillText("Click Here To Start", this.canvas_width / 2 - 170, this.canvas_height / 3+ 200);
 	}
 
 }
