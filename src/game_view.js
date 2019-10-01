@@ -42,11 +42,14 @@ class GameView {
 		}));
 
 		this.game.addAI();
+
+		
 	};
 	
 
 	start() {
 		this.bindKeyHandlers();
+		
 
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
