@@ -1,4 +1,4 @@
-<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/Screenshot1.jpg"></a>
+<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/Screenshot1.jpg"></a>
 
 <h2>Picard Maneuver Overview</h2>
 You are in control of a starship thrust into combat with an enemy. By controlling your speed and direction and firing your phasers and torpedos, you can destroy the other ship. Just watch out because the other ship has it's own weapons.
@@ -21,7 +21,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Ship Systems Display in corner to indicate shield strength, hull integrity and weapon recharge status.</li>
 </ol>
 <br>
-<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/Screenshot2.jpg"></a>
+<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/Screenshot2.jpg"></a>
 <br>
 <br>
 <h2>Interesting Code</h2>
@@ -41,7 +41,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 
 		// find the angle between the 2 objects
 		const arcTangent = Math.atan(yDelta / xDelta);
-		if(xDelta < 0) angle = arcTangent + Math.PI;
+		if (xDelta < 0) angle = arcTangent + Math.PI;
 		else if(xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
 		else angle = arcTangent;
 
