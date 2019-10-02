@@ -30,7 +30,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>When determining which shield is being hit by enemy fire.</li>
 	<li>When determining if the enemy ship (or the main ship on autopilot) should fire torpedos.</li>
 </ol>
-<p>We have a ship (ship1) which is getting fired  by ship2 or is deciding if ship2 is in it's torpedo firing arc. We can find the angle to the other ship by first determing the xDelta or difference in position of the ships in pixels on the x-axis and doing the same for yDelta on the y-axis. </p>
+<p>We have a ship (ship1) which is getting fired on by ship2 or is deciding if ship2 is in it's torpedo firing arc. We can find the angle to the other ship by first determing the xDelta or difference in position of the ships in pixels on the x-axis and doing the same for yDelta on the y-axis. </p>
 <p>Then we use Math.atan (which is arc tangent or inverse tangent) to get an angle from the two deltas. We may need to add PI or 2*PI to get a full circle of radians. Finally we subtract the ship1's rotation in radians to get the angle relative to ship1.</p>
 
 ```
