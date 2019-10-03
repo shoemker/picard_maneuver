@@ -21,7 +21,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Ship Systems Display in corner to indicate shield strength, hull integrity and weapon recharge status.</li>
 </ol>
 <br>
-<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/Screenshot2.jpg"></a>
+<a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>
 <br>
 <br>
 <h2>Interesting Code</h2>

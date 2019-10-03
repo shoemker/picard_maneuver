@@ -184,15 +184,6 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = "#ADD8E6";
 		ctx.stroke();
 	};
-	
-
-	// drawHullPhaserHit(ctx, color) {
-	// 	ctx.beginPath();
-
-	// 	ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
-	// 	ctx.fillStyle = color;
-	// 	ctx.fill();
-	// };
 
 
 	drawShipExplosion(ctx) {
