@@ -15,6 +15,7 @@ class Ship extends SpaceObject{
 		this.torpSound = options.torpSound;
 		this.explosion = options.explosion;
 		this.explosionImg = options.explosionImg;
+		this.sparksImg = options.sparksImg;
 
 		this.speed = 0;
 		this.width = 60;
@@ -106,7 +107,7 @@ class Ship extends SpaceObject{
 			yDelta = yDelta * distanceRatio;
 		}
 
-		let ratio = this.phaserCounter/ phaserDrawMax;
+		let ratio = this.phaserCounter / phaserDrawMax;
 		if (ratio > 1) ratio = 1;
 
 		const xProgress = ratio * xDelta + this.center()[0];
@@ -125,7 +126,12 @@ class Ship extends SpaceObject{
 			if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
 				this.target.drawShieldOnHit(ctx, this.target.shieldHit);
 			}
-			else this.target.drawHullPhaserHit(ctx,this.phaserColor);
+
+			//draws sparks effect when beam hits
+			if (this.phaserCounter%2 === 0) {
+				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress-7, yProgress-7, 14, 14);
+			}
+			else ctx.drawImage(this.sparksImg, 120, 2, 165,148, xProgress - 10, yProgress - 10, 20, 20);
 		}
 
 		if (this.phaserCounter > (phaserDrawMax+10)) this.phaserCounter = 0;
@@ -180,13 +186,13 @@ class Ship extends SpaceObject{
 	};
 	
 
-	drawHullPhaserHit(ctx, color) {
-		ctx.beginPath();
+	// drawHullPhaserHit(ctx, color) {
+	// 	ctx.beginPath();
 
-		ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
-		ctx.fillStyle = color;
-		ctx.fill();
-	};
+	// 	ctx.arc(this.center()[0], this.center()[1], 8, 0, Math.PI * 2);
+	// 	ctx.fillStyle = color;
+	// 	ctx.fill();
+	// };
 
 
 	drawShipExplosion(ctx) {

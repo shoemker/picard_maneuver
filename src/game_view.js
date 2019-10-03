@@ -16,6 +16,7 @@ class GameView {
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
+		this.loadSparksImg();
 		this.loadExplosionImg();
 		this.explosion = new Explosion(this.explosionImg, sounds.exploSound);
 
@@ -27,7 +28,8 @@ class GameView {
 			torpSound: sounds.torpSound,
 			beamSound: sounds.phasSound,
 			explosion: this.explosion,
-			explosionImg: this.explosionImg
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg
 		}));
 
 		this.game.addEnemy( new D7({
@@ -38,7 +40,8 @@ class GameView {
 			torpSound: sounds.kTorpSound,
 			beamSound: sounds.disruptSound,
 			explosion: this.explosion,
-			explosionImg: this.explosionImg
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg
 		}));
 
 		this.game.addAI();
@@ -128,7 +131,12 @@ class GameView {
 		this.explosionImg.onload = () => { return true; }
 		this.explosionImg.src = './images/explosion-sprite-sheet.png';
 	};
-	
+
+	loadSparksImg() {
+		this.sparksImg = new Image();
+		this.sparksImg.onload = () => { return true; }
+		this.sparksImg.src = './images/sparks.png';
+	};
 }
 
 module.exports = GameView;
