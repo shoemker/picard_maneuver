@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		else{
 			const x = event.pageX;
 			const y = event.pageY;
-			console.log(x + "," + y);
+			
 			if (x > 1085 && x < 1112 && y > 46 && y < 71) {
 				g.game.muteToggle();
 

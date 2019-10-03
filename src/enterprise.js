@@ -12,7 +12,7 @@ class Enterprise extends Ship {
 
 		// rotates image 180 degrees so it faces left at start
 		this.rotationOffset = Math.PI;
-
+		this.phaserStartOffset = 18;
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({

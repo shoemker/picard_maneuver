@@ -20,6 +20,7 @@ class Ship extends SpaceObject{
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30
+		this.phaserStartOffset = 0;
 		this.phaserCounter = 0;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
@@ -96,8 +97,13 @@ class Ship extends SpaceObject{
 	drawPhaser(ctx) {
 
 		const phaserDrawMax = 12;
-		let xDelta = this.target.center()[0] - this.center()[0];
-		let yDelta = this.target.center()[1] - this.center()[1];
+
+		// moves the starting point for the phaser forward on the saucer for the enterprise
+		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * this.phaserStartOffset;
+		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * this.phaserStartOffset;
+
+		let xDelta = this.target.center()[0] - xStartingPoint;
+		let yDelta = this.target.center()[1] - yStartingPoint;
 
 		// beam should stop if it hits a shield
 		if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
@@ -110,11 +116,11 @@ class Ship extends SpaceObject{
 		let ratio = this.phaserCounter / phaserDrawMax;
 		if (ratio > 1) ratio = 1;
 
-		const xProgress = ratio * xDelta + this.center()[0];
-		const yProgress = ratio * yDelta + this.center()[1];
+		const xProgress = ratio * xDelta + xStartingPoint;
+		const yProgress = ratio * yDelta + yStartingPoint;
 
 		ctx.beginPath();
-		ctx.moveTo(this.center()[0], this.center()[1]);
+		ctx.moveTo(xStartingPoint, yStartingPoint);
 		ctx.lineTo(xProgress, yProgress);
 		ctx.strokeStyle = this.phaserColor;
 		ctx.lineWidth = 3;
