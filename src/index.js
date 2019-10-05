@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		else{
 			const x = event.pageX;
 			const y = event.pageY;
-			
+
 			if (x > 1085 && x < 1112 && y > 46 && y < 71) {
 				g.game.muteToggle();
 
@@ -64,12 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			else if (x > 1085 && x < 1112 && y > 85 && y < 112) g.game.autoPilotToggle();
 		}
 	});
+
+	window.addEventListener('keydown', function (e) {
+		if (e.keyCode == 32 && e.target == document.body) {
+			e.preventDefault();
+		}
+		g.bindKeyHandlers(e);
+	});
 });
 
 
-window.addEventListener('keydown', function (e) {
-	if (e.keyCode == 32 && e.target == document.body) {
-		e.preventDefault();
-	}
-});
+
 

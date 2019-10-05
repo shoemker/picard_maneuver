@@ -113,11 +113,11 @@ class Ship extends SpaceObject{
 			yDelta = yDelta * distanceRatio;
 		}
 
-		let ratio = this.phaserCounter / phaserDrawMax;
-		if (ratio > 1) ratio = 1;
+		let increasingRatio = this.phaserCounter / phaserDrawMax;
+		if (increasingRatio > 1) increasingRatio = 1;
 
-		const xProgress = ratio * xDelta + xStartingPoint;
-		const yProgress = ratio * yDelta + yStartingPoint;
+		const xProgress = increasingRatio * xDelta + xStartingPoint;
+		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
 		ctx.beginPath();
 		ctx.moveTo(xStartingPoint, yStartingPoint);
@@ -140,6 +140,7 @@ class Ship extends SpaceObject{
 			else ctx.drawImage(this.sparksImg, 120, 2, 165,148, xProgress - 10, yProgress - 10, 20, 20);
 		}
 
+		// zeros the counter and ends the beam effect
 		if (this.phaserCounter > (phaserDrawMax+10)) this.phaserCounter = 0;
 	};
 	
