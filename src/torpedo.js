@@ -1,15 +1,12 @@
 const SpaceObject = require("./space_object");
 
 class Torpedo extends SpaceObject {
-	constructor(pos, torpImg, directionIndex) {
+	constructor(pos, torpImg, direction) {
 		super(pos);
 
 		this.torpImg = torpImg;
-		
-		if (directionIndex === 36) directionIndex = 0;
-		else if (directionIndex === -1) directionIndex = 35;
+		this.direction = direction;
 
-		this.direction = this.directionArray[directionIndex];
 		this.speed = 3;
 		this.height = 10;
 		this.width = 10;

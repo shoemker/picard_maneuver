@@ -75,7 +75,6 @@ class Game {
 
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
-
 		const shift_x = this.enterprise.getDirection()[0] / this.base_speed_inverse;
 		const shift_y = this.enterprise.getDirection()[1] / this.base_speed_inverse;
 

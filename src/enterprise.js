@@ -7,11 +7,7 @@ class Enterprise extends Ship {
  
 		this.loadShipImg();
 
-		// this.hullIntegrity = 5;
-
-
-		// rotates image 180 degrees so it faces left at start
-		this.rotationOffset = Math.PI;
+		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserStartOffset = 18;
 
 		// ssd is the ship systems display in the corner of the screen

@@ -8,8 +8,7 @@ class Ship extends SpaceObject{
 	constructor(options) {
 		super(options.pos);
 
-		this.directionIndex = options.directionIndex;
-		this.direction = options.direction;
+		this.rotationOffset = options.rotationOffset;
 		this.phaserColor = options.phaserColor;
 		this.beamSound = options.beamSound;
 		this.torpSound = options.torpSound;
@@ -25,7 +24,7 @@ class Ship extends SpaceObject{
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
 		
-		this.rotationOffset = 0;
+		this.direction = this.calcDirection(this.rotationOffset);
 		this.increment = Math.PI / 18;
 
 		this.torpedos = [];
@@ -218,9 +217,14 @@ class Ship extends SpaceObject{
 
 	fireTorpedos(torpImg) {
 		if (this.torpedoReload === this.torpedoReloadMax) {
-			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex - 1));
-			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex));
-			this.torpedos.push(new Torpedo(this.center(), torpImg, this.directionIndex + 1));
+			this.torpedos.push(new Torpedo(this.center(), torpImg, 
+				this.calcDirection(this.rotationOffset - this.increment)));
+
+			this.torpedos.push(new Torpedo(this.center(), torpImg, this.direction));
+
+			this.torpedos.push(new Torpedo(this.center(), torpImg, 
+				this.calcDirection(this.rotationOffset + this.increment)));
+
 			this.torpedoReload = 0;
 			this.torpSound.play();
 		}
@@ -264,15 +268,17 @@ class Ship extends SpaceObject{
 
 	changeDirection(dir) { 
 		this.rotationOffset += dir*this.increment;
-		if (dir > 0 && this.directionIndex === 35) this.directionIndex = 0;
-		else if (dir < 0 && this.directionIndex === 0) this.directionIndex = 35;
-		else this.directionIndex += dir;
 
 		if (this.rotationOffset > 6.2) this.rotationOffset -= Math.PI *2;
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
-		this.direction = this.directionArray[this.directionIndex];
+		this.direction = this.calcDirection(this.rotationOffset);
 	};
+
+
+	calcDirection(rotationOffset) {
+		return [Math.cos(rotationOffset) * 7, Math.sin(rotationOffset) * -7];
+	}
 
 }
 
