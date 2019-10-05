@@ -15,8 +15,8 @@ class EnemyAI  {
 
 	consultAI(onscreen){
 		const angleOfOponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
-		const turnCounterMax = 5;
-		const turnCircleMax = 50;
+		const turnCounterMax = 4;
+		const turnCircleMax = 60;
 
 		// speed
 		if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 

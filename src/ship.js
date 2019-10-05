@@ -25,7 +25,7 @@ class Ship extends SpaceObject{
 		this.shipExplosionCounter = 0;
 		
 		this.direction = this.calcDirection(this.rotationOffset);
-		this.increment = Math.PI / 18;
+		this.increment = Math.PI / 36;
 
 		this.torpedos = [];
 		this.ssd;
@@ -218,12 +218,12 @@ class Ship extends SpaceObject{
 	fireTorpedos(torpImg) {
 		if (this.torpedoReload === this.torpedoReloadMax) {
 			this.torpedos.push(new Torpedo(this.center(), torpImg, 
-				this.calcDirection(this.rotationOffset - this.increment)));
+				this.calcDirection(this.rotationOffset - 2*this.increment)));
 
 			this.torpedos.push(new Torpedo(this.center(), torpImg, this.direction));
 
 			this.torpedos.push(new Torpedo(this.center(), torpImg, 
-				this.calcDirection(this.rotationOffset + this.increment)));
+				this.calcDirection(this.rotationOffset + 2*this.increment)));
 
 			this.torpedoReload = 0;
 			this.torpSound.play();
