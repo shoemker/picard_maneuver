@@ -12,6 +12,7 @@ class GameView {
 		this.ctx = ctx;
 		this.pause = false;
 		this.theme = sounds.theme;
+		this.keyMap = {};
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
@@ -45,8 +46,6 @@ class GameView {
 		}));
 
 		this.game.addAI();
-
-		
 	};
 	
 
@@ -79,36 +78,13 @@ class GameView {
 	
 	bindKeyHandlers(e) {
 
-		const that = this;
 
-		if (this.game.enterprise.getHull() > 0 && typeof e !== "undefined") {
-			
-			switch (e.keyCode) {
-				case 80: 	// p
-					{that.pauseGame(); }					
-					break;
-				case 32:	// space
-					that.game.firePhasers(that.game.enterprise);
-					break;
-				case 87:	// w
-					that.game.enterprise.power(1);
-					break;
-				case 83:	// s
-					that.game.enterprise.power(-1)
-					break;
-				case 65:	// a
-					that.game.enterprise.changeDirection(-1);
-					break;
-				case 68:	// d
-					that.game.enterprise.changeDirection(1);
-					break;
-				case 75:	// k
-				case 70:	// f
-					that.game.fireTorpedos(that.game.enterprise);
-					break;
-				default:
+		if (this.game.enterprise.getHull() > 0) {
+			if (e.type == 'keydown') this.keyMap[e.keyCode] = true;
+			else this.keyMap[e.keyCode] = false;	
+		
+			this.checkKeyMap();
 
-			}
 
 			// key("w", function () { that.game.enterpirse.power(1) });
 			// key("s", function () { that.game.enterpirse.power(-1) });
@@ -118,12 +94,47 @@ class GameView {
 
 			// //call to rotate ship image
 			// key("a", function () { that.game.enterprise.changeDirection(-1); });
-			// key("d", function () { that.game.enterprise.changeDirection(1); });
+			// key("d", function () { that.game[enterprise.changeDirection(1); });
 
 			// key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
 			// key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
 
 			// key("p", function () { that.pauseGame(); });
+		}
+	};
+
+
+	checkKeyMap() {
+		const that = this;
+
+		for (let key in that.keyMap) {
+			if (that.keyMap[key]) {
+				switch (parseInt(key, 10)) {
+					case 80: 	// p
+						{ that.pauseGame(); }
+						break;
+					case 32:	// space
+						that.game.firePhasers(that.game.enterprise);
+						break;
+					case 87:	// w
+						that.game.enterprise.power(1);
+						break;
+					case 83:	// s
+						that.game.enterprise.power(-1)
+						break;
+					case 65:	// a
+						that.game.enterprise.changeDirection(-1);
+						break;
+					case 68:	// d
+						that.game.enterprise.changeDirection(1);
+						break;
+					case 75:	// k
+					case 70:	// f
+						that.game.fireTorpedos(that.game.enterprise);
+						break;
+					default:
+				}
+			}
 		}
 	};
 

@@ -60,6 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		g.bindKeyHandlers(e);
 	});
+
+	window.addEventListener('keyup', function (e) {
+		g.bindKeyHandlers(e);
+	});
 });
 
 
