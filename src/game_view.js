@@ -51,7 +51,7 @@ class GameView {
 	
 
 	start() {
-		this.bindKeyHandlers();
+		// this.bindKeyHandlers();
 
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
@@ -82,7 +82,7 @@ class GameView {
 		const that = this;
 
 		if (this.game.enterprise.getHull() > 0 && typeof e !== "undefined") {
-
+			
 			switch (e.keyCode) {
 				case 80: 	// p
 					{that.pauseGame(); }					
@@ -127,7 +127,22 @@ class GameView {
 		}
 	};
 
-	
+
+	// check to see if mute or autopilot is being clicked
+	checkClick(x, y, gainNode) {
+		
+		if(x > 1085 && x < 1112) {
+			if (y > 46 && y < 71) {
+				this.game.muteToggle();
+
+				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
+				else gainNode.gain.value = 0;
+			}
+			else if (y > 85 && y < 112) this.game.autoPilotToggle();
+		}
+	}
+
+
 	pauseGame() {
 		if (!this.pause) this.pause = true;
 		else { 
