@@ -3,49 +3,24 @@ class SpaceObject {
 	constructor(pos) {
 		this.pos = pos;
 
+		this.direction = [0,0];
 		this.width;
 		this.height;
-
-		// this array contains all of the directions (36 of them)
-		// this.directionArray = [
-		// 	[7, 0],
-		// 	[7, -1],
-		// 	[7, -2],
-		// 	[6, -3],
-		// 	[5, -4],
-		// 	[4, -5],
-		// 	[3, -6],
-		// 	[2, -7],
-		// 	[1, -7],
-		// 	[0, -7],
-		// 	[-1, -7],
-		// 	[-2, -7],
-		// 	[-3, -6],
-		// 	[-4, -5],
-		// 	[-5, -4],
-		// 	[-6, -3],
-		// 	[-7, -2],
-		// 	[-7, -1],
-		// 	[-7, 0],
-		// 	[-7, 1],
-		// 	[-7, 2],
-		// 	[-6, 3],
-		// 	[-5, 4],
-		// 	[-4, 5],
-		// 	[-3, 6],
-		// 	[-2, 7],
-		// 	[-1, 7],
-		// 	[0, 7],
-		// 	[1, 7],
-		// 	[2, 7],
-		// 	[3, 6],
-		// 	[4, 5],
-		// 	[5, 4],
-		// 	[6, 3],
-		// 	[7, 2],
-		// 	[7, 1]
-		// ];
 	};
+
+
+	rotateCanvas(ctx) {
+		ctx.translate(this.center()[0], this.center()[1]);
+		ctx.rotate(this.rotationOffset);
+		ctx.translate(-(this.center()[0]), -(this.center()[1]));
+	};
+
+
+	move(base_speed_inverse) {
+		this.pos[0] += (this.direction[0] / base_speed_inverse) * this.speed;
+		this.pos[1] -= (this.direction[1] / base_speed_inverse) * this.speed;
+	};
+
 
 	// shifts to account for main ship movement
 	shift(direction, speed) {
@@ -53,12 +28,14 @@ class SpaceObject {
 		this.pos[1] += speed * direction[1];
 	};
 
+
 	onscreen(canvas_width, canvas_height) {
 		const center = this.center();
 		return (center[0] > 0 && center[0] < canvas_width &&
 						center[1] > 0 && center[1] < canvas_height);
 	};
 
+	
 	center() {
 		return [this.pos[0] + this.width / 2, this.pos[1] + this.height / 2];
 	};

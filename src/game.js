@@ -1,6 +1,8 @@
 const Star = require("./star");
 const Planet = require("./planet");
 const EnemyAI = require("./enemyAI");
+const Torpedo = require("./torpedo");
+
 const Utils = require("./utils");
 
 class Game {
@@ -19,6 +21,8 @@ class Game {
 
 		this.createStarField();
 		this.loadTorpImg();
+
+		this.torpedoes = [];
 
 		this.planet_08 = new Planet({
 			pos: [300, 300],
@@ -46,8 +50,8 @@ class Game {
 	};
 
 	addAI() {
-		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, true, this.torpImg);
-		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this.torpImg);
+		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, true, this);
+		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this);
 	};
 
 	step() {
@@ -57,8 +61,7 @@ class Game {
 		if ( this.autopilot) 
 			this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 
-		this.checkTorpCollisions(this.enemy, this.enterprise.getTorpedos());
-		this.checkTorpCollisions(this.enterprise, this.enemy.getTorpedos());
+		this.checkTorpCollisions();
 	};
 
 
@@ -68,8 +71,7 @@ class Game {
 		// now give ships and objects their own movement
 		this.enemy.move(this.base_speed_inverse);
 
-		this.moveTorpedos(this.enterprise);
-		this.moveTorpedos(this.enemy);
+		this.moveTorpedos();
 	}
 
 
@@ -109,6 +111,7 @@ class Game {
 
 		this.planet_08.draw(ctx);
 		this.moon_01.draw(ctx);
+		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
@@ -214,21 +217,31 @@ class Game {
 	};
 
 
-	moveTorpedos(ship) {
-		ship.getTorpedos().forEach((torpedo, i) => {
+	moveTorpedos() {
+		this.torpedoes.forEach((torpedo, i) => {
 			torpedo.move();
 
 			// delete torpedo when it moves offscreen
 			let center = torpedo.center();
 			if (center[0] < 0 || center[0] > this.canvas_width ||
 				center[1] < 0 || center[1] > this.canvas_height)
-				ship.getTorpedos().splice(i, 1);
+				this.torpedoes.splice(i, 1);
 		});
 	};
 
 
 	fireTorpedos(ship) {
-		ship.fireTorpedos(this.torpImg);
+		if (ship.fireTorpedos()) {
+			
+			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg,
+				ship.calcDirection(ship.getRotation() - Math.PI / 18), ship ));
+
+			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg, 
+				ship.getDirection(), ship ));
+
+			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg,
+				ship.calcDirection(ship.getRotation() + Math.PI / 18), ship ));
+		}
 	};
 
 
@@ -243,16 +256,19 @@ class Game {
 	};
 
 
-	checkTorpCollisions(ship, torpedos) {
+	checkTorpCollisions() {
 		let distance;
+		const ships = [this.enterprise, this.enemy]
 
-		torpedos.forEach((torpedo,i) => {
-			distance = Utils.distance(ship, torpedo);
-			if (distance < 30) {
-				torpedos.splice(i, 1);
-				if (ship === this.enterprise) ship.receiveTorpHit(this.enemy);
-				else ship.receiveTorpHit(this.enterprise)
-			}
+		this.torpedoes.forEach((torpedo,i) => {
+			ships.forEach((ship) => {
+				distance = Utils.distance(ship, torpedo);
+				if (distance < 30 && (ship !== torpedo.getLauncher())) {
+					ship.receiveTorpHit(torpedo);
+
+					this.torpedoes.splice(i, 1);
+				}
+			})
 		})
 	};
 

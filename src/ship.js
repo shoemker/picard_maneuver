@@ -1,6 +1,5 @@
 
 const SpaceObject = require("./space_object");
-const Torpedo = require("./torpedo");
 const Utils = require("./utils");
 
 class Ship extends SpaceObject{
@@ -27,7 +26,6 @@ class Ship extends SpaceObject{
 		this.direction = this.calcDirection(this.rotationOffset);
 		this.increment = Math.PI / 36;
 
-		this.torpedos = [];
 		this.ssd;
 
 		this.phaserRecharge = 0;
@@ -49,24 +47,8 @@ class Ship extends SpaceObject{
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 
-
-	rotateCanvas(ctx) {
-		ctx.translate(this.center()[0], this.center()[1]);
-		ctx.rotate(this.rotationOffset);
-		ctx.translate(-(this.center()[0]), -(this.center()[1]));
-	};
-	
-
-	move(base_speed_inverse) {
-		this.pos[0] += (this.direction[0] / base_speed_inverse) * this.speed ;
-		this.pos[1] -= (this.direction[1] / base_speed_inverse) * this.speed ;
-	};
-
 	
 	draw(ctx) {
-
-		// draw torpedos if any
-		this.torpedos.forEach((torpedo) => torpedo.draw(ctx));
 
 		//draw ship systems display
 		this.ssd.draw(ctx,
@@ -215,19 +197,14 @@ class Ship extends SpaceObject{
 	};
 
 
-	fireTorpedos(torpImg) {
+	fireTorpedos() {
 		if (this.torpedoReload === this.torpedoReloadMax) {
-			this.torpedos.push(new Torpedo(this.center(), torpImg, 
-				this.calcDirection(this.rotationOffset - 2*this.increment)));
-
-			this.torpedos.push(new Torpedo(this.center(), torpImg, this.direction));
-
-			this.torpedos.push(new Torpedo(this.center(), torpImg, 
-				this.calcDirection(this.rotationOffset + 2*this.increment)));
 
 			this.torpedoReload = 0;
 			this.torpSound.play();
+			return true;
 		}
+		return false;
 	}
 
 
@@ -236,8 +213,9 @@ class Ship extends SpaceObject{
 	};
 
 
-	receiveTorpHit(attacker) {
-		this.takeDamage(attacker, 20);
+	receiveTorpHit(torpedo) {
+		this.takeDamage(torpedo.getLauncher(), 20);
+		this.torpedo = torpedo;
 		this.torpExplosionCounter = 1;
 	};
 
@@ -269,7 +247,7 @@ class Ship extends SpaceObject{
 	changeDirection(dir) { 
 		this.rotationOffset += dir*this.increment;
 
-		if (this.rotationOffset > 6.2) this.rotationOffset -= Math.PI *2;
+		if (this.rotationOffset > 6.28) this.rotationOffset -= Math.PI *2;
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;
 
 		this.direction = this.calcDirection(this.rotationOffset);
