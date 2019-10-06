@@ -19,6 +19,8 @@ class Game {
 		this.muted = false;
 		this.autopilot = false;
 
+		this.keyMap = {};
+
 		this.createStarField();
 		this.loadTorpImg();
 
@@ -40,6 +42,8 @@ class Game {
 			sheetCoords: [3,3,58,58]
 		})
 	}
+
+	getKeyMap() { return this.keyMap; }
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
@@ -116,9 +120,9 @@ class Game {
 		this.enterprise.draw(ctx);
 		this.enemy.draw(ctx);
 
-		// draw mute box
-		this.drawMute(ctx);
-		this.drawAutopilot(ctx);
+		// draw mute and autopilot box
+		this.drawBox(ctx, 30, "Mute", this.muted);
+		this.drawBox(ctx, 70, "Autopilot", this.autopilot);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
@@ -139,43 +143,22 @@ class Game {
 	};
 
 
-	drawMute(ctx) {
+	// draws the mute and autopilot check boxes	
+	drawBox(ctx, y, label, check) {
 		ctx.beginPath();
-		ctx.rect(this.canvas_width - 130, 30, 20, 20);
+		ctx.rect(this.canvas_width - 130, y, 20, 20);
 		ctx.strokeStyle = "white";
 		ctx.stroke();
 
 		ctx.font = "24px Arial";
 		ctx.fillStyle = "white";
-		ctx.fillText("Mute", this.canvas_width - 100, 48);
+		ctx.fillText(label, this.canvas_width - 100, y + 18);
 
-		if (this.muted) {
+		if (check) {
 			ctx.beginPath();
-			ctx.moveTo(this.canvas_width - 130,40);
-			ctx.lineTo(this.canvas_width - 120,50);
-			ctx.lineTo(this.canvas_width - 105, 30)
-			ctx.strokeStyle = 'red';
-			ctx.lineWidth = 5;
-			ctx.stroke();
-		}
-	};
-
-
-	drawAutopilot(ctx) {
-		ctx.beginPath();
-		ctx.rect(this.canvas_width - 130, 70, 20, 20);
-		ctx.strokeStyle = "white";
-		ctx.stroke();
-
-		ctx.font = "24px Arial";
-		ctx.fillStyle = "white";
-		ctx.fillText("Autopilot", this.canvas_width - 100, 88);
-
-		if (this.autopilot) {
-			ctx.beginPath();
-			ctx.moveTo(this.canvas_width - 130, 80);
-			ctx.lineTo(this.canvas_width - 120, 90);
-			ctx.lineTo(this.canvas_width - 105, 70)
+			ctx.moveTo(this.canvas_width - 130, y + 10);
+			ctx.lineTo(this.canvas_width - 120, y + 20);
+			ctx.lineTo(this.canvas_width - 105, y);
 			ctx.strokeStyle = 'red';
 			ctx.lineWidth = 5;
 			ctx.stroke();
@@ -273,10 +256,10 @@ class Game {
 	};
 
 
-	checkKeyMap(keyMap) {
+	checkKeyMap() {
 
-		for (let key in keyMap) {
-			if (keyMap[key]) {
+		for (let key in this.keyMap) {
+			if (this.keyMap[key]) {
 				switch (parseInt(key, 10)) {
 					case 32:	// space
 						this.firePhasers(this.enterprise);

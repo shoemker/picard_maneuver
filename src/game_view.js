@@ -12,7 +12,6 @@ class GameView {
 		this.ctx = ctx;
 		this.pause = false;
 		this.theme = sounds.theme;
-		this.keyMap = {};
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
@@ -75,10 +74,10 @@ class GameView {
 	
 	bindKeyHandlers(e) {
 
-		if (e.type == 'keydown') this.keyMap[e.keyCode] = true;
-		else this.keyMap[e.keyCode] = false;	
+		if (e.type == 'keydown') this.game.getKeyMap()[e.keyCode] = true;
+		else this.game.getKeyMap()[e.keyCode] = false;	
 		
-		if (this.game.enterprise.getHull() > 0) this.game.checkKeyMap(this.keyMap);
+		if (this.game.enterprise.getHull() > 0) this.game.checkKeyMap();
 	};
 
 
