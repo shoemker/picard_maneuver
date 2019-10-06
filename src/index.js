@@ -60,12 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (e.keyCode == 32 && e.target == document.body) {
 				e.preventDefault();
 			}
-			g.bindKeyHandlers(e);
+			g.keyHandler(e);
 		}
 	});
 
 	window.addEventListener('keyup', function (e) {
-		g.bindKeyHandlers(e);
+		g.keyHandler(e);
 	});
 });
 

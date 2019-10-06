@@ -121,9 +121,9 @@ class Game {
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
 		// draw all of the objects
+		this.stars.forEach((star) => star.draw(ctx));
 		this.planet_08.draw(ctx);
 		this.moon_01.draw(ctx);
-		this.stars.forEach((star) => star.draw(ctx));
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
 		this.enterprise.draw(ctx);
@@ -217,7 +217,7 @@ class Game {
 	};
 
 
-	fireTorpedos(ship) {
+	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
 			
 			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg,
@@ -262,36 +262,26 @@ class Game {
 
 	checkKeyMap() {
 
-		for (let key in this.keyMap) {
-			if (this.keyMap[key]) {
-				switch (parseInt(key, 10)) {
-					case 32:	// space
-						this.firePhasers(this.enterprise);
-						break;
-					case 87:	// w
-					case 38:
-						if (this.turnCounter === 0) this.enterprise.power(1);
-						break;
-					case 83:	// s
-					case 40:
-						if (this.turnCounter === 0) this.enterprise.power(-1)
-						break;
-					case 65:	// a
-					case 37:
-						this.enterprise.changeDirection(-1);
-						break;
-					case 68:	// d
-					case 39:
-						this.enterprise.changeDirection(1);
-						break;
-					case 75:	// k
-					case 70:	// f
-						this.fireTorpedos(this.enterprise);
-						break;
-					default:
-				}
-			}
-		}
+		if (this.keyMap["32"]) this.firePhasers(this.enterprise); // space
+
+		// f or k
+		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);
+
+		// acceleration/decceleration needs a longer turnCounter than turning
+		// w or up arrow
+		if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
+			this.enterprise.power(1);
+
+		// s or down arrow
+		if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
+			this.enterprise.power(-1);
+		
+		// a or left arrow
+		if (this.keyMap["65"] || this.keyMap["37"]) this.enterprise.changeDirection(-1);
+
+		// do or right arrow
+		if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
+
 	};
 
 

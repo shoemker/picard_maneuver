@@ -51,7 +51,7 @@ class EnemyAI  {
 					else this.controlledShip.changeDirection(1);
 				}
 			}
-			else if (onscreen) this.game.fireTorpedos(this.controlledShip);
+			else if (onscreen) this.game.fireTorpedoes(this.controlledShip);
 		}
 		// ai gets some randomness
 		else if (this.randomness) {
