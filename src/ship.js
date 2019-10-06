@@ -41,7 +41,6 @@ class Ship extends SpaceObject{
 	// getter methods
 	getDirection() { return this.direction; }
 	getSpeed() {	return this.speed; }
-	getTorpedos() { return this.torpedos; }
 	getRotation() { return this.rotationOffset; }
 	phaserReady() { return this.phaserRecharge === this.phaserRechargeMax; }
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
@@ -215,7 +214,6 @@ class Ship extends SpaceObject{
 
 	receiveTorpHit(torpedo) {
 		this.takeDamage(torpedo.getLauncher(), 20);
-		this.torpedo = torpedo;
 		this.torpExplosionCounter = 1;
 	};
 

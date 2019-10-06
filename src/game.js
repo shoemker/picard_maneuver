@@ -121,10 +121,9 @@ class Game {
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
 		// draw all of the objects
-		this.drawStars(ctx);
-
 		this.planet_08.draw(ctx);
 		this.moon_01.draw(ctx);
+		this.stars.forEach((star) => star.draw(ctx));
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
 		this.enterprise.draw(ctx);
@@ -136,11 +135,6 @@ class Game {
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
-	};
-
-
-	drawStars(ctx) {
-		this.stars.forEach((star) => star.draw(ctx));
 	};
 
 
