@@ -24,6 +24,9 @@ class Game {
 		this.createStarField();
 		this.loadTorpImg();
 
+		// this.turnCounter = 0;
+		// this.turnCounterMax = 5;
+
 		this.torpedoes = [];
 
 		this.planet_08 = new Planet({
@@ -59,6 +62,10 @@ class Game {
 	};
 
 	step() {
+		// this.turnCounter++;
+		// if (this.turnCounter > this.turnCounterMax) this.turnCounter = 0;
+		// this.checkKeyMap();
+
 		this.moveObjects();
 
 		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
@@ -121,8 +128,8 @@ class Game {
 		this.enemy.draw(ctx);
 
 		// draw mute and autopilot box
-		this.drawBox(ctx, 30, "Mute", this.muted);
-		this.drawBox(ctx, 70, "Autopilot", this.autopilot);
+		this.drawCheckBox(ctx, this.canvas_width - 130, 30, "Mute", this.muted);
+		this.drawCheckBox(ctx, this.canvas_width - 130, 70, "Autopilot", this.autopilot);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
@@ -144,21 +151,21 @@ class Game {
 
 
 	// draws the mute and autopilot check boxes	
-	drawBox(ctx, y, label, check) {
+	drawCheckBox(ctx, x, y, label, check) {
 		ctx.beginPath();
-		ctx.rect(this.canvas_width - 130, y, 20, 20);
+		ctx.rect(x, y, 20, 20);
 		ctx.strokeStyle = "white";
 		ctx.stroke();
 
 		ctx.font = "24px Arial";
 		ctx.fillStyle = "white";
-		ctx.fillText(label, this.canvas_width - 100, y + 18);
+		ctx.fillText(label, x + 30, y + 18);
 
 		if (check) {
 			ctx.beginPath();
-			ctx.moveTo(this.canvas_width - 130, y + 10);
-			ctx.lineTo(this.canvas_width - 120, y + 20);
-			ctx.lineTo(this.canvas_width - 105, y);
+			ctx.moveTo(x, y + 10);
+			ctx.lineTo(x + 10, y + 20);
+			ctx.lineTo(x + 25, y);
 			ctx.strokeStyle = 'red';
 			ctx.lineWidth = 5;
 			ctx.stroke();
@@ -271,9 +278,11 @@ class Game {
 						this.enterprise.power(-1)
 						break;
 					case 65:	// a
+						// if (this.turnCounter === this.turnCounterMax) 
 						this.enterprise.changeDirection(-1);
 						break;
 					case 68:	// d
+						// if (this.turnCounter === this.turnCounterMax) 
 						this.enterprise.changeDirection(1);
 						break;
 					case 75:	// k
