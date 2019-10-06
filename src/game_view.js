@@ -78,62 +78,7 @@ class GameView {
 		if (e.type == 'keydown') this.keyMap[e.keyCode] = true;
 		else this.keyMap[e.keyCode] = false;	
 		
-		if (this.game.enterprise.getHull() > 0) {
-
-		
-			this.checkKeyMap();
-
-
-			// key("w", function () { that.game.enterpirse.power(1) });
-			// key("s", function () { that.game.enterpirse.power(-1) });
-
-			// key("space", function () { that.game.firePhasers(that.game.enterprise); });
-			
-
-			// //call to rotate ship image
-			// key("a", function () { that.game.enterprise.changeDirection(-1); });
-			// key("d", function () { that.game[enterprise.changeDirection(1); });
-
-			// key("f", function () { that.game.fireTorpedos(that.game.enterprise); });
-			// key("k", function () { that.game.fireTorpedos(that.game.enterprise); });
-
-			// key("p", function () { that.pauseGame(); });
-		}
-	};
-
-
-	checkKeyMap() {
-		const that = this;
-
-		for (let key in that.keyMap) {
-			if (that.keyMap[key]) {
-				switch (parseInt(key, 10)) {
-					case 80: 	// p
-						{ that.pauseGame(); }
-						break;
-					case 32:	// space
-						that.game.firePhasers(that.game.enterprise);
-						break;
-					case 87:	// w
-						that.game.enterprise.power(1);
-						break;
-					case 83:	// s
-						that.game.enterprise.power(-1)
-						break;
-					case 65:	// a
-						that.game.enterprise.changeDirection(-1);
-						break;
-					case 68:	// d
-						that.game.enterprise.changeDirection(1);
-						break;
-					case 75:	// k
-					case 70:	// f
-						that.game.fireTorpedos(that.game.enterprise);
-						break;
-					default:
-				}
-			}
-		}
+		if (this.game.enterprise.getHull() > 0) this.game.checkKeyMap(this.keyMap);
 	};
 
 

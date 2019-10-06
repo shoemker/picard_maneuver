@@ -273,6 +273,37 @@ class Game {
 	};
 
 
+	checkKeyMap(keyMap) {
+
+		for (let key in keyMap) {
+			if (keyMap[key]) {
+				switch (parseInt(key, 10)) {
+					case 32:	// space
+						this.firePhasers(this.enterprise);
+						break;
+					case 87:	// w
+						this.enterprise.power(1);
+						break;
+					case 83:	// s
+						this.enterprise.power(-1)
+						break;
+					case 65:	// a
+						this.enterprise.changeDirection(-1);
+						break;
+					case 68:	// d
+						this.enterprise.changeDirection(1);
+						break;
+					case 75:	// k
+					case 70:	// f
+						this.fireTorpedos(this.enterprise);
+						break;
+					default:
+				}
+			}
+		}
+	};
+
+
 	loadTorpImg() {
 		this.torpImg = new Image();
 		this.torpImg.onload = () => { return true; }

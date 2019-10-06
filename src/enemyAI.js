@@ -16,7 +16,7 @@ class EnemyAI  {
 	consultAI(onscreen){
 		const angleOfOponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
 		const turnCounterMax = 4;
-		const turnCircleMax = 60;
+		const turnCircleMax = 80;
 
 		// speed
 		if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 
@@ -56,8 +56,8 @@ class EnemyAI  {
 		// ai gets some randomness
 		else if (this.randomness) {
 			const random = Math.random();
-			if (random < .01) this.controlledShip.changeDirection(1);
-			else if (random > .99) this.controlledShip.changeDirection(-1);
+			if (random < .02) this.controlledShip.changeDirection(1);
+			else if (random > .98) this.controlledShip.changeDirection(-1);
 		}
 
 		this.turnCounter++;
