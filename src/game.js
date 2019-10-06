@@ -25,7 +25,7 @@ class Game {
 		this.loadTorpImg();
 
 		this.turnCounter = 0;
-		this.turnCounterMax = 4;
+		this.turnCounterMax = 8;
 
 		this.torpedoes = [];
 
@@ -67,6 +67,7 @@ class Game {
 			this.turnCounter = 0;
 			this.checkKeyMap();
 		}
+		else if (this.turnCounter === this.turnCounterMax/2) this.checkKeyMap();
 
 		this.moveObjects();
 
@@ -274,10 +275,10 @@ class Game {
 						this.firePhasers(this.enterprise);
 						break;
 					case 87:	// w
-						this.enterprise.power(1);
+						if (this.turnCounter === 0) this.enterprise.power(1);
 						break;
 					case 83:	// s
-						this.enterprise.power(-1)
+						if (this.turnCounter === 0) this.enterprise.power(-1)
 						break;
 					case 65:	// a
 						this.enterprise.changeDirection(-1);
