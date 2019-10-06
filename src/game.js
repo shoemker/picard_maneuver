@@ -24,8 +24,8 @@ class Game {
 		this.createStarField();
 		this.loadTorpImg();
 
-		// this.turnCounter = 0;
-		// this.turnCounterMax = 5;
+		this.turnCounter = 0;
+		this.turnCounterMax = 4;
 
 		this.torpedoes = [];
 
@@ -62,9 +62,11 @@ class Game {
 	};
 
 	step() {
-		// this.turnCounter++;
-		// if (this.turnCounter > this.turnCounterMax) this.turnCounter = 0;
-		// this.checkKeyMap();
+		this.turnCounter++;
+		if (this.turnCounter === this.turnCounterMax) {
+			this.turnCounter = 0;
+			this.checkKeyMap();
+		}
 
 		this.moveObjects();
 
@@ -278,11 +280,9 @@ class Game {
 						this.enterprise.power(-1)
 						break;
 					case 65:	// a
-						// if (this.turnCounter === this.turnCounterMax) 
 						this.enterprise.changeDirection(-1);
 						break;
 					case 68:	// d
-						// if (this.turnCounter === this.turnCounterMax) 
 						this.enterprise.changeDirection(1);
 						break;
 					case 75:	// k

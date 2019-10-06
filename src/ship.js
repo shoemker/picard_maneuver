@@ -205,7 +205,7 @@ class Ship extends SpaceObject{
 			return true;
 		}
 		return false;
-	}
+	};
 
 
 	receivePhaserHit(attacker) {

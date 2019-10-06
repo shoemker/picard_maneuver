@@ -77,7 +77,7 @@ class GameView {
 		if (e.type == 'keydown') this.game.getKeyMap()[e.keyCode] = true;
 		else this.game.getKeyMap()[e.keyCode] = false;	
 		
-		if (this.game.enterprise.getHull() > 0) this.game.checkKeyMap();
+		// if (this.game.enterprise.getHull() > 0) this.game.checkKeyMap();
 	};
 
 
