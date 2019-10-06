@@ -275,15 +275,19 @@ class Game {
 						this.firePhasers(this.enterprise);
 						break;
 					case 87:	// w
+					case 38:
 						if (this.turnCounter === 0) this.enterprise.power(1);
 						break;
 					case 83:	// s
+					case 40:
 						if (this.turnCounter === 0) this.enterprise.power(-1)
 						break;
 					case 65:	// a
+					case 37:
 						this.enterprise.changeDirection(-1);
 						break;
 					case 68:	// d
+					case 39:
 						this.enterprise.changeDirection(1);
 						break;
 					case 75:	// k
