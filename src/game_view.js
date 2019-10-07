@@ -95,7 +95,7 @@ class GameView {
 	}
 
 
-	pauseGame() {
+	pauseGameToggle() {
 		if (!this.pause) this.pause = true;
 		else { 
 			this.pause = false;

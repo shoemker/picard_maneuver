@@ -62,6 +62,7 @@ class Game {
 	};
 
 	step() {
+		// gets user input
 		this.turnCounter++;
 		if (this.turnCounter === this.turnCounterMax) {
 			this.turnCounter = 0;

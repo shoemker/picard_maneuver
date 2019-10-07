@@ -11,6 +11,8 @@ class EnemyAI  {
 		this.turnLeftLength = 0;
 		this.turnRightLength = 0;
 		this.turnCounter = 0;
+		this.reverseCount = 0;
+		this.reverseCountMax = 60;
 	}
 
 	consultAI(onscreen){
@@ -19,10 +21,24 @@ class EnemyAI  {
 		const turnCircleMax = 80;
 
 		// speed
-		if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 
+		if (this.reverseCount !== 0) {
+			console.log(this.reverseCount);
+			this.controlledShip.power(-1);
+			this.reverseCount++;
+			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
+		}
+		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 
 				this.controlledShip.getSpeed() < 1) {
 			this.controlledShip.power(1);
 		}
+
+		// if the other ship is sitting behind, stop
+		if (Math.abs(Math.PI - angleOfOponent) < .4 && 
+			Utils.distance(this.controlledShip, this.opponent) < 150 &&
+			Math.abs(this.controlledShip.getRotation() - this.opponent.getRotation()) < .4) {
+				this.reverseCount++;
+		}
+
 
 		// fire phasers
 		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.opponent);

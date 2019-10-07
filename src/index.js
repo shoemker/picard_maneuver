@@ -46,16 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	g.start(ctx);
 
-	canvasEl.addEventListener("click", (event) => {
+	canvasEl.addEventListener("click", (e) => {
 		if (g.gameOpening !== null) {
 			g.openingOff();
 			audioContext.resume().then(() => { return true; });
 		}
-		else g.checkClick(event.pageX, event.pageY, gainNode);
+		else g.checkClick(e.pageX, e.pageY, gainNode);
 	});
 
-	window.addEventListener('keydown', function (e) {
-		if (e.keyCode == 80 && e.target == document.body) g.pauseGame();
+	window.addEventListener('keydown', (e) => {
+		if (e.keyCode == 80 && e.target == document.body) g.pauseGameToggle();
 		else {
 			if (e.keyCode == 32 && e.target == document.body) {
 				e.preventDefault();
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
-	window.addEventListener('keyup', function (e) {
+	window.addEventListener('keyup', (e) => {
 		g.keyHandler(e);
 	});
 });
