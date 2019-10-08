@@ -14,7 +14,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Control over your ship (speed, direction, weapons).</li>
 	<li>Optional autopilot if you just want to watch.</li>
 	<li>Visuals for beam weapon and torpedos.</li>
-	<li>Shields show on hit (until they're down.</li>
+	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>
 	<li>Moving starfield to indicate main ship movement.</li>
@@ -24,7 +24,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>
 <br>
 <br>
-<h2>Interesting Code</h2>
+<h2>Interesting Code Example 1</h2>
 <p>There are cases in which it is necessary to determine the angle to another ship. </p>
 <ol>
 	<li>When determining which shield is being hit by enemy fire.</li>
@@ -34,21 +34,65 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <p>Then we use Math.atan (which is arc tangent or inverse tangent) to get an angle from the two deltas. We may need to add PI or 2*PI to get a full circle of radians. Finally we subtract the ship1's rotation in radians to get the angle relative to ship1.</p>
 
 ```
+angleToOtherShip(ship, otherShip) {
+	const xDelta = otherShip.center()[0] - ship.center()[0];
+	const yDelta = otherShip.center()[1] - ship.center()[1];
 
-	angleToOtherShip(ship, otherShip) {
-		const xDelta = otherShip.center()[0] - ship.center()[0];
-		const yDelta = otherShip.center()[1] - ship.center()[1];
+	// find the angle between the 2 objects
+	const arcTangent = Math.atan(yDelta / xDelta);
+	if (xDelta < 0) angle = arcTangent + Math.PI;
+	else if(xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
+	else angle = arcTangent;
 
-		// find the angle between the 2 objects
-		const arcTangent = Math.atan(yDelta / xDelta);
-		if (xDelta < 0) angle = arcTangent + Math.PI;
-		else if(xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
-		else angle = arcTangent;
-
-		// take the rotation of the hit ship into account
-		angle -= ship.getRotation();
-		if (angle < 0) angle += Math.PI * 2;
-		return angle;
-	}
+	// take the rotation of the hit ship into account
+	angle -= ship.getRotation();
+	if (angle < 0) angle += Math.PI * 2;
+	return angle;
+}
 
 ```
+<br>
+<h2>Interesting Code Example 2</h2>
+<p>Originally, if you tried to fire weapons or change speed while turning, your turn would stop because the program wouldn't
+continue detecting the keydown event that would indicate the turn. The solution was to save keydown and keyup events
+to a POJO</p>
+
+```
+keyHandler(e) {
+	if (e.type == 'keydown') this.game.getKeyMap()[e.keyCode] = true;
+	else this.game.getKeyMap()[e.keyCode] = false;	
+};
+```
+
+<p>Here, keyHandler, a function in the game_view.js class uses the event keyCode as a key in the keyMap POJO from the game.js
+class. If the event.type is keydown, the value in the POJO is set to true, and if it's keyup, the value is set to false.</p>
+<br>
+
+```
+checkKeyMap() {
+	// spacebar
+	if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
+
+	// f or k
+	if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);
+
+	// acceleration/decceleration needs a longer turnCounter than turning
+	// w or up arrow
+	if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
+		this.enterprise.power(1);
+
+	// s or down arrow
+	if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
+		this.enterprise.power(-1);
+	
+	// a or left arrow
+	if (this.keyMap["65"] || this.keyMap["37"]) this.enterprise.changeDirection(-1);
+
+	// d or right arrow
+	if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
+};
+```
+<p>checkKeyMap is a function in the game.js class that is called every few frames. If any of the keyCode keys
+have true values, the associated actions are taken. These true values correspond to keys that are 
+currently pressed down, allowing things like firing while turning to be possible. When the keys are
+no longer pressed, a keyup event is handled, the value is set to false, and no action is taken for that key. </p>

@@ -262,8 +262,8 @@ class Game {
 
 
 	checkKeyMap() {
-
-		if (this.keyMap["32"]) this.firePhasers(this.enterprise); // space
+		// spacebar
+		if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
 
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);
@@ -280,9 +280,8 @@ class Game {
 		// a or left arrow
 		if (this.keyMap["65"] || this.keyMap["37"]) this.enterprise.changeDirection(-1);
 
-		// do or right arrow
+		// d or right arrow
 		if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
-
 	};
 
 
