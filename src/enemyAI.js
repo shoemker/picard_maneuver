@@ -16,39 +16,36 @@ class EnemyAI  {
 	}
 
 	consultAI(onscreen){
-		const angleOfOponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
-		const turnCounterMax = 4;
-		const turnCircleMax = 80;
+		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
 
-		// speed
-		if (this.reverseCount !== 0) {
-			console.log(this.reverseCount);
-			this.controlledShip.power(-1);
-			this.reverseCount++;
-			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
-		}
-		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) || 
-				this.controlledShip.getSpeed() < 1) {
-			this.controlledShip.power(1);
-		}
+		this.changeSpeed();
+		this.fireBeamWeapon(onscreen);
+		this.checkForRearEnemy(angleOfOpponent);
+		this.turningAndTorpedoes(angleOfOpponent, onscreen);
+	}
 
-		// if the other ship is sitting behind, stop
-		if (Math.abs(Math.PI - angleOfOponent) < .4 && 
+
+	fireBeamWeapon(onscreen) {
+		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.opponent);
+	}
+
+	// if the other ship is sitting behind, stop
+	checkForRearEnemy(angleOfOpponent) {
+		if (Math.abs(Math.PI - angleOfOpponent) < .4 &&
 			Utils.distance(this.controlledShip, this.opponent) < 150 &&
 			Math.abs(this.controlledShip.getRotation() - this.opponent.getRotation()) < .4) {
-				this.reverseCount++;
+			this.reverseCount++;
 		}
+	}
+	
 
-
-		// fire phasers
-		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.opponent);
-
-
-		// turning and torpedos
+	turningAndTorpedoes(angleOfOpponent, onscreen) {
+		const turnCounterMax = 4;
+		const turnCircleMax = 80;
 		if (!onscreen || this.controlledShip.torpedosReady()) {
-			if (angleOfOponent > Math.PI * .0625 && angleOfOponent <= Math.PI) {
+			if (angleOfOpponent > Math.PI * .0625 && angleOfOpponent <= Math.PI) {
 				if (this.turnCounter === turnCounterMax) {
-					if(this.turnRightLength < turnCircleMax) {
+					if (this.turnRightLength < turnCircleMax) {
 						this.controlledShip.changeDirection(1);
 						this.turnRightLength++;
 						this.turnLeftLength = 0;
@@ -56,8 +53,8 @@ class EnemyAI  {
 					else this.controlledShip.changeDirection(-1);
 				}
 			}
-			else if (angleOfOponent < Math.PI * 1.9375 &&
-				angleOfOponent > Math.PI) {
+			else if (angleOfOpponent < Math.PI * 1.9375 &&
+				angleOfOpponent > Math.PI) {
 				if (this.turnCounter === turnCounterMax) {
 					if (this.turnLeftLength < turnCircleMax) {
 						this.controlledShip.changeDirection(-1);
@@ -78,6 +75,20 @@ class EnemyAI  {
 
 		this.turnCounter++;
 		if (this.turnCounter > turnCounterMax) this.turnCounter = 0;
+	}
+
+
+	changeSpeed() {
+		if (this.reverseCount !== 0) {
+			console.log(this.reverseCount);
+			this.controlledShip.power(-1);
+			this.reverseCount++;
+			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
+		}
+		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) ||
+			this.controlledShip.getSpeed() < 1) {
+			this.controlledShip.power(1);
+		}
 	}
 }
 

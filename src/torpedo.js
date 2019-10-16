@@ -13,8 +13,6 @@ class Torpedo extends SpaceObject {
 		this.width = 10;
 	};
 	
-	getTorpImg() { return this.torpImg; }
-
 	getLauncher() { return this.launcher; }
 	
 	draw(ctx) {

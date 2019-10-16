@@ -198,7 +198,6 @@ class Ship extends SpaceObject{
 
 	fireTorpedos() {
 		if (this.torpedoReload === this.torpedoReloadMax) {
-
 			this.torpedoReload = 0;
 			this.torpSound.play();
 			return true;
