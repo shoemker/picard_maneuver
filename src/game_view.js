@@ -96,8 +96,16 @@ class GameView {
 
 				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
 				else gainNode.gain.value = 0;
+
+				// if paused, draw to show checkmark in box
+				if (this.pause) this.game.draw(this.ctx)
 			}
-			else if (y > 85 && y < 112) this.game.autoPilotToggle();
+			else if (y > 85 && y < 112) {
+				this.game.autoPilotToggle();
+
+				// if paused, draw to show checkmark in box
+				if (this.pause) this.game.draw(this.ctx)
+			}
 		}
 	}
 
