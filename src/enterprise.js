@@ -1,11 +1,12 @@
 const Ship = require("./ship");
 const SSD = require("./ssd");
+const Utils = require("./utils");
 
 class Enterprise extends Ship {
 	constructor(options) {
 		super(options);
  
-		this.loadShipImg();
+		this.shipImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png');
 
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserStartOffset = 18;
@@ -40,13 +41,6 @@ class Enterprise extends Ship {
 		ctx.restore();
 		
 		super.draw(ctx);
-	};
-
-
-	loadShipImg() {
-		this.shipImg = new Image();
-		this.shipImg.onload = () => { return true; };
-		this.shipImg.src = './images/uss-enterprise-png-view-original-669.png';
 	};
 }
 

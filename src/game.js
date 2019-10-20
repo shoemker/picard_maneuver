@@ -10,7 +10,6 @@ class Game {
 		this.canvas_width = canvas_width;
 		this.canvas_height = canvas_height;
 
-		this.stars = [];
 		this.base_speed_inverse = 5;
 
 		this.win = false;
@@ -20,17 +19,17 @@ class Game {
 
 		this.enemies = [];
 		this.enemyAIs = [];
+		this.torpedoes = [];
+		this.stars = [];
+
 		this.keyMap = {};
 
+		this.createPlanetAndMoon();
 		this.createStarField();
-		this.loadTorpImg();
+		this.torpImg = Utils.loadImg('./images/torpedo.png');
 
 		this.turnCounter = 0;
 		this.turnCounterMax = 8;
-
-		this.torpedoes = [];
-
-		this.createPlanetAndMoon();
 	}
 
 	getKeyMap() { return this.keyMap; }
@@ -49,7 +48,7 @@ class Game {
 	createPlanetAndMoon() {
 		this.planet_08 = new Planet({
 			pos: [300, 300],
-			img: this.loadPlanet('./images/planets/planet_08.png'),
+			img: Utils.loadImg('./images/planets/planet_08.png'),
 			width: 200,
 			height: 200,
 			sheetCoords: [20, 20, 460, 480]
@@ -57,7 +56,7 @@ class Game {
 
 		this.moon_01 = new Planet({
 			pos: [260, 410],
-			img: this.loadPlanet('./images/planets/moon_01.png'),
+			img: Utils.loadImg('./images/planets/moon_01.png'),
 			width: 50,
 			height: 50,
 			sheetCoords: [3, 3, 58, 58]
@@ -283,20 +282,6 @@ class Game {
 
 		// d or right arrow
 		if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
-	};
-
-
-	loadTorpImg() {
-		this.torpImg = new Image();
-		this.torpImg.onload = () => { return true; }
-		this.torpImg.src = './images/torpedo.png';
-	};
-
-	loadPlanet(file) {
-		let img = new Image();
-		img.onload = () => { return true; }
-		img.src = file;
-		return img;
 	};
 
 }

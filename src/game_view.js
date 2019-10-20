@@ -3,7 +3,7 @@ const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
 const Explosion = require("./explosion")
-
+const Utils = require("./utils");
 
 class GameView {
 
@@ -16,8 +16,8 @@ class GameView {
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
-		this.loadSparksImg();
-		this.loadExplosionImg();
+		this.sparksImg = Utils.loadImg('./images/sparks.png');
+		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
 		this.explosion = new Explosion(this.explosionImg, sounds.exploSound);
 
 		this.game.addEnterprise(new Enterprise({
@@ -125,19 +125,6 @@ class GameView {
 	openingOff() {
 		this.gameOpening = null;
 		this.theme.play();
-	};
-
-
-	loadExplosionImg() {
-		this.explosionImg = new Image();
-		this.explosionImg.onload = () => { return true; }
-		this.explosionImg.src = './images/explosion-sprite-sheet.png';
-	};
-
-	loadSparksImg() {
-		this.sparksImg = new Image();
-		this.sparksImg.onload = () => { return true; }
-		this.sparksImg.src = './images/sparks.png';
 	};
 }
 

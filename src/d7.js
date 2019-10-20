@@ -1,11 +1,12 @@
 const Ship = require("./ship");
 const SSD = require("./ssd");
+const Utils = require("./utils");
 
 class D7 extends Ship {
 	constructor(options) {
 		super(options);
 
-		this.loadShipImg();
+		this.shipImg = Utils.loadImg('./images/D7.png');
 
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
@@ -40,13 +41,6 @@ class D7 extends Ship {
 		ctx.restore();
 
 		super.draw(ctx);
-	};
-
-
-	loadShipImg() {
-		this.shipImg = new Image();
-		this.shipImg.onload = () => { return true; };
-		this.shipImg.src = './images/D7.png';
 	};
 }
 

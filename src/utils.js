@@ -21,6 +21,13 @@ const Utils = {
 		angle -= ship.getRotation();
 		if (angle < 0) angle += Math.PI * 2;
 		return angle;
+	},
+
+	loadImg(file) {
+		let img = new Image();
+		img.onload = () => { return true; }
+		img.src = file;
+		return img;
 	}
 }
 

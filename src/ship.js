@@ -22,6 +22,8 @@ class Ship extends SpaceObject{
 		this.phaserCounter = 0;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
+		this.phaserDamage = 18;
+		this.torpedoDamage = 20;
 		
 		this.direction = this.calcDirection(this.rotationOffset);
 		this.increment = Math.PI / 36;
@@ -209,12 +211,12 @@ class Ship extends SpaceObject{
 
 
 	receivePhaserHit(attacker) {
-		this.takeDamage(attacker, 18);
+		this.takeDamage(attacker, this.phaserDamage);
 	};
 
 
 	receiveTorpHit(torpedo) {
-		this.takeDamage(torpedo.getLauncher(), 20);
+		this.takeDamage(torpedo.getLauncher(), this.torpedoDamage);
 		this.torpExplosionCounter = 1;
 	};
 
