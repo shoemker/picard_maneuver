@@ -39,8 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
 		phasSound, disruptSound,
 		kTorpSound, torpSound,
-		exploSound,
-		theme,
+		exploSound, theme,
 		}
 	);
 

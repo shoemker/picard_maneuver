@@ -44,7 +44,7 @@ class Game {
 			img: this.loadPlanet('./images/planets/moon_01.png'),
 			width: 50,
 			height: 50,
-			sheetCoords: [3,3,58,58]
+			sheetCoords: [3, 3, 58, 58]
 		})
 	}
 
@@ -52,17 +52,14 @@ class Game {
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
+		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemies[0], true, this);
 	};
 
 	addEnemy(enemy){
 		this.enemies.push(enemy);
+		this.enemyAIs.push(new EnemyAI(enemy, this.enterprise, true, this));
 	};
 
-	addAI() {
-		this.enemies.forEach((enemy) => this.enemyAIs.push(new EnemyAI(enemy, this.enterprise, true, this)));
-
-		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemies[0], true, this);
-	};
 
 	step() {
 		// gets user input
@@ -177,14 +174,12 @@ class Game {
 
 
 	muteToggle() {
-		if (this.muted) this.muted = false;
-		else this.muted = true;
+		this.muted = this.muted === false;
 	};
 
 
 	autoPilotToggle() {
-		if (this.autopilot) this.autopilot = false;
-		else this.autopilot = true;
+		this.autopilot = this.autopilot === false;
 	};
 
 	// factory method to create stars
@@ -226,14 +221,14 @@ class Game {
 	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
 			
-			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg,
-				ship.calcDirection(ship.getRotation() - Math.PI / 18), ship ));
+			this.torpedoes.push(new Torpedo(ship, this.torpImg,
+				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 
-			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg, 
-				ship.getDirection(), ship ));
+			this.torpedoes.push(new Torpedo(ship, this.torpImg, 
+				ship.getDirection() ));
 
-			this.torpedoes.push(new Torpedo(ship.center(), this.torpImg,
-				ship.calcDirection(ship.getRotation() + Math.PI / 18), ship ));
+			this.torpedoes.push(new Torpedo(ship, this.torpImg,
+				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
 		}
 	};
 
@@ -250,15 +245,12 @@ class Game {
 
 
 	checkTorpCollisions() {
-		let distance;
 		const ships = this.enemies.concat(this.enterprise);
 
 		this.torpedoes.forEach((torpedo,i) => {
 			ships.forEach((ship) => {
-				distance = Utils.distance(ship, torpedo);
-				if (distance < 30 && (ship !== torpedo.getLauncher())) {
+				if (ship !== torpedo.getLauncher() && Utils.distance(ship, torpedo) < 30) {
 					ship.receiveTorpHit(torpedo);
-
 					this.torpedoes.splice(i, 1);
 				}
 			})

@@ -52,8 +52,6 @@ class GameView {
 		// 	explosionImg: this.explosionImg,
 		// 	sparksImg: this.sparksImg
 		// }));		
-
-		this.game.addAI();
 	};
 	
 
