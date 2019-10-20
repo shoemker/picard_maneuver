@@ -79,7 +79,7 @@ class Game {
 
 		// this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 		if ( this.autopilot) 
-			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height));
+			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height),this.enemies[0]);
 
 		this.checkTorpCollisions();
 	};

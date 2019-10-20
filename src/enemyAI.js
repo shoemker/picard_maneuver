@@ -15,9 +15,10 @@ class EnemyAI  {
 		this.reverseCountMax = 60;
 	}
 
-	consultAI(onscreen){
-		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.target);
+	consultAI(onscreen, target){
+		if (target) this.target = target;
 
+		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.target);
 		this.changeSpeed();
 		this.fireBeamWeapon(onscreen);
 		this.checkForRearEnemy(angleOfOpponent);

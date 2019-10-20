@@ -42,7 +42,16 @@ class GameView {
 			sparksImg: this.sparksImg
 		}));
 
-		
+		// this.game.addEnemy(new D7({
+		// 	pos: [0, 500],
+		// 	rotationOffset: 0,
+		// 	phaserColor: "green",
+		// 	torpSound: sounds.kTorpSound,
+		// 	beamSound: sounds.disruptSound,
+		// 	explosion: this.explosion,
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg
+		// }));		
 
 		this.game.addAI();
 	};
