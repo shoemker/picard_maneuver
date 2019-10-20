@@ -3,8 +3,8 @@ const Shield = require("./shield");
 // SSD is the ship's systems display in the corner of the screen
 class SSD {
 	constructor(options) {
-		this.ssd_x = options.ssd_x;
-		this.ssd_y = options.ssd_y;
+		this.ssd_x = options.ssdPos[0];
+		this.ssd_y = options.ssdPos[1];
 		this.ssd_width = options.ssd_width;
 		this.ssd_height = options.ssd_height;
 		this.imgCoords = options.imgCoords;

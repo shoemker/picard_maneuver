@@ -12,8 +12,7 @@ class D7 extends Ship {
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
-			ssd_x: 100,
-			ssd_y: 700,
+			ssdPos: options.ssdPos,
 			ssd_width: 70,
 			ssd_height: 120,
 			imgName: './images/D7-SSD.png',

@@ -2,7 +2,6 @@ const Star = require("./star");
 const Planet = require("./planet");
 const EnemyAI = require("./enemyAI");
 const Torpedo = require("./torpedo");
-
 const Utils = require("./utils");
 
 class Game {
@@ -31,21 +30,7 @@ class Game {
 
 		this.torpedoes = [];
 
-		this.planet_08 = new Planet({
-			pos: [300, 300],
-			img: this.loadPlanet('./images/planets/planet_08.png'),
-			width: 200,
-			height: 200,
-			sheetCoords: [20, 20, 460, 480]
-		});
-
-		this.moon_01 = new Planet({
-			pos:[260, 410],
-			img: this.loadPlanet('./images/planets/moon_01.png'),
-			width: 50,
-			height: 50,
-			sheetCoords: [3, 3, 58, 58]
-		})
+		this.createPlanetAndMoon();
 	}
 
 	getKeyMap() { return this.keyMap; }
@@ -59,6 +44,25 @@ class Game {
 		this.enemies.push(enemy);
 		this.enemyAIs.push(new EnemyAI(enemy, this.enterprise, true, this));
 	};
+
+
+	createPlanetAndMoon() {
+		this.planet_08 = new Planet({
+			pos: [300, 300],
+			img: this.loadPlanet('./images/planets/planet_08.png'),
+			width: 200,
+			height: 200,
+			sheetCoords: [20, 20, 460, 480]
+		});
+
+		this.moon_01 = new Planet({
+			pos: [260, 410],
+			img: this.loadPlanet('./images/planets/moon_01.png'),
+			width: 50,
+			height: 50,
+			sheetCoords: [3, 3, 58, 58]
+		});
+	}
 
 
 	step() {

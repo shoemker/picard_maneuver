@@ -12,8 +12,7 @@ class Enterprise extends Ship {
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
-			ssd_x: 1040,
-			ssd_y: 700,
+			ssdPos: options.ssdPos,
 			ssd_width: 60,
 			ssd_height: 120,
 			imgName: './images/enterprise-refit-ssd.png',

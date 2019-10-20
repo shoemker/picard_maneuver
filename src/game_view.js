@@ -13,7 +13,7 @@ class GameView {
 		this.pause = false;
 		this.theme = sounds.theme;
 
-		this.game = new Game(width, height);
+		this.game = new Game(width, height, false);
 		this.gameOpening = new GameOpening(width, height);
 
 		this.loadSparksImg();
@@ -28,7 +28,8 @@ class GameView {
 			beamSound: sounds.phasSound,
 			explosion: this.explosion,
 			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg
+			sparksImg: this.sparksImg,
+			ssdPos: [1040, 700]
 		}));
 
 		this.game.addEnemy( new D7({
@@ -39,24 +40,25 @@ class GameView {
 			beamSound: sounds.disruptSound,
 			explosion: this.explosion,
 			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 700]
 		}));
 
-		// this.game.addEnemy(new D7({
-		// 	pos: [0, 500],
-		// 	rotationOffset: 0,
-		// 	phaserColor: "green",
-		// 	torpSound: sounds.kTorpSound,
-		// 	beamSound: sounds.disruptSound,
-		// 	explosion: this.explosion,
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg
-		// }));		
+		this.game.addEnemy(new D7({
+			pos: [0, 500],
+			rotationOffset: 0,
+			phaserColor: "green",
+			torpSound: sounds.kTorpSound,
+			beamSound: sounds.disruptSound,
+			explosion: this.explosion,
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 60]
+		}));		
 	};
 	
 
 	start() {
-
 		// start the animation
 		requestAnimationFrame(this.animate.bind(this));
 	};
@@ -89,7 +91,7 @@ class GameView {
 
 	// check to see if mute or autopilot is being clicked
 	checkClick(x, y, gainNode) {
-		
+
 		if(x > 1085 && x < 1112) {
 			if (y > 46 && y < 71) {
 				this.game.muteToggle();
@@ -111,11 +113,10 @@ class GameView {
 
 
 	pauseGameToggle() {
-		if (!this.pause) this.pause = true;
-		else { 
-			this.pause = false;
-			requestAnimationFrame(this.animate.bind(this));
-		}
+		this.pause = this.pause === false;
+		
+		// needed to restart animation on unpause
+		if (!this.pause) requestAnimationFrame(this.animate.bind(this));
 	};
 
 
