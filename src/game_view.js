@@ -2,6 +2,7 @@ const Game = require("./game");
 const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
 const D7 = require("./d7");
+const Bird_of_Prey = require("./bird_of_prey");
 const Explosion = require("./explosion")
 const Utils = require("./utils");
 

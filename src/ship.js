@@ -17,7 +17,7 @@ class Ship extends SpaceObject{
 
 		this.speed = 0;
 		this.width = 60;
-		this.height = 30
+		this.height = 30;
 		this.phaserStartOffset = 0;
 		this.phaserCounter = 0;
 		this.torpExplosionCounter = 0;

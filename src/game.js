@@ -77,7 +77,6 @@ class Game {
 
 		this.enemyAIs.forEach((AI, i) => AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
 
-		// this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 		if ( this.autopilot) 
 			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height),this.enemies[0]);
 
@@ -239,7 +238,7 @@ class Game {
 	firePhasers(ship) {
 		const enemyOnScreen = this.enemies[0].onscreen(this.canvas_width, this.canvas_height);
 		if (ship === this.enterprise && enemyOnScreen) {
-			ship.firePhasers(this.enemy);
+			ship.firePhasers(this.enemies[0]);
 		}
 		else if (ship.onscreen(this.canvas_width, this.canvas_height)) { 
 			ship.firePhasers(this.enterprise);
