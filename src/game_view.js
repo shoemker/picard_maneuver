@@ -13,7 +13,7 @@ class GameView {
 		this.pause = false;
 		this.theme = sounds.theme;
 
-		this.game = new Game(width, height, false);
+		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
 
 		this.loadSparksImg();
@@ -29,7 +29,7 @@ class GameView {
 			explosion: this.explosion,
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [1040, 700]
+			ssdPos: [1040, 710]
 		}));
 
 		this.game.addEnemy( new D7({
@@ -41,7 +41,7 @@ class GameView {
 			explosion: this.explosion,
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 700]
+			ssdPos: [100, 710]
 		}));
 
 		// this.game.addEnemy(new D7({
@@ -53,7 +53,9 @@ class GameView {
 		// 	explosion: this.explosion,
 		// 	explosionImg: this.explosionImg,
 		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60]
+		// 	ssdPos: [100, 60],
+		// 	phaserRecharge: 80,
+		// 	torpedoReload: 100
 		// }));		
 	};
 	

@@ -28,10 +28,12 @@ class Ship extends SpaceObject{
 
 		this.ssd;
 
-		this.phaserRecharge = 0;
+		if (options.phaserRecharge) this.phaserRecharge = options.phaserRecharge;
+		else this.phaserRecharge = 0;
 		this.phaserRechargeMax = 180;
 
-		this.torpedoReload = 0;
+		if (options.torpedoReload) this.torpedoReload = options.torpedoReload;
+		else this.torpedoReload = 0;
 		this.torpedoReloadMax= 220;
 
 		this.hullIntegrityMax = 200;

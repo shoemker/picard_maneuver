@@ -5,6 +5,7 @@ class GameOpening {
 	constructor(canvas_width, canvas_height) {
 		this.canvas_width = canvas_width;
 		this.canvas_height = canvas_height;
+		this.choose = false;
 
 		this.max_depth = 32;
 
@@ -13,6 +14,7 @@ class GameOpening {
 		this.createOpeningStarfield();
 	};
 
+	getChoose() { return this.choose; }
 
 	createOpeningStarfield() {
 		for (let i = 0; i < this.stars.length; i++) {
@@ -53,7 +55,7 @@ class GameOpening {
 			}
 		});
 
-		this.drawText(ctx);
+		if (!this.choose) this.drawText(ctx);
 	};
 
 

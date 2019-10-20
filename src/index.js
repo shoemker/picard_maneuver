@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
 		phasSound, disruptSound,
 		kTorpSound, torpSound,
-		exploSound, theme,
+		exploSound,theme,
 		}
 	);
 
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	canvasEl.addEventListener("click", (e) => {
 		if (g.gameOpening !== null) {
+		
 			g.openingOff();
 			audioContext.resume().then(() => { return true; });
 		}
