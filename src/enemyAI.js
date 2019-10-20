@@ -2,9 +2,9 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, opponent, randomness, game) {
+	constructor(controlledShip, target, randomness, game) {
 		this.controlledShip = controlledShip;
-		this.opponent = opponent;
+		this.target = target;
 		this.randomness = randomness;
 		this.game = game;
 
@@ -16,7 +16,7 @@ class EnemyAI  {
 	}
 
 	consultAI(onscreen){
-		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.opponent);
+		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.target);
 
 		this.changeSpeed();
 		this.fireBeamWeapon(onscreen);
@@ -26,14 +26,14 @@ class EnemyAI  {
 
 
 	fireBeamWeapon(onscreen) {
-		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.opponent);
+		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.target);
 	}
 
 	// if the other ship is sitting behind, stop
 	checkForRearEnemy(angleOfOpponent) {
 		if (Math.abs(Math.PI - angleOfOpponent) < .4 &&
-			Utils.distance(this.controlledShip, this.opponent) < 150 &&
-			Math.abs(this.controlledShip.getRotation() - this.opponent.getRotation()) < .4) {
+			Utils.distance(this.controlledShip, this.target) < 150 &&
+			Math.abs(this.controlledShip.getRotation() - this.target.getRotation()) < .4) {
 			this.reverseCount++;
 		}
 	}
@@ -80,12 +80,11 @@ class EnemyAI  {
 
 	changeSpeed() {
 		if (this.reverseCount !== 0) {
-			console.log(this.reverseCount);
 			this.controlledShip.power(-1);
 			this.reverseCount++;
 			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
 		}
-		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.opponent.getSpeed()) ||
+		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.target.getSpeed()) ||
 			this.controlledShip.getSpeed() < 1) {
 			this.controlledShip.power(1);
 		}

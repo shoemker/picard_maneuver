@@ -42,6 +42,8 @@ class GameView {
 			sparksImg: this.sparksImg
 		}));
 
+		
+
 		this.game.addAI();
 	};
 	
@@ -60,7 +62,7 @@ class GameView {
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
 				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
-				else if (this.game.enemy.getHull() === 0) this.game.win = true;
+				else if (this.game.enemies[0].getHull() === 0) this.game.win = true;
 				else this.game.step();
 
 				this.game.draw(this.ctx);

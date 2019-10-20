@@ -19,6 +19,8 @@ class Game {
 		this.muted = false;
 		this.autopilot = false;
 
+		this.enemies = [];
+		this.enemyAIs = [];
 		this.keyMap = {};
 
 		this.createStarField();
@@ -53,12 +55,13 @@ class Game {
 	};
 
 	addEnemy(enemy){
-		this.enemy = enemy;
+		this.enemies.push(enemy);
 	};
 
 	addAI() {
-		this.enemyAI = new EnemyAI(this.enemy, this.enterprise, true, this);
-		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemy, true, this);
+		this.enemies.forEach((enemy) => this.enemyAIs.push(new EnemyAI(enemy, this.enterprise, true, this)));
+
+		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemies[0], true, this);
 	};
 
 	step() {
@@ -72,9 +75,11 @@ class Game {
 
 		this.moveObjects();
 
-		this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
+		this.enemyAIs.forEach((AI, i) => AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
+
+		// this.enemyAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
 		if ( this.autopilot) 
-			this.enterpriseAI.consultAI(this.enemy.onscreen(this.canvas_width, this.canvas_height));
+			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions();
 	};
@@ -84,7 +89,7 @@ class Game {
 		this.shift();
 
 		// now give ships and objects their own movement
-		this.enemy.move(this.base_speed_inverse);
+		this.enemies.forEach((enemy) => enemy.move(this.base_speed_inverse));
 
 		this.moveTorpedos();
 	}
@@ -99,7 +104,7 @@ class Game {
 		this.stars.forEach((star) =>
 					star.shift([shift_x , shift_y], this.enterprise.getSpeed()));
 
-		this.enemy.shift([shift_x, shift_y], this.enterprise.getSpeed());
+		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], this.enterprise.getSpeed()));
 										
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet_08.shift(
@@ -128,7 +133,7 @@ class Game {
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
 		this.enterprise.draw(ctx);
-		this.enemy.draw(ctx);
+		this.enemies.forEach((enemy) => enemy.draw(ctx));
 
 		// draw mute and autopilot box
 		this.drawCheckBox(ctx, this.canvas_width - 130, 30, "Mute", this.muted);
@@ -234,11 +239,11 @@ class Game {
 
 
 	firePhasers(ship) {
-		const enemyOnScreen = this.enemy.onscreen(this.canvas_width, this.canvas_height);
+		const enemyOnScreen = this.enemies[0].onscreen(this.canvas_width, this.canvas_height);
 		if (ship === this.enterprise && enemyOnScreen) {
 			ship.firePhasers(this.enemy);
 		}
-		else if (enemyOnScreen) { 
+		else if (ship.onscreen(this.canvas_width, this.canvas_height)) { 
 			ship.firePhasers(this.enterprise);
 		}
 	};
@@ -246,7 +251,7 @@ class Game {
 
 	checkTorpCollisions() {
 		let distance;
-		const ships = [this.enterprise, this.enemy]
+		const ships = this.enemies.concat(this.enterprise);
 
 		this.torpedoes.forEach((torpedo,i) => {
 			ships.forEach((ship) => {
