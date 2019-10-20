@@ -14,8 +14,8 @@ class Enterprise extends Ship {
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
-			ssd_width: 60,
-			ssd_height: 120,
+			img_size: [60, 120],
+			img_pos_offset: [5,0],
 			imgName: './images/enterprise-refit-ssd.png',
 			beamWeaponName: "Phaser",
 			imgCoords: [0, 0, 54, 129]

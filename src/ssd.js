@@ -6,8 +6,11 @@ class SSD {
 	constructor(options) {
 		this.ssd_x = options.ssdPos[0];
 		this.ssd_y = options.ssdPos[1];
-		this.ssd_width = options.ssd_width;
-		this.ssd_height = options.ssd_height;
+		this.ssd_total_width = 70;
+		this.ssd_total_height = 120;
+
+		this.img_size = options.img_size;
+		this.img_pos_offset = options.img_pos_offset;
 		this.imgCoords = options.imgCoords;
 		this.beamWeaponName = options.beamWeaponName;
 		
@@ -26,10 +29,10 @@ class SSD {
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
-			this.ssd_x,
-			this.ssd_y,
-			this.ssd_width,
-			this.ssd_height);
+			this.ssd_x + this.img_pos_offset[0],
+			this.ssd_y + this.img_pos_offset[1],
+			this.img_size[0],
+			this.img_size[1]);
 
 		ctx.beginPath(); 
 		
@@ -40,7 +43,7 @@ class SSD {
 		this.drawRechargeBar(ctx, this.ssd_x - 60, phaserRechargePercent);
 
 		// draw torpedo reload
-		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_width + 50, torpedoReloadPercent);
+		this.drawRechargeBar(ctx, this.ssd_x + this.ssd_total_width + 50, torpedoReloadPercent);
 
 		this.drawHullIntegrity(ctx, hullPercentage);
 
@@ -54,10 +57,10 @@ class SSD {
 
 
 	drawRechargeBar(ctx, x, percentage) {
-		let bar_height = this.ssd_height - 6;
+		let bar_height = this.ssd_total_height - 6;
 
 		ctx.beginPath();
-		ctx.rect(x, this.ssd_y, 10, this.ssd_height);
+		ctx.rect(x, this.ssd_y, 10, this.ssd_total_height);
 		ctx.strokeStyle = "grey";
 		ctx.stroke();
 
@@ -89,15 +92,15 @@ class SSD {
 		ctx.fillText(this.beamWeaponName, x_coord, this.ssd_y + 150);
 		ctx.fillText("Recharge", this.ssd_x - 95, this.ssd_y + 175);
 
-		ctx.fillText("Torpedo", this.ssd_x + this.ssd_width + 20, this.ssd_y + 150);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_width + 25, this.ssd_y + 175);
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, this.ssd_y + 150);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, this.ssd_y + 175);
 	};
 
 
 	// factory method to create shield objects
 	raiseShields() {
-		const x = this.ssd_x + this.ssd_width / 2;
-		const y = this.ssd_y + this.ssd_height / 2
+		const x = this.ssd_x + this.ssd_total_width / 2;
+		const y = this.ssd_y + this.ssd_total_height / 2
 
 		// forward shield
 		this.shields.push(new Shield({

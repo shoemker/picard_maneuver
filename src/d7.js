@@ -14,8 +14,8 @@ class D7 extends Ship {
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
-			ssd_width: 70,
-			ssd_height: 120,
+			img_size: [70, 120],
+			img_pos_offset: [0, 0],
 			imgName: './images/D7-SSD.png',
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 170, 175]

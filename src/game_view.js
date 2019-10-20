@@ -33,7 +33,7 @@ class GameView {
 			ssdPos: [1040, 710]
 		}));
 
-		this.game.addEnemy( new D7({
+		this.game.addEnemy( new Bird_of_Prey({
 			pos: [0, 100],
 			rotationOffset: 0,
 			phaserColor: "green",
@@ -45,19 +45,19 @@ class GameView {
 			ssdPos: [100, 710]
 		}));
 
-		// this.game.addEnemy(new D7({
-		// 	pos: [0, 500],
-		// 	rotationOffset: 0,
-		// 	phaserColor: "green",
-		// 	torpSound: sounds.kTorpSound,
-		// 	beamSound: sounds.disruptSound,
-		// 	explosion: this.explosion,
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));		
+		this.game.addEnemy(new D7({
+			pos: [0, 500],
+			rotationOffset: 0,
+			phaserColor: "green",
+			torpSound: sounds.kTorpSound,
+			beamSound: sounds.disruptSound,
+			explosion: this.explosion,
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 60],
+			phaserRecharge: 80,
+			torpedoReload: 100
+		}));		
 	};
 	
 

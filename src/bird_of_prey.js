@@ -17,8 +17,8 @@ class Bird_of_Prey extends Ship {
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
-			ssd_width: 70,
-			ssd_height: 120,
+			img_size: [120,100],
+			img_pos_offset: [-25, 10],
 			imgName: './images/bop-ssd.png',
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 350, 240]
