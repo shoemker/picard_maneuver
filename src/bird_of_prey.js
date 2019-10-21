@@ -6,7 +6,7 @@ class Bird_of_Prey extends Ship {
 	constructor(options) {
 		super(options);
 
-		this.shipImg = Utils.loadImg('./images/bop1.png');
+		this.shipImg = Utils.loadImg('./images/bop.png');
 
 		this.width = 30;
 		this.height = 40;
@@ -19,7 +19,7 @@ class Bird_of_Prey extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [120,100],
 			img_pos_offset: [-25, 10],
-			imgName: './images/bop-ssd.png',
+			img: Utils.loadImg('./images/bop-ssd.png'),
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 350, 240]
 		});

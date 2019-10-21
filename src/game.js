@@ -36,12 +36,12 @@ class Game {
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
-		this.enterpriseAI = new EnemyAI(this.enterprise, this.enemies[0], true, this);
+		this.enterpriseAI = new EnemyAI(this.enterprise, this);
 	};
 
 	addEnemy(enemy){
 		this.enemies.push(enemy);
-		this.enemyAIs.push(new EnemyAI(enemy, this.enterprise, true, this));
+		this.enemyAIs.push(new EnemyAI(enemy, this));
 	};
 
 
@@ -78,7 +78,7 @@ class Game {
 		this.enemyAIs.forEach((AI, i) => AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
 
 		if ( this.autopilot) 
-			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height),this.enemies[0]);
+			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions();
 	};
@@ -237,12 +237,8 @@ class Game {
 
 	firePhasers(ship) {
 		const enemyOnScreen = this.enemies[0].onscreen(this.canvas_width, this.canvas_height);
-		if (ship === this.enterprise && enemyOnScreen) {
-			ship.firePhasers(this.enemies[0]);
-		}
-		else if (ship.onscreen(this.canvas_width, this.canvas_height)) { 
-			ship.firePhasers(this.enterprise);
-		}
+		if ((ship === this.enterprise && enemyOnScreen) || ship.onscreen(this.canvas_width, this.canvas_height))
+			ship.firePhasers();
 	};
 
 

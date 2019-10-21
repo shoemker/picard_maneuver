@@ -16,7 +16,7 @@ class D7 extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [70, 120],
 			img_pos_offset: [0, 0],
-			imgName: './images/D7-SSD.png',
+			img: Utils.loadImg('./images/D7-SSD.png'),
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 170, 175]
 		});

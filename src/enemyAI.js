@@ -2,10 +2,8 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, target, randomness, game) {
+	constructor(controlledShip, game) {
 		this.controlledShip = controlledShip;
-		this.target = target;
-		this.randomness = randomness;
 		this.game = game;
 
 		this.turnLeftLength = 0;
@@ -15,10 +13,8 @@ class EnemyAI  {
 		this.reverseCountMax = 60;
 	}
 
-	consultAI(onscreen, target){
-		if (target) this.target = target;
-
-		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.target);
+	consultAI(onscreen){
+		const angleOfOpponent = Utils.angleToOtherShip(this.controlledShip, this.controlledShip.getTarget());
 		this.changeSpeed();
 		this.fireBeamWeapon(onscreen);
 		this.checkForRearEnemy(angleOfOpponent);
@@ -27,14 +23,14 @@ class EnemyAI  {
 
 
 	fireBeamWeapon(onscreen) {
-		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers(this.target);
+		if (this.controlledShip.phaserReady() && onscreen) this.controlledShip.firePhasers();
 	}
 
 	// if the other ship is sitting behind, stop
 	checkForRearEnemy(angleOfOpponent) {
 		if (Math.abs(Math.PI - angleOfOpponent) < .4 &&
-			Utils.distance(this.controlledShip, this.target) < 150 &&
-			Math.abs(this.controlledShip.getRotation() - this.target.getRotation()) < .4) {
+			Utils.distance(this.controlledShip, this.controlledShip.getTarget()) < 150 &&
+			Math.abs(this.controlledShip.getRotation() - this.controlledShip.getTarget().getRotation()) < .4) {
 			this.reverseCount++;
 		}
 	}
@@ -68,7 +64,7 @@ class EnemyAI  {
 			else if (onscreen) this.game.fireTorpedoes(this.controlledShip);
 		}
 		// ai gets some randomness
-		else if (this.randomness) {
+		else {
 			const random = Math.random();
 			if (random < .02) this.controlledShip.changeDirection(1);
 			else if (random > .98) this.controlledShip.changeDirection(-1);
@@ -85,7 +81,7 @@ class EnemyAI  {
 			this.reverseCount++;
 			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
 		}
-		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.target.getSpeed()) ||
+		else if ((this.controlledShip.getSpeed() < 2 && this.controlledShip.getSpeed() < this.controlledShip.getTarget().getSpeed()) ||
 			this.controlledShip.getSpeed() < 1) {
 			this.controlledShip.power(1);
 		}

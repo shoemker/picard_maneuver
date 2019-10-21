@@ -1,5 +1,4 @@
 const Shield = require("./shield");
-const Utils = require("./utils");
 
 // SSD is the ship's systems display in the corner of the screen
 class SSD {
@@ -14,7 +13,7 @@ class SSD {
 		this.imgCoords = options.imgCoords;
 		this.beamWeaponName = options.beamWeaponName;
 		
-		this.SSDimg = Utils.loadImg(options.imgName);
+		this.SSDimg = options.img;
 
 		this.shields = [];
 		this.raiseShields();

@@ -14,6 +14,7 @@ class Ship extends SpaceObject{
 		this.explosion = options.explosion;
 		this.explosionImg = options.explosionImg;
 		this.sparksImg = options.sparksImg;
+		this.target = options.target;
 
 		this.speed = 0;
 		this.width = 60;
@@ -44,12 +45,14 @@ class Ship extends SpaceObject{
 
 	// getter methods
 	getDirection() { return this.direction; }
-	getSpeed() {	return this.speed; }
+	getSpeed() { return this.speed; }
 	getRotation() { return this.rotationOffset; }
 	phaserReady() { return this.phaserRecharge === this.phaserRechargeMax; }
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
+	getTarget() { return this.target; }
 
+	setTarget(target) { this.target = target; }
 	
 	draw(ctx) {
 
@@ -188,9 +191,8 @@ class Ship extends SpaceObject{
 	};
 
 
-	firePhasers(target) {
+	firePhasers() {
 		if (this.phaserRecharge === this.phaserRechargeMax) {
-			this.target = target;
 			this.target.receivePhaserHit(this);
 			this.phaserCounter = 1;
 
