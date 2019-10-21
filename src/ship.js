@@ -64,7 +64,10 @@ class Ship extends SpaceObject{
 			target
 		);
 
-		if (this.phaserCounter > 0 && this.target) this.drawPhaser(ctx);
+		// if there are multiple enemies, the current target gets a target draw on on it
+		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
+
+		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -91,12 +94,12 @@ class Ship extends SpaceObject{
 		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * this.phaserStartOffset;
 		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * this.phaserStartOffset;
 
-		let xDelta = this.target.center()[0] - xStartingPoint;
-		let yDelta = this.target.center()[1] - yStartingPoint;
+		let xDelta = this.ptarget.center()[0] - xStartingPoint;
+		let yDelta = this.ptarget.center()[1] - yStartingPoint;
 
 		// beam should stop if it hits a shield
-		if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
-			const distance = Utils.distance(this, this.target);
+		if (this.ptarget.ssd.getShields()[this.ptarget.shieldHit].getHitpoints() > 0) {
+			const distance = Utils.distance(this, this.ptarget);
 			const distanceRatio = (distance-35)/distance
 			xDelta = xDelta * distanceRatio;
 			yDelta = yDelta * distanceRatio;
@@ -118,8 +121,8 @@ class Ship extends SpaceObject{
 		this.phaserCounter++;
 
 		if (this.phaserCounter >= phaserDrawMax) {
-			if (this.target.ssd.getShields()[this.target.shieldHit].getHitpoints() > 0) {
-				this.target.drawShieldOnHit(ctx, this.target.shieldHit);
+			if (this.ptarget.ssd.getShields()[this.ptarget.shieldHit].getHitpoints() > 0) {
+				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
 			}
 
 			//draws sparks effect when beam hits
@@ -197,7 +200,7 @@ class Ship extends SpaceObject{
 		if (this.phaserRecharge === this.phaserRechargeMax) {
 			this.target.receivePhaserHit(this);
 			this.phaserCounter = 1;
-
+			this.ptarget = this.target;
 			this.phaserRecharge = 0;
 			this.beamSound.play();
 		}

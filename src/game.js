@@ -145,9 +145,6 @@ class Game {
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
-
-		const center = this.enterprise.getTarget().center();
-		if (this.enemies.length > 1) Utils.drawTarget(ctx, center[0], center[1],7,1);
 	};
 
 
@@ -272,7 +269,7 @@ class Game {
 		})
 		if (newIdx === this.enemies.length) newIdx = 0;
 		this.enterprise.setTarget(this.enemies[newIdx]);
-	}
+	};
 
 
 	checkKeyMap() {
