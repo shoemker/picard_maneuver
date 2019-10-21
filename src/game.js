@@ -256,9 +256,22 @@ class Game {
 	};
 
 
+	changeTarget() {
+		let newIdx = 0;
+		this.enemies.forEach((enemy, i) => {
+			if (enemy === this.enterprise.getTarget()) newIdx = i + 1;
+		})
+		if (newIdx === this.enemies.length) newIdx = 0;
+		this.enterprise.setTarget(this.enemies[newIdx]);
+	}
+
+
 	checkKeyMap() {
 		// spacebar
 		if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
+
+		// t
+		if (this.keyMap["84"]) this.changeTarget(); 
 
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);

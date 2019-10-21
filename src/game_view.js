@@ -47,20 +47,20 @@ class GameView {
 			target: this.game.enterprise
 		}));
 
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 500],
-		// 	rotationOffset: 0,
-		// 	phaserColor: "green",
-		// 	torpSound: sounds.kTorpSound,
-		// 	beamSound: sounds.disruptSound,
-		// 	explosion: this.explosion,
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	target: this.game.enterprise,
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));
+		this.game.addEnemy(new Bird_of_Prey({
+			pos: [0, 500],
+			rotationOffset: 0,
+			phaserColor: "green",
+			torpSound: sounds.kTorpSound,
+			beamSound: sounds.disruptSound,
+			explosion: this.explosion,
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 60],
+			target: this.game.enterprise,
+			phaserRecharge: 80,
+			torpedoReload: 100
+		}));
 		
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
