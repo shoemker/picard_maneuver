@@ -75,10 +75,11 @@ class Game {
 
 		this.moveObjects();
 
-		this.enemyAIs.forEach((AI, i) => AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
+		this.enemyAIs.forEach((AI, i) => 
+			AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
 
-		if ( this.autopilot) 
-			this.enterpriseAI.consultAI(this.enemies[0].onscreen(this.canvas_width, this.canvas_height));
+		if (this.autopilot && this.enterprise.getTarget()) 
+			this.enterpriseAI.consultAI(this.enterprise.getTarget().onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions();
 	};

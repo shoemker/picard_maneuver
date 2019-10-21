@@ -47,20 +47,20 @@ class GameView {
 			target: this.game.enterprise
 		}));
 
-		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 500],
-			rotationOffset: 0,
-			phaserColor: "green",
-			torpSound: sounds.kTorpSound,
-			beamSound: sounds.disruptSound,
-			explosion: this.explosion,
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			ssdPos: [100, 60],
-			target: this.game.enterprise,
-			phaserRecharge: 80,
-			torpedoReload: 100
-		}));
+		// this.game.addEnemy(new D7({
+		// 	pos: [0, 500],
+		// 	rotationOffset: 0,
+		// 	phaserColor: "green",
+		// 	torpSound: sounds.kTorpSound,
+		// 	beamSound: sounds.disruptSound,
+		// 	explosion: this.explosion,
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg,
+		// 	ssdPos: [100, 60],
+		// 	target: this.game.enterprise,
+		// 	phaserRecharge: 80,
+		// 	torpedoReload: 100
+		// }));
 		
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
@@ -79,9 +79,17 @@ class GameView {
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
 				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
-				else if (this.game.enemies[0].getHull() === 0) this.game.win = true;
-				else this.game.step();
-
+				else if (this.game.enemies.length === 0) this.game.win = true;
+				else {
+					this.game.enemies.forEach((enemy, i) => {
+						if (enemy.isGone()){
+							this.game.enemies.splice(i, 1);
+							this.game.enemyAIs.splice(i, 1);
+							if(this.game.enterprise.getTarget() === enemy) this.game.changeTarget();
+						} 
+					})
+					this.game.step();
+				}
 				this.game.draw(this.ctx);
 			}
 

@@ -51,11 +51,11 @@ class Ship extends SpaceObject{
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 	getTarget() { return this.target; }
+	isGone() { return this.shipExplosionCounter >= 33; }
 
 	setTarget(target) { this.target = target; }
 	
 	draw(ctx) {
-
 		//draw ship systems display
 		this.ssd.draw(ctx,
 			this.phaserRecharge / this.phaserRechargeMax,
@@ -77,6 +77,7 @@ class Ship extends SpaceObject{
 		}
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
+
 	}
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
@@ -181,7 +182,7 @@ class Ship extends SpaceObject{
 
 
 	drawShipExplosion(ctx) {
-		this.explosion.draw(ctx, this.center());
+		return this.explosion.draw(ctx, this.center());
 	};
 
 
