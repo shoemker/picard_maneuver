@@ -19,7 +19,6 @@ class GameView {
 
 		this.sparksImg = Utils.loadImg('./images/sparks.png');
 		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
-		this.explosion = new Explosion(this.explosionImg, sounds.exploSound);
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2 - 50],
@@ -27,7 +26,7 @@ class GameView {
 			phaserColor: "red",
 			torpSound: sounds.torpSound,
 			beamSound: sounds.phasSound,
-			explosion: this.explosion,
+			explosion: new Explosion(this.explosionImg, sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [1040, 710],
@@ -40,7 +39,7 @@ class GameView {
 			phaserColor: "green",
 			torpSound: sounds.kTorpSound,
 			beamSound: sounds.disruptSound,
-			explosion: this.explosion,
+			explosion: new Explosion(this.explosionImg, sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
@@ -53,7 +52,7 @@ class GameView {
 		// 	phaserColor: "green",
 		// 	torpSound: sounds.kTorpSound,
 		// 	beamSound: sounds.disruptSound,
-		// 	explosion: this.explosion,
+		// 	explosion: new Explosion(this.explosionImg, sounds.exploSound),
 		// 	explosionImg: this.explosionImg,
 		// 	sparksImg: this.sparksImg,
 		// 	ssdPos: [100, 60],

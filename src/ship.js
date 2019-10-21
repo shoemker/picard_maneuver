@@ -63,7 +63,7 @@ class Ship extends SpaceObject{
 			this.hullIntegrity / this.hullIntegrityMax
 		);
 
-		if (this.phaserCounter > 0) this.drawPhaser(ctx);
+		if (this.phaserCounter > 0 && this.target) this.drawPhaser(ctx);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -214,7 +214,7 @@ class Ship extends SpaceObject{
 
 
 	receivePhaserHit(attacker) {
-		this.takeDamage(attacker, this.phaserDamage);
+		this.takeDamage(attacker, attacker.phaserDamage);
 	};
 
 
