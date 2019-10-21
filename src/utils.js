@@ -28,6 +28,23 @@ const Utils = {
 		img.onload = () => { return true; }
 		img.src = file;
 		return img;
+	},
+
+	drawTarget(ctx, x, y, size,lw) {
+
+		ctx.beginPath();
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = lw;
+		ctx.arc(x, y, size, 0, 2 * Math.PI);
+		ctx.stroke();
+
+		ctx.moveTo(x, y - size);
+		ctx.lineTo(x, y + size);
+		ctx.stroke();
+
+		ctx.moveTo(x - size, y);
+		ctx.lineTo(x + size, y);
+		ctx.stroke();
 	}
 }
 

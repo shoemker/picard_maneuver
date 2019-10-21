@@ -14,6 +14,9 @@ class Bird_of_Prey extends Ship {
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
 
+		// this.phaserDamage = 5;
+
+
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
@@ -26,7 +29,7 @@ class Bird_of_Prey extends Ship {
 	};
 
 
-	draw(ctx) {
+	draw(ctx, target) {
 		ctx.save();
 
 		this.rotateCanvas(ctx);
@@ -43,7 +46,7 @@ class Bird_of_Prey extends Ship {
 
 		ctx.restore();
 
-		super.draw(ctx);
+		super.draw(ctx, target);
 	};
 }
 

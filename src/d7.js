@@ -10,8 +10,9 @@ class D7 extends Ship {
 
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
+		
 		// this.hullIntegrity = 5;
-		this.phaserDamage = 50;
+		// this.phaserDamage = 5;
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
@@ -25,7 +26,7 @@ class D7 extends Ship {
 	};
 
 
-	draw(ctx) {
+	draw(ctx, target) {
 		ctx.save();
 
 		this.rotateCanvas(ctx);
@@ -42,7 +43,7 @@ class D7 extends Ship {
 
 		ctx.restore();
 
-		super.draw(ctx);
+		super.draw(ctx, target);
 	};
 }
 

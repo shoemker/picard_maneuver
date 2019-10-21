@@ -133,7 +133,11 @@ class Game {
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
 		this.enterprise.draw(ctx);
-		this.enemies.forEach((enemy) => enemy.draw(ctx));
+
+		this.enemies.forEach((enemy) =>{
+			if(this.enemies.length > 1) enemy.draw(ctx, enemy === this.enterprise.getTarget());
+			else enemy.draw(ctx);
+		});
 
 		// draw mute and autopilot box
 		this.drawCheckBox(ctx, this.canvas_width - 130, 30, "Mute", this.muted);
@@ -141,6 +145,9 @@ class Game {
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
+
+		const center = this.enterprise.getTarget().center();
+		if (this.enemies.length > 1) Utils.drawTarget(ctx, center[0], center[1],7,1);
 	};
 
 
@@ -158,6 +165,7 @@ class Game {
 		ctx.beginPath();
 		ctx.rect(x, y, 20, 20);
 		ctx.strokeStyle = "white";
+		ctx.lineWidth = 3;
 		ctx.stroke();
 
 		ctx.font = "24px Arial";
@@ -272,7 +280,7 @@ class Game {
 		if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
 
 		// t
-		if (this.keyMap["84"]) this.changeTarget(); 
+		if (this.keyMap["84"] && this.turnCounter === 0) this.changeTarget(); 
 
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);

@@ -1,4 +1,5 @@
 const Shield = require("./shield");
+const Utils = require("./utils");
 
 // SSD is the ship's systems display in the corner of the screen
 class SSD {
@@ -25,7 +26,7 @@ class SSD {
 	};
 
 
-	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage) {
+	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			this.ssd_x + this.img_pos_offset[0],
@@ -47,6 +48,8 @@ class SSD {
 		this.drawHullIntegrity(ctx, hullPercentage);
 
 		this.drawLabels(ctx);
+
+		if (target) Utils.drawTarget(ctx, this.ssd_x+35, this.ssd_y+160, 15,2);
 	};
 
 

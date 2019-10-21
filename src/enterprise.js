@@ -7,7 +7,7 @@ class Enterprise extends Ship {
 		super(options);
 
 		// this.hullIntegrity = 600;
-		this.phaserDamage = 10;
+		// this.phaserDamage = 50;
  
 		this.shipImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png');
 

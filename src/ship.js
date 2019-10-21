@@ -55,12 +55,13 @@ class Ship extends SpaceObject{
 
 	setTarget(target) { this.target = target; }
 	
-	draw(ctx) {
+	draw(ctx, target) {
 		//draw ship systems display
 		this.ssd.draw(ctx,
 			this.phaserRecharge / this.phaserRechargeMax,
 			this.torpedoReload / this.torpedoReloadMax,
-			this.hullIntegrity / this.hullIntegrityMax
+			this.hullIntegrity / this.hullIntegrityMax,
+			target
 		);
 
 		if (this.phaserCounter > 0 && this.target) this.drawPhaser(ctx);

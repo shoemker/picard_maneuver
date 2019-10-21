@@ -46,7 +46,7 @@ class GameView {
 			target: this.game.enterprise
 		}));
 
-		// this.game.addEnemy(new D7({
+		// this.game.addEnemy(new Bird_of_Prey({
 		// 	pos: [0, 500],
 		// 	rotationOffset: 0,
 		// 	phaserColor: "green",
