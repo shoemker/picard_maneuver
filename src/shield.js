@@ -21,7 +21,7 @@ class Shield {
 
 	draw(ctx) {
 		this.timer++;
-		if (this.timer === 20) {
+		if (this.timer === 40) {
 			this.timer = 0;
 			this.color = "#ADD8E6";
 		}

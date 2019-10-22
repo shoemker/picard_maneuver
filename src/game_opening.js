@@ -15,6 +15,7 @@ class GameOpening {
 	};
 
 	getChoose() { return this.choose; }
+	setChoose() {this.choose = true; }
 
 	createOpeningStarfield() {
 		for (let i = 0; i < this.stars.length; i++) {
