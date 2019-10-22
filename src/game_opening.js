@@ -91,8 +91,8 @@ class GameOpening {
 		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 190, 200);
 
 		ctx.font = "48px FINALOLD";
-		ctx.fillText("Fight a Cruiser", 215, 715);
-		ctx.fillText("Or 2 Smaller Birds of Prey", 670, 715);
+		ctx.fillText("Fight a Cruiser", 215, 725);
+		ctx.fillText("Or 2 Smaller Birds of Prey", 670, 725);
 
 	};
 

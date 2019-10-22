@@ -21,7 +21,8 @@ class Enterprise extends Ship {
 			img_pos_offset: [5,0],
 			img: Utils.loadImg('./images/enterprise-refit-ssd.png'),
 			beamWeaponName: "Phaser",
-			imgCoords: [0, 0, 54, 129]
+			imgCoords: [0, 0, 54, 129],
+			shieldStrength: 100
 		});
 	};
 	

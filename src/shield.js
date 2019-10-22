@@ -5,7 +5,8 @@ class Shield {
 		this.end = options.end;
 		this.multiplier = options.multiplier
 
-		this.hitpoints = 100;
+		this.maxHitpoints = options.shieldStrength;
+		this.hitpoints = this.maxHitpoints;
 		this.color = "#ADD8E6";
 		this.timer = 0;
 	}
@@ -22,7 +23,7 @@ class Shield {
 			this.color = "#ADD8E6";
 		}
 
-		let shieldPercentage = this.hitpoints / 100;
+		let shieldPercentage = this.hitpoints / this.maxHitpoints;
 
 		ctx.beginPath();
 		ctx.arc(this.pos[0], 

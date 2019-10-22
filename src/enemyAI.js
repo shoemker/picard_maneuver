@@ -2,9 +2,10 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, game) {
+	constructor(controlledShip, game, turnCounterMax) {
 		this.controlledShip = controlledShip;
 		this.game = game;
+		this.turnCounterMax = turnCounterMax;
 
 		this.turnLeftLength = 0;
 		this.turnRightLength = 0;
@@ -37,11 +38,10 @@ class EnemyAI  {
 	
 
 	turningAndTorpedoes(angleOfOpponent, onscreen) {
-		const turnCounterMax = 4;
 		const turnCircleMax = 80;
 		if (!onscreen || this.controlledShip.torpedosReady()) {
 			if (angleOfOpponent > Math.PI * .0625 && angleOfOpponent <= Math.PI) {
-				if (this.turnCounter === turnCounterMax) {
+				if (this.turnCounter === this.turnCounterMax) {
 					if (this.turnRightLength < turnCircleMax) {
 						this.controlledShip.changeDirection(1);
 						this.turnRightLength++;
@@ -52,7 +52,7 @@ class EnemyAI  {
 			}
 			else if (angleOfOpponent < Math.PI * 1.9375 &&
 				angleOfOpponent > Math.PI) {
-				if (this.turnCounter === turnCounterMax) {
+				if (this.turnCounter === this.turnCounterMax) {
 					if (this.turnLeftLength < turnCircleMax) {
 						this.controlledShip.changeDirection(-1);
 						this.turnLeftLength++;
@@ -71,7 +71,7 @@ class EnemyAI  {
 		}
 
 		this.turnCounter++;
-		if (this.turnCounter > turnCounterMax) this.turnCounter = 0;
+		if (this.turnCounter > this.turnCounterMax) this.turnCounter = 0;
 	}
 
 

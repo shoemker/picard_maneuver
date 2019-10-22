@@ -47,7 +47,7 @@ class GameView {
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
 			target: this.game.enterprise
-		}));
+		}), 3);
 
 		this.game.addEnemy(new Bird_of_Prey({
 			pos: [0, 250],
@@ -62,7 +62,7 @@ class GameView {
 			target: this.game.enterprise,
 			phaserRecharge: 80,
 			torpedoReload: 100
-		}));
+		}), 3);
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
@@ -80,7 +80,7 @@ class GameView {
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
 			target: this.game.enterprise
-		}));
+		}), 4);
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	}

@@ -21,7 +21,8 @@ class D7 extends Ship {
 			img_pos_offset: [0, 0],
 			img: Utils.loadImg('./images/D7-SSD.png'),
 			beamWeaponName: 'Disruptor',
-			imgCoords: [0, 0, 170, 175]
+			imgCoords: [0, 0, 170, 175],
+			shieldStrength: 100
 		});
 	};
 

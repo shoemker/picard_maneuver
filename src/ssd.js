@@ -13,7 +13,7 @@ class SSD {
 		this.img_pos_offset = options.img_pos_offset;
 		this.imgCoords = options.imgCoords;
 		this.beamWeaponName = options.beamWeaponName;
-		
+		this.shieldStrength = options.shieldStrength;
 		this.SSDimg = options.img;
 
 		this.shields = [];
@@ -109,7 +109,8 @@ class SSD {
 			pos: [x, y + 25],
 			start: 1.4,
 			end: 1.6,
-			multiplier: .1
+			multiplier: .1,
+			shieldStrength: this.shieldStrength
 		}));
 
 		// starboard shield
@@ -117,7 +118,8 @@ class SSD {
 			pos: [x - 30, y + 5],
 			start: 1.8,
 			end: 2.2,
-			multiplier: .2
+			multiplier: .2,
+			shieldStrength: this.shieldStrength
 		}));
 
 		// rear shield
@@ -126,6 +128,7 @@ class SSD {
 			start: .4,
 			end: .6,
 			multiplier: .1,
+			shieldStrength: this.shieldStrength
 		}));
 
 		// port shield
@@ -133,7 +136,8 @@ class SSD {
 			pos: [x + 30, y + 5],
 			start: .8,
 			end: 1.2,
-			multiplier: .2
+			multiplier: .2,
+			shieldStrength: this.shieldStrength
 		}));
 	};
 

@@ -36,12 +36,12 @@ class Game {
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
-		this.enterpriseAI = new EnemyAI(this.enterprise, this);
+		this.enterpriseAI = new EnemyAI(this.enterprise, this, 4);
 	};
 
-	addEnemy(enemy){
+	addEnemy(enemy, turnCounterMax){
 		this.enemies.push(enemy);
-		this.enemyAIs.push(new EnemyAI(enemy, this));
+		this.enemyAIs.push(new EnemyAI(enemy, this, turnCounterMax));
 	};
 
 
