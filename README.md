@@ -13,6 +13,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <ol>
 	<li>Control over your ship (speed, direction, weapons).</li>
 	<li>Optional autopilot if you just want to watch.</li>
+	<li>Fight either one cruiser or 2 birds of prey.</li>
 	<li>Visuals for beam weapon and torpedos.</li>
 	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>

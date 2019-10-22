@@ -55,6 +55,7 @@ p {
 	text-align: center;
 }
 
+
 #controls-list {
 	font-family: 'FINALOLD';
 	color:lightblue;
@@ -63,4 +64,15 @@ p {
 
 .instr-desc {
 	color: lightcyan;
+}
+
+@media screen and (max-width: 1610px) {
+	p {
+		font-size: 48px;
+	}
+
+	#controls-list {
+
+		font-size: 40px;
+	}
 }

@@ -26,6 +26,7 @@ class Ship extends SpaceObject{
 		this.shipExplosionCounter = 0;
 		this.phaserDamage = 18;
 		this.torpedoDamage = 20;
+		this.targetShieldHP = 1;
 		
 		this.direction = this.calcDirection(this.rotationOffset);
 		this.increment = Math.PI / 36;
@@ -92,6 +93,7 @@ class Ship extends SpaceObject{
 
 		const phaserDrawMax = 12;
 
+
 		// moves the starting point for the phaser forward on the saucer for the enterprise
 		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * this.phaserStartOffset;
 		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * this.phaserStartOffset;
@@ -100,11 +102,13 @@ class Ship extends SpaceObject{
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;
 
 		// beam should stop if it hits a shield
-		if (this.ptarget.ssd.getShields()[this.ptarget.shieldHit].getHitpoints() > 0) {
+		if (this.targetShieldHP > 0) {
 			const distance = Utils.distance(this, this.ptarget);
-			const distanceRatio = (distance-35)/distance
-			xDelta = xDelta * distanceRatio;
-			yDelta = yDelta * distanceRatio;
+			if (distance > 35 ) {
+				const distanceRatio = (distance - 35) / distance
+				xDelta = xDelta * distanceRatio;
+				yDelta = yDelta * distanceRatio;
+			}
 		}
 
 		let increasingRatio = this.phaserCounter / phaserDrawMax;
@@ -122,20 +126,27 @@ class Ship extends SpaceObject{
 
 		this.phaserCounter++;
 
+		if (this.phaserCounter == phaserDrawMax) {
+			this.targetShieldHP = this.target.receivePhaserHit(this);
+		}
+
 		if (this.phaserCounter >= phaserDrawMax) {
-			if (this.ptarget.ssd.getShields()[this.ptarget.shieldHit].getHitpoints() > 0) {
+			if (this.targetShieldHP > 0) {
 				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
 			}
 
 			//draws sparks effect when beam hits
 			if (this.phaserCounter%2 === 0) {
-				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress-7, yProgress-7, 14, 14);
+				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress-5, yProgress-5, 10, 10);
 			}
-			else ctx.drawImage(this.sparksImg, 120, 2, 165,148, xProgress - 10, yProgress - 10, 20, 20);
+			else ctx.drawImage(this.sparksImg, 120, 2, 165,148, xProgress - 7, yProgress - 7, 14, 14);
 		}
 
 		// zeros the counter and ends the beam effect
-		if (this.phaserCounter > (phaserDrawMax+10)) this.phaserCounter = 0;
+		if (this.phaserCounter > (phaserDrawMax+10)) {
+			this.phaserCounter = 0;
+			this.targetShieldHP = 1;
+		}
 	};
 	
 
@@ -200,7 +211,6 @@ class Ship extends SpaceObject{
 
 	firePhasers() {
 		if (this.phaserRecharge === this.phaserRechargeMax) {
-			this.target.receivePhaserHit(this);
 			this.phaserCounter = 1;
 			this.ptarget = this.target;
 			this.phaserRecharge = 0;
@@ -220,7 +230,7 @@ class Ship extends SpaceObject{
 
 
 	receivePhaserHit(attacker) {
-		this.takeDamage(attacker, attacker.phaserDamage);
+		return this.takeDamage(attacker, attacker.phaserDamage);
 	};
 
 
@@ -234,13 +244,15 @@ class Ship extends SpaceObject{
 		this.attacker = attacker;
 
 		this.whichShieldWasHit(attacker);
-
-		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
+		const hp = this.ssd.getShields()[this.shieldHit].getHitpoints();
+		if (hp > 0) {
 			this.ssd.getShields()[this.shieldHit].hit(damage);
 		}
 		else this.hullIntegrity -= damage;
 
 		if (this.hullIntegrity < 0) this.hullIntegrity = 0;
+
+		return hp;
 	};
 
 	

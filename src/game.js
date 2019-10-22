@@ -82,6 +82,7 @@ class Game {
 			this.enterpriseAI.consultAI(this.enterprise.getTarget().onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions();
+		// console.log(Utils.distance(this.enterprise, this.enemies[0]));
 	};
 
 
