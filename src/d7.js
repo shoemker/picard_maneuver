@@ -7,7 +7,8 @@ class D7 extends Ship {
 		super(options);
 
 		this.shipImg = Utils.loadImg('./images/D7.png');
-
+		this.turnRadius = 4;
+		
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
 		

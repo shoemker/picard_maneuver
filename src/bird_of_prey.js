@@ -7,7 +7,8 @@ class Bird_of_Prey extends Ship {
 		super(options);
 
 		this.shipImg = Utils.loadImg('./images/bop.png');
-
+		this.turnRadius = 3;
+		
 		this.width = 30;
 		this.height = 40;
 

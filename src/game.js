@@ -36,12 +36,12 @@ class Game {
 
 	addEnterprise(enterprise){
 		this.enterprise = enterprise;
-		this.enterpriseAI = new EnemyAI(this.enterprise, this, 4);
+		this.enterpriseAI = new EnemyAI(enterprise, this);
 	};
 
-	addEnemy(enemy, turnCounterMax){
+	addEnemy(enemy){
 		this.enemies.push(enemy);
-		this.enemyAIs.push(new EnemyAI(enemy, this, turnCounterMax));
+		this.enemyAIs.push(new EnemyAI(enemy, this));
 	};
 
 	// factory method to create planet and moon objects

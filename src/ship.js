@@ -16,6 +16,7 @@ class Ship extends SpaceObject{
 		this.sparksImg = options.sparksImg;
 		this.target = options.target;
 
+		this.turnRadius;
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30;
@@ -51,6 +52,7 @@ class Ship extends SpaceObject{
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 	getTarget() { return this.target; }
+	getTurnRadius() { return this.turnRadius; }
 	isGone() { return this.shipExplosionCounter >= 33; }
 
 	setTarget(target) { this.target = target; }

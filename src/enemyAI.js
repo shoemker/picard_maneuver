@@ -2,10 +2,10 @@
 const Utils = require("./utils");
 
 class EnemyAI  {
-	constructor(controlledShip, game, turnCounterMax) {
+	constructor(controlledShip, game) {
 		this.controlledShip = controlledShip;
 		this.game = game;
-		this.turnCounterMax = turnCounterMax;
+		this.turnCounterMax = controlledShip.getTurnRadius();
 
 		this.turnLeftLength = 0;
 		this.turnRightLength = 0;
