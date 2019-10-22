@@ -44,7 +44,7 @@ class Game {
 		this.enemyAIs.push(new EnemyAI(enemy, this, turnCounterMax));
 	};
 
-
+	// factory method to create planet and moon objects
 	createPlanetAndMoon() {
 		this.planet_08 = new Planet({
 			pos: [300, 300],
@@ -242,9 +242,10 @@ class Game {
 
 
 	firePhasers(ship) {
-		const enemyOnScreen = this.enemies[0].onscreen(this.canvas_width, this.canvas_height);
-		if ((ship === this.enterprise && enemyOnScreen) || ship.onscreen(this.canvas_width, this.canvas_height))
-			ship.firePhasers();
+		const enemyOnScreen = this.enterprise.getTarget().onscreen(this.canvas_width, this.canvas_height);
+		if ((ship === this.enterprise && enemyOnScreen) || 
+		  (ship !== this.enterprise && ship.onscreen(this.canvas_width, this.canvas_height)))
+			 ship.firePhasers();
 	};
 
 

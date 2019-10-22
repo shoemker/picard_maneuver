@@ -36,14 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	const track6 = audioContext.createMediaElementSource(theme);
 	track6.connect(gainNode).connect(audioContext.destination);
 
-	let g = new GameView(ctx, canvasEl.width, canvasEl.height, {
-		phasSound, disruptSound,
-		kTorpSound, torpSound,
-		exploSound,theme,
-		}
-	);
+	let g = new GameView(ctx, canvasEl.width, canvasEl.height, 
+		{ phasSound, disruptSound, kTorpSound, torpSound,	exploSound,theme});
 
-	g.start(ctx);
+	g.start();
 
 	canvasEl.addEventListener("click", (e) => {
 		if (g.gameOpening !== null && !g.gameOpening.getChoose()) {
