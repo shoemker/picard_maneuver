@@ -37,7 +37,7 @@ class GameView {
 
 	addBops() {
 		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 500],
+			pos: [0, 600],
 			rotationOffset: 0,
 			phaserColor: "green",
 			torpSound: this.sounds.kTorpSound,
@@ -50,7 +50,7 @@ class GameView {
 		}));
 
 		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 100],
+			pos: [0, 250],
 			rotationOffset: 0,
 			phaserColor: "green",
 			torpSound: this.sounds.kTorpSound,
@@ -125,11 +125,12 @@ class GameView {
 	};
 
 
+	// get scenario click if still in the opening of the game, or
 	// check to see if mute or autopilot is being clicked
 	checkClick(x, y, gainNode) {
 
 		if (this.gameOpening !== null) {
-			if (y >= 267 && y <= 620) {
+			if (y >= 267 && y <= 734) {
 				if (x > 166 && x < 522) {
 					this.addD7();
 					this.openingOff();

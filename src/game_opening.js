@@ -71,21 +71,28 @@ class GameOpening {
 
 
 	drawScenario(ctx) {
-		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  150, 250,  350, 350);
-		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350,  700, 250,  350, 350);
+		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  150, 300,  350, 350);
+		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350,  700, 300,  350, 350);
 
 		ctx.beginPath();
-		ctx.rect(150, 250, 350, 350);
+		ctx.rect(150, 300, 350, 350);
 		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.rect(700, 250, 350, 350);
+		ctx.rect(700, 300, 350, 350);
 		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
 		ctx.stroke();
 
+		ctx.fillStyle = "lightblue";
+		ctx.font = "72px FINALOLD";
+		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 190, 200);
+
+		ctx.font = "48px FINALOLD";
+		ctx.fillText("Fight a Cruiser", 215, 715);
+		ctx.fillText("Or 2 Smaller Birds of Prey", 670, 715);
 
 	};
 
