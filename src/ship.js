@@ -93,7 +93,6 @@ class Ship extends SpaceObject{
 
 		const phaserDrawMax = 12;
 
-
 		// moves the starting point for the phaser forward on the saucer for the enterprise
 		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * this.phaserStartOffset;
 		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * this.phaserStartOffset;
@@ -126,9 +125,7 @@ class Ship extends SpaceObject{
 
 		this.phaserCounter++;
 
-		if (this.phaserCounter == phaserDrawMax) {
-			this.targetShieldHP = this.target.receivePhaserHit(this);
-		}
+		if (this.phaserCounter == phaserDrawMax) { this.targetShieldHP = this.target.receivePhaserHit(this); }
 
 		if (this.phaserCounter >= phaserDrawMax) {
 			if (this.targetShieldHP > 0) {
