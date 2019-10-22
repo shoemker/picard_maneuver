@@ -10,13 +10,9 @@ class Shield {
 		this.timer = 0;
 	}
 
-	getHitpoints() {
-		return this.hitpoints;
-	}
+	getHitpoints() { return this.hitpoints; }
 
-	up() {
-		return this.hitpoints > 0;
-	}
+	up() { return this.hitpoints > 0; }
 
 
 	draw(ctx) {

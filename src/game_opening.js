@@ -1,5 +1,5 @@
+const Utils = require("./utils");
 
-// a version of this came from http://codentronix.com/2011/07/22/html5-canvas-3d-starfield/
 class GameOpening {
 
 	constructor(canvas_width, canvas_height) {
@@ -12,11 +12,15 @@ class GameOpening {
 		this.stars = new Array(512);
 
 		this.createOpeningStarfield();
+
+		this.bopScenImg = Utils.loadImg('./images/bops_scenario.png');
+		this.d7ScenImg = Utils.loadImg('./images/D7_scenario.png');
 	};
 
 	getChoose() { return this.choose; }
-	setChoose() {this.choose = true; }
+	setChoose() { this.choose = true; }
 
+	// a version of the starfield came from http://codentronix.com/2011/07/22/html5-canvas-3d-starfield/
 	createOpeningStarfield() {
 		for (let i = 0; i < this.stars.length; i++) {
 			this.stars[i] = {
@@ -57,11 +61,32 @@ class GameOpening {
 		});
 
 		if (!this.choose) this.drawText(ctx);
+		else this.drawScenario(ctx);
 	};
 
 
 	randomRange(minVal, maxVal) {
 		return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
+	};
+
+
+	drawScenario(ctx) {
+		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  150, 250,  350, 350);
+		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350,  700, 250,  350, 350);
+
+		ctx.beginPath();
+		ctx.rect(150, 250, 350, 350);
+		ctx.strokeStyle = "grey";
+		ctx.lineWidth = 3;
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.rect(700, 250, 350, 350);
+		ctx.strokeStyle = "grey";
+		ctx.lineWidth = 3;
+		ctx.stroke();
+
+
 	};
 
 

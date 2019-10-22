@@ -46,12 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	g.start(ctx);
 
 	canvasEl.addEventListener("click", (e) => {
-		if (g.gameOpening !== null) {
-		
-			g.openingOff();
+		if (g.gameOpening !== null && !g.gameOpening.getChoose()) {
+			g.gameOpening.setChoose();
 			audioContext.resume().then(() => { return true; });
 		}
 		else g.checkClick(e.pageX, e.pageY, gainNode);
+
+		// console.log(e.pageX, e.pageY);
 	});
 
 	window.addEventListener('keydown', (e) => {

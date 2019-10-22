@@ -12,7 +12,7 @@ class GameView {
 
 		this.ctx = ctx;
 		this.pause = false;
-		this.theme = sounds.theme;
+		this.sounds = sounds;
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
@@ -24,59 +24,67 @@ class GameView {
 			pos: [width/2 - 50, height/2 - 50],
 			rotationOffset: Math.PI,
 			phaserColor: "red",
-			torpSound: sounds.torpSound,
-			beamSound: sounds.phasSound,
-			explosion: new Explosion(this.explosionImg, sounds.exploSound),
+			torpSound: this.sounds.torpSound,
+			beamSound: this.sounds.phasSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [1040, 710],
 			target: this.game.enemies[0]
 		}));
-		
-		this.game.addEnemy(new D7({
-			pos: [0, 100],
+	};
+	
+
+	addBops() {
+		this.game.addEnemy(new Bird_of_Prey({
+			pos: [0, 500],
 			rotationOffset: 0,
 			phaserColor: "green",
-			torpSound: sounds.kTorpSound,
-			beamSound: sounds.disruptSound,
-			explosion: new Explosion(this.explosionImg, sounds.exploSound),
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disruptSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
 			target: this.game.enterprise
 		}));
 
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 100],
-		// 	rotationOffset: 0,
-		// 	phaserColor: "green",
-		// 	torpSound: sounds.kTorpSound,
-		// 	beamSound: sounds.disruptSound,
-		// 	explosion: new Explosion(this.explosionImg, sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 710],
-		// 	target: this.game.enterprise
-		// }));
+		this.game.addEnemy(new Bird_of_Prey({
+			pos: [0, 100],
+			rotationOffset: 0,
+			phaserColor: "green",
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disruptSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 60],
+			target: this.game.enterprise,
+			phaserRecharge: 80,
+			torpedoReload: 100
+		}));
 
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 500],
-		// 	rotationOffset: 0,
-		// 	phaserColor: "green",
-		// 	torpSound: sounds.kTorpSound,
-		// 	beamSound: sounds.disruptSound,
-		// 	explosion: new Explosion(this.explosionImg, sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	target: this.game.enterprise,
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));
-		
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
-	
+
+
+	addD7() {
+		this.game.addEnemy(new D7({
+			pos: [0, 100],
+			rotationOffset: 0,
+			phaserColor: "green",
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disruptSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 710],
+			target: this.game.enterprise
+		}));
+
+		this.game.enterprise.setTarget(this.game.enemies[0]);
+	}
+
 
 	start() {
 		// start the animation
@@ -120,21 +128,35 @@ class GameView {
 	// check to see if mute or autopilot is being clicked
 	checkClick(x, y, gainNode) {
 
-		if(x > 1085 && x < 1112) {
-			if (y > 46 && y < 71) {
-				this.game.muteToggle();
-
-				if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
-				else gainNode.gain.value = 0;
-
-				// if paused, draw to show checkmark in box
-				if (this.pause) this.game.draw(this.ctx)
+		if (this.gameOpening !== null) {
+			if (y >= 267 && y <= 620) {
+				if (x > 166 && x < 522) {
+					this.addD7();
+					this.openingOff();
+				}
+				else if (x > 716 && x < 1070) {
+					this.addBops();
+					this.openingOff();
+				}
 			}
-			else if (y > 85 && y < 112) {
-				this.game.autoPilotToggle();
+		}
+		else {
+			if(x > 1085 && x < 1112) {
+				if (y > 46 && y < 71) {
+					this.game.muteToggle();
 
-				// if paused, draw to show checkmark in box
-				if (this.pause) this.game.draw(this.ctx)
+					if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
+					else gainNode.gain.value = 0;
+
+					// if paused, draw to show checkmark in box
+					if (this.pause) this.game.draw(this.ctx)
+				}
+				else if (y > 85 && y < 112) {
+					this.game.autoPilotToggle();
+
+					// if paused, draw to show checkmark in box
+					if (this.pause) this.game.draw(this.ctx)
+				}
 			}
 		}
 	}
@@ -150,7 +172,7 @@ class GameView {
 
 	openingOff() {
 		this.gameOpening = null;
-		this.theme.play();
+		this.sounds.theme.play();
 	};
 }
 
