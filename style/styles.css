@@ -76,3 +76,14 @@ p {
 		font-size: 40px;
 	}
 }
+
+@media screen and (max-width: 1530px) {
+	p {
+		font-size: 48px;
+	}
+
+	#controls-list {
+
+		font-size: 36px;
+	}
+}

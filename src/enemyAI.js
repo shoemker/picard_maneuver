@@ -30,7 +30,7 @@ class EnemyAI  {
 	// if the other ship is sitting behind, stop
 	checkForRearEnemy(angleOfOpponent) {
 		if (Math.abs(Math.PI - angleOfOpponent) < .4 &&
-			Utils.distance(this.controlledShip, this.controlledShip.getTarget()) < 150 &&
+			Utils.distance(this.controlledShip, this.controlledShip.getTarget()) < 120 &&
 			Math.abs(this.controlledShip.getRotation() - this.controlledShip.getTarget().getRotation()) < .4) {
 			this.reverseCount++;
 		}
