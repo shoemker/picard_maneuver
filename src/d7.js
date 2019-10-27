@@ -11,9 +11,10 @@ class D7 extends Ship {
 		
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
-		
-		// this.hullIntegrity = 5;
-		// this.phaserDamage = 50;
+
+		this.phaserOffsetDistance = 16;
+		this.phaserOffsetAngle = 1.3*Math.PI;
+
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
@@ -47,6 +48,15 @@ class D7 extends Ship {
 
 		super.draw(ctx, target);
 	};
+
+	// when beam is drawn, it could be drawn from either side depending on where target it
+	firePhasers() {
+		const angle = Utils.angleToOtherShip(this, this.target);
+		if (angle <= Math.PI) this.phaserOffsetAngle = .7 * Math.PI;
+		else this.phaserOffsetAngle = 1.3 * Math.PI;
+
+		super.firePhasers();
+	}
 }
 
 

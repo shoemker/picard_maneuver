@@ -51,12 +51,14 @@ class Bird_of_Prey extends Ship {
 		}
 
 		ctx.restore();
-		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, .4*Math.PI);
 
+		// draws a 2nd disruptor line from other wing
+		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, .4*Math.PI);
 
 		super.draw(ctx, target);
 	};
 
+	// bird of prey can only fire beams if target is in front
 	firePhasers(){
 		const angle = Utils.angleToOtherShip(this, this.target)
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
