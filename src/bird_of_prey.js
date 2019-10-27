@@ -18,7 +18,7 @@ class Bird_of_Prey extends Ship {
 		this.phaserOffsetAngle = 1.6*Math.PI;
 
 		this.phaserDamage = 6;
-		this.hullIntegrityMax = 80;
+		this.hullIntegrityMax = 100;
 		this.hullIntegrity = this.hullIntegrityMax;
 
 		// ssd is the ship systems display in the corner of the screen
