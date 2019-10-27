@@ -20,7 +20,8 @@ class Ship extends SpaceObject{
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30;
-		this.phaserStartOffset = 0;
+		this.phaserOffsetDistance = 0;
+		this.phaserOffsetAngle = 0;
 		this.phaserCounter = 0;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
@@ -70,7 +71,7 @@ class Ship extends SpaceObject{
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
-		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx);
+		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, this.phaserOffsetAngle);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -89,13 +90,13 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx) {
+	drawPhaser(ctx,angle) {
 
 		const phaserDrawMax = 12;
 
-		// moves the starting point for the phaser forward on the saucer for the enterprise
-		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * this.phaserStartOffset;
-		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * this.phaserStartOffset;
+		// moves the starting point for the phaser(on the saucer for the enterprise, on the wing for bop)
+		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
+		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
 
 		let xDelta = this.ptarget.center()[0] - xStartingPoint;
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;
@@ -123,7 +124,7 @@ class Ship extends SpaceObject{
 		ctx.lineWidth = 3;
 		ctx.stroke();
 
-		this.phaserCounter++;
+		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
 		if (this.phaserCounter == phaserDrawMax) { this.targetShieldHP = this.target.receivePhaserHit(this); }
 

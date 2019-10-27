@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	track6.connect(gainNode).connect(audioContext.destination);
 
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, 
-		{ phasSound, disruptSound, kTorpSound, torpSound,	exploSound,theme});
+		{ phasSound, disruptSound, kTorpSound, torpSound,	exploSound, theme});
 
 	g.start();
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	window.addEventListener('keydown', (e) => {
 		if (e.keyCode == 80 && e.target == document.body) g.pauseGameToggle();
 		else {
-			
+			// this line stops the space bar from moving window
 			if (e.keyCode == 32 && e.target == document.body) e.preventDefault();
 			
 			g.keyHandler(e);

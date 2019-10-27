@@ -50,8 +50,7 @@ class EnemyAI  {
 					else this.controlledShip.changeDirection(-1);
 				}
 			}
-			else if (angleOfOpponent < Math.PI * 1.9375 &&
-				angleOfOpponent > Math.PI) {
+			else if (angleOfOpponent < Math.PI * 1.9375 && angleOfOpponent > Math.PI) {
 				if (this.turnCounter === this.turnCounterMax) {
 					if (this.turnLeftLength < turnCircleMax) {
 						this.controlledShip.changeDirection(-1);

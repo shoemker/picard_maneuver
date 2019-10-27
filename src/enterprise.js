@@ -13,7 +13,7 @@ class Enterprise extends Ship {
 		this.turnRadius = 4;
 
 		// phaser animation starts from middle of saucer instead of center of ship
-		this.phaserStartOffset = 18;
+		this.phaserOffsetDistance = 18;
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({

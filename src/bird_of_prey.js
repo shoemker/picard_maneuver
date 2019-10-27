@@ -12,10 +12,13 @@ class Bird_of_Prey extends Ship {
 		this.width = 30;
 		this.height = 40;
 
-		this.phaserRechargeMax = 200;
-		this.torpedoReloadMax = 190;
+		this.phaserRechargeMax = 170;
+		this.torpedoReloadMax = 200;
 
-		this.phaserDamage = 8;
+		this.phaserOffsetDistance = 20;
+		this.phaserOffsetAngle = 1.6*Math.PI;
+
+		this.phaserDamage = 5;
 		this.hullIntegrityMax = 80;
 		this.hullIntegrity = this.hullIntegrityMax;
 
@@ -48,9 +51,16 @@ class Bird_of_Prey extends Ship {
 		}
 
 		ctx.restore();
+		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, .4*Math.PI);
+
 
 		super.draw(ctx, target);
 	};
+
+	firePhasers(){
+		const angle = Utils.angleToOtherShip(this, this.target)
+		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
+	}
 }
 
 
