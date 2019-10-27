@@ -5,9 +5,6 @@ const Utils = require("./utils");
 class Enterprise extends Ship {
 	constructor(options) {
 		super(options);
-
-		// this.hullIntegrity = 600;
-		// this.phaserDamage = 50;
  
 		this.shipImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png');
 		this.turnRadius = 4;

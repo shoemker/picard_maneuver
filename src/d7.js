@@ -13,8 +13,6 @@ class D7 extends Ship {
 		this.torpedoReloadMax = 190;
 
 		this.phaserOffsetDistance = 16;
-		this.phaserOffsetAngle = 1.3*Math.PI;
-
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({

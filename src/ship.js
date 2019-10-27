@@ -90,7 +90,7 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx,angle) {
+	drawPhaser(ctx, angle = 0) {
 
 		const phaserDrawMax = 12;
 
@@ -133,11 +133,16 @@ class Ship extends SpaceObject{
 				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
 			}
 
+			let sizeFactor = 1;
+			if (this.targetShieldHP === 0) sizeFactor = 1.5;
+
 			//draws sparks effect when beam hits
 			if (this.phaserCounter%2 === 0) {
-				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress-5, yProgress-5, 10, 10);
+				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress - 5 * sizeFactor, yProgress - 5 * sizeFactor, 
+					10 * sizeFactor, 10 * sizeFactor);
 			}
-			else ctx.drawImage(this.sparksImg, 120, 2, 165,148, xProgress - 7, yProgress - 7, 14, 14);
+			else ctx.drawImage(this.sparksImg, 120, 2, 165, 148, xProgress - 7 * sizeFactor, yProgress - 7 * sizeFactor, 
+				14 * sizeFactor, 14 * sizeFactor);
 		}
 
 		// zeros the counter and ends the beam effect
