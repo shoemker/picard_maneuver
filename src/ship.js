@@ -91,7 +91,7 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx, angle = 0) {
+	drawPhaser(ctx, angle = 0, dashed) {
 
 		const phaserDrawMax = 12;
 
@@ -122,8 +122,15 @@ class Ship extends SpaceObject{
 		ctx.moveTo(xStartingPoint, yStartingPoint);
 		ctx.lineTo(xProgress, yProgress);
 		ctx.strokeStyle = this.phaserColor;
-		ctx.lineWidth = 3;
+
+		if (dashed) {
+			ctx.setLineDash([5,2,5,20]);
+			ctx.lineWidth = 3;
+		} else ctx.lineWidth = 3;
+
 		ctx.stroke();
+		ctx.setLineDash([]);
+
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 

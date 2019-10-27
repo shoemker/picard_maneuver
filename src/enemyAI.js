@@ -31,7 +31,8 @@ class EnemyAI  {
 	checkForRearEnemy(angleOfOpponent) {
 		if (Math.abs(Math.PI - angleOfOpponent) < .4 &&
 			Utils.distance(this.controlledShip, this.controlledShip.getTarget()) < 120 &&
-			Math.abs(this.controlledShip.getRotation() - this.controlledShip.getTarget().getRotation()) < .4) {
+			Math.abs(this.controlledShip.getRotation() - this.controlledShip.getTarget().getRotation()) < .4 &&
+			this.controlledShip.torpedosReady()) {
 			this.reverseCount++;
 		}
 	}

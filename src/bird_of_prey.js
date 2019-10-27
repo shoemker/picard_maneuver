@@ -52,7 +52,7 @@ class Bird_of_Prey extends Ship {
 		ctx.restore();
 
 		// fires a 2nd disruptor line from other wing
-		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, .4*Math.PI);
+		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, .4 * Math.PI);
 
 		super.draw(ctx, target);
 	};
@@ -61,6 +61,10 @@ class Bird_of_Prey extends Ship {
 	firePhasers(){
 		const angle = Utils.angleToOtherShip(this, this.target)
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
+	}
+
+	drawPhaser(ctx, angle) {
+		super.drawPhaser(ctx, angle, true);
 	}
 }
 

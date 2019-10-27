@@ -36,8 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	const track6 = audioContext.createMediaElementSource(theme);
 	track6.connect(gainNode).connect(audioContext.destination);
 
+	const disrupt2Sound = document.getElementById("disruptor2");
+	const track7 = audioContext.createMediaElementSource(disrupt2Sound);
+	track7.connect(gainNode).connect(audioContext.destination);
+
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, 
-		{ phasSound, disruptSound, kTorpSound, torpSound,	exploSound, theme});
+		{ phasSound, disruptSound, disrupt2Sound, kTorpSound, torpSound,	exploSound, theme});
 
 	g.start();
 
