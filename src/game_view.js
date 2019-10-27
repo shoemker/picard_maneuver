@@ -19,6 +19,8 @@ class GameView {
 
 		this.sparksImg = Utils.loadImg('./images/sparks.png');
 		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
+		this.bopImg = Utils.loadImg('./images/bop.png');
+		this.d7Img = Utils.loadImg('./images/D7.png');
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2 - 50],
@@ -30,7 +32,8 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [1040, 710],
-			target: this.game.enemies[0]
+			target: this.game.enemies[0], 
+			shipImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
 		}));
 	};
 	
@@ -46,7 +49,8 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
-			target: this.game.enterprise
+			target: this.game.enterprise,
+			shipImg: this.bopImg
 		}));
 
 		this.game.addEnemy(new Bird_of_Prey({
@@ -60,6 +64,7 @@ class GameView {
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 60],
 			target: this.game.enterprise,
+			shipImg: this.bopImg,
 			phaserRecharge: 80,
 			torpedoReload: 100
 		}));
@@ -79,7 +84,9 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710],
-			target: this.game.enterprise
+			target: this.game.enterprise,
+			shipImg: this.d7Img
+
 		}));
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);

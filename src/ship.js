@@ -14,6 +14,7 @@ class Ship extends SpaceObject{
 		this.explosion = options.explosion;
 		this.explosionImg = options.explosionImg;
 		this.sparksImg = options.sparksImg;
+		this.shipImg = options.shipImg;
 		this.target = options.target;
 
 		this.turnRadius;

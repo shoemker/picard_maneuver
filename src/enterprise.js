@@ -6,7 +6,6 @@ class Enterprise extends Ship {
 	constructor(options) {
 		super(options);
  
-		this.shipImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png');
 		this.turnRadius = 4;
 
 		// phaser animation starts from middle of saucer instead of center of ship
