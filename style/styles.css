@@ -66,7 +66,7 @@ p {
 	color: lightcyan;
 }
 
-@media screen and (max-width: 1610px) {
+@media screen and (max-width: 1670px) {
 	p {
 		font-size: 48px;
 	}
@@ -77,7 +77,7 @@ p {
 	}
 }
 
-@media screen and (max-width: 1530px) {
+@media screen and (max-width: 1550px) {
 	p {
 		font-size: 48px;
 	}

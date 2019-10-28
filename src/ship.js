@@ -125,8 +125,7 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = this.phaserColor;
 		ctx.lineWidth = 3;
 		ctx.stroke();
-		ctx.setLineDash([]);
-
+		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
