@@ -41,7 +41,7 @@ class Game {
 
 	addEnemy(enemy){
 		this.enemies.push(enemy);
-		// this.enemyAIs.push(new EnemyAI(enemy, this));
+		this.enemyAIs.push(new EnemyAI(enemy, this));
 	};
 
 	// factory method to create planet and moon objects
