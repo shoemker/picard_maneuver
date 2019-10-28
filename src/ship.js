@@ -118,16 +118,12 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
+		if (dashed) ctx.setLineDash([5, 2, 5, 20]);
 		ctx.beginPath();
 		ctx.moveTo(xStartingPoint, yStartingPoint);
 		ctx.lineTo(xProgress, yProgress);
 		ctx.strokeStyle = this.phaserColor;
-
-		if (dashed) {
-			ctx.setLineDash([5,2,5,20]);
-			ctx.lineWidth = 3;
-		} else ctx.lineWidth = 3;
-
+		ctx.lineWidth = 3;
 		ctx.stroke();
 		ctx.setLineDash([]);
 

@@ -8,47 +8,27 @@ document.addEventListener("DOMContentLoaded", function () {
 	const ctx = canvasEl.getContext("2d");
 
 	// sounds
-	const audioContext = new AudioContext();
-	const gainNode = audioContext.createGain();
+	const audioCtx = new AudioContext();
+	const gainNode = audioCtx.createGain();
 	gainNode.gain.value = .25;
 
-	const phasSound = document.getElementById("phaser");
-	const track1 = audioContext.createMediaElementSource(phasSound);
-	track1.connect(gainNode).connect(audioContext.destination);
-
-	const disruptSound = document.getElementById("disruptor");
-	const track2 = audioContext.createMediaElementSource(disruptSound);
-	track2.connect(gainNode).connect(audioContext.destination);
-
-	const torpSound = document.getElementById("torpedo");
-	const track3 = audioContext.createMediaElementSource(torpSound);
-	track3.connect(gainNode).connect(audioContext.destination);
-
-	const kTorpSound = document.getElementById("klingonTorpedo");
-	const track4 = audioContext.createMediaElementSource(kTorpSound);
-	track4.connect(gainNode).connect(audioContext.destination);
-
-	const exploSound = document.getElementById("explosion");
-	const track5= audioContext.createMediaElementSource(exploSound);
-	track5.connect(gainNode).connect(audioContext.destination);
-
-	const theme = document.getElementById("theme");
-	const track6 = audioContext.createMediaElementSource(theme);
-	track6.connect(gainNode).connect(audioContext.destination);
-
-	const disrupt2Sound = document.getElementById("disruptor2");
-	const track7 = audioContext.createMediaElementSource(disrupt2Sound);
-	track7.connect(gainNode).connect(audioContext.destination);
-
 	let g = new GameView(ctx, canvasEl.width, canvasEl.height, 
-		{ phasSound, disruptSound, disrupt2Sound, kTorpSound, torpSound,	exploSound, theme});
+		{
+			phasSound: getSound("phaser", audioCtx, gainNode), 
+			disruptSound: getSound("disruptor", audioCtx, gainNode), 
+			disrupt2Sound: getSound("disruptor2", audioCtx, gainNode), 
+			kTorpSound: getSound("klingonTorpedo", audioCtx, gainNode), 
+			torpSound: getSound("torpedo", audioCtx, gainNode),	
+			exploSound: getSound("explosion", audioCtx, gainNode), 
+			theme: getSound("theme", audioCtx, gainNode)
+		});
 
 	g.start();
 
 	canvasEl.addEventListener("click", (e) => {
 		if (g.gameOpening !== null && !g.gameOpening.getChoose()) {
 			g.gameOpening.setChoose();
-			audioContext.resume().then(() => { return true; });
+			audioCtx.resume().then(() => { return true; });
 		}
 		else g.checkClick(e.pageX, e.pageY, gainNode);
 
@@ -68,8 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	window.addEventListener('keyup', (e) => {
 		g.keyHandler(e);
 	});
+
 });
 
+function getSound(id, audioCtx, gainNode) { 
+	const sound = document.getElementById(id);
+	const track = audioCtx.createMediaElementSource(sound);
+	track.connect(gainNode).connect(audioCtx.destination);
+	return sound;
+};
 
 
 
