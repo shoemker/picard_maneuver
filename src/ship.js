@@ -167,7 +167,7 @@ class Ship extends SpaceObject{
 			const yDelta = this.attacker.center()[1] - this.center()[1];
 			const distance = Utils.distance(this, this.attacker);
 			const percentage = 35 / distance;
-			x = this.center()[0] + xDelta * percentage;
+			x = this.center()[0] - 5 + xDelta * percentage;
 			y = this.center()[1] - 8 + yDelta * percentage;
 
 			this.drawShieldOnHit(ctx, this.shieldHit);

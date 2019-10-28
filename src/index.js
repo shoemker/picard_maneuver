@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	window.addEventListener('keydown', (e) => {
 		if (e.keyCode == 80 && e.target == document.body) g.pauseGameToggle();
 		else {
-			// this line stops the space bar from moving window
+			// this line stops the spacebar from moving window
 			if (e.keyCode == 32 && e.target == document.body) e.preventDefault();
 			
 			g.keyHandler(e);
