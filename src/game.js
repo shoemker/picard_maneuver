@@ -49,16 +49,14 @@ class Game {
 		this.planet_08 = new Planet({
 			pos: [300, 300],
 			img: Utils.loadImg('./images/planets/planet_08.png'),
-			width: 200,
-			height: 200,
+			width: 200, height: 200,
 			sheetCoords: [20, 20, 460, 480]
 		});
 
 		this.moon_01 = new Planet({
 			pos: [260, 410],
 			img: Utils.loadImg('./images/planets/moon_01.png'),
-			width: 50,
-			height: 50,
+			width: 50, height: 50,
 			sheetCoords: [3, 3, 58, 58]
 		});
 	};

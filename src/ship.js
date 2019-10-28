@@ -120,8 +120,8 @@ class Ship extends SpaceObject{
 
 		if (dashed) ctx.setLineDash([3, 2, 3, 20]);  // bop beam is a dotted line
 		ctx.beginPath();
-		ctx.moveTo(xStartingPoint, yStartingPoint);
-		ctx.lineTo(xProgress, yProgress);
+		ctx.moveTo(xProgress, yProgress);
+		ctx.lineTo(xStartingPoint, yStartingPoint);
 		ctx.strokeStyle = this.phaserColor;
 		ctx.lineWidth = 3;
 		ctx.stroke();
