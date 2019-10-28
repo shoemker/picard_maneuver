@@ -118,7 +118,7 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
-		if (dashed) ctx.setLineDash([5, 2, 5, 20]);
+		if (dashed) ctx.setLineDash([3, 2, 3, 20]);  // bop beam is a dotted line
 		ctx.beginPath();
 		ctx.moveTo(xStartingPoint, yStartingPoint);
 		ctx.lineTo(xProgress, yProgress);

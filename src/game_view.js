@@ -86,7 +86,6 @@ class GameView {
 			ssdPos: [100, 710],
 			target: this.game.enterprise,
 			shipImg: this.d7Img
-
 		}));
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);
