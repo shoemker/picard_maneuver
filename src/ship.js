@@ -8,7 +8,6 @@ class Ship extends SpaceObject{
 		super(options.pos);
 
 		this.rotationOffset = options.rotationOffset;
-		this.phaserColor = options.phaserColor;
 		this.beamSound = options.beamSound;
 		this.torpSound = options.torpSound;
 		this.explosion = options.explosion;
@@ -17,6 +16,7 @@ class Ship extends SpaceObject{
 		this.shipImg = options.shipImg;
 		this.target = options.target;
 
+		this.phaserColor;
 		this.turnRadius;
 		this.speed = 0;
 		this.width = 60;

@@ -1,6 +1,7 @@
 const Game = require("./game");
 const GameOpening = require("./game_opening");
 const Enterprise = require("./enterprise");
+const Soyuz = require("./soyuz");
 const D7 = require("./d7");
 const Bird_of_Prey = require("./bird_of_prey");
 const Explosion = require("./explosion")
@@ -21,18 +22,19 @@ class GameView {
 		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
 		this.bopImg = Utils.loadImg('./images/bop.png');
 		this.d7Img = Utils.loadImg('./images/D7.png');
+		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
 
 		this.game.addEnterprise(new Enterprise({
 			pos: [width/2 - 50, height/2 - 50],
 			rotationOffset: Math.PI,
-			phaserColor: "red",
 			torpSound: this.sounds.torpSound,
 			beamSound: this.sounds.phasSound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [1040, 710],
+			ssdPos: [1040, 710, 1, true],
 			target: this.game.enemies[0], 
+			// shipImg: this.soyuzImg
 			shipImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
 		}));
 	};
@@ -40,34 +42,77 @@ class GameView {
 
 	addBops() {
 		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 600],
+			pos: [0, 50],
 			rotationOffset: 0,
-			phaserColor: "green",
 			torpSound: this.sounds.kTorpSound,
 			beamSound: this.sounds.disrupt2Sound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 710],
+			ssdPos: [100, 620, .6, false],
 			target: this.game.enterprise,
-			shipImg: this.bopImg
-		}));
-
-		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 250],
-			rotationOffset: 0,
-			phaserColor: "green",
-			torpSound: this.sounds.kTorpSound,
-			beamSound: this.sounds.disrupt2Sound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			ssdPos: [100, 60],
-			target: this.game.enterprise,
+			shrink: .6,
 			shipImg: this.bopImg,
 			phaserRecharge: 80,
 			torpedoReload: 100
 		}));
+		
+		this.game.addEnemy(new Bird_of_Prey({
+			pos: [0, 500],
+			rotationOffset: 0,
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disrupt2Sound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			ssdPos: [100, 775, .6, true],
+			target: this.game.enterprise,
+			shipImg: this.bopImg
+		}));
+
+
+		// this.game.addEnemy(new Bird_of_Prey({
+		// 	pos: [0, 220],
+		// 	rotationOffset: 0,
+		// 	torpSound: this.sounds.kTorpSound,
+		// 	beamSound: this.sounds.disrupt2Sound,
+		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg,
+		// 	ssdPos: [100, 60],
+		// 	target: this.game.enterprise,
+		// 	shipImg: this.bopImg,
+		// 	phaserRecharge: 80,
+		// 	torpedoReload: 100
+		// }));
+		// this.game.addEnemy(new Bird_of_Prey({
+		// 	pos: [0, 230],
+		// 	rotationOffset: 0,
+		// 	torpSound: this.sounds.kTorpSound,
+		// 	beamSound: this.sounds.disrupt2Sound,
+		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg,
+		// 	ssdPos: [100, 60],
+		// 	target: this.game.enterprise,
+		// 	shipImg: this.bopImg,
+		// 	phaserRecharge: 80,
+		// 	torpedoReload: 100
+		// }));
+		// this.game.addEnemy(new Bird_of_Prey({
+		// 	pos: [0, 240],
+		// 	rotationOffset: 0,
+		// 	torpSound: this.sounds.kTorpSound,
+		// 	beamSound: this.sounds.disrupt2Sound,
+		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg,
+		// 	ssdPos: [100, 60],
+		// 	target: this.game.enterprise,
+		// 	shipImg: this.bopImg,
+		// 	phaserRecharge: 80,
+		// 	torpedoReload: 100
+		// }));
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
@@ -77,14 +122,14 @@ class GameView {
 		this.game.addEnemy(new D7({
 			pos: [0, 100],
 			rotationOffset: 0,
-			phaserColor: "green",
 			torpSound: this.sounds.kTorpSound,
 			beamSound: this.sounds.disruptSound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 710],
+			ssdPos: [100, 710, 1, true],
 			target: this.game.enterprise,
+			shrink: 1,
 			shipImg: this.d7Img
 		}));
 

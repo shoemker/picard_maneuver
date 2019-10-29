@@ -3,7 +3,7 @@ class Shield {
 		this.pos = options.pos;
 		this.start = options.start;
 		this.end = options.end;
-		this.multiplier = options.multiplier
+		this.radius = options.radius;
 
 		this.maxHitpoints = options.shieldStrength;
 		this.hitpoints = this.maxHitpoints;
@@ -16,7 +16,7 @@ class Shield {
 	up() { return this.hitpoints > 0; }
 
 
-	draw(ctx) {
+	draw(ctx, shrink) {
 		this.timer++;
 		if (this.timer === 40) {
 			this.timer = 0;
@@ -28,12 +28,12 @@ class Shield {
 		ctx.beginPath();
 		ctx.arc(this.pos[0], 
 			this.pos[1], 
-			100, 
-			this.start * Math.PI + this.multiplier * Math.PI * (1 - shieldPercentage),
-			this.end * Math.PI - this.multiplier * Math.PI * (1 - shieldPercentage)
+			this.radius, 
+			this.start * Math.PI + (this.end - this.start)/2* Math.PI * (1 - shieldPercentage),
+			this.end * Math.PI - (this.end - this.start)/2 * Math.PI * (1 - shieldPercentage)
 		);
 	
-		ctx.lineWidth = 7;
+		ctx.lineWidth = 7*shrink;
 		ctx.strokeStyle = this.color;
 		ctx.stroke();
 	}

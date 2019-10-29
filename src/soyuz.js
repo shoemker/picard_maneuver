@@ -2,21 +2,21 @@ const Ship = require("./ship");
 const SSD = require("./ssd");
 const Utils = require("./utils");
 
-class Bird_of_Prey extends Ship {
+class Soyuz extends Ship {
 	constructor(options) {
 		super(options);
 
 		this.turnRadius = 3;
-		
-		this.width = 30;
-		this.height = 40;
+
+		this.width = 40;
+		this.height = 30;
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
 
-		this.phaserColor = "green";
-		this.phaserOffsetDistance = 20;
-		this.phaserOffsetAngle = 1.6*Math.PI;
+		this.phaserOffsetDistance = 15;
+		this.phaserOffsetAngle = 1.5 * Math.PI;
+		this.phaserColor = "red";
 
 		this.phaserDamage = 5;
 		this.hullIntegrityMax = 100;
@@ -25,10 +25,10 @@ class Bird_of_Prey extends Ship {
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
-			img_size: [120,100],
-			img_pos_offset: [-25, 12],
+			img_size: [120, 100],
+			img_pos_offset: [-25, 10],
 			img: Utils.loadImg('./images/bop-ssd.png'),
-			beamWeaponName: 'Disruptor',
+			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 350, 240],
 			shieldStrength: 40
 		});
@@ -42,7 +42,7 @@ class Bird_of_Prey extends Ship {
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg, 0, 0, 267, 300,
+			ctx.drawImage(this.shipImg, 0, 0, 362, 237,
 				this.pos[0],
 				this.pos[1],
 				this.width,
@@ -52,16 +52,15 @@ class Bird_of_Prey extends Ship {
 
 		ctx.restore();
 
-		// fires a 2nd disruptor line from other wing
+		// fires a 2nd phaser line from other side
 		if (this.phaserCounter > 0 && this.ptarget) 
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle);
-;
+			this.drawPhaser(ctx, 2*Math.PI - this.phaserOffsetAngle);
 
 		super.draw(ctx, target);
 	};
 
-	// bird of prey can only fire beams if target is in front
-	firePhasers(){
+	// soyuz can only fire beams if target is in front
+	firePhasers() {
 		const angle = Utils.angleToOtherShip(this, this.target)
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
 	}
@@ -72,4 +71,4 @@ class Bird_of_Prey extends Ship {
 }
 
 
-module.exports = Bird_of_Prey;
+module.exports = Soyuz;
