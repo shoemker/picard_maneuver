@@ -18,7 +18,9 @@ class Game {
 		this.autopilot = false;
 
 		this.enemies = [];
+		this.allies = [];
 		this.enemyAIs = [];
+		this.allyAIs = []
 		this.torpedoes = [];
 		this.stars = [];
 
@@ -34,15 +36,20 @@ class Game {
 
 	getKeyMap() { return this.keyMap; }
 
-	addEnterprise(enterprise){
-		this.enterprise = enterprise;
-		this.enterpriseAI = new EnemyAI(enterprise, this);
+	addMainShip(ship){
+		this.main = ship;
+		this.mainAI = new EnemyAI(ship, this);
 	};
 
 	addEnemy(enemy){
 		this.enemies.push(enemy);
 		this.enemyAIs.push(new EnemyAI(enemy, this));
 	};
+
+	addAlly(ship) {
+		this.allies.push(ship);
+		this.allyAIs.push(new EnemyAI(ship, this));
+	}
 
 	// factory method to create planet and moon objects
 	createPlanetAndMoon() {
@@ -76,8 +83,11 @@ class Game {
 		this.enemyAIs.forEach((AI, i) => 
 			AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
 
-		if (this.autopilot && this.enterprise.getTarget()) 
-			this.enterpriseAI.consultAI(this.enterprise.getTarget().onscreen(this.canvas_width, this.canvas_height));
+		this.allyAIs.forEach((AI, i) =>
+			AI.consultAI(this.allies[i].onscreen(this.canvas_width, this.canvas_height)));
+
+		if (this.autopilot && this.main.getTarget()) 
+			this.mainAI.consultAI(this.main.getTarget().onscreen(this.canvas_width, this.canvas_height));
 
 		this.checkTorpCollisions();
 	};
@@ -89,31 +99,35 @@ class Game {
 		// now give ships and objects their own movement
 		this.enemies.forEach((enemy) => enemy.move(this.base_speed_inverse));
 
+		this.allies.forEach((ally) => ally.move(this.base_speed_inverse));
+
 		this.moveTorpedos();
 	}
 
 
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
-		const shift_x = this.enterprise.getDirection()[0] / this.base_speed_inverse;
-		const shift_y = this.enterprise.getDirection()[1] / this.base_speed_inverse;
+		const shift_x = this.main.getDirection()[0] / this.base_speed_inverse;
+		const shift_y = this.main.getDirection()[1] / this.base_speed_inverse;
 
 
 		this.stars.forEach((star) =>
-					star.shift([shift_x , shift_y], this.enterprise.getSpeed()));
+					star.shift([shift_x , shift_y], this.main.getSpeed()));
 
-		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], this.enterprise.getSpeed()));
+		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], this.main.getSpeed()));
+		this.allies.forEach((ally) => ally.shift([shift_x, shift_y], this.main.getSpeed()));
+
 										
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet_08.shift(
-			[this.enterprise.getDirection()[0] / (this.base_speed_inverse -2),
-			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2)],
-			this.enterprise.getSpeed());
+			[this.main.getDirection()[0] / (this.base_speed_inverse -2),
+			this.main.getDirection()[1] / (this.base_speed_inverse - 2)],
+			this.main.getSpeed());
 												
 		this.moon_01.shift(
-			[this.enterprise.getDirection()[0] / (this.base_speed_inverse - 2.5),
-			this.enterprise.getDirection()[1] / (this.base_speed_inverse - 2.5)],
-			this.enterprise.getSpeed());	
+			[this.main.getDirection()[0] / (this.base_speed_inverse - 2.5),
+			this.main.getDirection()[1] / (this.base_speed_inverse - 2.5)],
+			this.main.getSpeed());	
 	}
 
 
@@ -130,12 +144,14 @@ class Game {
 		this.moon_01.draw(ctx);
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 
-		this.enterprise.draw(ctx);
+		this.main.draw(ctx);
 
 		this.enemies.forEach((enemy) =>{
-			if(this.enemies.length > 1) enemy.draw(ctx, enemy === this.enterprise.getTarget());
+			if(this.enemies.length > 1) enemy.draw(ctx, enemy === this.main.getTarget());
 			else enemy.draw(ctx);
 		});
+
+		this.allies.forEach((ally) => ally.draw(ctx));
 
 		// draw mute and autopilot box
 		this.drawCheckBox(ctx, this.canvas_width - 130, 30, "Mute", this.muted);
@@ -240,19 +256,19 @@ class Game {
 
 
 	firePhasers(ship) {
-		const enemyOnScreen = this.enterprise.getTarget().onscreen(this.canvas_width, this.canvas_height);
-		if ((ship === this.enterprise && enemyOnScreen) || 
-		  (ship !== this.enterprise && ship.onscreen(this.canvas_width, this.canvas_height)))
+		const enemyOnScreen = this.main.getTarget().onscreen(this.canvas_width, this.canvas_height);
+		if ((ship === this.main && enemyOnScreen) || 
+		  (ship !== this.main && ship.onscreen(this.canvas_width, this.canvas_height)))
 			 ship.firePhasers();
 	};
 
 
 	checkTorpCollisions() {
-		const ships = this.enemies.concat(this.enterprise);
+		const ships = this.enemies.concat(this.main).concat(this.allies);
 
 		this.torpedoes.forEach((torpedo,i) => {
 			ships.forEach((ship) => {
-				if (ship !== torpedo.getLauncher() && Utils.distance(ship, torpedo) < 30) {
+				if (ship.isEnemy() !== torpedo.getLauncher().isEnemy() && Utils.distance(ship, torpedo) < 30) {
 					ship.receiveTorpHit(torpedo);
 					this.torpedoes.splice(i, 1);
 				}
@@ -264,37 +280,37 @@ class Game {
 	changeTarget() {
 		let newIdx = 0;
 		this.enemies.forEach((enemy, i) => {
-			if (enemy === this.enterprise.getTarget()) newIdx = i + 1;
+			if (enemy === this.main.getTarget()) newIdx = i + 1;
 		})
 		if (newIdx === this.enemies.length) newIdx = 0;
-		this.enterprise.setTarget(this.enemies[newIdx]);
+		this.main.setTarget(this.enemies[newIdx]);
 	};
 
 
 	checkKeyMap() {
 		// spacebar
-		if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
+		if (this.keyMap["32"]) this.firePhasers(this.main); 
 
 		// t
 		if (this.keyMap["84"] && this.turnCounter === 0) this.changeTarget(); 
 
 		// f or k
-		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);
+		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.main);
 
 		// acceleration/decceleration needs a longer turnCounter than turning
 		// w or up arrow
 		if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
-			this.enterprise.power(1);
+			this.main.power(1);
 
 		// s or down arrow
 		if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
-			this.enterprise.power(-1);
+			this.main.power(-1);
 		
 		// a or left arrow
-		if (this.keyMap["65"] || this.keyMap["37"]) this.enterprise.changeDirection(-1);
+		if (this.keyMap["65"] || this.keyMap["37"]) this.main.changeDirection(-1);
 
 		// d or right arrow
-		if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
+		if (this.keyMap["68"] || this.keyMap["39"]) this.main.changeDirection(1);
 	};
 
 }

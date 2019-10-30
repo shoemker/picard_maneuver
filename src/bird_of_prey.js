@@ -53,7 +53,7 @@ class Bird_of_Prey extends Ship {
 		ctx.restore();
 
 		// fires a 2nd disruptor line from other wing
-		if (this.phaserCounter > 0 && this.ptarget) 
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
 			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle);
 ;
 
@@ -66,6 +66,7 @@ class Bird_of_Prey extends Ship {
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
 	}
 
+	// gives flag to make dashed line
 	drawPhaser(ctx, angle) {
 		super.drawPhaser(ctx, angle, true);
 	}

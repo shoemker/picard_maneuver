@@ -14,6 +14,8 @@ class GameView {
 		this.ctx = ctx;
 		this.pause = false;
 		this.sounds = sounds;
+		this.width = width;
+		this.height = height;
 
 		this.game = new Game(width, height);
 		this.gameOpening = new GameOpening(width, height);
@@ -23,9 +25,12 @@ class GameView {
 		this.bopImg = Utils.loadImg('./images/bop.png');
 		this.d7Img = Utils.loadImg('./images/D7.png');
 		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
-
-		this.game.addEnterprise(new Enterprise({
-			pos: [width/2 - 50, height/2 - 50],
+		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
+	};
+	
+	addEnterprise() {
+		this.game.addMainShip(new Enterprise({
+			pos: [this.width / 2 - 50, this.height / 2 - 50],
 			rotationOffset: Math.PI,
 			torpSound: this.sounds.torpSound,
 			beamSound: this.sounds.phasSound,
@@ -35,11 +40,9 @@ class GameView {
 			ssdPos: [1040, 710, 1],
 			target: this.game.enemies[0],
 			enemy: false,
-			// shipImg: this.soyuzImg
-			shipImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
+			shipImg: this.enterpriseImg
 		}));
-	};
-	
+	}
 
 	addBops() {
 		this.game.addEnemy(new Bird_of_Prey({
@@ -51,7 +54,7 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 620, .6],
-			target: this.game.enterprise,
+			target: this.game.main,
 			enemy: true,
 			shipImg: this.bopImg,
 			phaserRecharge: 80,
@@ -67,12 +70,26 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 775, .6],
-			target: this.game.enterprise,
+			target: this.game.main,
 			enemy: true,
 			shipImg: this.bopImg
 		}));
 
-		this.game.enterprise.setTarget(this.game.enemies[0]);
+		// this.game.addAlly(new Soyuz({
+		// 	pos: [1200 / 2, 900 / 2],
+		// 	rotationOffset: Math.PI,
+		// 	torpSound: this.sounds.torpSound,
+		// 	beamSound: this.sounds.disrupt2Sound,
+		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+		// 	explosionImg: this.explosionImg,
+		// 	sparksImg: this.sparksImg,
+		// 	ssdPos: [1040, 500, .6],
+		// 	target: this.game.enemies[1],
+		// 	enemy: false,
+		// 	shipImg: this.soyuzImg
+		// }));
+
+		this.game.main.setTarget(this.game.enemies[0]);
 	};
 
 
@@ -86,12 +103,12 @@ class GameView {
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
 			ssdPos: [100, 710, 1],
-			target: this.game.enterprise,
+			target: this.game.main,
 			enemy: true,
 			shipImg: this.d7Img
 		}));
 
-		this.game.enterprise.setTarget(this.game.enemies[0]);
+		this.game.main.setTarget(this.game.enemies[0]);
 	}
 
 
@@ -107,15 +124,21 @@ class GameView {
 			// if unpaused this steps and draws either the game or the gameOpening
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
-				if (this.game.enterprise.getHull() === 0) this.game.lose = true;
+				if (this.game.main.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemies.length === 0) this.game.win = true;
 				else {
 					this.game.enemies.forEach((enemy, i) => {
 						if (enemy.isGone()){
 							this.game.enemies.splice(i, 1);
 							this.game.enemyAIs.splice(i, 1);
-							if(this.game.enterprise.getTarget() === enemy) this.game.changeTarget();
+							if(this.game.main.getTarget() === enemy) this.game.changeTarget();
 						} 
+					})
+					this.game.allies.forEach((ally, i) => {
+						if (ally.isGone()) {
+							this.game.allies.splice(i, 1);
+							this.game.allyAIs.splice(i, 1);
+						}
 					})
 					this.game.step();
 				}
@@ -141,10 +164,12 @@ class GameView {
 		if (this.gameOpening !== null) {
 			if (y >= 267 && y <= 734) {
 				if (x > 166 && x < 522) {
+					this.addEnterprise();
 					this.addD7();
 					this.openingOff();
 				}
 				else if (x > 716 && x < 1070) {
+					this.addEnterprise();
 					this.addBops();
 					this.openingOff();
 				}

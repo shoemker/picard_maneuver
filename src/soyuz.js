@@ -53,7 +53,7 @@ class Soyuz extends Ship {
 		ctx.restore();
 
 		// fires a 2nd phaser line from other side
-		if (this.phaserCounter > 0 && this.ptarget) 
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
 			this.drawPhaser(ctx, 2*Math.PI - this.phaserOffsetAngle);
 
 		super.draw(ctx, target);

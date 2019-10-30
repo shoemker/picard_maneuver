@@ -15,6 +15,7 @@ class Ship extends SpaceObject{
 		this.sparksImg = options.sparksImg;
 		this.shipImg = options.shipImg;
 		this.target = options.target;
+		this.enemy = options.enemy;
 
 		this.phaserColor;
 		this.turnRadius;
@@ -57,6 +58,7 @@ class Ship extends SpaceObject{
 	getTarget() { return this.target; }
 	getTurnRadius() { return this.turnRadius; }
 	isGone() { return this.shipExplosionCounter >= 33; }
+	isEnemy() { return this.enemy; }
 
 	setTarget(target) { this.target = target; }
 	
@@ -72,7 +74,8 @@ class Ship extends SpaceObject{
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
-		if (this.phaserCounter > 0 && this.ptarget) this.drawPhaser(ctx, this.phaserOffsetAngle);
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
+				this.drawPhaser(ctx, this.phaserOffsetAngle);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
