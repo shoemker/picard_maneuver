@@ -70,5 +70,4 @@ class Soyuz extends Ship {
 	}
 }
 
-
 module.exports = Soyuz;

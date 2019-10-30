@@ -7,6 +7,7 @@ class SSD {
 		this.ssd_x = options.ssdPos[0];
 		this.ssd_y = options.ssdPos[1];
 		this.scale = options.ssdPos[2];
+		this.labels = options.ssdPos[3];
 		
 		this.ssd_total_width = 70 * this.scale;
 		this.ssd_total_height = 120 * this.scale;
@@ -96,11 +97,17 @@ class SSD {
 
 		const y_coord = 865;
 
-		ctx.fillText(this.beamWeaponName, x_coord, y_coord );
+		ctx.fillText(this.beamWeaponName, x_coord, y_coord);
 		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 25);
 
 		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord);
 		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 25);
+
+		// ctx.fillText(this.beamWeaponName, x_coord, y_coord + 150 * this.scale);
+		// ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 15 + 160 * this.scale);
+
+		// ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
+		// ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
 	};
 
 

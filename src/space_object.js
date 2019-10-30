@@ -1,3 +1,4 @@
+const Utils = require("./utils");
 
 class SpaceObject {
 	constructor(pos) {
@@ -29,10 +30,10 @@ class SpaceObject {
 	};
 
 
-	onscreen(canvas_width, canvas_height) {
+	onscreen() {
 		const center = this.center();
-		return (center[0] > 0 && center[0] < canvas_width &&
-						center[1] > 0 && center[1] < canvas_height);
+		return (center[0] > 0 && center[0] < Utils.getCanvasDim()[0] &&
+			center[1] > 0 && center[1] < Utils.getCanvasDim()[1]);
 	};
 
 	

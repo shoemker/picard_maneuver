@@ -28,87 +28,80 @@ class GameView {
 		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
 	};
 	
-	addEnterprise() {
+	addMain(ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addMainShip(new Enterprise({
 			pos: [this.width / 2 - 50, this.height / 2 - 50],
+			ssdPos,
 			rotationOffset: Math.PI,
 			torpSound: this.sounds.torpSound,
 			beamSound: this.sounds.phasSound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [1040, 710, 1],
 			target: this.game.enemies[0],
 			enemy: false,
-			shipImg: this.enterpriseImg
-		}));
+			shipImg: this.enterpriseImg,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
 	}
 
-	addBops() {
+	addBop(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 50],
+			pos,
+			ssdPos,
 			rotationOffset: 0,
 			torpSound: this.sounds.kTorpSound,
 			beamSound: this.sounds.disrupt2Sound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 620, .6],
 			target: this.game.main,
 			enemy: true,
 			shipImg: this.bopImg,
-			phaserRecharge: 80,
-			torpedoReload: 100
-		}));
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
+	};
+
 		
-		this.game.addEnemy(new Bird_of_Prey({
-			pos: [0, 500],
-			rotationOffset: 0,
-			torpSound: this.sounds.kTorpSound,
+	addSoyuz(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+		this.game.addAlly(new Soyuz({
+			pos,
+			ssdPos,
+			rotationOffset: Math.PI,
+			torpSound: this.sounds.torpSound,
 			beamSound: this.sounds.disrupt2Sound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 775, .6],
-			target: this.game.main,
-			enemy: true,
-			shipImg: this.bopImg
-		}));
+			target: this.game.enemies[1],
+			enemy: false,
+			shipImg: this.soyuzImg,
+			phaserRecharge,
+			torpedoReload
+		}),aiTargeting);
 
-		// this.game.addAlly(new Soyuz({
-		// 	pos: [1200 / 2, 900 / 2],
-		// 	rotationOffset: Math.PI,
-		// 	torpSound: this.sounds.torpSound,
-		// 	beamSound: this.sounds.disrupt2Sound,
-		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [1040, 500, .6],
-		// 	target: this.game.enemies[1],
-		// 	enemy: false,
-		// 	shipImg: this.soyuzImg
-		// }));
-
-		this.game.main.setTarget(this.game.enemies[0]);
 	};
 
 
-	addD7() {
+	addD7(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new D7({
-			pos: [0, 100],
+			pos,
+			ssdPos,
 			rotationOffset: 0,
 			torpSound: this.sounds.kTorpSound,
 			beamSound: this.sounds.disruptSound,
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 710, 1],
 			target: this.game.main,
 			enemy: true,
-			shipImg: this.d7Img
-		}));
+			shipImg: this.d7Img,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
 
-		this.game.main.setTarget(this.game.enemies[0]);
 	}
 
 
@@ -131,7 +124,7 @@ class GameView {
 						if (enemy.isGone()){
 							this.game.enemies.splice(i, 1);
 							this.game.enemyAIs.splice(i, 1);
-							if(this.game.main.getTarget() === enemy) this.game.changeTarget();
+							if(this.game.main.getTarget() === enemy) this.game.changeMainTarget();
 						} 
 					})
 					this.game.allies.forEach((ally, i) => {
@@ -164,13 +157,21 @@ class GameView {
 		if (this.gameOpening !== null) {
 			if (y >= 267 && y <= 734) {
 				if (x > 166 && x < 522) {
-					this.addEnterprise();
-					this.addD7();
+					this.addMain([1040, 710, 1], false);
+					this.addD7([0, 100], [100, 710, 1], false);
+					
+					this.game.main.setTarget(this.game.enemies[0]);
 					this.openingOff();
 				}
 				else if (x > 716 && x < 1070) {
-					this.addEnterprise();
-					this.addBops();
+					this.addMain([1040, 775, .6], false);
+					this.addBop([0, 50], [100, 620, .6], true);
+					this.addBop([0, 500], [100, 465, .6], true, 80, 100);
+					this.addD7([0, 100], [100, 775, .6], true);
+					this.addSoyuz([600, 350], [1040, 465, .6], true);
+					this.addSoyuz([600, 450], [1040, 620, .6], true);
+
+					this.game.main.setTarget(this.game.enemies[0]);
 					this.openingOff();
 				}
 			}

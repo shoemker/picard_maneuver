@@ -72,5 +72,4 @@ class Bird_of_Prey extends Ship {
 	}
 }
 
-
 module.exports = Bird_of_Prey;

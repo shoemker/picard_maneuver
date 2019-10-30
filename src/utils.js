@@ -43,7 +43,9 @@ const Utils = {
 		ctx.lineTo(x + size, y);
 		
 		ctx.stroke();
-	}
+	},
+
+	getCanvasDim() { return [1200, 900]; }
 }
 
 module.exports = Utils;

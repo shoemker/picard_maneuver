@@ -35,20 +35,22 @@ class Game {
 	}
 
 	getKeyMap() { return this.keyMap; }
+	getCanvasWidth() { return this.canvas_width; }
+	getCanvasHeight() { return this.canvas_height; }
 
-	addMainShip(ship){
+	addMainShip(ship, aiTargeting){
 		this.main = ship;
-		this.mainAI = new EnemyAI(ship, this);
+		this.mainAI = new EnemyAI(ship, this, aiTargeting);
 	};
 
-	addEnemy(enemy){
+	addEnemy(enemy, aiTargeting){
 		this.enemies.push(enemy);
-		this.enemyAIs.push(new EnemyAI(enemy, this));
+		this.enemyAIs.push(new EnemyAI(enemy, this, aiTargeting));
 	};
 
-	addAlly(ship) {
+	addAlly(ship, aiTargeting) {
 		this.allies.push(ship);
-		this.allyAIs.push(new EnemyAI(ship, this));
+		this.allyAIs.push(new EnemyAI(ship, this, aiTargeting));
 	}
 
 	// factory method to create planet and moon objects
@@ -81,13 +83,13 @@ class Game {
 		this.moveObjects();
 
 		this.enemyAIs.forEach((AI, i) => 
-			AI.consultAI(this.enemies[i].onscreen(this.canvas_width, this.canvas_height)));
+			AI.consultAI(this.enemies[i].onscreen()));
 
 		this.allyAIs.forEach((AI, i) =>
-			AI.consultAI(this.allies[i].onscreen(this.canvas_width, this.canvas_height)));
+			AI.consultAI(this.allies[i].onscreen()));
 
 		if (this.autopilot && this.main.getTarget()) 
-			this.mainAI.consultAI(this.main.getTarget().onscreen(this.canvas_width, this.canvas_height));
+			this.mainAI.consultAI(this.main.getTarget().onscreen());
 
 		this.checkTorpCollisions();
 	};
@@ -256,9 +258,9 @@ class Game {
 
 
 	firePhasers(ship) {
-		const enemyOnScreen = this.main.getTarget().onscreen(this.canvas_width, this.canvas_height);
+		const enemyOnScreen = this.main.getTarget().onscreen();
 		if ((ship === this.main && enemyOnScreen) || 
-		  (ship !== this.main && ship.onscreen(this.canvas_width, this.canvas_height)))
+		  (ship !== this.main && ship.onscreen()))
 			 ship.firePhasers();
 	};
 
@@ -277,7 +279,7 @@ class Game {
 	};
 
 
-	changeTarget() {
+	changeMainTarget() {
 		let newIdx = 0;
 		this.enemies.forEach((enemy, i) => {
 			if (enemy === this.main.getTarget()) newIdx = i + 1;
@@ -287,12 +289,23 @@ class Game {
 	};
 
 
+	randomTarget(ship) {
+		let potentialTargets = [];
+		if (ship.isEnemy()) potentialTargets = this.allies.concat(this.main);
+		else potentialTargets = this.enemies;
+
+		let newIdx = Math.floor(Math.random() * potentialTargets.length)
+
+		return potentialTargets[newIdx]
+	};
+
+
 	checkKeyMap() {
 		// spacebar
 		if (this.keyMap["32"]) this.firePhasers(this.main); 
 
 		// t
-		if (this.keyMap["84"] && this.turnCounter === 0) this.changeTarget(); 
+		if (this.keyMap["84"] && this.turnCounter === 0) this.changeMainTarget(); 
 
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.main);
