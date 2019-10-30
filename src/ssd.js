@@ -6,11 +6,10 @@ class SSD {
 	constructor(options) {
 		this.ssd_x = options.ssdPos[0];
 		this.ssd_y = options.ssdPos[1];
-		this.shrink = options.ssdPos[2];
-		this.labels = options.ssdPos[3];
+		this.scale = options.ssdPos[2];
 		
-		this.ssd_total_width = 70 * this.shrink;
-		this.ssd_total_height = 120 * this.shrink;
+		this.ssd_total_width = 70 * this.scale;
+		this.ssd_total_height = 120 * this.scale;
 
 		this.img_size = options.img_size;
 		this.img_pos_offset = options.img_pos_offset;
@@ -32,10 +31,10 @@ class SSD {
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
 		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
-			this.ssd_x + this.img_pos_offset[0]*this.shrink,
+			this.ssd_x + this.img_pos_offset[0]*this.scale,
 			this.ssd_y + this.img_pos_offset[1],
-			this.img_size[0]*this.shrink,
-			this.img_size[1]*this.shrink);
+			this.img_size[0]*this.scale,
+			this.img_size[1]*this.scale);
 
 		ctx.beginPath(); 
 		
@@ -50,14 +49,14 @@ class SSD {
 
 		this.drawHullIntegrity(ctx, hullPercentage);
 
-		if (this.labels) this.drawLabels(ctx);
+		this.drawLabels(ctx);
 
-		if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.shrink, this.ssd_y+165*this.shrink, 15*this.shrink,2);
+		if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
 	};
 
 
 	drawShields(ctx) {
-		this.shields.forEach((shield) => shield.draw(ctx, this.shrink))
+		this.shields.forEach((shield) => shield.draw(ctx, this.scale))
 	};
 
 
@@ -83,7 +82,7 @@ class SSD {
 		else ctx.fillStyle = "red";
 
 		ctx.fillText("Hull Integrity: " + Math.floor(hullPercentage*100) + "%", 
-			this.ssd_x-43-30*(1-this.shrink), this.ssd_y - 30*this.shrink);
+			this.ssd_x-43-30*(1-this.scale), this.ssd_y - 30*this.scale);
 	};
 
 
@@ -95,11 +94,13 @@ class SSD {
 		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
 		else x_coord = this.ssd_x - 85;
 
-		ctx.fillText(this.beamWeaponName, x_coord, this.ssd_y + 150 * this.shrink);
-		ctx.fillText("Recharge", this.ssd_x - 95, this.ssd_y + 15 + 160 * this.shrink);
+		const y_coord = 865;
 
-		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, this.ssd_y + 150 * this.shrink);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, this.ssd_y + 15 + 160 * this.shrink);
+		ctx.fillText(this.beamWeaponName, x_coord, y_coord );
+		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 25);
+
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 25);
 	};
 
 
@@ -113,16 +114,16 @@ class SSD {
 			pos: [x, y + 10],
 			start: 1.3,
 			end: 1.7,
-			radius: 80 * this.shrink,
+			radius: 80 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
 
 		// starboard shield
 		this.shields.push(new Shield({
-			pos: [x - 30 * this.shrink, y + 5],
+			pos: [x - 30 * this.scale, y + 5],
 			start: 1.85,
 			end: 2.15,
-			radius: 100 * this.shrink,
+			radius: 100 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
 
@@ -131,16 +132,16 @@ class SSD {
 			pos: [x, y - 1],
 			start: .3,
 			end: .7,
-			radius: 80 * this.shrink,
+			radius: 80 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
 
 		// port shield
 		this.shields.push(new Shield({
-			pos: [x + 30 * this.shrink, y + 5],
+			pos: [x + 30 * this.scale, y + 5],
 			start: .85,
 			end: 1.15,
-			radius: 100 * this.shrink,
+			radius: 100 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
 	};

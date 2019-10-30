@@ -32,8 +32,9 @@ class GameView {
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [1040, 710, 1, true],
-			target: this.game.enemies[0], 
+			ssdPos: [1040, 710, 1],
+			target: this.game.enemies[0],
+			enemy: false,
 			// shipImg: this.soyuzImg
 			shipImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
 		}));
@@ -49,9 +50,9 @@ class GameView {
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 620, .6, false],
+			ssdPos: [100, 620, .6],
 			target: this.game.enterprise,
-			shrink: .6,
+			enemy: true,
 			shipImg: this.bopImg,
 			phaserRecharge: 80,
 			torpedoReload: 100
@@ -65,54 +66,11 @@ class GameView {
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 775, .6, true],
+			ssdPos: [100, 775, .6],
 			target: this.game.enterprise,
+			enemy: true,
 			shipImg: this.bopImg
 		}));
-
-
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 220],
-		// 	rotationOffset: 0,
-		// 	torpSound: this.sounds.kTorpSound,
-		// 	beamSound: this.sounds.disrupt2Sound,
-		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	target: this.game.enterprise,
-		// 	shipImg: this.bopImg,
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 230],
-		// 	rotationOffset: 0,
-		// 	torpSound: this.sounds.kTorpSound,
-		// 	beamSound: this.sounds.disrupt2Sound,
-		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	target: this.game.enterprise,
-		// 	shipImg: this.bopImg,
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));
-		// this.game.addEnemy(new Bird_of_Prey({
-		// 	pos: [0, 240],
-		// 	rotationOffset: 0,
-		// 	torpSound: this.sounds.kTorpSound,
-		// 	beamSound: this.sounds.disrupt2Sound,
-		// 	explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-		// 	explosionImg: this.explosionImg,
-		// 	sparksImg: this.sparksImg,
-		// 	ssdPos: [100, 60],
-		// 	target: this.game.enterprise,
-		// 	shipImg: this.bopImg,
-		// 	phaserRecharge: 80,
-		// 	torpedoReload: 100
-		// }));
 
 		this.game.enterprise.setTarget(this.game.enemies[0]);
 	};
@@ -127,9 +85,9 @@ class GameView {
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			ssdPos: [100, 710, 1, true],
+			ssdPos: [100, 710, 1],
 			target: this.game.enterprise,
-			shrink: 1,
+			enemy: true,
 			shipImg: this.d7Img
 		}));
 

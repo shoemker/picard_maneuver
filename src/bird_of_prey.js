@@ -30,7 +30,7 @@ class Bird_of_Prey extends Ship {
 			img: Utils.loadImg('./images/bop-ssd.png'),
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 350, 240],
-			shieldStrength: 40
+			shieldStrength: 35
 		});
 	};
 

@@ -8,13 +8,13 @@ class Soyuz extends Ship {
 
 		this.turnRadius = 3;
 
-		this.width = 40;
-		this.height = 30;
+		this.width = 35;
+		this.height = 28;
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
 
-		this.phaserOffsetDistance = 15;
+		this.phaserOffsetDistance = 13;
 		this.phaserOffsetAngle = 1.5 * Math.PI;
 		this.phaserColor = "red";
 
@@ -25,12 +25,12 @@ class Soyuz extends Ship {
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
-			img_size: [120, 100],
-			img_pos_offset: [-25, 10],
-			img: Utils.loadImg('./images/bop-ssd.png'),
+			img_size: [80, 100],
+			img_pos_offset: [-5, 10],
+			img: Utils.loadImg('./images/soyuz-ssd.png'),
 			beamWeaponName: 'Phaser',
-			imgCoords: [0, 0, 350, 240],
-			shieldStrength: 40
+			imgCoords: [0, 0, 125, 215],
+			shieldStrength: 35
 		});
 	};
 
