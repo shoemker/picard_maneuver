@@ -2,9 +2,9 @@ const Utils = require("./utils");
 
 class GameOpening {
 
-	constructor(canvas_width, canvas_height) {
-		this.canvas_width = canvas_width;
-		this.canvas_height = canvas_height;
+	constructor() {
+		this.canvas_width = Utils.getCanvasDim()[0];
+		this.canvas_height = Utils.getCanvasDim()[1];
 		this.choose = false;
 
 		this.max_depth = 32;

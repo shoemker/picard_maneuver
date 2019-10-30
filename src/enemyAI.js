@@ -26,7 +26,8 @@ class EnemyAI  {
 			this.fireBeamWeapon(onscreen);
 			this.checkForRearEnemy(angleOfOpponent);
 			this.turningAndTorpedoes(angleOfOpponent, onscreen);
-		}
+		} 
+		else this.aiShip.setTarget(this.game.randomTarget(this.aiShip));
 	}
 	
 
@@ -92,7 +93,7 @@ class EnemyAI  {
 					else this.aiShip.changeDirection(1);
 				}
 			}
-			else if (onscreen) this.game.fireTorpedoes(this.aiShip);
+			else if (this.aiShip.getTarget().onscreen()) this.game.fireTorpedoes(this.aiShip);
 		}
 		// ai gets some randomness
 		else {

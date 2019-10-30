@@ -7,6 +7,7 @@ class Soyuz extends Ship {
 		super(options);
 
 		this.turnRadius = 3;
+		this.enemy = false;
 
 		this.width = 35;
 		this.height = 28;

@@ -7,7 +7,8 @@ class Bird_of_Prey extends Ship {
 		super(options);
 
 		this.turnRadius = 3;
-		
+		this.enemy = true;
+
 		this.width = 30;
 		this.height = 40;
 

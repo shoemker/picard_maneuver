@@ -9,101 +9,18 @@ const Utils = require("./utils");
 
 class GameView {
 
-	constructor(ctx, width, height, sounds) {
+	constructor(ctx, sounds) {
 
 		this.ctx = ctx;
 		this.pause = false;
 		this.sounds = sounds;
-		this.width = width;
-		this.height = height;
 
-		this.game = new Game(width, height);
-		this.gameOpening = new GameOpening(width, height);
+		this.game = new Game();
+		this.gameOpening = new GameOpening();
 
-		this.sparksImg = Utils.loadImg('./images/sparks.png');
-		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
-		this.bopImg = Utils.loadImg('./images/bop.png');
-		this.d7Img = Utils.loadImg('./images/D7.png');
-		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
-		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
+		this.loadImages();
 	};
 	
-	addMain(ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
-		this.game.addMainShip(new Enterprise({
-			pos: [this.width / 2 - 50, this.height / 2 - 50],
-			ssdPos,
-			rotationOffset: Math.PI,
-			torpSound: this.sounds.torpSound,
-			beamSound: this.sounds.phasSound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			target: this.game.enemies[0],
-			enemy: false,
-			shipImg: this.enterpriseImg,
-			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
-	}
-
-	addBop(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
-		this.game.addEnemy(new Bird_of_Prey({
-			pos,
-			ssdPos,
-			rotationOffset: 0,
-			torpSound: this.sounds.kTorpSound,
-			beamSound: this.sounds.disrupt2Sound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			target: this.game.main,
-			enemy: true,
-			shipImg: this.bopImg,
-			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
-	};
-
-		
-	addSoyuz(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
-		this.game.addAlly(new Soyuz({
-			pos,
-			ssdPos,
-			rotationOffset: Math.PI,
-			torpSound: this.sounds.torpSound,
-			beamSound: this.sounds.disrupt2Sound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			target: this.game.enemies[1],
-			enemy: false,
-			shipImg: this.soyuzImg,
-			phaserRecharge,
-			torpedoReload
-		}),aiTargeting);
-
-	};
-
-
-	addD7(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
-		this.game.addEnemy(new D7({
-			pos,
-			ssdPos,
-			rotationOffset: 0,
-			torpSound: this.sounds.kTorpSound,
-			beamSound: this.sounds.disruptSound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			target: this.game.main,
-			enemy: true,
-			shipImg: this.d7Img,
-			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
-
-	}
-
 
 	start() {
 		// start the animation
@@ -125,6 +42,8 @@ class GameView {
 							this.game.enemies.splice(i, 1);
 							this.game.enemyAIs.splice(i, 1);
 							if(this.game.main.getTarget() === enemy) this.game.changeMainTarget();
+							if(this.game.enemies.length > 0) 
+								this.game.enemies[this.game.enemies.length - 1].setLabels(true);
 						} 
 					})
 					this.game.allies.forEach((ally, i) => {
@@ -157,21 +76,11 @@ class GameView {
 		if (this.gameOpening !== null) {
 			if (y >= 267 && y <= 734) {
 				if (x > 166 && x < 522) {
-					this.addMain([1040, 710, 1], false);
-					this.addD7([0, 100], [100, 710, 1], false);
-					
-					this.game.main.setTarget(this.game.enemies[0]);
+					this.loadScenario1();
 					this.openingOff();
 				}
 				else if (x > 716 && x < 1070) {
-					this.addMain([1040, 775, .6], false);
-					this.addBop([0, 50], [100, 620, .6], true);
-					this.addBop([0, 500], [100, 465, .6], true, 80, 100);
-					this.addD7([0, 100], [100, 775, .6], true);
-					this.addSoyuz([600, 350], [1040, 465, .6], true);
-					this.addSoyuz([600, 450], [1040, 620, .6], true);
-
-					this.game.main.setTarget(this.game.enemies[0]);
+					this.loadScenario3();
 					this.openingOff();
 				}
 			}
@@ -210,6 +119,103 @@ class GameView {
 		this.gameOpening = null;
 		this.sounds.theme.play();
 	};
+
+	loadScenario1(){
+		this.addMain([1040, 710, 1, true], false);
+		this.addD7([0, 100], [100, 710, 1, true], false);
+
+		this.game.main.setTarget(this.game.enemies[0]);
+	};
+
+	loadScenario2() {
+		this.addMain([1040, 710, 1, true], false);
+		this.addBop([0, 500], [100, 620, .6, false], true, 80, 100);
+		this.addBop([0, 50], [100, 775, .6, true], true);
+
+		this.game.main.setTarget(this.game.enemies[0]);
+	};
+
+	loadScenario3() {
+		this.addMain([1040, 775, .6, true], false);
+		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
+		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
+		this.addBop([0, 100], [100, 620, .6, false], true);
+		this.addBop([0, 300], [100, 465, .6, false], true, 80, 100);
+		this.addD7([0, 200], [100, 775, .6, true], true);
+
+
+		this.game.main.setTarget(this.game.enemies[0]);
+	};
+
+	addMain(ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+		this.game.addMainShip(new Enterprise({
+			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
+			rotationOffset: Math.PI,
+			torpSound: this.sounds.torpSound,
+			beamSound: this.sounds.phasSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			target: this.game.enemies[0],
+			shipImg: this.enterpriseImg,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
+	}
+
+	addBop(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+		this.game.addEnemy(new Bird_of_Prey({
+			pos, ssdPos,
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disrupt2Sound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			shipImg: this.bopImg,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
+	};
+
+
+	addSoyuz(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+		this.game.addAlly(new Soyuz({
+			pos, ssdPos,
+			rotationOffset: Math.PI,
+			torpSound: this.sounds.torpSound,
+			beamSound: this.sounds.disrupt2Sound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			shipImg: this.soyuzImg,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
+	};
+
+
+	addD7(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+		this.game.addEnemy(new D7({
+			pos, ssdPos,
+			torpSound: this.sounds.kTorpSound,
+			beamSound: this.sounds.disruptSound,
+			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
+			explosionImg: this.explosionImg,
+			sparksImg: this.sparksImg,
+			shipImg: this.d7Img,
+			phaserRecharge,
+			torpedoReload
+		}), aiTargeting);
+	};
+
+	loadImages() {
+		this.sparksImg = Utils.loadImg('./images/sparks.png');
+		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
+		this.bopImg = Utils.loadImg('./images/bop.png');
+		this.d7Img = Utils.loadImg('./images/D7.png');
+		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
+		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
+	}
 }
 
 module.exports = GameView;

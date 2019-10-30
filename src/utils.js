@@ -30,6 +30,7 @@ const Utils = {
 		return img;
 	},
 
+	// draw a red circle with a vert and a horiz line
 	drawTarget(ctx, x, y, size, lw) {
 
 		ctx.beginPath();

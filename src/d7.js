@@ -7,7 +7,8 @@ class D7 extends Ship {
 		super(options);
 
 		this.turnRadius = 4;
-		
+		this.enemy = true;
+
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
 

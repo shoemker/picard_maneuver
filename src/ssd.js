@@ -24,10 +24,8 @@ class SSD {
 	};
 
 
-	getShields() {
-		return this.shields;
-	};
-
+	getShields() { return this.shields; };
+	setLabels(val) { this.labels = val; };
 
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
@@ -50,7 +48,7 @@ class SSD {
 
 		this.drawHullIntegrity(ctx, hullPercentage);
 
-		this.drawLabels(ctx);
+		if(this.labels) this.drawLabels(ctx);
 
 		if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
 	};
@@ -95,19 +93,19 @@ class SSD {
 		if (this.beamWeaponName === "Disruptor") x_coord = this.ssd_x - 93;
 		else x_coord = this.ssd_x - 85;
 
-		const y_coord = 865;
+		const y_coord = this.ssd_y;
 
-		ctx.fillText(this.beamWeaponName, x_coord, y_coord);
-		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 25);
+		// ctx.fillText(this.beamWeaponName, x_coord, y_coord);
+		// ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 25);
 
-		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 25);
+		// ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord);
+		// ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 25);
 
-		// ctx.fillText(this.beamWeaponName, x_coord, y_coord + 150 * this.scale);
-		// ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 15 + 160 * this.scale);
+		ctx.fillText(this.beamWeaponName, x_coord, y_coord + 150 * this.scale);
+		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 15 + 160 * this.scale);
 
-		// ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
-		// ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
+		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
 	};
 
 

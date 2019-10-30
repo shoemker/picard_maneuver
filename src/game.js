@@ -6,9 +6,9 @@ const Utils = require("./utils");
 
 class Game {
 
-	constructor(canvas_width, canvas_height) {
-		this.canvas_width = canvas_width;
-		this.canvas_height = canvas_height;
+	constructor() {
+		this.canvas_width = Utils.getCanvasDim()[0];
+		this.canvas_height = Utils.getCanvasDim()[1];
 
 		this.base_speed_inverse = 5;
 
@@ -35,8 +35,6 @@ class Game {
 	}
 
 	getKeyMap() { return this.keyMap; }
-	getCanvasWidth() { return this.canvas_width; }
-	getCanvasHeight() { return this.canvas_height; }
 
 	addMainShip(ship, aiTargeting){
 		this.main = ship;

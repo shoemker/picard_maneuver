@@ -1,4 +1,3 @@
-
 const SpaceObject = require("./space_object");
 const Utils = require("./utils");
 
@@ -7,7 +6,9 @@ class Ship extends SpaceObject{
 	constructor(options) {
 		super(options.pos);
 
-		this.rotationOffset = options.rotationOffset;
+		if (options.rotationOffset) this.rotationOffset = options.rotationOffset;
+		else this.rotationOffset = 0;
+		
 		this.beamSound = options.beamSound;
 		this.torpSound = options.torpSound;
 		this.explosion = options.explosion;
@@ -15,8 +16,8 @@ class Ship extends SpaceObject{
 		this.sparksImg = options.sparksImg;
 		this.shipImg = options.shipImg;
 		this.target = options.target;
-		this.enemy = options.enemy;
 
+		this.enemy;
 		this.phaserColor;
 		this.turnRadius;
 		this.speed = 0;
@@ -61,6 +62,7 @@ class Ship extends SpaceObject{
 	isEnemy() { return this.enemy; }
 
 	setTarget(target) { this.target = target; }
+	setLabels(val) { this.ssd.setLabels(val); }
 	
 	draw(ctx, target) {
 		//draw ship systems display

@@ -7,7 +7,8 @@ class Enterprise extends Ship {
 		super(options);
  
 		this.turnRadius = 4;
-
+		this.enemy = false;
+		
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
 		this.phaserColor = "red";

@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const gainNode = audioCtx.createGain();
 	gainNode.gain.value = .25;
 
-	let g = new GameView(ctx, canvasEl.width, canvasEl.height, 
-		{
+	let g = new GameView(ctx, {
 			phasSound: getSound("phaser", audioCtx, gainNode), 
 			disruptSound: getSound("disruptor", audioCtx, gainNode), 
 			disrupt2Sound: getSound("disruptor2", audioCtx, gainNode), 
