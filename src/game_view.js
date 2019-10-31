@@ -145,7 +145,7 @@ class GameView {
 	loadScenario3() {
 		this.addMain([1040, 775, .6, true], true);
 		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
-		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
+		this.addSoyuz([600, 450], [1040, 620, .6, false], true,50,50);
 		this.addBop([0, 300], [100, 465, .6, false], true, 80, 100);
 		this.addBop([0, 100], [100, 620, .6, false], true);
 		this.addD7([0, 200], [100, 775, .6, true], true);
@@ -215,6 +215,7 @@ class GameView {
 		}), aiTargeting);
 	};
 
+
 	loadImages() {
 		this.sparksImg = Utils.loadImg('./images/sparks.png');
 		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
@@ -222,7 +223,7 @@ class GameView {
 		this.d7Img = Utils.loadImg('./images/D7.png');
 		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
 		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
-	}
+	};
 }
 
 module.exports = GameView;
