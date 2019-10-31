@@ -26,7 +26,6 @@ class Game {
 
 		this.keyMap = {};
 
-		this.createPlanetAndMoon();
 		this.createStarField();
 		this.torpImg = Utils.loadImg('./images/torpedo.png');
 
@@ -52,20 +51,21 @@ class Game {
 	}
 
 	// factory method to create planet and moon objects
-	createPlanetAndMoon() {
+	createPlanetAndMoon(planetImg = 'moon_03.png', pCoords = [0, 0, 110, 110],
+		moonImg = 'moon_01.png', mCoords = [3, 3, 58, 58]) {
+
 		this.planet = new Planet({
 			pos: [300, 300],
-			img: Utils.loadImg('./images/planets/moon_03.png'),
+			img: Utils.loadImg('./images/planets/' + planetImg),
 			width: 200, height: 200,
-			// sheetCoords: [0, 0, 480, 480]
-			sheetCoords: [0, 0, 110, 110]
+			sheetCoords: pCoords
 		});
 
 		this.moon_01 = new Planet({
 			pos: [260, 410],
-			img: Utils.loadImg('./images/planets/moon_01.png'),
+			img: Utils.loadImg('./images/planets/' + moonImg),
 			width: 50, height: 50,
-			sheetCoords: [3, 3, 58, 58]
+			sheetCoords: mCoords
 		});
 	};
 

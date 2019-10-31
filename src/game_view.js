@@ -126,6 +126,8 @@ class GameView {
 
 
 	loadScenario1(){
+		this.game.createPlanetAndMoon('planet_08.png', [0, 0, 480, 480]);
+
 		this.addMain([1040, 710, 1, true], false);
 		this.addD7([0, 100], [100, 710, 1, true], false);
 
@@ -134,6 +136,8 @@ class GameView {
 
 
 	loadScenario2() {
+		this.game.createPlanetAndMoon();
+
 		this.addMain([1040, 710, 1, true], false);
 		this.addBop([0, 400], [100, 620, .6, false], true, 80, 100);
 		this.addBop([0, 50], [100, 775, .6, true], true);
@@ -143,6 +147,8 @@ class GameView {
 
 
 	loadScenario3() {
+		this.game.createPlanetAndMoon();
+
 		this.addMain([1040, 775, .6, true], true);
 		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
 		this.addSoyuz([600, 450], [1040, 620, .6, false], true,50,50);
