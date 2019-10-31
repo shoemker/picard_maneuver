@@ -12,14 +12,15 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <h2>Features</h2>
 <ol>
 	<li>Control over your ship (speed, direction, weapons).</li>
-	<li>Optional autopilot if you just want to watch.</li>
-	<li>Fight either one cruiser or 2 birds of prey.</li>
-	<li>Visuals for beam weapon and torpedos.</li>
+	<li>Enemy AI</li>
+	<li>Optional autopilot of the main ship if you just want to watch.</li>
+	<li>Option to fight either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
+	<li>Visuals for beam weapons, torpedos, and cannons.</li>
 	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>
 	<li>Moving starfield to indicate main ship movement.</li>
-	<li>Ship Systems Display in corner to indicate shield strength, hull integrity and weapon recharge status.</li>
+	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity and weapon recharge status.</li>
 </ol>
 <br>
 <a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>

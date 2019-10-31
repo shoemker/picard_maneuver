@@ -20,7 +20,7 @@ class Soyuz extends Ship {
 		this.phaserColor = "red";
 
 		this.phaserDamage = 5;
-		this.hullIntegrityMax = 100;
+		this.hullIntegrityMax = 90;
 		this.hullIntegrity = this.hullIntegrityMax;
 
 		// ssd is the ship systems display in the corner of the screen
@@ -31,7 +31,7 @@ class Soyuz extends Ship {
 			img: Utils.loadImg('./images/soyuz-ssd.png'),
 			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 125, 215],
-			shieldStrength: 35
+			shieldStrength: 30
 		});
 	};
 

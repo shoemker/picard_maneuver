@@ -143,7 +143,7 @@ class GameView {
 
 
 	loadScenario3() {
-		this.addMain([1040, 775, .6, true], false);
+		this.addMain([1040, 775, .6, true], true);
 		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
 		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
 		this.addBop([0, 300], [100, 465, .6, false], true, 80, 100);
@@ -152,17 +152,7 @@ class GameView {
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
-
-	loadScenario4() {
-		this.addMain([1040, 775, .6, true], false);
-		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
-		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
-		this.addBop([375, 350], [100, 465, .6, false], true, 80, 100);
-		this.addBop([375, 450], [100, 620, .6, false], true);
-		this.addD7([400, 405], [100, 775, .6, true], true);
-
-		this.game.main.setTarget(this.game.enemies[0]);
-	};
+	
 
 	addMain(ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addMainShip(new Enterprise({
