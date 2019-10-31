@@ -94,7 +94,6 @@ class GameOpening {
 		ctx.fillText("Fight a Cruiser", 110, 715);
 		ctx.fillText("2 Smaller Birds of Prey", 428, 715);
 		ctx.fillText("or Fleet Action", 874, 715);
-
 	};
 
 

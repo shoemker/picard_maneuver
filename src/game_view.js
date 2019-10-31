@@ -156,7 +156,7 @@ class GameView {
 		this.addBop([0, 100], [100, 620, .6, false], true);
 		this.addD7([0, 200], [100, 775, .6, true], true);
 
-		this.game.main.setTarget(this.game.enemies[0]);
+		this.game.main.setTarget(this.game.randomTarget(this.game.main));
 	};
 
 
@@ -169,7 +169,6 @@ class GameView {
 			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
 			explosionImg: this.explosionImg,
 			sparksImg: this.sparksImg,
-			target: this.game.enemies[0],
 			shipImg: this.enterpriseImg,
 			phaserRecharge,
 			torpedoReload
