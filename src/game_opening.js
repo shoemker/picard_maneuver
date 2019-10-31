@@ -88,7 +88,7 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "80px FINALOLD";
-		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 210, 200);
+		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 207, 200);
 
 		ctx.font = "44px FINALOLD";
 		ctx.fillText("Fight a Cruiser", 110, 715);
