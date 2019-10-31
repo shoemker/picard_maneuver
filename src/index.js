@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		else g.checkClick(e.pageX, e.pageY, gainNode);
 
-		// console.log(e.pageX, e.pageY);
+		console.log(e.pageX, e.pageY);
 	});
 
 	window.addEventListener('keydown', (e) => {

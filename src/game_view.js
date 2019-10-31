@@ -74,12 +74,16 @@ class GameView {
 	checkClick(x, y, gainNode) {
 
 		if (this.gameOpening !== null) {
-			if (y >= 267 && y <= 734) {
-				if (x > 166 && x < 522) {
+			if (y >= 317 && y <= 734) {
+				if (x > 54 && x < 407) {
 					this.loadScenario1();
 					this.openingOff();
 				}
-				else if (x > 716 && x < 1070) {
+				else if (x > 440 && x < 795) {
+					this.loadScenario2();
+					this.openingOff();
+				}
+				else if (x > 830 && x < 1184) {
 					this.loadScenario3();
 					this.openingOff();
 				}
@@ -120,12 +124,14 @@ class GameView {
 		this.sounds.theme.play();
 	};
 
+
 	loadScenario1(){
 		this.addMain([1040, 710, 1, true], false);
 		this.addD7([0, 100], [100, 710, 1, true], false);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
+
 
 	loadScenario2() {
 		this.addMain([1040, 710, 1, true], false);
@@ -135,14 +141,25 @@ class GameView {
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
 
+
 	loadScenario3() {
 		this.addMain([1040, 775, .6, true], false);
 		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
 		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
-		this.addBop([0, 100], [100, 620, .6, false], true);
 		this.addBop([0, 300], [100, 465, .6, false], true, 80, 100);
+		this.addBop([0, 100], [100, 620, .6, false], true);
 		this.addD7([0, 200], [100, 775, .6, true], true);
 
+		this.game.main.setTarget(this.game.enemies[0]);
+	};
+
+	loadScenario4() {
+		this.addMain([1040, 775, .6, true], false);
+		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
+		this.addSoyuz([600, 450], [1040, 620, .6, false], true);
+		this.addBop([375, 350], [100, 465, .6, false], true, 80, 100);
+		this.addBop([375, 450], [100, 620, .6, false], true);
+		this.addD7([400, 405], [100, 775, .6, true], true);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};

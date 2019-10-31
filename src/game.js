@@ -53,11 +53,12 @@ class Game {
 
 	// factory method to create planet and moon objects
 	createPlanetAndMoon() {
-		this.planet_08 = new Planet({
+		this.planet = new Planet({
 			pos: [300, 300],
-			img: Utils.loadImg('./images/planets/planet_08.png'),
+			img: Utils.loadImg('./images/planets/moon_03.png'),
 			width: 200, height: 200,
-			sheetCoords: [20, 20, 460, 480]
+			// sheetCoords: [0, 0, 480, 480]
+			sheetCoords: [0, 0, 110, 110]
 		});
 
 		this.moon_01 = new Planet({
@@ -119,7 +120,7 @@ class Game {
 
 										
 		// the planet and moon shift differently than the stars to give a layered background
-		this.planet_08.shift(
+		this.planet.shift(
 			[this.main.getDirection()[0] / (this.base_speed_inverse -2),
 			this.main.getDirection()[1] / (this.base_speed_inverse - 2)],
 			this.main.getSpeed());
@@ -140,7 +141,7 @@ class Game {
 
 		// draw all of the objects
 		this.stars.forEach((star) => star.draw(ctx));
-		this.planet_08.draw(ctx);
+		this.planet.draw(ctx);
 		this.moon_01.draw(ctx);
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
 

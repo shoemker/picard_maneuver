@@ -56,7 +56,8 @@ class EnemyAI  {
 
 
 	fireBeamWeapon(onscreen) {
-		if (this.aiShip.phaserReady() && onscreen) this.aiShip.firePhasers();
+		if (this.aiShip.phaserReady() && onscreen && this.aiShip.getTarget().onscreen()) 
+			this.aiShip.firePhasers();
 	}
 
 	// if the other ship is sitting behind, stop

@@ -13,8 +13,9 @@ class GameOpening {
 
 		this.createOpeningStarfield();
 
-		this.bopScenImg = Utils.loadImg('./images/bops_scenario.png');
-		this.d7ScenImg = Utils.loadImg('./images/D7_scenario.png');
+		this.bopScenImg = Utils.loadImg('./images/scenarios/bops_scenario.png');
+		this.d7ScenImg = Utils.loadImg('./images/scenarios/D7_scenario.png');
+		this.fleetScenImg = Utils.loadImg('./images/scenarios/fleet_scenario.png');
 	};
 
 	getChoose() { return this.choose; }
@@ -71,17 +72,16 @@ class GameOpening {
 
 
 	drawScenario(ctx) {
-		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  150, 300,  350, 350);
-		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350,  700, 300,  350, 350);
+		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 300,  350, 350);
+		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 300, 350, 350);
+		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 300, 350, 350);
 
 		ctx.beginPath();
-		ctx.rect(150, 300, 350, 350);
-		ctx.strokeStyle = "grey";
-		ctx.lineWidth = 3;
-		ctx.stroke();
 
-		ctx.beginPath();
-		ctx.rect(700, 300, 350, 350);
+		ctx.rect(37, 300, 350, 350);
+		ctx.rect(424, 300, 350, 350);
+		ctx.rect(813, 300, 350, 350);
+
 		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
 		ctx.stroke();
@@ -90,9 +90,10 @@ class GameOpening {
 		ctx.font = "80px FINALOLD";
 		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 210, 200);
 
-		ctx.font = "48px FINALOLD";
-		ctx.fillText("Fight a Cruiser", 215, 725);
-		ctx.fillText("Or 2 Smaller Birds of Prey", 670, 725);
+		ctx.font = "44px FINALOLD";
+		ctx.fillText("Fight a Cruiser", 110, 715);
+		ctx.fillText("2 Smaller Birds of Prey", 428, 715);
+		ctx.fillText("or Fleet Action", 874, 715);
 
 	};
 
