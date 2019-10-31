@@ -136,7 +136,7 @@ class GameView {
 
 
 	loadScenario2() {
-		this.game.createPlanetAndMoon();
+		this.game.createPlanetAndMoon('planet_03.png', [0, 0, 480, 480]);
 
 		this.addMain([1040, 710, 1, true], false);
 		this.addBop([0, 400], [100, 620, .6, false], true, 80, 100);
