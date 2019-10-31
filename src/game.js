@@ -126,8 +126,8 @@ class Game {
 			this.main.getSpeed());
 												
 		this.moon_01.shift(
-			[this.main.getDirection()[0] / (this.base_speed_inverse - 2.5),
-			this.main.getDirection()[1] / (this.base_speed_inverse - 2.5)],
+			[this.main.getDirection()[0] / (this.base_speed_inverse - 2.25),
+			this.main.getDirection()[1] / (this.base_speed_inverse - 2.25)],
 			this.main.getSpeed());	
 	}
 
