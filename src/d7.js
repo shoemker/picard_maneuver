@@ -9,8 +9,6 @@ class D7 extends Ship {
 		this.turnRadius = 4;
 		this.enemy = true;
 
-		this.images = options.images;
-		this.shipImg = this.images.d7Img;
 		this.beamSound = options.sounds.disruptSound;
 		this.torpSound = options.sounds.kTorpSound;
 
@@ -40,7 +38,7 @@ class D7 extends Ship {
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg, 0, 0, 380, 275,
+			ctx.drawImage(this.images.d7Img, 0, 0, 380, 275,
 				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}

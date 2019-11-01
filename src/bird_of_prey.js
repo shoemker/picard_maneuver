@@ -12,8 +12,6 @@ class Bird_of_Prey extends Ship {
 		this.width = 30;
 		this.height = 40;
 
-		this.images = options.images;
-		this.shipImg = this.images.bopImg;
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.kTorpSound;
 
@@ -48,7 +46,7 @@ class Bird_of_Prey extends Ship {
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg, 0, 0, 267, 300,
+			ctx.drawImage(this.images.bopImg, 0, 0, 267, 300,
 				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}

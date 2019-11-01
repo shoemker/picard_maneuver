@@ -12,8 +12,6 @@ class Soyuz extends Ship {
 		this.width = 35;
 		this.height = 28;
 
-		this.images = options.images;
-		this.shipImg = this.images.soyuzImg;
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.torpSound;
 
@@ -48,7 +46,7 @@ class Soyuz extends Ship {
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg, 0, 0, 362, 237,
+			ctx.drawImage(this.images.soyuzImg, 0, 0, 362, 237,
 				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}

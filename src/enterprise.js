@@ -9,8 +9,6 @@ class Enterprise extends Ship {
 		this.turnRadius = 4;
 		this.enemy = false;
 
-		this.images = options.images;
-		this.shipImg = this.images.enterpriseImg;
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
 		
@@ -42,7 +40,7 @@ class Enterprise extends Ship {
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg, 22, 0, 660, 300,
+			ctx.drawImage(this.images.enterpriseImg, 22, 0, 660, 300,
 				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}
