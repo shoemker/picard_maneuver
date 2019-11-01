@@ -243,14 +243,14 @@ class Game {
 
 	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
-			
-			this.torpedoes.push(new Torpedo(ship, this.images.torpImg,
+
+			this.torpedoes.push(new Torpedo(ship, this.images,
 				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 
-			this.torpedoes.push(new Torpedo(ship, this.images.torpImg, 
+			this.torpedoes.push(new Torpedo(ship, this.images, 
 				ship.getDirection() ));
 
-			this.torpedoes.push(new Torpedo(ship, this.images.torpImg,
+			this.torpedoes.push(new Torpedo(ship, this.images,
 				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
 		}
 	};

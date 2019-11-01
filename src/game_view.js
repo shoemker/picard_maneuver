@@ -210,6 +210,7 @@ class GameView {
 			soyuzImg: Utils.loadImg('./images/soyuz.png'),
 			enterpriseImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png'),
 			torpImg: Utils.loadImg('./images/torpedo.png'),
+			kTorpImg: Utils.loadImg('./images/many_torpedos.png'),
 			bopSsdImg: Utils.loadImg('./images/bop-ssd.png'),
 			d7SsdImg: Utils.loadImg('./images/D7-SSD.png'),
 			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd.png'),
