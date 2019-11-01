@@ -18,6 +18,7 @@ class Ship extends SpaceObject{
 		this.beamSound;
 		this.torpSound;
 		this.shipImg;
+		this.beamPattern;
 		this.enemy;
 		this.phaserColor;
 		this.turnRadius;
@@ -78,7 +79,7 @@ class Ship extends SpaceObject{
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-				this.drawPhaser(ctx, this.phaserOffsetAngle);
+			this.drawPhaser(ctx, this.phaserOffsetAngle);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -97,7 +98,7 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx, angle = 0, dashed) {
+	drawPhaser(ctx, angle) {
 
 		const phaserDrawMax = 12;
 
@@ -124,7 +125,7 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
-		if (dashed) ctx.setLineDash([3, 2, 3, 20]);  // bop beam is a dotted line
+		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		ctx.beginPath();
 		ctx.moveTo(xProgress, yProgress);
 		ctx.lineTo(xStartingPoint, yStartingPoint);
@@ -135,7 +136,7 @@ class Ship extends SpaceObject{
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
-		if (this.phaserCounter == phaserDrawMax) { this.targetShieldHP = this.ptarget.receivePhaserHit(this); }
+		if (this.phaserCounter === phaserDrawMax) this.targetShieldHP = this.ptarget.receivePhaserHit(this);
 
 		if (this.phaserCounter >= phaserDrawMax) {
 			if (this.targetShieldHP > 0) {

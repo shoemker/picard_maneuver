@@ -15,7 +15,7 @@ class Enterprise extends Ship {
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
 		this.phaserColor = "red";
-
+		this.beamPattern = [];
 
 		// this.hullIntegrityMax = 1000;
 		// this.hullIntegrity = this.hullIntegrityMax;

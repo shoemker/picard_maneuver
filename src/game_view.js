@@ -106,7 +106,7 @@ class GameView {
 				}
 			}
 		}
-	}
+	};
 
 
 	pauseGameToggle() {

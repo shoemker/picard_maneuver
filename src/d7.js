@@ -16,6 +16,7 @@ class D7 extends Ship {
 		this.torpedoReloadMax = 190;
 
 		this.phaserColor = "green";
+		this.beamPattern = [];
 		this.phaserOffsetDistance = 16;
 
 		// ssd is the ship systems display in the corner of the screen
@@ -44,7 +45,7 @@ class D7 extends Ship {
 		}
 
 		ctx.restore();
-
+   
 		super.draw(ctx, target);
 	};
 

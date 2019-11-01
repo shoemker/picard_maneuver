@@ -19,6 +19,7 @@ class Bird_of_Prey extends Ship {
 		this.torpedoReloadMax = 200;
 
 		this.phaserColor = "green";
+		this.beamPattern = [3, 2, 3, 20];
 		this.phaserOffsetDistance = 20;
 		this.phaserOffsetAngle = 1.6*Math.PI;
 
@@ -65,11 +66,6 @@ class Bird_of_Prey extends Ship {
 	firePhasers(){
 		const angle = Utils.angleToOtherShip(this, this.target)
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
-	}
-
-	// gives flag to make dashed line
-	drawPhaser(ctx, angle) {
-		super.drawPhaser(ctx, angle, true);
 	}
 }
 
