@@ -4,7 +4,6 @@ const Enterprise = require("./enterprise");
 const Soyuz = require("./soyuz");
 const D7 = require("./d7");
 const Bird_of_Prey = require("./bird_of_prey");
-const Explosion = require("./explosion")
 const Utils = require("./utils");
 
 class GameView {
@@ -12,13 +11,12 @@ class GameView {
 	constructor(ctx, sounds) {
 
 		this.ctx = ctx;
-		this.pause = false;
 		this.sounds = sounds;
+		this.pause = false;
 
-		this.game = new Game();
+		this.images = this.loadImages();
+		this.game = new Game(this.images);
 		this.gameOpening = new GameOpening();
-
-		this.loadImages();
 	};
 	
 
@@ -126,7 +124,7 @@ class GameView {
 
 
 	loadScenario1(){
-		this.game.createPlanetAndMoon('planet_08.png', [0, 0, 480, 480]);
+		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],this.images.moon_01 );
 
 		this.addMain([1040, 710, 1, true], false);
 		this.addD7([0, 100], [100, 710, 1, true], false);
@@ -136,7 +134,7 @@ class GameView {
 
 
 	loadScenario2() {
-		this.game.createPlanetAndMoon('planet_03.png', [0, 0, 480, 480]);
+		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], this.images.moon_01);
 
 		this.addMain([1040, 710, 1, true], false);
 		this.addBop([0, 400], [100, 620, .6, false], true, 80, 100);
@@ -147,7 +145,7 @@ class GameView {
 
 
 	loadScenario3() {
-		this.game.createPlanetAndMoon();
+		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
 		this.addMain([1040, 775, .6, true], true);
 		this.addSoyuz([600, 350], [1040, 465, .6, false], true);
@@ -164,12 +162,8 @@ class GameView {
 		this.game.addMainShip(new Enterprise({
 			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
 			rotationOffset: Math.PI,
-			torpSound: this.sounds.torpSound,
-			beamSound: this.sounds.phasSound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			shipImg: this.enterpriseImg,
+			images: this.images,
+			sounds: this.sounds,
 			phaserRecharge,
 			torpedoReload
 		}), aiTargeting);
@@ -178,43 +172,29 @@ class GameView {
 	addBop(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
 			pos, ssdPos,
-			torpSound: this.sounds.kTorpSound,
-			beamSound: this.sounds.disrupt2Sound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			shipImg: this.bopImg,
+			images: this.images,
+			sounds: this.sounds,
 			phaserRecharge,
 			torpedoReload
 		}), aiTargeting);
 	};
-
 
 	addSoyuz(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addAlly(new Soyuz({
 			pos, ssdPos,
 			rotationOffset: Math.PI,
-			torpSound: this.sounds.torpSound,
-			beamSound: this.sounds.disrupt2Sound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			shipImg: this.soyuzImg,
+			images: this.images,
+			sounds: this.sounds,
 			phaserRecharge,
 			torpedoReload
 		}), aiTargeting);
 	};
 
-
 	addD7(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new D7({
 			pos, ssdPos,
-			torpSound: this.sounds.kTorpSound,
-			beamSound: this.sounds.disruptSound,
-			explosion: new Explosion(this.explosionImg, this.sounds.exploSound),
-			explosionImg: this.explosionImg,
-			sparksImg: this.sparksImg,
-			shipImg: this.d7Img,
+			images: this.images,
+			sounds: this.sounds,
 			phaserRecharge,
 			torpedoReload
 		}), aiTargeting);
@@ -222,12 +202,23 @@ class GameView {
 
 
 	loadImages() {
-		this.sparksImg = Utils.loadImg('./images/sparks.png');
-		this.explosionImg = Utils.loadImg('./images/explosion-sprite-sheet.png');
-		this.bopImg = Utils.loadImg('./images/bop.png');
-		this.d7Img = Utils.loadImg('./images/D7.png');
-		this.soyuzImg = Utils.loadImg('./images/soyuz.png');
-		this.enterpriseImg = Utils.loadImg('./images/uss-enterprise-png-view-original-669.png')
+		return {
+			sparksImg: Utils.loadImg('./images/sparks.png'),
+			explosionImg: Utils.loadImg('./images/explosion-sprite-sheet.png'),
+			bopImg: Utils.loadImg('./images/bop.png'),
+			d7Img: Utils.loadImg('./images/D7.png'),
+			soyuzImg: Utils.loadImg('./images/soyuz.png'),
+			enterpriseImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png'),
+			torpImg: Utils.loadImg('./images/torpedo.png'),
+			bopSsdImg: Utils.loadImg('./images/bop-ssd.png'),
+			d7SsdImg: Utils.loadImg('./images/D7-SSD.png'),
+			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd.png'),
+			entSsdImg: Utils.loadImg('./images/enterprise-refit-ssd.png'),
+			moon_01: Utils.loadImg('./images/planets/moon_01.png'),
+			moon_03: Utils.loadImg('./images/planets/moon_03.png'),
+			planet_08: Utils.loadImg('./images/planets/planet_08.png'),
+			planet_03: Utils.loadImg('./images/planets/planet_03.png'),
+		}
 	};
 }
 

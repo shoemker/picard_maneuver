@@ -6,7 +6,9 @@ const Utils = require("./utils");
 
 class Game {
 
-	constructor() {
+	constructor(images) {
+		this.images = images;
+
 		this.canvas_width = Utils.getCanvasDim()[0];
 		this.canvas_height = Utils.getCanvasDim()[1];
 
@@ -27,7 +29,6 @@ class Game {
 		this.keyMap = {};
 
 		this.createStarField();
-		this.torpImg = Utils.loadImg('./images/torpedo.png');
 
 		this.turnCounter = 0;
 		this.turnCounterMax = 8;
@@ -51,19 +52,18 @@ class Game {
 	}
 
 	// factory method to create planet and moon objects
-	createPlanetAndMoon(planetImg = 'moon_03.png', pCoords = [0, 0, 110, 110],
-		moonImg = 'moon_01.png', mCoords = [3, 3, 58, 58]) {
+	createPlanetAndMoon(planetImg, pCoords,	moonImg, mCoords = [3, 3, 58, 58]) {
 
 		this.planet = new Planet({
 			pos: [300, 300],
-			img: Utils.loadImg('./images/planets/' + planetImg),
+			img:  planetImg,
 			width: 200, height: 200,
 			sheetCoords: pCoords
 		});
 
 		this.moon_01 = new Planet({
 			pos: [260, 410],
-			img: Utils.loadImg('./images/planets/' + moonImg),
+			img: moonImg,
 			width: 50, height: 50,
 			sheetCoords: mCoords
 		});
@@ -244,13 +244,13 @@ class Game {
 	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
 			
-			this.torpedoes.push(new Torpedo(ship, this.torpImg,
+			this.torpedoes.push(new Torpedo(ship, this.images.torpImg,
 				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 
-			this.torpedoes.push(new Torpedo(ship, this.torpImg, 
+			this.torpedoes.push(new Torpedo(ship, this.images.torpImg, 
 				ship.getDirection() ));
 
-			this.torpedoes.push(new Torpedo(ship, this.torpImg,
+			this.torpedoes.push(new Torpedo(ship, this.images.torpImg,
 				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
 		}
 	};

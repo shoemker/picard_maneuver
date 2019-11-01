@@ -8,6 +8,11 @@ class Enterprise extends Ship {
  
 		this.turnRadius = 4;
 		this.enemy = false;
+
+		this.images = options.images;
+		this.shipImg = this.images.enterpriseImg;
+		this.beamSound = options.sounds.phasSound;
+		this.torpSound = options.sounds.torpSound;
 		
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
@@ -22,7 +27,7 @@ class Enterprise extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [60, 120],
 			img_pos_offset: [5,4],
-			img: Utils.loadImg('./images/enterprise-refit-ssd.png'),
+			img: this.images.entSsdImg,
 			beamWeaponName: "Phaser",
 			imgCoords: [0, 0, 54, 129],
 			shieldStrength: 100,
@@ -38,10 +43,7 @@ class Enterprise extends Ship {
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
 			ctx.drawImage(this.shipImg, 22, 0, 660, 300,
-				this.pos[0],
-				this.pos[1],
-				this.width,
-				this.height
+				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}
 

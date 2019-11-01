@@ -9,6 +9,11 @@ class D7 extends Ship {
 		this.turnRadius = 4;
 		this.enemy = true;
 
+		this.images = options.images;
+		this.shipImg = this.images.d7Img;
+		this.beamSound = options.sounds.disruptSound;
+		this.torpSound = options.sounds.kTorpSound;
+
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
 
@@ -20,7 +25,7 @@ class D7 extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [70, 120],
 			img_pos_offset: [0, 0],
-			img: Utils.loadImg('./images/D7-SSD.png'),
+			img: this.images.d7SsdImg,
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 170, 175],
 			shieldStrength: 100
@@ -36,10 +41,7 @@ class D7 extends Ship {
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
 			ctx.drawImage(this.shipImg, 0, 0, 380, 275,
-				this.pos[0],
-				this.pos[1],
-				this.width,
-				this.height
+				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}
 

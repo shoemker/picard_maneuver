@@ -12,11 +12,7 @@ class Planet extends SpaceObject {
 	draw(ctx) {
 		ctx.drawImage(this.img,
 			this.sheetCoords[0], this.sheetCoords[1], this.sheetCoords[2], this.sheetCoords[3],
-			this.pos[0],
-			this.pos[1],
-			this.width,
-			this.height);
-
+			this.pos[0], this.pos[1], this.width, this.height);
 	}
 }
 

@@ -12,6 +12,11 @@ class Soyuz extends Ship {
 		this.width = 35;
 		this.height = 28;
 
+		this.images = options.images;
+		this.shipImg = this.images.soyuzImg;
+		this.beamSound = options.sounds.disrupt2Sound;
+		this.torpSound = options.sounds.torpSound;
+
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
 
@@ -28,7 +33,7 @@ class Soyuz extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [80, 100],
 			img_pos_offset: [-5, 10],
-			img: Utils.loadImg('./images/soyuz-ssd.png'),
+			img: this.images.soyuzSsdImg,
 			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 125, 215],
 			shieldStrength: 30
@@ -44,10 +49,7 @@ class Soyuz extends Ship {
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
 			ctx.drawImage(this.shipImg, 0, 0, 362, 237,
-				this.pos[0],
-				this.pos[1],
-				this.width,
-				this.height
+				this.pos[0], this.pos[1], this.width, this.height
 			);
 		}
 

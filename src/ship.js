@@ -1,4 +1,5 @@
 const SpaceObject = require("./space_object");
+const Explosion = require("./explosion")
 const Utils = require("./utils");
 
 class Ship extends SpaceObject{
@@ -9,14 +10,14 @@ class Ship extends SpaceObject{
 		if (options.rotationOffset) this.rotationOffset = options.rotationOffset;
 		else this.rotationOffset = 0;
 		
-		this.beamSound = options.beamSound;
-		this.torpSound = options.torpSound;
-		this.explosion = options.explosion;
-		this.explosionImg = options.explosionImg;
-		this.sparksImg = options.sparksImg;
-		this.shipImg = options.shipImg;
+		this.images = options.images;
 		this.target = options.target;
 
+		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
+
+		this.beamSound;
+		this.torpSound;
+		this.shipImg;
 		this.enemy;
 		this.phaserColor;
 		this.turnRadius;
@@ -146,11 +147,14 @@ class Ship extends SpaceObject{
 
 			//draws sparks effect when beam hits
 			if (this.phaserCounter%2 === 0) {
-				ctx.drawImage(this.sparksImg, 1, 25, 92, 108, xProgress - 5 * sizeFactor, yProgress - 5 * sizeFactor, 
+				ctx.drawImage(this.images.sparksImg, 1, 25, 92, 108, 
+					xProgress - 5 * sizeFactor, yProgress - 5 * sizeFactor, 
 					10 * sizeFactor, 10 * sizeFactor);
 			}
-			else ctx.drawImage(this.sparksImg, 120, 2, 165, 148, xProgress - 7 * sizeFactor, yProgress - 7 * sizeFactor, 
-				14 * sizeFactor, 14 * sizeFactor);
+			else 
+				ctx.drawImage(this.images.sparksImg, 120, 2, 165, 148, 
+					xProgress - 7 * sizeFactor, yProgress - 7 * sizeFactor, 
+					14 * sizeFactor, 14 * sizeFactor);
 		}
 
 		// zeros the counter and ends the beam effect
@@ -181,7 +185,7 @@ class Ship extends SpaceObject{
 			y =	this.center()[1] - 5;
 		}
 
-		ctx.drawImage(this.explosionImg, 606, 295, 100, 100, x, y, 10, 10);
+		ctx.drawImage(this.images.explosionImg, 606, 295, 100, 100, x, y, 10, 10);
 	};
 
 
