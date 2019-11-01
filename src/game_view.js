@@ -127,7 +127,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],this.images.moon_01 );
 
 		this.addMain([1040, 710, 1, true], false);
-		this.addD7([0, 200], [100, 710, 1, true], false);
+		this.addD7([0, 100], [100, 710, 1, true], false);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
