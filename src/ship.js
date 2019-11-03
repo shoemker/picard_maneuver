@@ -100,11 +100,11 @@ class Ship extends SpaceObject{
 	// then stays there for a few frames
 	drawPhaser(ctx, angle) {
 
-		const phaserDrawMax = 12;
+		const phaserDrawMax = 16;
 
 		// moves the starting point for the phaser(on the saucer for the enterprise, on the wing for bop)
-		const xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
-		const yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
+		let xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
+		let yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
 
 		let xDelta = this.ptarget.center()[0] - xStartingPoint;
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;

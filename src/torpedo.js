@@ -27,7 +27,8 @@ class Torpedo extends SpaceObject {
 	getLauncher() { return this.launcher; }
 	
 	draw(ctx) {
-		ctx.drawImage(this.torpImg, this.dim[0], this.dim[1], this.dim[2], this.dim[3],
+		ctx.drawImage(this.torpImg, 
+			this.dim[0], this.dim[1], this.dim[2], this.dim[3],
 			this.pos[0]-this.width/2,
 			this.pos[1]-this.height/2,
 			this.width,

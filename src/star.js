@@ -1,4 +1,5 @@
 const SpaceObject = require("./space_object");
+const Utils = require("./utils");
 
 class Star extends SpaceObject {
 	constructor(options){
@@ -7,8 +8,6 @@ class Star extends SpaceObject {
 		this.radius = options.radius;
 		this.hue = options.hue;
 		this.sat = options.sat;
-		this.canvas_width = options.canvas_width;
-		this.canvas_height = options.canvas_height;
 	};
 
 	draw(ctx) {
@@ -21,11 +20,11 @@ class Star extends SpaceObject {
 	shift(direction, speed) {
 		super.shift(direction, speed);
 
-		if (this.pos[0] > this.canvas_width) this.pos[0] = 0;
-		else if (this.pos[0] < 0) this.pos[0] = this.canvas_width;
+		if (this.pos[0] > Utils.getCanvasDim()[0]) this.pos[0] = 0;
+		else if (this.pos[0] < 0) this.pos[0] = Utils.getCanvasDim()[0];
 
-		if (this.pos[1] > this.canvas_height) this.pos[1] = 0;
-		else if (this.pos[1] < 0) this.pos[1] = this.canvas_height;
+		if (this.pos[1] > Utils.getCanvasDim()[1]) this.pos[1] = 0;
+		else if (this.pos[1] < 0) this.pos[1] = Utils.getCanvasDim()[1];
 	};
 
 }

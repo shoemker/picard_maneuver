@@ -9,9 +9,6 @@ class Game {
 	constructor(images) {
 		this.images = images;
 
-		this.canvas_width = Utils.getCanvasDim()[0];
-		this.canvas_height = Utils.getCanvasDim()[1];
-
 		this.base_speed_inverse = 5;
 
 		this.win = false;
@@ -135,9 +132,9 @@ class Game {
 	draw(ctx){
 		// clear canvas and draw black background
 		ctx.beginPath();
-		ctx.clearRect(0, 0, this.canvas_width, this.canvas_height);
+		ctx.clearRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
 		ctx.fillStyle = "black";
-		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
+		ctx.fillRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
 
 		// draw all of the objects
 		this.stars.forEach((star) => star.draw(ctx));
@@ -155,8 +152,8 @@ class Game {
 		this.allies.forEach((ally) => ally.draw(ctx));
 
 		// draw mute and autopilot box
-		this.drawCheckBox(ctx, this.canvas_width - 130, 30, "Mute", this.muted);
-		this.drawCheckBox(ctx, this.canvas_width - 130, 70, "Autopilot", this.autopilot);
+		this.drawCheckBox(ctx, Utils.getCanvasDim()[0] - 130, 30, "Mute", this.muted);
+		this.drawCheckBox(ctx, Utils.getCanvasDim()[0] - 130, 70, "Autopilot", this.autopilot);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
@@ -167,8 +164,8 @@ class Game {
 		ctx.font = "72px FINALOLD";
 		ctx.fillStyle = "#FAFAD2";
 
-		ctx.fillText(message, this.canvas_width/2-315, this.canvas_height/3 - 100);
-		ctx.fillText("Refresh to play again", this.canvas_width / 2 - 270, this.canvas_height / 3 - 20);
+		ctx.fillText(message, Utils.getCanvasDim()[0]/2-315, Utils.getCanvasDim()[1]/3 - 100);
+		ctx.fillText("Refresh to play again", Utils.getCanvasDim()[0] / 2 - 270, Utils.getCanvasDim()[1] / 3 - 20);
 	};
 
 
@@ -213,12 +210,10 @@ class Game {
 		
 		for (let i = 0; i < starCount; i++) {
 			this.stars.push(new Star({
-				pos: [Math.random() * this.canvas_width, Math.random() * this.canvas_height],
+				pos: [Math.random() * Utils.getCanvasDim()[0], Math.random() * Utils.getCanvasDim()[1]],
 				radius: Math.random() * 2.0,
 				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
-				sat: this.getRandom(50, 100),
-				canvas_width: this.canvas_width,
-				canvas_height: this.canvas_height				
+				sat: this.getRandom(50, 100),		
 			}))
 		}
 	};
@@ -234,8 +229,8 @@ class Game {
 
 			// delete torpedo when it moves offscreen
 			let center = torpedo.center();
-			if (center[0] < 0 || center[0] > this.canvas_width ||
-				center[1] < 0 || center[1] > this.canvas_height)
+			if (center[0] < 0 || center[0] > Utils.getCanvasDim()[0] ||
+				center[1] < 0 || center[1] > Utils.getCanvasDim()[1])
 				this.torpedoes.splice(i, 1);
 		});
 	};
