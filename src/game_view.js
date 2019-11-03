@@ -17,6 +17,7 @@ class GameView {
 		this.images = this.loadImages();
 		this.game = new Game(this.images);
 		this.gameOpening = new GameOpening();
+		this.demo = false;
 	};
 	
 
@@ -32,7 +33,11 @@ class GameView {
 			// if unpaused this steps and draws either the game or the gameOpening
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
-				if (this.game.main.getHull() === 0) this.game.lose = true;
+				if (this.demo && (this.game.main.getHull() === 0 || this.game.enemies.length === 0)) {
+					this.game = new Game(this.images);
+					this.loadScenario4();
+				}
+				else if (this.game.main.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemies.length === 0) this.game.win = true;
 				else {
 					this.game.enemies.forEach((enemy, i) => {
@@ -155,6 +160,12 @@ class GameView {
 		this.addD7([0, 200], [100, 775, .6, true], true);
 
 		this.game.main.setTarget(this.game.randomTarget(this.game.main));
+	};
+
+	loadScenario4() {
+		this.loadScenario3();
+		this.demo = true;
+		this.game.autoPilotToggle();
 	};
 
 
