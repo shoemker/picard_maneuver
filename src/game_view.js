@@ -224,7 +224,7 @@ class GameView {
 			kTorpImg: Utils.loadImg('./images/many_torpedos.png'),
 			bopSsdImg: Utils.loadImg('./images/bop-ssd.png'),
 			d7SsdImg: Utils.loadImg('./images/D7-SSD.png'),
-			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd.png'),
+			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd2.png'),
 			entSsdImg: Utils.loadImg('./images/enterprise-refit-ssd.png'),
 			moon_01: Utils.loadImg('./images/planets/moon_01.png'),
 			moon_03: Utils.loadImg('./images/planets/moon_03.png'),

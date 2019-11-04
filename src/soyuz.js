@@ -34,7 +34,7 @@ class Soyuz extends Ship {
 			img_pos_offset: [-5, 10],
 			img: this.images.soyuzSsdImg,
 			beamWeaponName: 'Phaser',
-			imgCoords: [0, 0, 125, 215],
+			imgCoords: [0, 0, 202, 298],
 			shieldStrength: 30
 		});
 	};
