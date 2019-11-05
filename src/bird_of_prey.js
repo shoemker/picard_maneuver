@@ -20,6 +20,7 @@ class Bird_of_Prey extends Ship {
 
 		this.phaserColor = "green";
 		this.beamPattern = [3, 2, 3, 20];
+
 		this.phaserOffsetDistance = 20;
 		this.phaserOffsetAngle = 1.6*Math.PI;
 

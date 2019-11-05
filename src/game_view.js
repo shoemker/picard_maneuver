@@ -91,6 +91,10 @@ class GameView {
 					this.openingOff();
 				}
 			}
+			else if (x > 20 && y > 20 && x < 40 && y < 40) {
+				this.loadScenario4();
+				this.openingOff();
+			}
 		}
 		else {
 			if(x > 1085 && x < 1112) {
@@ -166,6 +170,7 @@ class GameView {
 		this.loadScenario3();
 		this.demo = true;
 		this.game.autoPilotToggle();
+		this.game.muteToggle();
 	};
 
 
