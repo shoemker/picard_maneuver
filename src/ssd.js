@@ -95,12 +95,6 @@ class SSD {
 
 		const y_coord = this.ssd_y;
 
-		// ctx.fillText(this.beamWeaponName, x_coord, y_coord);
-		// ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 25);
-
-		// ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord);
-		// ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 25);
-
 		ctx.fillText(this.beamWeaponName, x_coord, y_coord + 150 * this.scale);
 		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 15 + 160 * this.scale);
 
@@ -117,8 +111,7 @@ class SSD {
 		// forward shield
 		this.shields.push(new Shield({
 			pos: [x, y + 10],
-			start: 1.3,
-			end: 1.7,
+			start: 1.3, end: 1.7,
 			radius: 80 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
@@ -126,8 +119,7 @@ class SSD {
 		// starboard shield
 		this.shields.push(new Shield({
 			pos: [x - 30 * this.scale, y + 5],
-			start: 1.85,
-			end: 2.15,
+			start: 1.85, end: 2.15,
 			radius: 100 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
@@ -135,8 +127,7 @@ class SSD {
 		// rear shield
 		this.shields.push(new Shield({
 			pos: [x, y - 1],
-			start: .3,
-			end: .7,
+			start: .3, end: .7,
 			radius: 80 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
@@ -144,13 +135,11 @@ class SSD {
 		// port shield
 		this.shields.push(new Shield({
 			pos: [x + 30 * this.scale, y + 5],
-			start: .85,
-			end: 1.15,
+			start: .85, end: 1.15,
 			radius: 100 * this.scale,
 			shieldStrength: this.shieldStrength
 		}));
 	};
-
 }
 
 module.exports = SSD;

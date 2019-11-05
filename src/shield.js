@@ -16,7 +16,7 @@ class Shield {
 	up() { return this.hitpoints > 0; }
 
 
-	draw(ctx, shrink) {
+	draw(ctx, scale) {
 		this.timer++;
 		if (this.timer === 40) {
 			this.timer = 0;
@@ -33,7 +33,7 @@ class Shield {
 			this.end * Math.PI - (this.end - this.start)/2 * Math.PI * (1 - shieldPercentage)
 		);
 	
-		ctx.lineWidth = 7*shrink;
+		ctx.lineWidth = 7*scale;
 		ctx.strokeStyle = this.color;
 		ctx.stroke();
 	}
