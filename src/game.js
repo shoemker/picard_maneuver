@@ -193,8 +193,10 @@ class Game {
 	};
 
 
-	muteCheckMarkToggle() {
+	muteToggle(gainNode) {
 		this.muted = this.muted === false;
+		if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
+		else gainNode.gain.value = 0;
 	};
 
 
