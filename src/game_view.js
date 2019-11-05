@@ -34,8 +34,10 @@ class GameView {
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
 				if (this.demo && (this.game.main.getHull() === 0 || this.game.enemies.length === 0)) {
+					const muted = this.game.muted;
 					this.game = new Game(this.images);
 					this.loadScenario4();
+					this.game.muted = muted;
 				}
 				else if (this.game.main.getHull() === 0) this.game.lose = true;
 				else if (this.game.enemies.length === 0) this.game.win = true;
@@ -75,7 +77,6 @@ class GameView {
 	// get scenario click if still in the opening of the game, or
 	// check to see if mute or autopilot is being clicked
 	checkClick(x, y, gainNode) {
-		this.gainNode = gainNode;
 
 		if (this.gameOpening !== null) {
 			if (y >= 317 && y <= 734) {
@@ -93,6 +94,8 @@ class GameView {
 				}
 			}
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
+				gainNode.gain.value = 0;
+				this.game.muted = true;
 				this.loadScenario4();
 				this.openingOff();
 			}
@@ -100,7 +103,7 @@ class GameView {
 		else {
 			if(x > 1085 && x < 1112) {
 				if (y > 46 && y < 71) {
-					this.game.muteToggle(this.gainNode);
+					this.game.muteToggle(gainNode);
 
 					// if paused, draw to show checkmark in box
 					if (this.pause) this.game.draw(this.ctx)
@@ -167,8 +170,6 @@ class GameView {
 	loadScenario4() {
 		this.loadScenario3();
 		this.demo = true;
-		this.game.muted = true;
-		this.gainNode.gain.value = 0
 		this.game.autoPilotToggle();
 	};
 
