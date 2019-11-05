@@ -94,8 +94,7 @@ class GameView {
 				}
 			}
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
-				gainNode.gain.value = 0;
-				this.game.muted = true;
+				this.game.muteToggle(gainNode);
 				this.loadScenario4();
 				this.openingOff();
 			}
