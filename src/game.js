@@ -193,7 +193,7 @@ class Game {
 	};
 
 
-	muteToggle() {
+	muteCheckMarkToggle() {
 		this.muted = this.muted === false;
 	};
 

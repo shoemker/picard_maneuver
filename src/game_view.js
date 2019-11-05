@@ -99,10 +99,7 @@ class GameView {
 		else {
 			if(x > 1085 && x < 1112) {
 				if (y > 46 && y < 71) {
-					this.game.muteToggle();
-
-					if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
-					else gainNode.gain.value = 0;
+					this.muteToggle();
 
 					// if paused, draw to show checkmark in box
 					if (this.pause) this.game.draw(this.ctx)
@@ -117,6 +114,12 @@ class GameView {
 		}
 	};
 
+	muteToggle() {
+		this.game.muteCheckMarkToggle();
+
+		if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
+		else gainNode.gain.value = 0;
+	}
 
 	pauseGameToggle() {
 		this.pause = this.pause === false;
