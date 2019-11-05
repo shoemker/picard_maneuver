@@ -96,6 +96,7 @@ class GameView {
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
 				this.game.muteToggle(gainNode);
 				this.loadScenario4();
+				this.openingOff();
 			}
 		}
 		else {
@@ -169,7 +170,6 @@ class GameView {
 		this.loadScenario3();
 		this.demo = true;
 		this.game.autoPilotToggle();
-		this.openingOff();
 	};
 
 
