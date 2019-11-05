@@ -75,6 +75,7 @@ class GameView {
 	// get scenario click if still in the opening of the game, or
 	// check to see if mute or autopilot is being clicked
 	checkClick(x, y, gainNode) {
+		this.gainNode = gainNode;
 
 		if (this.gameOpening !== null) {
 			if (y >= 317 && y <= 734) {
@@ -92,7 +93,6 @@ class GameView {
 				}
 			}
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
-				this.muteToggle(gainNode);
 				this.loadScenario4();
 				this.openingOff();
 			}
@@ -100,7 +100,7 @@ class GameView {
 		else {
 			if(x > 1085 && x < 1112) {
 				if (y > 46 && y < 71) {
-					this.muteToggle(gainNode);
+					this.muteToggle();
 
 					// if paused, draw to show checkmark in box
 					if (this.pause) this.game.draw(this.ctx)
@@ -115,10 +115,10 @@ class GameView {
 		}
 	};
 
-	muteToggle(gainNode) {
+	muteToggle() {
 		this.game.muteCheckMarkToggle();
-		if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
-		else gainNode.gain.value = 0;
+		if (this.gainNode.gain.value > -.01 && this.gainNode.gain.value < .01) this.gainNode.gain.value = .25;
+		else this.gainNode.gain.value = 0;
 	}
 
 	pauseGameToggle() {
@@ -172,6 +172,7 @@ class GameView {
 	loadScenario4() {
 		this.loadScenario3();
 		this.demo = true;
+		this.muteToggle();
 		this.game.autoPilotToggle();
 	};
 
