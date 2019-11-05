@@ -92,6 +92,7 @@ class GameView {
 				}
 			}
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
+				this.muteToggle(gainNode);
 				this.loadScenario4();
 				this.openingOff();
 			}
@@ -99,7 +100,7 @@ class GameView {
 		else {
 			if(x > 1085 && x < 1112) {
 				if (y > 46 && y < 71) {
-					this.muteToggle();
+					this.muteToggle(gainNode);
 
 					// if paused, draw to show checkmark in box
 					if (this.pause) this.game.draw(this.ctx)
@@ -114,9 +115,8 @@ class GameView {
 		}
 	};
 
-	muteToggle() {
+	muteToggle(gainNode) {
 		this.game.muteCheckMarkToggle();
-
 		if (gainNode.gain.value > -.01 && gainNode.gain.value < .01) gainNode.gain.value = .25;
 		else gainNode.gain.value = 0;
 	}
@@ -173,7 +173,6 @@ class GameView {
 		this.loadScenario3();
 		this.demo = true;
 		this.game.autoPilotToggle();
-		this.game.muteToggle();
 	};
 
 
