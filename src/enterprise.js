@@ -27,7 +27,7 @@ class Enterprise extends Ship {
 			img_pos_offset: [5,4],
 			img: this.images.entSsdImg,
 			beamWeaponName: "Phaser",
-			imgCoords: [0, 0, 54, 129],
+			imgCoords: [0, 0, 110, 257],
 			shieldStrength: 100,
 		});
 	};

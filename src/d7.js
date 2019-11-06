@@ -23,10 +23,10 @@ class D7 extends Ship {
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
 			img_size: [70, 120],
-			img_pos_offset: [0, 0],
+			img_pos_offset: [0, 3],
 			img: this.images.d7SsdImg,
 			beamWeaponName: 'Disruptor',
-			imgCoords: [0, 0, 170, 175],
+			imgCoords: [0, 0, 207, 287],
 			shieldStrength: 100
 		});
 	};

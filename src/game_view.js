@@ -93,6 +93,7 @@ class GameView {
 					this.openingOff();
 				}
 			}
+			// continuous demo mode
 			else if (x > 20 && y > 20 && x < 40 && y < 40) {
 				this.game.muteToggle(gainNode);
 				this.loadScenario4();
@@ -227,9 +228,9 @@ class GameView {
 			torpImg: Utils.loadImg('./images/torpedo.png'),
 			kTorpImg: Utils.loadImg('./images/many_torpedos.png'),
 			bopSsdImg: Utils.loadImg('./images/bop-ssd.png'),
-			d7SsdImg: Utils.loadImg('./images/D7-SSD.png'),
+			d7SsdImg: Utils.loadImg('./images/d7-ssd.png'),
 			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd2.png'),
-			entSsdImg: Utils.loadImg('./images/enterprise-refit-ssd.png'),
+			entSsdImg: Utils.loadImg('./images/enterprise-ssd.png'),
 			moon_01: Utils.loadImg('./images/planets/moon_01.png'),
 			moon_03: Utils.loadImg('./images/planets/moon_03.png'),
 			planet_08: Utils.loadImg('./images/planets/planet_08.png'),
