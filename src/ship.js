@@ -138,7 +138,7 @@ class Ship extends SpaceObject{
 
 		if (this.phaserCounter === phaserDrawMax) this.targetShieldHP = this.ptarget.receivePhaserHit(this);
 
-		if (this.phaserCounter >= phaserDrawMax) {
+		if (this.phaserCounter > phaserDrawMax) {
 			if (this.targetShieldHP > 0) {
 				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
 			}
