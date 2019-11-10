@@ -53,7 +53,7 @@ class SSD {
 		
 		for (let index = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4; index < this.imgData.data.length; index += 4) {
 			if (this.imgData.data[index] !== 0) {
-				this.imgData.data[index] = 255;
+				this.imgData.data[index] = 153;
 				this.imgData.data[index+1] = 0;
 				this.imgData.data[index + 2] = 0;
 			}			
@@ -74,11 +74,7 @@ class SSD {
 			this.captureImage(ctx, imgXDraw, imgYDraw);
 			this.firstFrame = false;
 		}
-		else {
-			ctx.drawImage(this.img, imgXDraw, imgYDraw);
-			
-		}
-
+		else ctx.drawImage(this.img, imgXDraw, imgYDraw);		
 		
 		ctx.beginPath(); 
 		
