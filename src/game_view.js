@@ -33,7 +33,7 @@ class GameView {
 			// if unpaused this steps and draws either the game or the gameOpening
 			if (this.gameOpening !== null) this.gameOpening.stepAndDraw(this.ctx);
 			else {
-				if (this.demo && (this.game.main.getHull() === 0 || this.game.enemies.length === 0)) {
+				if (this.demo && (this.game.main.isGone() || this.game.enemies.length === 0)) {
 					const muted = this.game.muted;
 					this.game = new Game(this.images);
 					this.loadScenario4();

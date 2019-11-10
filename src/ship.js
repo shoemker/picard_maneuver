@@ -270,7 +270,7 @@ class Ship extends SpaceObject{
 		}
 		else {
 			this.hullIntegrity -= damage;
-			this.ssd.changeImg(this.hullIntegrity / this.hullIntegrityMax);
+			this.ssd.updateImg(this.hullIntegrity / this.hullIntegrityMax);
 		}
 
 		if (this.hullIntegrity < 0) this.hullIntegrity = 0;

@@ -46,12 +46,13 @@ class SSD {
 			}
 		}
 
-		this.changeImg(1);
-	}
+		this.updateImg(1);
+	};
 
-	changeImg(hullPercentage){
-		
-		for (let index = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4; index < this.imgData.data.length; index += 4) {
+
+	updateImg(hullPercentage){
+		const start = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4;
+		for (let index = start; index < this.imgData.data.length; index += 4) {
 			if (this.imgData.data[index] !== 0) {
 				this.imgData.data[index] = 153;
 				this.imgData.data[index+1] = 0;
@@ -61,7 +62,8 @@ class SSD {
 		this.tempCtx.putImageData(this.imgData, 0, 0);
 		this.img = new Image();
 		this.img.src = this.tempCanvas.toDataURL();
-	}
+	};
+
 
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
