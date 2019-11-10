@@ -147,7 +147,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], this.images.moon_01);
 
 		this.addMain([1040, 710, 1, true], false);
-		this.addBop([0, 400], [100, 620, .6, false], true, 80, 100);
+		this.addBop([0, 400], [100, 630, .6, false], true, 80, 100);
 		this.addBop([0, 50], [100, 775, .6, true], true);
 
 		this.game.main.setTarget(this.game.enemies[0]);
@@ -158,10 +158,10 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
 		this.addMain([1060, 775, .6, true], true);
-		this.addSoyuz([600, 350], [1060, 445, .6, false], true);
-		this.addSoyuz([600, 450], [1060, 610, .6, false], true,50,50);
-		this.addBop([0, 300], [100, 445, .6, false], true, 80, 100);
-		this.addBop([0, 100], [100, 610, .6, false], true);
+		this.addSoyuz([600, 350], [1060, 485, .6, false], true);
+		this.addSoyuz([600, 450], [1060, 630, .6, false], true,50,50);
+		this.addBop([0, 300], [100, 486, .6, false], true, 80, 100);
+		this.addBop([0, 100], [100, 630, .6, false], true);
 		this.addD7([0, 200], [100, 775, .6, true], true);
 
 		this.game.main.setTarget(this.game.randomTarget(this.game.main));
