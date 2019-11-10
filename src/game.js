@@ -15,6 +15,7 @@ class Game {
 		this.lose = false;
 		this.muted = false;
 		this.autopilot = false;
+		this.firstFrame = true;
 
 		this.enemies = [];
 		this.allies = [];
@@ -137,7 +138,7 @@ class Game {
 		ctx.fillRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
 
 		// draw all of the objects
-		this.stars.forEach((star) => star.draw(ctx));
+		if (!this.firstFrame) this.stars.forEach((star) => star.draw(ctx));
 		this.planet.draw(ctx);
 		this.moon_01.draw(ctx);
 		this.torpedoes.forEach((torpedo) => torpedo.draw(ctx));
@@ -157,6 +158,8 @@ class Game {
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
 		if (this.win) this.drawMessage(ctx, "Congratulations, You Win!");
+
+		if (this.firstFrame) this.firstFrame = false;
 	};
 
 

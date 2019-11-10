@@ -12,7 +12,8 @@ class SSD {
 		this.ssd_total_width = 70 * this.scale;
 		this.ssd_total_height = 120 * this.scale;
 
-		this.img_size = options.img_size;
+		this.img_size_x = options.img_size[0] * this.scale;
+		this.img_size_y = options.img_size[1] * this.scale;
 		this.img_pos_offset = options.img_pos_offset;
 		this.imgCoords = options.imgCoords;
 		this.beamWeaponName = options.beamWeaponName;
@@ -20,21 +21,65 @@ class SSD {
 		this.SSDimg = options.img;
 
 		this.shields = [];
+		this.data;
+		this.firstFrame = true;
 		this.raiseShields();
+
+		this.tempCanvas = document.createElement('canvas');
+		this.tempCanvas.width = this.img_size_x;
+		this.tempCanvas.height = this.img_size_y;
+		this.tempCtx = this.tempCanvas.getContext('2d');
 	};
 
 
 	getShields() { return this.shields; };
 	setLabels(val) { this.labels = val; };
 
+
+	// this function gets the ssd ship image from the canvas after it's drawn
+	// it then sets the black pixels to transparent
+	captureImage(ctx, imgXDraw, imgYDraw) {
+		this.imgData = ctx.getImageData(imgXDraw, imgYDraw, this.img_size_x, this.img_size_y);
+		for (let index = 0; index < this.imgData.data.length; index += 4) {
+			if (this.imgData.data[index] === 0) {
+				this.imgData.data[index + 3] = 0;
+			}
+		}
+
+		this.changeImg(1);
+	}
+
+	changeImg(hullPercentage){
+		
+		for (let index = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4; index < this.imgData.data.length; index += 4) {
+			if (this.imgData.data[index] !== 0) {
+				this.imgData.data[index] = 255;
+				this.imgData.data[index+1] = 0;
+				this.imgData.data[index + 2] = 0;
+			}			
+		}
+		this.tempCtx.putImageData(this.imgData, 0, 0);
+		this.img = new Image();
+		this.img.src = this.tempCanvas.toDataURL();
+	}
+
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
-		ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
-			this.ssd_x + this.img_pos_offset[0]*this.scale,
-			this.ssd_y + this.img_pos_offset[1],
-			this.img_size[0]*this.scale,
-			this.img_size[1]*this.scale);
+		const imgXDraw = this.ssd_x + this.img_pos_offset[0] * this.scale;
+		const imgYDraw = this.ssd_y + this.img_pos_offset[1];
 
+		if (this.firstFrame) {
+			ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
+				imgXDraw, imgYDraw, this.img_size_x, this.img_size_y);
+			this.captureImage(ctx, imgXDraw, imgYDraw);
+			this.firstFrame = false;
+		}
+		else {
+			ctx.drawImage(this.img, imgXDraw, imgYDraw);
+			
+		}
+
+		
 		ctx.beginPath(); 
 		
 		this.drawShields(ctx);

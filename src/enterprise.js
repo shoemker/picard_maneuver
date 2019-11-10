@@ -33,7 +33,7 @@ class Enterprise extends Ship {
 	};
 	
 
-	draw(ctx) {
+	draw(ctx, ) {
 		ctx.save();
 
 		this.rotateCanvas(ctx);
@@ -47,7 +47,7 @@ class Enterprise extends Ship {
 
 		ctx.restore();
 		
-		super.draw(ctx);
+		super.draw(ctx, );
 	};
 }
 

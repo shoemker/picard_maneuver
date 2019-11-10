@@ -55,6 +55,7 @@ class Ship extends SpaceObject{
 	getDirection() { return this.direction; }
 	getSpeed() { return this.speed; }
 	getRotation() { return this.rotationOffset; }
+	getSSD() { return this.ssd; }
 	phaserReady() { return this.phaserRecharge === this.phaserRechargeMax; }
 	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
@@ -267,7 +268,10 @@ class Ship extends SpaceObject{
 		if (hp > 0) {
 			this.ssd.getShields()[this.shieldHit].hit(damage);
 		}
-		else this.hullIntegrity -= damage;
+		else {
+			this.hullIntegrity -= damage;
+			this.ssd.changeImg(this.hullIntegrity / this.hullIntegrityMax);
+		}
 
 		if (this.hullIntegrity < 0) this.hullIntegrity = 0;
 
