@@ -53,6 +53,7 @@ class SSD {
 	updateImg(hullPercentage){
 		const start = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4;
 		for (let index = start; index < this.imgData.data.length; index += 4) {
+			// if (this.imgData.data[index] === 153) break;
 			if (this.imgData.data[index] !== 0) {
 				this.imgData.data[index] = 153;
 				this.imgData.data[index+1] = 0;
@@ -93,7 +94,9 @@ class SSD {
 
 		if(this.labels) this.drawLabels(ctx);
 
-		if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
+		// if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
+		if (target) Utils.drawTarget(ctx, this.ssd_x - 35 + 5 * this.scale, 
+			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
 	};
 
 
