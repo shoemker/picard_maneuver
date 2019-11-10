@@ -95,7 +95,7 @@ class SSD {
 		if(this.labels) this.drawLabels(ctx);
 
 		// if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
-		if (target) Utils.drawTarget(ctx, this.ssd_x - 35 + 5 * this.scale, 
+		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
 	};
 
