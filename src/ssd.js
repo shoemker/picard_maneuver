@@ -22,13 +22,9 @@ class SSD {
 
 		this.shields = [];
 		this.data;
-		this.firstFrame = true;
 		this.raiseShields();
 
-		this.tempCanvas = document.createElement('canvas');
-		this.tempCanvas.width = this.img_size_x;
-		this.tempCanvas.height = this.img_size_y;
-		this.tempCtx = this.tempCanvas.getContext('2d');
+		this.setUpVirtualCanvas();
 	};
 
 
@@ -36,33 +32,53 @@ class SSD {
 	setLabels(val) { this.labels = val; };
 
 
+	// draw original image on virtual canvas and call captureImage to get the data
+	setUpVirtualCanvas() {
+		this.virtualCanvas = document.createElement('canvas');
+		this.virtualCanvas.width = this.img_size_x;
+		this.virtualCanvas.height = this.img_size_y;
+		this.virtualCtx = this.virtualCanvas.getContext('2d');
+
+		this.virtualCtx.beginPath();
+		this.virtualCtx.clearRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
+		this.virtualCtx.fillStyle = "black";
+		this.virtualCtx.fillRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
+
+		this.virtualCtx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
+			0, 0, this.img_size_x, this.img_size_y);
+
+		this.captureImage();
+	}
+
 	// this function gets the ssd ship image from the canvas after it's drawn
 	// it then sets the black pixels to transparent
-	captureImage(ctx, imgXDraw, imgYDraw) {
-		this.imgData = ctx.getImageData(imgXDraw, imgYDraw, this.img_size_x, this.img_size_y);
+	captureImage() {
+		this.imgData = this.virtualCtx.getImageData(0, 0, this.img_size_x, this.img_size_y);
+
+		// sets the black pixels to transparent
 		for (let index = 0; index < this.imgData.data.length; index += 4) {
-			if (this.imgData.data[index] === 0) {
-				this.imgData.data[index + 3] = 0;
-			}
+			if (this.imgData.data[index] === 0) this.imgData.data[index + 3] = 0;		
 		}
 
 		this.updateImg(1);
 	};
 
 
+	// updates the image data, making pixels red with current hull %
+	// then puts image data on a canvas which is then turned into an image
 	updateImg(hullPercentage){
 		const start = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4;
 		for (let index = start; index < this.imgData.data.length; index += 4) {
 			// if (this.imgData.data[index] === 153) break;
 			if (this.imgData.data[index] !== 0) {
 				this.imgData.data[index] = 153;
-				this.imgData.data[index+1] = 0;
+				this.imgData.data[index + 1] = 0;
 				this.imgData.data[index + 2] = 0;
 			}			
 		}
-		this.tempCtx.putImageData(this.imgData, 0, 0);
+		this.virtualCtx.putImageData(this.imgData, 0, 0);
 		this.img = new Image();
-		this.img.src = this.tempCanvas.toDataURL();
+		this.img.src = this.virtualCanvas.toDataURL();
 	};
 
 
@@ -71,13 +87,7 @@ class SSD {
 		const imgXDraw = this.ssd_x + this.img_pos_offset[0] * this.scale;
 		const imgYDraw = this.ssd_y + this.img_pos_offset[1];
 
-		if (this.firstFrame) {
-			ctx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
-				imgXDraw, imgYDraw, this.img_size_x, this.img_size_y);
-			this.captureImage(ctx, imgXDraw, imgYDraw);
-			this.firstFrame = false;
-		}
-		else ctx.drawImage(this.img, imgXDraw, imgYDraw);		
+		ctx.drawImage(this.img, imgXDraw, imgYDraw);		
 		
 		ctx.beginPath(); 
 		

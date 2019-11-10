@@ -306,5 +306,3 @@ class Ship extends SpaceObject{
 }
 
 module.exports = Ship
-
-
