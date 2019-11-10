@@ -20,11 +20,10 @@ class SSD {
 		this.shieldStrength = options.shieldStrength;
 		this.SSDimg = options.img;
 
-		this.shields = [];
-		this.data;
-		this.raiseShields();
-
 		this.setUpVirtualCanvas();
+
+		this.shields = [];
+		this.raiseShields();
 	};
 
 
@@ -39,10 +38,10 @@ class SSD {
 		this.virtualCanvas.height = this.img_size_y;
 		this.virtualCtx = this.virtualCanvas.getContext('2d');
 
-		this.virtualCtx.beginPath();
-		this.virtualCtx.clearRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
-		this.virtualCtx.fillStyle = "black";
-		this.virtualCtx.fillRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
+		// this.virtualCtx.beginPath();
+		// this.virtualCtx.clearRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
+		// this.virtualCtx.fillStyle = "black";
+		// this.virtualCtx.fillRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
 
 		this.virtualCtx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			0, 0, this.img_size_x, this.img_size_y);
@@ -71,14 +70,14 @@ class SSD {
 		for (let index = start; index < this.imgData.data.length; index += 4) {
 			// if (this.imgData.data[index] === 153) break;
 			if (this.imgData.data[index] !== 0) {
-				this.imgData.data[index] = 153;
+				this.imgData.data[index] = 250;
 				this.imgData.data[index + 1] = 0;
 				this.imgData.data[index + 2] = 0;
 			}			
 		}
 		this.virtualCtx.putImageData(this.imgData, 0, 0);
-		this.img = new Image();
-		this.img.src = this.virtualCanvas.toDataURL();
+		this.updatedImg = new Image();
+		this.updatedImg.src = this.virtualCanvas.toDataURL();
 	};
 
 
@@ -87,7 +86,7 @@ class SSD {
 		const imgXDraw = this.ssd_x + this.img_pos_offset[0] * this.scale;
 		const imgYDraw = this.ssd_y + this.img_pos_offset[1];
 
-		ctx.drawImage(this.img, imgXDraw, imgYDraw);		
+		ctx.drawImage(this.updatedImg, imgXDraw, imgYDraw);		
 		
 		ctx.beginPath(); 
 		
