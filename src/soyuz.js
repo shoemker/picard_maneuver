@@ -24,7 +24,7 @@ class Soyuz extends Ship {
 		this.beamPattern = [3, 2, 3, 20];
 
 		this.phaserDamage = 5;
-		this.hullIntegrityMax = 90;
+		this.hullIntegrityMax = 100;
 		this.hullIntegrity = this.hullIntegrityMax;
 
 		// ssd is the ship systems display in the corner of the screen
@@ -35,7 +35,7 @@ class Soyuz extends Ship {
 			img: this.images.soyuzSsdImg,
 			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 202, 298],
-			shieldStrength: 30
+			shieldStrength: 40
 		});
 	};
 
