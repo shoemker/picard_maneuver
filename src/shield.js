@@ -33,7 +33,7 @@ class Shield {
 			this.end * Math.PI - (this.end - this.start)/2 * Math.PI * (1 - shieldPercentage)
 		);
 	
-		ctx.lineWidth = 7*scale;
+		ctx.lineWidth = 3 + 4*scale*this.maxHitpoints/100;
 		ctx.strokeStyle = this.color;
 		ctx.stroke();
 	}

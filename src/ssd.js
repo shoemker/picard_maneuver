@@ -38,18 +38,13 @@ class SSD {
 		this.virtualCanvas.height = this.img_size_y;
 		this.virtualCtx = this.virtualCanvas.getContext('2d');
 
-		// this.virtualCtx.beginPath();
-		// this.virtualCtx.clearRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
-		// this.virtualCtx.fillStyle = "black";
-		// this.virtualCtx.fillRect(0, 0, this.virtualCanvas.width, 	this.virtualCanvas.height);
-
 		this.virtualCtx.drawImage(this.SSDimg, this.imgCoords[0], this.imgCoords[1], this.imgCoords[2], this.imgCoords[3],
 			0, 0, this.img_size_x, this.img_size_y);
 
 		this.captureImage();
 	}
 
-	// this function gets the ssd ship image from the canvas after it's drawn
+	// this function gets the ssd imageData from the virtual canvas after it's drawn
 	// it then sets the black pixels to transparent
 	captureImage() {
 		this.imgData = this.virtualCtx.getImageData(0, 0, this.img_size_x, this.img_size_y);
@@ -64,7 +59,8 @@ class SSD {
 
 
 	// updates the image data, making pixels red with current hull %
-	// then puts image data on a canvas which is then turned into an image
+	// then puts image data on a canvas which is then turned into an image.
+	// Called once from captureImage() and then called from takeDamage() in ship class
 	updateImg(hullPercentage){
 		const start = Math.floor(this.imgData.data.length * hullPercentage / 4.0) * 4;
 		for (let index = start; index < this.imgData.data.length; index += 4) {

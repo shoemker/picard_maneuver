@@ -157,12 +157,12 @@ class GameView {
 	loadScenario3() {
 		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
-		this.addMain([1060, 775, .6, true], true);
-		this.addSoyuz([600, 350], [1060, 485, .6, false], true);
-		this.addSoyuz([600, 450], [1060, 630, .6, false], true,50,50);
-		this.addBop([0, 300], [100, 486, .6, false], true, 80, 100);
-		this.addBop([0, 100], [100, 630, .6, false], true);
-		this.addD7([0, 200], [100, 775, .6, true], true);
+		this.addMain([1060, 765, .7, true], true);
+		this.addSoyuz([600, 350], [1064, 475, .6, false], true);
+		this.addSoyuz([600, 450], [1064, 618, .6, false], true,50,50);
+		this.addBop([0, 300], [104, 475, .6, false], true, 80, 100);
+		this.addBop([0, 100], [104, 618, .6, false], true);
+		this.addD7([0, 200], [100, 765, .7, true], true);
 
 		this.game.main.setTarget(this.game.randomTarget(this.game.main));
 	};
