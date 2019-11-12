@@ -20,7 +20,8 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>
 	<li>Moving starfield to indicate main ship movement.</li>
-	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity and weapon recharge status.</li>
+	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity and weapon recharge status. Shield strength is indicated by size of shield. Portrait of ship turns red as ship is damaged</li>
+	<li>When facing multiple enemies, a target appears on the ship that main ship is targeting and a corresponding target appears on the enemy's Ship Systems Display. Target can be changed by player.</li>
 </ol>
 <br>
 <a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>
