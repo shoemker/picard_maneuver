@@ -93,7 +93,7 @@ class GameOpening {
 		ctx.font = "44px FINALOLD";
 		ctx.fillText("Fight a Cruiser", 110, 715);
 		ctx.fillText("2 Smaller Birds of Prey", 428, 715);
-		ctx.fillText("or Fleet Action", 874, 715);
+		ctx.fillText("or in a Fleet Action", 850, 715);
 	};
 
 
