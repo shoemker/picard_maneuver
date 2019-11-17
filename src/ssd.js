@@ -12,9 +12,12 @@ class SSD {
 		this.ssd_total_width = 70 * this.scale;
 		this.ssd_total_height = 120 * this.scale;
 
+		this.img_pos_offset = options.img_pos_offset;
 		this.img_size_x = options.img_size[0] * this.scale;
 		this.img_size_y = options.img_size[1] * this.scale;
-		this.img_pos_offset = options.img_pos_offset;
+		this.img_pos_x = this.ssd_x + this.img_pos_offset[0] * this.scale;
+		this.img_pos_y = this.ssd_y + this.img_pos_offset[1];
+
 		this.imgCoords = options.imgCoords;
 		this.beamWeaponName = options.beamWeaponName;
 		this.shieldStrength = options.shieldStrength;
@@ -79,10 +82,7 @@ class SSD {
 
 	draw(ctx, phaserRechargePercent, torpedoReloadPercent, hullPercentage, target) {
 
-		const imgXDraw = this.ssd_x + this.img_pos_offset[0] * this.scale;
-		const imgYDraw = this.ssd_y + this.img_pos_offset[1];
-
-		ctx.drawImage(this.updatedImg, imgXDraw, imgYDraw);		
+		ctx.drawImage(this.updatedImg, this.img_pos_x, this.img_pos_y);		
 		
 		ctx.beginPath(); 
 		
@@ -99,7 +99,6 @@ class SSD {
 
 		if(this.labels) this.drawLabels(ctx);
 
-		// if (target) Utils.drawTarget(ctx, this.ssd_x+35*this.scale, this.ssd_y+162*this.scale, 15*this.scale,2);
 		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
 	};
