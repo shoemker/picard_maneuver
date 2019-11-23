@@ -157,12 +157,12 @@ class GameView {
 	loadScenario3() {
 		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
-		this.addMain([1060, 765, .7, true], true);
-		this.addSoyuz([600, 350], [1064, 475, .6, false], true);
-		this.addSoyuz([600, 450], [1064, 618, .6, false], true,50,50);
-		this.addBop([0, 300], [104, 475, .6, false], true, 80, 100);
-		this.addBop([0, 100], [104, 618, .6, false], true);
-		this.addD7([0, 200], [100, 765, .7, true], true);
+		this.addMain([1060, 765, .7, true], true, Math.PI);
+		this.addSoyuz([600, 350], [1064, 475, .6, false], true, Math.PI);
+		this.addSoyuz([600, 450], [1064, 618, .6, false], true, Math.PI,50,50);
+		this.addBop([0, 300], [104, 475, .6, false], true, 0, 80, 100);
+		this.addBop([0, 100], [104, 618, .6, false], true, 0);
+		this.addD7([0, 200], [100, 765, .7, true], true, .1*Math.PI);
 
 		this.game.main.setTarget(this.game.randomTarget(this.game.main));
 	};
@@ -174,10 +174,10 @@ class GameView {
 	};
 
 
-	addMain(ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+	addMain(ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addMainShip(new Enterprise({
 			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
-			rotationOffset: Math.PI,
+			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
@@ -185,9 +185,10 @@ class GameView {
 		}), aiTargeting);
 	}
 
-	addBop(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
 			pos, ssdPos,
+			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
@@ -195,10 +196,10 @@ class GameView {
 		}), aiTargeting);
 	};
 
-	addSoyuz(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+	addSoyuz(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addAlly(new Soyuz({
 			pos, ssdPos,
-			rotationOffset: Math.PI,
+			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
@@ -206,9 +207,10 @@ class GameView {
 		}), aiTargeting);
 	};
 
-	addD7(pos, ssdPos, aiTargeting, phaserRecharge, torpedoReload) {
+	addD7(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new D7({
 			pos, ssdPos,
+			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
