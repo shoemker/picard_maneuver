@@ -36,7 +36,7 @@ class SpaceObject {
 			center[1] > 0 && center[1] < Utils.getCanvasDim()[1]);
 	};
 
-	
+	 
 	center() {
 		return [this.pos[0] + this.width / 2, this.pos[1] + this.height / 2];
 	};
