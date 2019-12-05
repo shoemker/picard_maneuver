@@ -8,8 +8,6 @@ class Torpedo extends SpaceObject {
 		this.direction = direction;
 		this.images = images;
 
-		this.torpImg;
-		this.dim;
 		if (launcher.isEnemy()) {
 			this.torpImg = this.images.kTorpImg;
 			this.dim = [249, 137, 79, 78];
