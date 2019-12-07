@@ -108,7 +108,6 @@ class Game {
 		const shift_x = this.main.getDirection()[0] / this.base_speed_inverse;
 		const shift_y = this.main.getDirection()[1] / this.base_speed_inverse;
 
-
 		this.stars.forEach((star) =>
 					star.shift([shift_x , shift_y], this.main.getSpeed()));
 
