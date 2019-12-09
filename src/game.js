@@ -46,7 +46,7 @@ class Game {
 	addAlly(ship, aiTargeting) {
 		this.allies.push(ship);
 		this.allyAIs.push(new EnemyAI(ship, this, aiTargeting));
-	}
+	};
 
 	// factory method to create planet and moon objects
 	createPlanetAndMoon(planetImg, pCoords,	moonImg, mCoords = [3, 3, 58, 58]) {
