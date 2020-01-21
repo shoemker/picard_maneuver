@@ -1,7 +1,7 @@
-const Star = require("./star");
-const Planet = require("./planet");
+const Star = require("./non-ship_space_objects/star");
+const Planet = require("./non-ship_space_objects/planet");
 const EnemyAI = require("./enemyAI");
-const Torpedo = require("./torpedo");
+const Torpedo = require("./non-ship_space_objects/torpedo");
 const Utils = require("./utils");
 
 class Game {

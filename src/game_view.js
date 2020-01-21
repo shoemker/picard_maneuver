@@ -1,9 +1,9 @@
 const Game = require("./game");
 const GameOpening = require("./game_opening");
-const Enterprise = require("./enterprise");
-const Soyuz = require("./soyuz");
-const D7 = require("./d7");
-const Bird_of_Prey = require("./bird_of_prey");
+const Enterprise = require("./ships/enterprise");
+const Soyuz = require("./ships/soyuz");
+const D7 = require("./ships/d7");
+const Bird_of_Prey = require("./ships/bird_of_prey");
 const Utils = require("./utils");
 
 class GameView {

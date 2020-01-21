@@ -1,5 +1,5 @@
 const Ship = require("./ship");
-const SSD = require("./ssd");
+const SSD = require("../ssd");
 
 class Enterprise extends Ship {
 	constructor(options) {

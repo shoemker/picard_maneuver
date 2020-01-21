@@ -1,6 +1,6 @@
 const Ship = require("./ship");
-const SSD = require("./ssd");
-const Utils = require("./utils");
+const SSD = require("../ssd");
+const Utils = require("../utils");
 
 class Soyuz extends Ship {
 	constructor(options) {

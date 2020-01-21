@@ -1,6 +1,6 @@
-const SpaceObject = require("./space_object");
-const Explosion = require("./explosion")
-const Utils = require("./utils");
+const SpaceObject = require("../non-ship_space_objects/space_object");
+const Explosion = require("../explosion")
+const Utils = require("../utils");
 
 class Ship extends SpaceObject{
 

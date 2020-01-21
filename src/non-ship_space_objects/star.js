@@ -1,5 +1,5 @@
 const SpaceObject = require("./space_object");
-const Utils = require("./utils");
+const Utils = require("../utils");
 
 class Star extends SpaceObject {
 	constructor(options){

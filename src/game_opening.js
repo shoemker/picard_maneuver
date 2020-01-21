@@ -1,4 +1,5 @@
 const Utils = require("./utils");
+const userDraw = require("./userDraw");
 
 class GameOpening {
 
@@ -10,6 +11,7 @@ class GameOpening {
 		this.max_depth = 32;
 
 		this.stars = new Array(512);
+		this.userDrawArea = new userDraw();
 
 		this.createOpeningStarfield();
 
@@ -61,7 +63,11 @@ class GameOpening {
 			}
 		});
 
-		if (!this.choose) this.drawText(ctx);
+		if (!this.choose) {
+			this.drawText(ctx);
+	//		this.userDrawArea.draw(ctx);
+		}
+
 		else this.drawScenario(ctx);
 	};
 
