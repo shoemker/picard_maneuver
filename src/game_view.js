@@ -8,9 +8,10 @@ const Utils = require("./utils");
 
 class GameView {
 
-	constructor(ctx, sounds) {
+	constructor(ctx, audioCtx, sounds) {
 
 		this.ctx = ctx;
+		this.audioCtx = audioCtx;
 		this.sounds = sounds;
 		this.pause = false;
 
@@ -76,45 +77,20 @@ class GameView {
 
 	// get scenario click if still in the opening of the game, or
 	// check to see if mute or autopilot is being clicked
-	checkClick(x, y, gainNode) {
+	checkClick(e, gainNode) {
+		const x = e.pageX;
+		const y = e.pageY;
 
-		if (this.gameOpening !== null) {
-			if (y >= 317 && y <= 734) {
-				if (x > 54 && x < 407) {
-					this.loadScenario1();
-					this.openingOff();
-				}
-				else if (x > 440 && x < 795) {
-					this.loadScenario2();
-					this.openingOff();
-				}
-				else if (x > 830 && x < 1184) {
-					this.loadScenario3();
-					this.openingOff();
-				}
-			}
-			// continuous demo mode
-			else if (x > 20 && y > 20 && x < 40 && y < 40) {
-				this.game.muteToggle(gainNode);
-				this.loadScenario4();
-				this.openingOff();
-			}
+		if (this.gameOpening !== null && !this.gameOpening.getChoose()) {
+			this.gameOpening.setChoose();
+			this.audioCtx.resume().then(() => { return true; });
+		}
+
+		else if (this.gameOpening !== null) {
+			this.chooseScenario(x,y,gainNode);
 		}
 		else {
-			if(x > 1085 && x < 1112) {
-				if (y > 46 && y < 71) {
-					this.game.muteToggle(gainNode);
-
-					// if paused, draw to show checkmark in box
-					if (this.pause) this.game.draw(this.ctx)
-				}
-				else if (y > 85 && y < 112) {
-					this.game.autoPilotToggle();
-
-					// if paused, draw to show checkmark in box
-					if (this.pause) this.game.draw(this.ctx)
-				}
-			}
+			this.muteAndAutopilotBoxes(x,y,gainNode);
 		}
 	};
 
@@ -131,6 +107,46 @@ class GameView {
 		this.gameOpening = null;
 		this.sounds.theme.play();
 	};
+
+	muteAndAutopilotBoxes(x, y, gainNode){
+		if (x > 1085 && x < 1112) {
+			if (y > 46 && y < 71) {
+				this.game.muteToggle(gainNode);
+
+				// if paused, draw to show checkmark in box
+				if (this.pause) this.game.draw(this.ctx)
+			}
+			else if (y > 85 && y < 112) {
+				this.game.autoPilotToggle();
+
+				// if paused, draw to show checkmark in box
+				if (this.pause) this.game.draw(this.ctx)
+			}
+		}
+	}
+
+	chooseScenario(x,y,gainNode) {
+		if (y >= 317 && y <= 734) {
+			if (x > 54 && x < 407) {
+				this.loadScenario1();
+				this.openingOff();
+			}
+			else if (x > 440 && x < 795) {
+				this.loadScenario2();
+				this.openingOff();
+			}
+			else if (x > 830 && x < 1184) {
+				this.loadScenario3();
+				this.openingOff();
+			}
+		}
+		// continuous demo mode
+		else if (x > 20 && y > 20 && x < 40 && y < 40) {
+			this.game.muteToggle(gainNode);
+			this.loadScenario4();
+			this.openingOff();
+		}
+	}
 
 
 	loadScenario1(){

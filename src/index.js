@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const gainNode = audioCtx.createGain();
 	gainNode.gain.value = .25;
 
-	let gv = new GameView(ctx, {
+	let gv = new GameView(ctx, audioCtx, {
 			phasSound: getSound("phaser", audioCtx, gainNode), 
 			disruptSound: getSound("disruptor", audioCtx, gainNode), 
 			disrupt2Sound: getSound("disruptor2", audioCtx, gainNode), 
@@ -25,11 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	gv.start();
 
 	canvasEl.addEventListener("click", (e) => {
-		if (gv.gameOpening !== null && !gv.gameOpening.getChoose()) {
-			gv.gameOpening.setChoose();
-			audioCtx.resume().then(() => { return true; });
-		}
-		else gv.checkClick(e.pageX, e.pageY, gainNode);
+
+		gv.checkClick(e, gainNode);
 
 		// console.log(e.pageX, e.pageY);
 	});
