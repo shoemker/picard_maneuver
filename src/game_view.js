@@ -5,6 +5,7 @@ const Soyuz = require("./ships/soyuz");
 const D7 = require("./ships/d7");
 const Bird_of_Prey = require("./ships/bird_of_prey");
 const Utils = require("./utils");
+const UserDraw = require("./user_draw");
 
 class GameView {
 
@@ -81,12 +82,16 @@ class GameView {
 		const x = e.pageX;
 		const y = e.pageY;
 
-		if (this.gameOpening !== null && !this.gameOpening.getChoose()) {
-			this.gameOpening.setChoose();
-		}
-
-		else if (this.gameOpening !== null) {
-			this.chooseScenario(x,y,gainNode);
+		if (this.gameOpening !== null) {
+			if (this.gameOpening.getShipChoice()) {
+				this.chooseShip(x,y);
+			}
+			else if(this.userDraw != null){
+				
+			}
+			else {
+				this.chooseScenario(x,y,gainNode);
+			}
 		}
 		else {
 			this.muteAndAutopilotBoxes(x,y,gainNode);
@@ -104,8 +109,10 @@ class GameView {
 
 	openingOff() {
 		this.gameOpening = null;
+		this.audioCtx.resume().then(() => { return true; });
 		this.sounds.theme.play();
 	};
+	
 
 	muteAndAutopilotBoxes(x, y, gainNode){
 		if (x > 1085 && x < 1112) {
@@ -122,45 +129,56 @@ class GameView {
 				if (this.pause) this.game.draw(this.ctx)
 			}
 		}
-	}
+	};
+
+
+	chooseShip(x,y) {
+		if (y >= 460 && y <= 820) {
+			if (x >= 140 && x <= 545) {
+				this.gameOpening.setShipChoice(false);
+				this.gameOpening.setScenario(true);
+				this.enterprise = true;
+			}
+			else if (x >= 690 && x <= 1095) {
+				this.gameOpening.setShipChoice(false);
+				this.userDraw = new UserDraw();
+				this.gameOpening.stepAndDraw(this.ctx);
+				this.pause = true;
+				this.userDraw.draw(this.ctx);
+			}
+		}
+	};
+
 
 	chooseScenario(x,y,gainNode) {
 		if (y >= 317 && y <= 734) {
 			if (x > 54 && x < 407) {
 				this.loadScenario1();
-				this.turnOffOpeningAndStartTheme();
-
+				this.openingOff();
 			}
 			else if (x > 440 && x < 795) {
 				this.loadScenario2();
-				this.turnOffOpeningAndStartTheme();
-
+				this.openingOff();
 			}
 			else if (x > 830 && x < 1184) {
 				this.loadScenario3();
-				this.turnOffOpeningAndStartTheme();
+				this.openingOff();
 			}
 		}
 		// continuous demo mode
 		else if (x > 20 && y > 20 && x < 40 && y < 40) {
 			this.game.muteToggle(gainNode);
 			this.loadScenario4();
-			this.turnOffOpeningAndStartTheme();
+			this.openingOff();
 		}
 	}
 
-
-	turnOffOpeningAndStartTheme(){
-		this.openingOff();
-		this.audioCtx.resume().then(() => { return true; });
-	}
-
-
+	
 	loadScenario1(){
 		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],this.images.moon_01 );
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
+		if (this.enterprise) this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
 		this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
 
 		this.game.main.setTarget(this.game.enemies[0]);
@@ -171,7 +189,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
+		if (this.enterprise) this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
 		this.addBop([0, 400], [100, 630, .6, false], true, 0, 80, 100);
 		this.addBop([0, 50], [100, 775, .6, true], true, 0, 0, 0);
 
@@ -183,7 +201,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		this.addMain([1060, 765, .7, true], true, Math.PI);
+		if (this.enterprise) this.addMain([1060, 765, .7, true], true, Math.PI);
 		this.addSoyuz([600, 350], [1064, 475, .6, false], true, Math.PI);
 		this.addSoyuz([600, 450], [1064, 618, .6, false], true, Math.PI,50,50);
 		this.addBop([0, 300], [104, 475, .6, false], true, 0, 80, 100);

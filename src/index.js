@@ -24,12 +24,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	gv.start();
 
+	// this block is for the events for the user to draw a ship
+	let legalDraw = false;
+	canvasEl.addEventListener('mousedown', () => {
+		legalDraw = true;
+	});
+	canvasEl.addEventListener('mousemove', (e) => {
+		if (gv.userDraw != null && legalDraw) gv.userDraw.drawFromUser(e);
+	});
+	canvasEl.addEventListener('mouseup', () => {
+		legalDraw = false;
+		if (gv.userDraw != null) gv.userDraw.setPrevToNull();
+	});
+
+
 	canvasEl.addEventListener("click", (e) => {
 
 		gv.checkClick(e, gainNode);
-
-		// console.log(e.pageX, e.pageY);
+		// console.log("x = " + e.pageX, "y = " + e.pageY);
 	});
+
 
 	window.addEventListener('keydown', (e) => {
 		if (e.keyCode == 80 && e.target == document.body) gv.pauseGameToggle();
@@ -41,10 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
+
 	window.addEventListener('keyup', (e) => {
 		gv.keyHandler(e);
 	});
-
 });
 
 function getSound(id, audioCtx, gainNode) { 

@@ -1,13 +1,12 @@
 const Utils = require("./utils");
-const UserDraw = require("./utils");
-
 
 class GameOpening {
 
 	constructor() {
 		this.canvas_width = Utils.getCanvasDim()[0];
 		this.canvas_height = Utils.getCanvasDim()[1];
-		this.choose = false;
+		this.shipChoice = true;
+		this.scenario = false;
 
 		this.max_depth = 32;
 
@@ -20,8 +19,11 @@ class GameOpening {
 		this.fleetScenImg = Utils.loadImg('./images/scenarios/fleet_scenario.png');
 	};
 
-	getChoose() { return this.choose; }
-	setChoose() { this.choose = true; }
+	getShipChoice() { return this.shipChoice; }
+	setShipChoice(choice) { this.shipChoice = choice; }
+
+	getScenario() { return this.scenario; }
+	setScenario(scen) { this.scenario = scen; }
 
 	// a version of the starfield came from http://codentronix.com/2011/07/22/html5-canvas-3d-starfield/
 	createOpeningStarfield() {
@@ -63,8 +65,8 @@ class GameOpening {
 			}
 		});
 
-		if (!this.choose) this.drawText(ctx);
-		else this.drawScenario(ctx);
+		if (this.shipChoice) this.drawShipChoice(ctx);
+		else if (this.scenario) this.drawScenario(ctx);
 	};
 
 
@@ -99,19 +101,34 @@ class GameOpening {
 	};
 
 
-	drawText(ctx) {
+	drawShipChoice(ctx) {
 		ctx.fillStyle = "lightblue";
 
 		ctx.font = "108px FINALOLD";
-		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 365, this.canvas_height / 3);
+		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 365, this.canvas_height /4);
 
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 3+ 80);
+		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 4+ 80);
 
 		ctx.fillStyle = "white";
+
 		ctx.font = "54px FINALOLD"; 
-		ctx.fillText("Click Here To Start", this.canvas_width / 2 - 170, this.canvas_height / 3+ 200);
+		ctx.fillText("Play as This Ship", 125+50, 480);
+		ctx.fillText("Draw Your Own Ship", 675+25, 480);
+
+
+		ctx.fillText("Click Here!", 125 + 110, 800);
+		ctx.fillText("Click Here!", 675 + 110, 800);
+
+		ctx.fillStyle = "lightblue";
+		ctx.font = "72px FINALOLD";
+		ctx.fillText("OR", 575, 640);
+
+
+		Utils.drawBlackRectangleWithBorder(ctx,125,500,400,250);
+		Utils.drawBlackRectangleWithBorder(ctx, 675, 500, 400, 250);
 	}
+
 
 }
 

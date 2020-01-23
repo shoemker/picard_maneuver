@@ -46,6 +46,18 @@ const Utils = {
 		ctx.stroke();
 	},
 
+
+	drawBlackRectangleWithBorder(ctx, x, y, width, height) {
+		ctx.beginPath();
+
+		ctx.fillStyle = "black";
+		ctx.fillRect(x, y, width, height);
+
+		ctx.rect(x, y, width, height);
+		ctx.strokeStyle = "grey";
+		ctx.stroke();
+	},
+
 	getCanvasDim() { return [1200, 900]; }
 }
 
