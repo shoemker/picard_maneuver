@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const gainNode = audioCtx.createGain();
 	gainNode.gain.value = .25;
 
-	let g = new GameView(ctx, {
+	let gv = new GameView(ctx, {
 			phasSound: getSound("phaser", audioCtx, gainNode), 
 			disruptSound: getSound("disruptor", audioCtx, gainNode), 
 			disrupt2Sound: getSound("disruptor2", audioCtx, gainNode), 
@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			theme: getSound("theme", audioCtx, gainNode)
 		});
 
-	g.start();
+	gv.start();
 
 	canvasEl.addEventListener("click", (e) => {
-		if (g.gameOpening !== null && !g.gameOpening.getChoose()) {
-			g.gameOpening.setChoose();
+		if (gv.gameOpening !== null && !gv.gameOpening.getChoose()) {
+			gv.gameOpening.setChoose();
 			audioCtx.resume().then(() => { return true; });
 		}
-		else g.checkClick(e.pageX, e.pageY, gainNode);
+		else gv.checkClick(e.pageX, e.pageY, gainNode);
 
 		// console.log(e.pageX, e.pageY);
 	});
@@ -40,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			// this line stops the spacebar from moving window
 			if (e.keyCode == 32 && e.target == document.body) e.preventDefault();
 			
-			g.keyHandler(e);
+			gv.keyHandler(e);
 		}
 	});
 
 	window.addEventListener('keyup', (e) => {
-		g.keyHandler(e);
+		gv.keyHandler(e);
 	});
 
 });
