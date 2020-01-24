@@ -55,36 +55,66 @@ class UserDraw {
 		else this.setPrevToNull();
 	}
 
-	acceptDrawing(){
-		this.imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
-		this.virtualCanvas = document.createElement('canvas');
-		this.virtualCanvas.width = this.boxWidth;
-		this.virtualCanvas.height = this.boxHeight;
-		this.virtualCtx = this.virtualCanvas.getContext('2d');
+	acceptDrawing(images){
+		const imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+		const virtualCanvas = document.createElement('canvas');
+		virtualCanvas.width = this.boxWidth;
+		virtualCanvas.height = this.boxHeight;
+		const virtualCtx = virtualCanvas.getContext('2d');
 
 		// sets the black pixels to transparent
-		for (let index = 0; index < this.imgData.data.length; index += 4) {
-			if (this.imgData.data[index] === 0 && 
-				this.imgData.data[index+1] === 0 &&
-				this.imgData.data[index+2] === 0)
-				this.imgData.data[index + 3] = 0;
+		for (let index = 0; index < imgData.data.length; index += 4) {
+			if (imgData.data[index] === 0 && 
+				imgData.data[index+1] === 0 &&
+				imgData.data[index+2] === 0)
+				imgData.data[index + 3] = 0;
 		}
 
-		this.virtualCtx.putImageData(this.imgData, 0, 0);
-
-		// this.virtualCtx.save();
-		// this.virtualCtx.translate(250, 250);
-	
-		// this.virtualCtx.rotate(Math.PI/2);
-		// this.virtualCtx.translate(-250, -250);
-		// this.virtualCtx.restore();
-
-
+		virtualCtx.putImageData(imgData, 0, 0);
 		this.updatedImg = new Image();
-		this.updatedImg.src = this.virtualCanvas.toDataURL();
+		this.updatedImg.src = virtualCanvas.toDataURL();
+
+
+		const that = this;
+		setTimeout(function () { that.rotate(virtualCtx); }, 1) ;
+
+		
+
+	
+
+				// this.rotate( virtualCtx);
+
+		// this.ctx.drawImage(images.sparksImg, 0, 0, 500, 500, 0, 0, 500, 500);
+
+		// virtualCtx.save();
+		// virtualCtx.translate(250, 250);
+
+		// virtualCtx.rotate(Math.PI/2);
+		// virtualCtx.translate(-250, -250);
+		// virtualCtx.restore();
+		// this.updatedImg.src = virtualCanvas.toDataURL();
 
 	}
 
+	rotate(virtualCtx) {
+		
+
+
+		// virtualCtx.beginPath();
+		// virtualCtx.clearRect(0, 0, 500, 500);
+		// debugger
+		this.ctx.save();
+		this.ctx.translate(250, 250);
+
+		this.ctx.rotate(Math.PI/2);
+		this.ctx.translate(-250, -250);
+		this.ctx.drawImage(this.updatedImg, 0, 0, 500, 500, 0, 0, 500, 500);
+
+		this.ctx.restore();
+		this.updatedImg = new Image();
+
+		this.updatedImg.src = virtualCanvas.toDataURL();
+	}
 	getDrawing() {
 		return this.updatedImg;
 	}

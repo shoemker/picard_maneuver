@@ -105,14 +105,14 @@ class GameView {
 
 	drawingClick(x,y) {
 		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
-			this.userDraw.acceptDrawing();
+			this.userDraw.acceptDrawing(this.images);
 			this.drawing = this.userDraw.getDrawing();
-			this.gameOpening.setShipChoice(false);
-			this.gameOpening.setScenario(true);
-			this.enterprise = false;
+			// this.gameOpening.setShipChoice(false);
+			// this.gameOpening.setScenario(true);
+			// this.enterprise = false;
 
-			this.pauseGameToggle();
-			this.userDraw = null;
+			// this.pauseGameToggle();
+			// this.userDraw = null;
 		}
 	}
 
