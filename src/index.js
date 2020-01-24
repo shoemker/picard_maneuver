@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	canvasEl.addEventListener("click", (e) => {
 
 		gv.checkClick(e, gainNode);
-		// console.log("x = " + e.pageX, "y = " + e.pageY);
+		console.log("x = " + e.pageX, "y = " + e.pageY);
 	});
 
 
 	window.addEventListener('keydown', (e) => {
-		if (e.keyCode == 80 && e.target == document.body) gv.pauseGameToggle();
+		if (e.keyCode == 80 && e.target == document.body && gv.userDraw == null) gv.pauseGameToggle();
 		else {
 			// this line stops the spacebar from moving window
 			if (e.keyCode == 32 && e.target == document.body) e.preventDefault();

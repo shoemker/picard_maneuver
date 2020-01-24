@@ -92,7 +92,7 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "80px FINALOLD";
-		ctx.fillText("Click a Scenario", this.canvas_width / 2 - 207, 200);
+		ctx.fillText("Now Click a Scenario", this.canvas_width / 2 - 260, 200);
 
 		ctx.font = "44px FINALOLD";
 		ctx.fillText("Fight a Cruiser", 110, 715);
@@ -113,20 +113,20 @@ class GameOpening {
 		ctx.fillStyle = "white";
 
 		ctx.font = "54px FINALOLD"; 
-		ctx.fillText("Play as This Ship", 125+50, 480);
-		ctx.fillText("Draw Your Own Ship", 675+25, 480);
+		ctx.fillText("Play as This Ship", 125+50, 460);
+		ctx.fillText("Draw Your Own Ship", 675+25, 460);
 
 
-		ctx.fillText("Click Here!", 125 + 110, 800);
-		ctx.fillText("Click Here!", 675 + 110, 800);
+		ctx.fillText("Click Here!", 125 + 110, 780);
+		ctx.fillText("Click Here!", 675 + 110, 780);
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("OR", 575, 640);
+		ctx.fillText("OR", 575, 620);
 
 
-		Utils.drawBlackRectangleWithBorder(ctx,125,500,400,250);
-		Utils.drawBlackRectangleWithBorder(ctx, 675, 500, 400, 250);
+		Utils.drawBlackRectangleWithBorder(ctx,125,480,400,250);
+		Utils.drawBlackRectangleWithBorder(ctx, 675, 480, 400, 250);
 	}
 
 

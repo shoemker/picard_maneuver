@@ -87,7 +87,7 @@ class GameView {
 				this.chooseShip(x,y);
 			}
 			else if(this.userDraw != null){
-				
+				this.drawingClick(x,y);
 			}
 			else {
 				this.chooseScenario(x,y,gainNode);
@@ -99,11 +99,24 @@ class GameView {
 	};
 
 
+	drawingClick(x,y) {
+		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
+			this.userDraw.acceptDrawing();
+			this.userDraw.getDrawing();
+			this.gameOpening.setShipChoice(false);
+			this.gameOpening.setScenario(true);
+			this.enterprise = true;
+
+			this.pauseGameToggle();
+			this.userDraw = null;
+		}
+	}
+
 	pauseGameToggle() {
 		this.pause = this.pause === false;
 		
 		// needed to restart animation on unpause
-		if (!this.pause) requestAnimationFrame(this.animate.bind(this));
+		if (!this.pause) this.start();
 	};
 
 
@@ -133,7 +146,7 @@ class GameView {
 
 
 	chooseShip(x,y) {
-		if (y >= 460 && y <= 820) {
+		if (y >= 440 && y <= 800) {
 			if (x >= 140 && x <= 545) {
 				this.gameOpening.setShipChoice(false);
 				this.gameOpening.setScenario(true);
@@ -141,10 +154,10 @@ class GameView {
 			}
 			else if (x >= 690 && x <= 1095) {
 				this.gameOpening.setShipChoice(false);
-				this.userDraw = new UserDraw();
+				this.userDraw = new UserDraw(this.ctx);
 				this.gameOpening.stepAndDraw(this.ctx);
 				this.pause = true;
-				this.userDraw.draw(this.ctx);
+				this.userDraw.draw();
 			}
 		}
 	};
