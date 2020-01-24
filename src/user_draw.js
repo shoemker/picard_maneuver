@@ -40,10 +40,14 @@ class UserDraw {
 				e.offsetX <= this.boxX+this.boxWidth && 
 				e.offsetY >= this.boxY && 
 				e.offsetY <= this.boxY+this.boxHeight) {
+
 			this.ctx.beginPath();
 			this.ctx.moveTo(this.prevX, this.prevY);
 			this.ctx.lineTo(e.offsetX, e.offsetY);
+
 			this.ctx.strokeStyle = "white";
+			this.ctx.lineWidth = 20;
+
 			if (this.prevX && this.prevY) this.ctx.stroke();
 			this.prevX = e.offsetX;
 			this.prevY = e.offsetY;
@@ -52,11 +56,37 @@ class UserDraw {
 	}
 
 	acceptDrawing(){
-		
+		this.imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+		this.virtualCanvas = document.createElement('canvas');
+		this.virtualCanvas.width = this.boxWidth;
+		this.virtualCanvas.height = this.boxHeight;
+		this.virtualCtx = this.virtualCanvas.getContext('2d');
+
+		// sets the black pixels to transparent
+		for (let index = 0; index < this.imgData.data.length; index += 4) {
+			if (this.imgData.data[index] === 0 && 
+				this.imgData.data[index+1] === 0 &&
+				this.imgData.data[index+2] === 0)
+				this.imgData.data[index + 3] = 0;
+		}
+
+		this.virtualCtx.putImageData(this.imgData, 0, 0);
+
+		// this.virtualCtx.save();
+		// this.virtualCtx.translate(250, 250);
+	
+		// this.virtualCtx.rotate(Math.PI/2);
+		// this.virtualCtx.translate(-250, -250);
+		// this.virtualCtx.restore();
+
+
+		this.updatedImg = new Image();
+		this.updatedImg.src = this.virtualCanvas.toDataURL();
+
 	}
 
 	getDrawing() {
-
+		return this.updatedImg;
 	}
 }
 

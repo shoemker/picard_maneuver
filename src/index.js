@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	canvasEl.addEventListener("click", (e) => {
 
 		gv.checkClick(e, gainNode);
-		console.log("x = " + e.pageX, "y = " + e.pageY);
+		// console.log("x = " + e.pageX, "y = " + e.pageY);
 	});
 
 

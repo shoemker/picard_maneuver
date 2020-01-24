@@ -1,5 +1,6 @@
 const Game = require("./game");
 const GameOpening = require("./game_opening");
+const DrawnShip = require("./ships/drawn_ship");
 const Enterprise = require("./ships/enterprise");
 const Soyuz = require("./ships/soyuz");
 const D7 = require("./ships/d7");
@@ -15,6 +16,9 @@ class GameView {
 		this.audioCtx = audioCtx;
 		this.sounds = sounds;
 		this.pause = false;
+
+		// main ship is the default
+		this.enterprise = true;
 
 		this.images = this.loadImages();
 		this.game = new Game(this.images);
@@ -102,10 +106,10 @@ class GameView {
 	drawingClick(x,y) {
 		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
 			this.userDraw.acceptDrawing();
-			this.userDraw.getDrawing();
+			this.drawing = this.userDraw.getDrawing();
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
-			this.enterprise = true;
+			this.enterprise = false;
 
 			this.pauseGameToggle();
 			this.userDraw = null;
@@ -191,7 +195,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],this.images.moon_01 );
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		if (this.enterprise) this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
+		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
 		this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
 
 		this.game.main.setTarget(this.game.enemies[0]);
@@ -202,7 +206,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		if (this.enterprise) this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
+		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
 		this.addBop([0, 400], [100, 630, .6, false], true, 0, 80, 100);
 		this.addBop([0, 50], [100, 775, .6, true], true, 0, 0, 0);
 
@@ -214,7 +218,7 @@ class GameView {
 		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
-		if (this.enterprise) this.addMain([1060, 765, .7, true], true, Math.PI);
+		this.addMain([1060, 765, .7, true], true, Math.PI);
 		this.addSoyuz([600, 350], [1064, 475, .6, false], true, Math.PI);
 		this.addSoyuz([600, 450], [1064, 618, .6, false], true, Math.PI,50,50);
 		this.addBop([0, 300], [104, 475, .6, false], true, 0, 80, 100);
@@ -232,14 +236,27 @@ class GameView {
 
 
 	addMain(ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
-		this.game.addMainShip(new Enterprise({
-			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
-			rotationOffset,
-			images: this.images,
-			sounds: this.sounds,
-			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
+		if (this.enterprise) {
+			this.game.addMainShip(new Enterprise({
+				pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
+				rotationOffset,
+				images: this.images,
+				sounds: this.sounds,
+				phaserRecharge,
+				torpedoReload
+			}), aiTargeting);
+		}
+		else {
+			this.game.addMainShip(new DrawnShip({
+				pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
+				rotationOffset,
+				image: this.drawing,
+				images: this.images,
+				sounds: this.sounds,
+				phaserRecharge,
+				torpedoReload
+			}), aiTargeting);
+		}
 	}
 
 	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
