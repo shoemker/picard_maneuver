@@ -34,8 +34,7 @@ class UserDraw {
 
 	// this was adapted from http://www.mattmorgante.com/technology/javascript-draw-html5-canvas
 	drawFromUser(e) {
-		const x = e.offsetX;
-		const y = e.offsetY;
+
 		if (e.offsetX >= this.boxX && 
 				e.offsetX <= this.boxX+this.boxWidth && 
 				e.offsetY >= this.boxY && 
@@ -56,11 +55,17 @@ class UserDraw {
 	}
 
 	acceptDrawing(images){
-		const imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
-		const virtualCanvas = document.createElement('canvas');
-		virtualCanvas.width = this.boxWidth;
-		virtualCanvas.height = this.boxHeight;
-		const virtualCtx = virtualCanvas.getContext('2d');
+		let imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+		// let virtualCanvas = document.createElement('canvas');
+		let secondCanvas = document.getElementsByTagName("canvas")[1];
+		secondCanvas.width = this.boxWidth;
+		secondCanvas.height = this.boxHeight;
+		let secondCtx = secondCanvas.getContext('2d');
+
+		const thirdCanvas = document.getElementsByTagName("canvas")[2];
+		thirdCanvas.width = this.boxWidth;
+		thirdCanvas.height = this.boxHeight;
+		const thirdCtx = thirdCanvas.getContext('2d');
 
 		// sets the black pixels to transparent
 		for (let index = 0; index < imgData.data.length; index += 4) {
@@ -70,19 +75,30 @@ class UserDraw {
 				imgData.data[index + 3] = 0;
 		}
 
-		virtualCtx.putImageData(imgData, 0, 0);
-		this.updatedImg = new Image();
-		this.updatedImg.src = virtualCanvas.toDataURL();
+		secondCtx.putImageData(imgData, 0, 0);
+		/////////////////////////////////
+		this.img = new Image();
+		this.img.src = secondCanvas.toDataURL();
 
 
-		
+		setTimeout( () => { 
+			thirdCtx.save();
+			thirdCtx.translate(this.boxWidth / 2, this.boxHeight / 2);
+			thirdCtx.rotate(Math.PI / 2);
+			thirdCtx.translate(-this.boxWidth / 2, -this.boxHeight / 2);
+			thirdCtx.drawImage(this.img, 0, 0, 500, 500, 0, 0, 500, 500); 
+
+			thirdCtx.restore();
+			this.img.src = thirdCanvas.toDataURL();
+
+		}, 1);
+
 
 
 	}
 
-
 	getDrawing() {
-		return this.updatedImg;
+		return this.img;
 	}
 }
 
