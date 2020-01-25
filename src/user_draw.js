@@ -75,46 +75,12 @@ class UserDraw {
 		this.updatedImg.src = virtualCanvas.toDataURL();
 
 
-		const that = this;
-		setTimeout(function () { that.rotate(virtualCtx); }, 1) ;
-
-		
-
-	
-
-				// this.rotate( virtualCtx);
-
-		// this.ctx.drawImage(images.sparksImg, 0, 0, 500, 500, 0, 0, 500, 500);
-
-		// virtualCtx.save();
-		// virtualCtx.translate(250, 250);
-
-		// virtualCtx.rotate(Math.PI/2);
-		// virtualCtx.translate(-250, -250);
-		// virtualCtx.restore();
-		// this.updatedImg.src = virtualCanvas.toDataURL();
-
-	}
-
-	rotate(virtualCtx) {
 		
 
 
-		// virtualCtx.beginPath();
-		// virtualCtx.clearRect(0, 0, 500, 500);
-		// debugger
-		this.ctx.save();
-		this.ctx.translate(250, 250);
-
-		this.ctx.rotate(Math.PI/2);
-		this.ctx.translate(-250, -250);
-		this.ctx.drawImage(this.updatedImg, 0, 0, 500, 500, 0, 0, 500, 500);
-
-		this.ctx.restore();
-		this.updatedImg = new Image();
-
-		this.updatedImg.src = virtualCanvas.toDataURL();
 	}
+
+
 	getDrawing() {
 		return this.updatedImg;
 	}
