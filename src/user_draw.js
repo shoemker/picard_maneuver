@@ -33,6 +33,7 @@ class UserDraw {
 	}
 
 	// this was adapted from http://www.mattmorgante.com/technology/javascript-draw-html5-canvas
+	// user can draw a ship in a box with cursor
 	drawFromUser(e) {
 
 		if (e.offsetX >= this.boxX && 
@@ -54,49 +55,78 @@ class UserDraw {
 		else this.setPrevToNull();
 	}
 
-	acceptDrawing(images){
-		let imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
-		const virtual1Canvas = document.createElement('canvas');
-		virtual1Canvas.width = this.boxWidth;
-		virtual1Canvas.height = this.boxHeight;
-		const virtual1Ctx = virtual1Canvas.getContext('2d');
+	// take user drawn picture
+	acceptDrawing(){
+		const imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 
-		const virtual2Canvas = document.createElement('canvas');
-		virtual2Canvas.width = this.boxWidth;
-		virtual2Canvas.height = this.boxHeight;
-		const virtual2Ctx = virtual2Canvas.getContext('2d');
+		const virtualCanvas = document.createElement('canvas');
+		virtualCanvas.width = this.boxWidth;
+		virtualCanvas.height = this.boxHeight;
+		const virtualCtx = virtualCanvas.getContext('2d');
 
 		// sets the black pixels to transparent
 		for (let index = 0; index < imgData.data.length; index += 4) {
 			if (imgData.data[index] === 0 && 
-				imgData.data[index+1] === 0 &&
-				imgData.data[index+2] === 0)
+					imgData.data[index + 1] === 0 &&
+					imgData.data[index + 2] === 0)
 				imgData.data[index + 3] = 0;
 		}
 
-		virtual1Ctx.putImageData(imgData, 0, 0);
+		// puts the imageData on a canvas and turns it into an Image
+		virtualCtx.putImageData(imgData, 0, 0);
 		this.img = new Image();
-		this.img.src = virtual1Canvas.toDataURL();
+		this.ssdImg = new Image();
 
+		this.img.src = virtualCanvas.toDataURL();
+		this.ssdImg.src = virtualCanvas.toDataURL();
 
+		virtualCtx.clearRect(0, 0, this.boxWidth, this.boxHeight );
+
+		// this block puts the Image back onto a canvas and rotates it 90 degrees
 		setTimeout( () => { 
-			virtual2Ctx.save();
-			virtual2Ctx.translate(this.boxWidth / 2, this.boxHeight / 2);
-			virtual2Ctx.rotate(Math.PI / 2);
-			virtual2Ctx.translate(-this.boxWidth / 2, -this.boxHeight / 2);
-			virtual2Ctx.drawImage(this.img, 0, 0, 500, 500, 0, 0, 500, 500); 
+			virtualCtx.save();
+			virtualCtx.translate(this.boxWidth / 2, this.boxHeight / 2);
+			virtualCtx.rotate(Math.PI / 2);
+			virtualCtx.translate(-this.boxWidth / 2, -this.boxHeight / 2);
+			virtualCtx.drawImage(this.img, 0, 0, 500, 500, 0, 0, 500, 500); 
 
-			virtual2Ctx.restore();
-			this.img.src = virtual2Canvas.toDataURL();
-
+			virtualCtx.restore();
+			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
 
+		this.generateSSDImg(imgData);
+	}
 
 
+	// this generates the ssd portrait from user drawn picture
+	generateSSDImg(imgData) {
+
+		// turns the image grey for the ssd portrait
+		for (let index = 0; index < imgData.data.length; index += 4) {
+			if (imgData.data[index] != 0 || imgData.data[index + 1] != 0 || imgData.data[index + 2] != 0) {
+				imgData.data[index] = 194;
+				imgData.data[index + 1] = 194;
+				imgData.data[index + 2] = 194;
+			}
+		}	
+		const virtualCanvas = document.createElement('canvas');
+		virtualCanvas.width = this.boxWidth;
+		virtualCanvas.height = this.boxHeight;
+		const virtualCtx = virtualCanvas.getContext('2d');
+
+
+		virtualCtx.putImageData(imgData, 0, 0);
+		this.ssdImg = new Image();
+
+		this.ssdImg.src = virtualCanvas.toDataURL();
 	}
 
 	getDrawing() {
 		return this.img;
+	}
+	
+	getSSDportrait() {
+		return this.ssdImg;
 	}
 }
 

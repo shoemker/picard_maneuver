@@ -107,6 +107,8 @@ class GameView {
 		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
 			this.userDraw.acceptDrawing(this.images);
 			this.drawing = this.userDraw.getDrawing();
+			this.ssdPortrait = this.userDraw.getSSDportrait();
+			
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
 			this.enterprise = false;
@@ -126,7 +128,7 @@ class GameView {
 
 	openingOff() {
 		this.gameOpening = null;
-		this.audioCtx.resume().then(() => { return true; });
+		// this.audioCtx.resume().then(() => { return true; });
 		this.sounds.theme.play();
 	};
 	
@@ -251,6 +253,7 @@ class GameView {
 				pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
 				rotationOffset,
 				image: this.drawing,
+				ssdImage: this.ssdPortrait,
 				images: this.images,
 				sounds: this.sounds,
 				phaserRecharge,
