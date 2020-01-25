@@ -56,16 +56,15 @@ class UserDraw {
 
 	acceptDrawing(images){
 		let imgData = this.ctx.getImageData(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
-		// let virtualCanvas = document.createElement('canvas');
-		let secondCanvas = document.getElementsByTagName("canvas")[1];
-		secondCanvas.width = this.boxWidth;
-		secondCanvas.height = this.boxHeight;
-		let secondCtx = secondCanvas.getContext('2d');
+		const virtual1Canvas = document.createElement('canvas');
+		virtual1Canvas.width = this.boxWidth;
+		virtual1Canvas.height = this.boxHeight;
+		const virtual1Ctx = virtual1Canvas.getContext('2d');
 
-		const thirdCanvas = document.getElementsByTagName("canvas")[2];
-		thirdCanvas.width = this.boxWidth;
-		thirdCanvas.height = this.boxHeight;
-		const thirdCtx = thirdCanvas.getContext('2d');
+		const virtual2Canvas = document.createElement('canvas');
+		virtual2Canvas.width = this.boxWidth;
+		virtual2Canvas.height = this.boxHeight;
+		const virtual2Ctx = virtual2Canvas.getContext('2d');
 
 		// sets the black pixels to transparent
 		for (let index = 0; index < imgData.data.length; index += 4) {
@@ -75,21 +74,20 @@ class UserDraw {
 				imgData.data[index + 3] = 0;
 		}
 
-		secondCtx.putImageData(imgData, 0, 0);
-		/////////////////////////////////
+		virtual1Ctx.putImageData(imgData, 0, 0);
 		this.img = new Image();
-		this.img.src = secondCanvas.toDataURL();
+		this.img.src = virtual1Canvas.toDataURL();
 
 
 		setTimeout( () => { 
-			thirdCtx.save();
-			thirdCtx.translate(this.boxWidth / 2, this.boxHeight / 2);
-			thirdCtx.rotate(Math.PI / 2);
-			thirdCtx.translate(-this.boxWidth / 2, -this.boxHeight / 2);
-			thirdCtx.drawImage(this.img, 0, 0, 500, 500, 0, 0, 500, 500); 
+			virtual2Ctx.save();
+			virtual2Ctx.translate(this.boxWidth / 2, this.boxHeight / 2);
+			virtual2Ctx.rotate(Math.PI / 2);
+			virtual2Ctx.translate(-this.boxWidth / 2, -this.boxHeight / 2);
+			virtual2Ctx.drawImage(this.img, 0, 0, 500, 500, 0, 0, 500, 500); 
 
-			thirdCtx.restore();
-			this.img.src = thirdCanvas.toDataURL();
+			virtual2Ctx.restore();
+			this.img.src = virtual2Canvas.toDataURL();
 
 		}, 1);
 
