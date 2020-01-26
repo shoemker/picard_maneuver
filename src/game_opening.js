@@ -114,7 +114,7 @@ class GameOpening {
 
 		ctx.font = "54px FINALOLD"; 
 		ctx.fillText("Play as This Ship", 125+50, 460);
-		ctx.fillText("Draw Your Own Ship", 675+25, 460);
+		ctx.fillText("Doodle Your Own Ship", 675+13, 460);
 
 
 		ctx.fillText("Click Here!", 125 + 110, 780);

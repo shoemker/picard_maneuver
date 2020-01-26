@@ -105,7 +105,7 @@ class GameView {
 
 	drawingClick(x,y) {
 		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
-			this.userDraw.acceptDrawing(this.images);
+			this.userDraw.acceptDrawing();
 			this.drawing = this.userDraw.getDrawing();
 			this.ssdPortrait = this.userDraw.getSSDportrait();
 			
@@ -115,6 +115,9 @@ class GameView {
 
 			this.pauseGameToggle();
 			this.userDraw = null;
+		}
+		else if (x >= 298 && x <= 330) {
+			this.userDraw.changeColor(y);
 		}
 	}
 

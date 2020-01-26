@@ -26,15 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	gv.start();
 
 	// this block is for the events for the user to draw a ship
-	let legalDraw = false;
-	canvasEl.addEventListener('mousedown', () => {
-		legalDraw = true;
-	});
+	let draw = false;
+	canvasEl.addEventListener('mousedown', () => { draw = true; });
 	canvasEl.addEventListener('mousemove', (e) => {
-		if (gv.userDraw != null && legalDraw) gv.userDraw.drawFromUser(e);
+		if (gv.userDraw != null && draw) gv.userDraw.drawFromUser(e);
 	});
 	canvasEl.addEventListener('mouseup', () => {
-		legalDraw = false;
+		draw = false;
 		if (gv.userDraw != null) gv.userDraw.setPrevToNull();
 	});
 

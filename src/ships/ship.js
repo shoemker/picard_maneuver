@@ -94,7 +94,6 @@ class Ship extends SpaceObject{
 		}
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
-
 	}
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,

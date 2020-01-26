@@ -11,6 +11,9 @@ class Enterprise extends Ship {
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
 		
+		this.width = 60;
+		this.height = 30;
+		
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
 		this.phaserColor = "red";

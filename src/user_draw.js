@@ -4,9 +4,11 @@ class UserDraw {
 	constructor(ctx) {
 		this.ctx = ctx;
 		this.boxX = 350;
-		this.boxY = 200;
+		this.boxY = 150;
 		this.boxWidth = 500;
 		this.boxHeight = 500;
+
+		this.ctx.strokeStyle = "white";
 
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
@@ -22,15 +24,62 @@ class UserDraw {
 	draw() {
 		Utils.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
-		Utils.drawBlackRectangleWithBorder(this.ctx, 500, 802, 210, 50, "lightblue", 3 );
-		this.ctx.stroke();
+		this.drawAcceptButton();
 
 		this.ctx.fillStyle = "lightblue";
+		this.ctx.font = "60px FINALOLD";
+		this.ctx.fillText("Front of Ship", 470, this.boxY - 15);
+		this.ctx.fillText("Rear of Ship", 475, this.boxY +this.boxHeight+ 53);
 
+		this.drawColorChoices();
+
+		this.ctx.strokeStyle = "white";
+		this.ctx.lineWidth = 20;
+	}
+
+	
+	drawAcceptButton(){
+		Utils.drawBlackRectangleWithBorder(this.ctx, 500, 802, 210, 50, "lightblue", 3);
+		this.ctx.stroke();
+		this.ctx.fillStyle = "lightblue";
 		this.ctx.font = "40px FINALOLD";
 		this.ctx.fillText("Click to Accept", 510, 840);
+	}
+
+
+	drawColorChoices() {
+		const x = this.boxX - 70;
+		const y = this.boxY + 30
+
+		this.ctx.fillStyle = "white";
+		this.ctx.fillRect(x, y, 30, 30);
+
+		this.ctx.fillStyle = "red";
+		this.ctx.fillRect(x, y + 80, 30, 30);
+
+		this.ctx.fillStyle = "blue";
+		this.ctx.fillRect(x, y + 160, 30, 30);
+
+		this.ctx.fillStyle = "yellow";
+		this.ctx.fillRect(x, y + 240, 30, 30);
+
+		this.ctx.fillStyle = "green";
+		this.ctx.fillRect(x, y + 320, 30, 30);
+
+		Utils.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
 
 	}
+
+
+	changeColor(y) {
+		if (y >= this.boxY + 50 && y <= this.boxY + 80) this.ctx.strokeStyle = "white";
+		else if (y >= this.boxY + 130 && y <= this.boxY + 160) this.ctx.strokeStyle = "red";
+		else if (y >= this.boxY + 210 && y <= this.boxY + 240) this.ctx.strokeStyle = "blue";
+		else if (y >= this.boxY + 290 && y <= this.boxY + 320) this.ctx.strokeStyle = "yellow";
+		else if (y >= this.boxY + 370 && y <= this.boxY + 400) this.ctx.strokeStyle = "green";
+		else if (y >= this.boxY + 450 && y <= this.boxY + 480) this.ctx.strokeStyle = "black";
+	}
+
 
 	// this was adapted from http://www.mattmorgante.com/technology/javascript-draw-html5-canvas
 	// user can draw a ship in a box with cursor
@@ -45,7 +94,6 @@ class UserDraw {
 			this.ctx.moveTo(this.prevX, this.prevY);
 			this.ctx.lineTo(e.offsetX, e.offsetY);
 
-			this.ctx.strokeStyle = "white";
 			this.ctx.lineWidth = 20;
 
 			if (this.prevX && this.prevY) this.ctx.stroke();
@@ -54,6 +102,7 @@ class UserDraw {
 		}
 		else this.setPrevToNull();
 	}
+
 
 	// take user drawn picture
 	acceptDrawing(){
@@ -121,7 +170,6 @@ class UserDraw {
 	getDrawing() { return this.img; }
 	
 	getSSDportrait() { return this.ssdImg; }
-	
 }
 
 module.exports = UserDraw;
