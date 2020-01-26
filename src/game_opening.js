@@ -17,6 +17,9 @@ class GameOpening {
 		this.bopScenImg = Utils.loadImg('./images/scenarios/bops_scenario.png');
 		this.d7ScenImg = Utils.loadImg('./images/scenarios/D7_scenario.png');
 		this.fleetScenImg = Utils.loadImg('./images/scenarios/fleet_scenario.png');
+		this.sillyImg = Utils.loadImg('./images/sillyDrawing.png');
+		this.enterImg = Utils.loadImg('./images/uss-enterprise-png-choice.png');
+		
 	};
 
 	getShipChoice() { return this.shipChoice; }
@@ -102,6 +105,9 @@ class GameOpening {
 
 
 	drawShipChoice(ctx) {
+		const x1 = 100;
+		const x2 = 700;
+
 		ctx.fillStyle = "lightblue";
 
 		ctx.font = "108px FINALOLD";
@@ -113,20 +119,21 @@ class GameOpening {
 		ctx.fillStyle = "white";
 
 		ctx.font = "54px FINALOLD"; 
-		ctx.fillText("Play as This Ship", 125+50, 460);
-		ctx.fillText("Doodle Your Own Ship", 675+13, 460);
+		ctx.fillText("Play as This Ship", x1+50, 460);
+		ctx.fillText("Doodle Your Own Ship", x2+13, 460);
 
 
-		ctx.fillText("Click Here!", 125 + 110, 780);
-		ctx.fillText("Click Here!", 675 + 110, 780);
+		ctx.fillText("Click Here!", x1 + 110, 780);
+		ctx.fillText("Click Here!", x2 + 110, 780);
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "72px FINALOLD";
 		ctx.fillText("OR", 575, 620);
 
 
-		Utils.drawBlackRectangleWithBorder(ctx,125,480,400,250);
-		Utils.drawBlackRectangleWithBorder(ctx, 675, 480, 400, 250);
+		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, 505, 400, 200);
+		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, 480, 400, 250);
+
 	}
 
 

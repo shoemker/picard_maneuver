@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// this block is for the events for the user to draw a ship
 	let draw = false;
-	canvasEl.addEventListener('mousedown', () => { draw = true; });
+	canvasEl.addEventListener('mousedown', () => { 
+		draw = true; 
+	});
 	canvasEl.addEventListener('mousemove', (e) => {
 		if (gv.userDraw != null && draw) gv.userDraw.drawFromUser(e);
 	});

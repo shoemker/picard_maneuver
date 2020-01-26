@@ -30,7 +30,7 @@ class UserDraw {
 		this.ctx.fillStyle = "lightblue";
 		this.ctx.font = "60px FINALOLD";
 		this.ctx.fillText("Front of Ship", 470, this.boxY - 15);
-		this.ctx.fillText("Rear of Ship", 475, this.boxY +this.boxHeight+ 53);
+		this.ctx.fillText("Rear of Ship", 485, this.boxY +this.boxHeight+ 53);
 
 		this.ctx.font = "50px FINALOLD";
 
@@ -109,7 +109,7 @@ class UserDraw {
 		const yOffset = this.boxY + 55;
 
 		if (y >= yOffset && y <= yOffset + 30) this.ctx.strokeStyle = "white";
-		else if (y >= yOffset + 205 && y <= yOffset + 110) this.ctx.strokeStyle = "red";
+		else if (y >= yOffset + 80 && y <= yOffset + 110) this.ctx.strokeStyle = "red";
 		else if (y >= yOffset + 160 && y <= yOffset + 190) this.ctx.strokeStyle = "blue";
 		else if (y >= yOffset + 240 && y <= yOffset + 270) this.ctx.strokeStyle = "yellow";
 		else if (y >= yOffset + 320 && y <= yOffset + 350) this.ctx.strokeStyle = "green";
