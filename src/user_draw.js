@@ -75,10 +75,7 @@ class UserDraw {
 		// puts the imageData on a canvas and turns it into an Image
 		virtualCtx.putImageData(imgData, 0, 0);
 		this.img = new Image();
-		this.ssdImg = new Image();
-
 		this.img.src = virtualCanvas.toDataURL();
-		this.ssdImg.src = virtualCanvas.toDataURL();
 
 		virtualCtx.clearRect(0, 0, this.boxWidth, this.boxHeight );
 
@@ -121,13 +118,10 @@ class UserDraw {
 		this.ssdImg.src = virtualCanvas.toDataURL();
 	}
 
-	getDrawing() {
-		return this.img;
-	}
+	getDrawing() { return this.img; }
 	
-	getSSDportrait() {
-		return this.ssdImg;
-	}
+	getSSDportrait() { return this.ssdImg; }
+	
 }
 
 module.exports = UserDraw;

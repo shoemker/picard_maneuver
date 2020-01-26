@@ -53,9 +53,9 @@ class SSD {
 		this.imgData = this.virtualCtx.getImageData(0, 0, this.img_size_x, this.img_size_y);
 
 		// // sets the black pixels to transparent
-		// for (let index = 0; index < this.imgData.data.length; index += 4) {
-		// 	if (this.imgData.data[index] === 0) this.imgData.data[index + 3] = 0;		
-		// }
+		for (let index = 0; index < this.imgData.data.length; index += 4) {
+			if (this.imgData.data[index] === 0) this.imgData.data[index + 3] = 0;		
+		}
 
 		this.updateImg(1);
 	};

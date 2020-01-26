@@ -26,16 +26,19 @@ class Shield {
 		let shieldPercentage = this.hitpoints / this.maxHitpoints;
 
 		ctx.beginPath();
-		ctx.arc(this.pos[0], 
-			this.pos[1], 
-			this.radius, 
-			this.start * Math.PI + (this.end - this.start)/2* Math.PI * (1 - shieldPercentage),
-			this.end * Math.PI - (this.end - this.start)/2 * Math.PI * (1 - shieldPercentage)
-		);
-	
-		ctx.lineWidth = 3 + 4*scale*this.maxHitpoints/100;
-		ctx.strokeStyle = this.color;
-		ctx.stroke();
+
+		if (this.hitpoints > 0) { // have to do this check because of a mysterious bug when user would draw ship
+			ctx.arc(this.pos[0], 
+				this.pos[1], 
+				this.radius, 
+				this.start * Math.PI + (this.end - this.start)/2* Math.PI * (1 - shieldPercentage),
+				this.end * Math.PI - (this.end - this.start)/2 * Math.PI * (1 - shieldPercentage)
+			);
+		
+			ctx.lineWidth = 3 + 4*scale*this.maxHitpoints/100;
+			ctx.strokeStyle = this.color;
+			ctx.stroke();
+		}
 	}
 
 

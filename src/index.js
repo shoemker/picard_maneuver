@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	// sounds
 	const audioCtx = new AudioContext();
 	const gainNode = audioCtx.createGain();
-	// gainNode.gain.value = .25;
-	gainNode.gain.value = 0;
+	gainNode.gain.value = .25;
+	// gainNode.gain.value = 0;
 
 	let gv = new GameView(ctx, audioCtx, {
 			phasSound: getSound("phaser", audioCtx, gainNode), 
