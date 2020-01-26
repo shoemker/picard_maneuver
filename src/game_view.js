@@ -119,6 +119,9 @@ class GameView {
 		else if (x >= 298 && x <= 330) {
 			this.userDraw.changeColor(y);
 		}
+		else if (x >= 910 && x <= 1000) {
+			this.userDraw.changeLineWidth(y);
+		}
 	}
 
 	pauseGameToggle() {

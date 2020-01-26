@@ -9,6 +9,7 @@ class UserDraw {
 		this.boxHeight = 500;
 
 		this.ctx.strokeStyle = "white";
+		this.ctx.lineWidth = 20;
 
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
@@ -31,7 +32,18 @@ class UserDraw {
 		this.ctx.fillText("Front of Ship", 470, this.boxY - 15);
 		this.ctx.fillText("Rear of Ship", 475, this.boxY +this.boxHeight+ 53);
 
+		this.ctx.font = "50px FINALOLD";
+
+		this.ctx.fillText("click",100, this.boxY + 240);
+		this.ctx.fillText("color", 100, this.boxY + 290);
+
+		this.ctx.fillText("click", 1030, this.boxY + 240);
+		this.ctx.fillText("width", 1030, this.boxY + 290);
+
 		this.drawColorChoices();
+		this.drawLineWidthChoices();
+
+
 
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
@@ -47,9 +59,32 @@ class UserDraw {
 	}
 
 
+	drawLineWidthChoices() {
+		this.ctx.strokeStyle = "white";
+
+		this.ctx.beginPath();
+		this.ctx.moveTo(this.boxX + 550, this.boxY + 125);
+		this.ctx.lineTo(this.boxX + 550 + 70, this.boxY + 125);
+		this.ctx.lineWidth = 13;
+		this.ctx.stroke();
+
+		this.ctx.beginPath();
+		this.ctx.moveTo(this.boxX + 550, this.boxY + 250);
+		this.ctx.lineTo(this.boxX + 550+70, this.boxY + 250);
+		this.ctx.lineWidth = 20;
+		this.ctx.stroke();
+
+		this.ctx.beginPath();
+		this.ctx.moveTo(this.boxX + 550, this.boxY + 375);
+		this.ctx.lineTo(this.boxX + 550 + 70, this.boxY + 375);
+		this.ctx.lineWidth = 27;
+		this.ctx.stroke();
+	}
+
+	
 	drawColorChoices() {
 		const x = this.boxX - 70;
-		const y = this.boxY + 30
+		const y = this.boxY + 33;
 
 		this.ctx.fillStyle = "white";
 		this.ctx.fillRect(x, y, 30, 30);
@@ -67,17 +102,26 @@ class UserDraw {
 		this.ctx.fillRect(x, y + 320, 30, 30);
 
 		Utils.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
-
 	}
 
 
 	changeColor(y) {
-		if (y >= this.boxY + 50 && y <= this.boxY + 80) this.ctx.strokeStyle = "white";
-		else if (y >= this.boxY + 130 && y <= this.boxY + 160) this.ctx.strokeStyle = "red";
-		else if (y >= this.boxY + 210 && y <= this.boxY + 240) this.ctx.strokeStyle = "blue";
-		else if (y >= this.boxY + 290 && y <= this.boxY + 320) this.ctx.strokeStyle = "yellow";
-		else if (y >= this.boxY + 370 && y <= this.boxY + 400) this.ctx.strokeStyle = "green";
-		else if (y >= this.boxY + 450 && y <= this.boxY + 480) this.ctx.strokeStyle = "black";
+		const yOffset = this.boxY + 55;
+
+		if (y >= yOffset && y <= yOffset + 30) this.ctx.strokeStyle = "white";
+		else if (y >= yOffset + 205 && y <= yOffset + 110) this.ctx.strokeStyle = "red";
+		else if (y >= yOffset + 160 && y <= yOffset + 190) this.ctx.strokeStyle = "blue";
+		else if (y >= yOffset + 240 && y <= yOffset + 270) this.ctx.strokeStyle = "yellow";
+		else if (y >= yOffset + 320 && y <= yOffset + 350) this.ctx.strokeStyle = "green";
+		else if (y >= yOffset + 400 && y <= yOffset + 430) this.ctx.strokeStyle = "black";
+	}
+
+
+	changeLineWidth(y) {
+		const yOffset = this.boxY + 135;
+		if (y >= yOffset && y <= yOffset + 20) this.ctx.lineWidth = 13;
+		else if (y >= yOffset + 125 && y <= yOffset + 145) this.ctx.lineWidth = 20;
+		else if (y >= yOffset + 245 && y <= yOffset + 272) this.ctx.lineWidth = 27;
 	}
 
 
@@ -93,8 +137,6 @@ class UserDraw {
 			this.ctx.beginPath();
 			this.ctx.moveTo(this.prevX, this.prevY);
 			this.ctx.lineTo(e.offsetX, e.offsetY);
-
-			this.ctx.lineWidth = 20;
 
 			if (this.prevX && this.prevY) this.ctx.stroke();
 			this.prevX = e.offsetX;
@@ -170,6 +212,7 @@ class UserDraw {
 	getDrawing() { return this.img; }
 	
 	getSSDportrait() { return this.ssdImg; }
+
 }
 
 module.exports = UserDraw;
