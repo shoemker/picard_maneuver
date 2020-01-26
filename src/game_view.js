@@ -79,8 +79,9 @@ class GameView {
 		else this.game.getKeyMap()[e.keyCode] = false;			
 	};
 
-
-	// get scenario click if still in the opening of the game, or
+	// get ship choice, 
+	// get clicks for choices on draw screen
+	// get scenario click if still in the opening of the game,
 	// check to see if mute or autopilot is being clicked
 	checkClick(e, gainNode) {
 		const x = e.pageX;
@@ -251,30 +252,25 @@ class GameView {
 
 
 	addMain(ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
+		const options = {
+			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], 
+			ssdPos,
+			rotationOffset,
+			images: this.images,
+			sounds: this.sounds,
+			phaserRecharge,
+			torpedoReload 
+		}
+
 		if (this.enterprise) {
-			this.game.addMainShip(new Enterprise({
-				pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
-				rotationOffset,
-				images: this.images,
-				sounds: this.sounds,
-				phaserRecharge,
-				torpedoReload
-			}), aiTargeting);
+			this.game.addMainShip(new Enterprise(options), aiTargeting);
 		}
 		else {
-			this.game.addMainShip(new DrawnShip({
-				pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], ssdPos,
-				rotationOffset,
-				image: this.drawing,
-				ssdImage: this.ssdPortrait,
-				images: this.images,
-				sounds: this.sounds,
-				phaserRecharge,
-				torpedoReload
-			}), aiTargeting);
+			this.game.addMainShip(new DrawnShip(options, this.drawing, this.ssdPortrait), aiTargeting);
 		}
 	}
 
+	
 	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
 			pos, ssdPos,

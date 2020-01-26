@@ -2,10 +2,10 @@ const Ship = require("./ship");
 const SSD = require("../ssd");
 
 class DrawnShip extends Ship {
-	constructor(options) {
+	constructor(options, drawing, ssdImg) {
 		super(options);
 
-		this.image = options.image;
+		this.image = drawing;
 		this.turnRadius = 4;
 		this.enemy = false;
 
@@ -23,7 +23,7 @@ class DrawnShip extends Ship {
 			ssdPos: options.ssdPos,
 			img_size: [100, 100],
 			img_pos_offset: [-15, 14],
-			img: options.ssdImage,
+			img: ssdImg,
 			beamWeaponName: "Phaser",
 			imgCoords: [1, 1, 498, 498],
 			shieldStrength: 100,
