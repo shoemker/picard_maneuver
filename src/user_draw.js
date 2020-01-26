@@ -1,5 +1,3 @@
-const Utils = require("./utils");
-
 class UserDraw {
 	constructor(ctx) {
 		this.ctx = ctx;
@@ -30,8 +28,8 @@ class UserDraw {
 
 		this.ctx.fillStyle = "lightblue";
 		this.ctx.font = "60px FINALOLD";
-		this.ctx.fillText("Front of Ship", 470, this.boxY - 15);
-		this.ctx.fillText("Rear of Ship", 485, this.boxY +this.boxHeight+ 53);
+		this.ctx.fillText("Front of Ship", 470, this.boxY - 25);
+		this.ctx.fillText("Rear of Ship", 485, this.boxY +this.boxHeight+ 63);
 
 		this.ctx.font = "50px FINALOLD";
 
@@ -42,13 +40,13 @@ class UserDraw {
 		this.ctx.fillText("width", 1030, this.boxY + 290);
 
 		this.drawColorChoices();
+		this.drawColorIndicator(this.ctx);
 		this.drawLineWidthChoices();
-		if (!this.started) this.drawInstructions();
+		this.drawInstructions();
 
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
 	};
-
 
 
 	drawBlackRectangleWithBorder(ctx, x, y, width, height, color = "grey", lineWidth = 1) {
@@ -128,6 +126,47 @@ class UserDraw {
 		this.ctx.fillRect(x, y + 320, 30, 30);
 
 		this.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
+		this.ctx.strokeStyle = "white";
+	}
+
+
+	drawColorIndicator(ctx) {
+
+		const x = this.boxX - 70;
+		const y = this.boxY + 33;
+		const colorHolder = this.ctx.strokeStyle;
+		const widthHolder = this.ctx.lineWidth;
+
+		this.ctx.lineWidth = 3;
+	
+		if (colorHolder === "#ffffff") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		// debugger
+		ctx.beginPath();
+		ctx.strokeRect(x - 4, y - 4, 38, 38);
+
+		if (colorHolder === "#ff0000") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		ctx.strokeRect(x-4, y-4 + 80, 38, 38);
+
+		if (colorHolder === "#0000ff") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		ctx.strokeRect(x-4, y-4 + 160, 38, 38);
+
+		if (colorHolder === "#ffff00") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		ctx.strokeRect(x-4, y-4 + 240, 38, 38);
+
+		if (colorHolder === "#008000") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		ctx.strokeRect(x-4, y-4 + 320, 38, 38);
+
+		if (colorHolder === "#000000") this.ctx.strokeStyle = "lightblue";
+		else this.ctx.strokeStyle = "black";
+		ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
+
+		this.ctx.strokeStyle = colorHolder;
+		this.ctx.lineWidth = widthHolder;
 	}
 
 
@@ -140,6 +179,8 @@ class UserDraw {
 		else if (y >= yOffset + 240 && y <= yOffset + 270) this.ctx.strokeStyle = "yellow";
 		else if (y >= yOffset + 320 && y <= yOffset + 350) this.ctx.strokeStyle = "green";
 		else if (y >= yOffset + 400 && y <= yOffset + 430) this.ctx.strokeStyle = "black";
+
+		this.drawColorIndicator(this.ctx);
 	}
 
 
@@ -154,7 +195,6 @@ class UserDraw {
 	// this was adapted from http://www.mattmorgante.com/technology/javascript-draw-html5-canvas
 	// user can draw a ship in a box with cursor
 	drawFromUser(e) {
-
 
 		if (e.offsetX >= this.boxX && 
 				e.offsetX <= this.boxX+this.boxWidth && 
