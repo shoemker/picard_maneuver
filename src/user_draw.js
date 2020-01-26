@@ -22,7 +22,7 @@ class UserDraw {
 	}
 	
 	draw() {
-		this.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+		this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
 		this.drawAcceptButton();
 
@@ -52,17 +52,17 @@ class UserDraw {
 	};
 
 
-	drawBlackRectangleWithBorder(ctx, x, y, width, height, color = "grey", lineWidth = 1) {
-		ctx.beginPath();
+	drawBlackRectangleWithBorder(x, y, width, height, color = "grey", lineWidth = 1) {
+		this.ctx.beginPath();
 
-		ctx.lineWidth = lineWidth;
+		this.ctx.lineWidth = lineWidth;
 
-		ctx.fillStyle = "black";
-		ctx.fillRect(x, y, width, height);
+		this.ctx.fillStyle = "black";
+		this.ctx.fillRect(x, y, width, height);
 
-		ctx.rect(x, y, width, height);
-		ctx.strokeStyle = color;
-		ctx.stroke();
+		this.ctx.rect(x, y, width, height);
+		this.ctx.strokeStyle = color;
+		this.ctx.stroke();
 	};
 
 
@@ -78,7 +78,7 @@ class UserDraw {
 
 
 	drawAcceptButton(){
-		this.drawBlackRectangleWithBorder(this.ctx, 500, 802, 210, 50, "lightblue", 3);
+		this.drawBlackRectangleWithBorder(500, 802, 210, 50, "lightblue", 3);
 		this.ctx.stroke();
 		this.ctx.fillStyle = "lightblue";
 		this.ctx.font = "40px FINALOLD";
@@ -158,7 +158,7 @@ class UserDraw {
 		this.ctx.fillStyle = "green";
 		this.ctx.fillRect(x, y + 320, 30, 30);
 
-		this.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
+		this.drawBlackRectangleWithBorder(x, y + 400, 30, 30);
 		this.ctx.strokeStyle = "white";
 	}
 
@@ -240,7 +240,7 @@ class UserDraw {
 				const tempColor = this.ctx.strokeStyle;
 				const tempWidth = this.ctx.lineWidth;
 				this.started = true;
-				this.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+				this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 				this.ctx.strokeStyle = tempColor;
 				this.ctx.lineWidth = tempWidth;
 			}
