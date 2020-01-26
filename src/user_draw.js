@@ -10,6 +10,7 @@ class UserDraw {
 
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
+		this.started = false;
 
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
@@ -23,7 +24,7 @@ class UserDraw {
 	}
 	
 	draw() {
-		Utils.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+		this.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
 		this.drawAcceptButton();
 
@@ -42,16 +43,41 @@ class UserDraw {
 
 		this.drawColorChoices();
 		this.drawLineWidthChoices();
-
-
+		if (!this.started) this.drawInstructions();
 
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
+	};
+
+
+
+	drawBlackRectangleWithBorder(ctx, x, y, width, height, color = "grey", lineWidth = 1) {
+		ctx.beginPath();
+
+		ctx.lineWidth = lineWidth;
+
+		ctx.fillStyle = "black";
+		ctx.fillRect(x, y, width, height);
+
+		ctx.rect(x, y, width, height);
+		ctx.strokeStyle = color;
+		ctx.stroke();
+	};
+
+
+	drawInstructions(){
+		this.ctx.fillStyle = "white";
+		this.ctx.font = "60px FINALOLD";
+		this.ctx.globalAlpha = 0.3;
+		this.ctx.fillText("Hold Down Mouse Button", 361, this.boxY + 210);
+		this.ctx.fillText("to Draw in this Area", 400, this.boxY + 310);
+
+		this.ctx.globalAlpha = 1;
 	}
 
-	
+
 	drawAcceptButton(){
-		Utils.drawBlackRectangleWithBorder(this.ctx, 500, 802, 210, 50, "lightblue", 3);
+		this.drawBlackRectangleWithBorder(this.ctx, 500, 802, 210, 50, "lightblue", 3);
 		this.ctx.stroke();
 		this.ctx.fillStyle = "lightblue";
 		this.ctx.font = "40px FINALOLD";
@@ -101,7 +127,7 @@ class UserDraw {
 		this.ctx.fillStyle = "green";
 		this.ctx.fillRect(x, y + 320, 30, 30);
 
-		Utils.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
+		this.drawBlackRectangleWithBorder(this.ctx, x, y + 400, 30, 30);
 	}
 
 
@@ -129,11 +155,22 @@ class UserDraw {
 	// user can draw a ship in a box with cursor
 	drawFromUser(e) {
 
+
 		if (e.offsetX >= this.boxX && 
 				e.offsetX <= this.boxX+this.boxWidth && 
 				e.offsetY >= this.boxY && 
 				e.offsetY <= this.boxY+this.boxHeight) {
 
+			// reddraw area without instructions
+			if (!this.started) {
+				const tempColor = this.ctx.strokeStyle;
+				const tempWidth = this.ctx.lineWidth;
+				this.started = true;
+				this.drawBlackRectangleWithBorder(this.ctx, this.boxX, this.boxY, this.boxWidth, this.boxHeight);
+				this.ctx.strokeStyle = tempColor;
+				this.ctx.lineWidth = tempWidth;
+			}
+			
 			this.ctx.beginPath();
 			this.ctx.moveTo(this.prevX, this.prevY);
 			this.ctx.lineTo(e.offsetX, e.offsetY);

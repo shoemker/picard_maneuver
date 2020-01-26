@@ -46,20 +46,6 @@ const Utils = {
 		ctx.stroke();
 	},
 
-
-	drawBlackRectangleWithBorder(ctx, x, y, width, height, color = "grey", lineWidth = 1) {
-		ctx.beginPath();
-
-		ctx.lineWidth = lineWidth;
-
-		ctx.fillStyle = "black";
-		ctx.fillRect(x, y, width, height);
-
-		ctx.rect(x, y, width, height);
-		ctx.strokeStyle = color;
-		ctx.stroke();
-	},
-
 	getCanvasDim() { return [1200, 900]; }
 }
 

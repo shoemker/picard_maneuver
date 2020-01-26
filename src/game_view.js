@@ -1,12 +1,12 @@
 const Game = require("./game");
 const GameOpening = require("./game_opening");
+const UserDraw = require("./user_draw");
 const DrawnShip = require("./ships/drawn_ship");
 const Enterprise = require("./ships/enterprise");
 const Soyuz = require("./ships/soyuz");
 const D7 = require("./ships/d7");
 const Bird_of_Prey = require("./ships/bird_of_prey");
 const Utils = require("./utils");
-const UserDraw = require("./user_draw");
 
 class GameView {
 
@@ -88,15 +88,9 @@ class GameView {
 		const y = e.pageY;
 
 		if (this.gameOpening !== null) {
-			if (this.gameOpening.getShipChoice()) {
-				this.chooseShip(x,y);
-			}
-			else if(this.userDraw != null){
-				this.drawingClick(x,y);
-			}
-			else {
-				this.chooseScenario(x,y,gainNode);
-			}
+			if (this.gameOpening.getShipChoice()) this.chooseShip(x,y);
+			else if(this.userDraw != null) this.drawingClick(x,y);
+			else this.chooseScenario(x,y,gainNode);	
 		}
 		// start again from scenario choice
 		else if (this.game.win || this.game.lose) {
@@ -112,7 +106,7 @@ class GameView {
 
 
 	drawingClick(x,y) {
-		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) {
+		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) { // accept button
 			this.userDraw.acceptDrawing();
 			this.drawing = this.userDraw.getDrawing();
 			this.ssdPortrait = this.userDraw.getSSDportrait();
@@ -130,7 +124,7 @@ class GameView {
 		else if (x >= 910 && x <= 1000) {
 			this.userDraw.changeLineWidth(y);
 		}
-	}
+	};
 
 	pauseGameToggle() {
 		this.pause = this.pause === false;
@@ -270,7 +264,7 @@ class GameView {
 		}
 	}
 
-	
+
 	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
 			pos, ssdPos,
