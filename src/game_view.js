@@ -97,6 +97,13 @@ class GameView {
 				this.chooseScenario(x,y,gainNode);
 			}
 		}
+		// start again from scenario choice
+		else if (this.game.win || this.game.lose) {
+			this.game = new Game(this.images);
+			this.gameOpening = new GameOpening();
+			this.gameOpening.setShipChoice(false);
+			this.gameOpening.setScenario(true);
+		}
 		else {
 			this.muteAndAutopilotBoxes(x,y,gainNode);
 		}

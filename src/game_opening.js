@@ -130,13 +130,9 @@ class GameOpening {
 		ctx.font = "72px FINALOLD";
 		ctx.fillText("OR", 575, 620);
 
-
 		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, 505, 400, 200);
 		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, 480, 400, 250);
-
 	}
-
-
 }
 
 module.exports = GameOpening;

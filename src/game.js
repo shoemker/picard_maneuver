@@ -164,7 +164,7 @@ class Game {
 		ctx.fillStyle = "#FAFAD2";
 
 		ctx.fillText(message, Utils.getCanvasDim()[0]/2-315, Utils.getCanvasDim()[1]/3 - 100);
-		ctx.fillText("Refresh to play again", Utils.getCanvasDim()[0] / 2 - 270, Utils.getCanvasDim()[1] / 3 - 20);
+		ctx.fillText("Click to play again", Utils.getCanvasDim()[0] / 2 - 240, Utils.getCanvasDim()[1] / 3 - 20);
 	};
 
 
