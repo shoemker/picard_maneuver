@@ -33,11 +33,11 @@ class UserDraw {
 
 		this.ctx.font = "50px FINALOLD";
 
-		this.ctx.fillText("click",100, this.boxY + 240);
-		this.ctx.fillText("color", 100, this.boxY + 290);
+		// this.ctx.fillText("click",100, this.boxY + 240);
+		// this.ctx.fillText("color", 100, this.boxY + 290);
 
-		this.ctx.fillText("click", 1030, this.boxY + 240);
-		this.ctx.fillText("width", 1030, this.boxY + 290);
+		// this.ctx.fillText("click", 1030, this.boxY + 240);
+		// this.ctx.fillText("width", 1030, this.boxY + 290);
 
 		this.drawColorChoices();
 		this.drawColorIndicator();
@@ -218,8 +218,8 @@ class UserDraw {
 
 	changeLineWidth(y) {
 		const yOffset = this.boxY + 135;
-		if (y >= yOffset && y <= yOffset + 20) this.ctx.lineWidth = 13;
-		else if (y >= yOffset + 125 && y <= yOffset + 145) this.ctx.lineWidth = 20;
+		if (y >= yOffset-5 && y <= yOffset + 25) this.ctx.lineWidth = 13;
+		else if (y >= yOffset + 120 && y <= yOffset + 150) this.ctx.lineWidth = 20;
 		else if (y >= yOffset + 245 && y <= yOffset + 272) this.ctx.lineWidth = 27;
 
 		this.drawLineWidthIndicator();
