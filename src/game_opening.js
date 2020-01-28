@@ -105,7 +105,7 @@ class GameOpening {
 
 
 	drawShipChoice(ctx) {
-		const y = 560;
+		const y = 540;
 		const x1 = 100;
 		const x2 = 810;
 
