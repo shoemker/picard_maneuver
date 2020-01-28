@@ -105,33 +105,34 @@ class GameOpening {
 
 
 	drawShipChoice(ctx) {
+		const y = 560;
 		const x1 = 100;
-		const x2 = 700;
+		const x2 = 810;
 
 		ctx.fillStyle = "lightblue";
 
-		ctx.font = "108px FINALOLD";
-		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 365, this.canvas_height /4);
+		ctx.font = "132px FINALOLD";
+		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 435, this.canvas_height /3-30);
 
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 4+ 80);
+		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 3+ 50);
 
-		ctx.fillStyle = "white";
+		ctx.fillStyle = "#FAFAD2";
 
 		ctx.font = "54px FINALOLD"; 
-		ctx.fillText("Play as This Ship", x1+50, 460);
-		ctx.fillText("Doodle Your Own Ship", x2+13, 460);
+		ctx.fillText("Play as This Ship", x1, y);
+		ctx.fillText("Doodle Your Own Ship", x2-40, y);
 
 
-		ctx.fillText("Click Here!", x1 + 110, 780);
-		ctx.fillText("Click Here!", x2 + 110, 780);
+		ctx.fillText("Click Here!", x1+50, y + 280);
+		ctx.fillText("Click Here!", x2+60 , y + 280);
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("OR", 575, 620);
+		ctx.fillText("OR", 575, y+150);
 
-		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, 505, 400, 200);
-		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, 480, 400, 250);
+		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, y + 45, 300, 150);
+		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, y+20, 300, 200);
 	}
 }
 

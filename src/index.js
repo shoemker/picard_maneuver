@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	const audioCtx = new AudioContext();
 	const gainNode = audioCtx.createGain();
 	gainNode.gain.value = .25;
-	// gainNode.gain.value = 0;
 
 	let gv = new GameView(ctx, audioCtx, {
 			phasSound: getSound("phaser", audioCtx, gainNode), 
@@ -40,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 	canvasEl.addEventListener("click", (e) => {
-
 		gv.checkClick(e, gainNode);
 		// console.log("x = " + e.pageX, "y = " + e.pageY);
 	});
