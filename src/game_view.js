@@ -157,7 +157,7 @@ class GameView {
 
 
 	chooseShip(x,y) {
-		if (y >= 540 && y <= 860) {
+		if (y >= 540 && y <= 825) {
 			if (x >= 120 && x <= 414) {
 				this.gameOpening.setShipChoice(false);
 				this.gameOpening.setScenario(true);

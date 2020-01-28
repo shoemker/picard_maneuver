@@ -124,15 +124,15 @@ class GameOpening {
 		ctx.fillText("Doodle Your Own Ship", x2-40, y);
 
 
-		ctx.fillText("Click Here!", x1+50, y + 280);
-		ctx.fillText("Click Here!", x2+60 , y + 280);
+		ctx.fillText("Click Here!", x1+50, y + 240);
+		ctx.fillText("Click Here!", x2+60 , y + 240);
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("OR", 575, y+150);
+		ctx.fillText("OR", 575, y+135);
 
-		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, y + 45, 300, 150);
-		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, y+20, 300, 200);
+		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, y + 28, 300, 150);
+		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, y+2, 300, 200);
 	}
 }
 
