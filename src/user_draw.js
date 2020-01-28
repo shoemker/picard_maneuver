@@ -54,7 +54,7 @@ class UserDraw {
 		this.ctx.fillStyle = "black";
 		this.ctx.fillRect(x, y, width, height);
 
-		this.ctx.rect(x, y, width, height);
+		this.ctx.rect(x-1, y-1, width+2, height+2);
 		this.ctx.strokeStyle = color;
 		this.ctx.stroke();
 	};

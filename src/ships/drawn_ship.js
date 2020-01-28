@@ -25,7 +25,7 @@ class DrawnShip extends Ship {
 			img_pos_offset: [-15, 14],
 			img: ssdImg,
 			beamWeaponName: "Phaser",
-			imgCoords: [1, 1, 498, 498],
+			imgCoords: [0, 0, 500, 500],
 			shieldStrength: 100,
 		});
 	};
