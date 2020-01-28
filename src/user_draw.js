@@ -33,12 +33,6 @@ class UserDraw {
 
 		this.ctx.font = "50px FINALOLD";
 
-		// this.ctx.fillText("click",100, this.boxY + 240);
-		// this.ctx.fillText("color", 100, this.boxY + 290);
-
-		// this.ctx.fillText("click", 1030, this.boxY + 240);
-		// this.ctx.fillText("width", 1030, this.boxY + 290);
-
 		this.drawColorChoices();
 		this.drawColorIndicator();
 		this.drawLineWidthChoices();
@@ -88,24 +82,24 @@ class UserDraw {
 
 	drawLineWidthChoices() {
 		const x = this.boxX + 550
-		const y = this.boxY + 125
+		const y = this.boxY + 100
 		this.ctx.strokeStyle = "white";
 
 		this.ctx.beginPath();
 		this.ctx.moveTo(x, y);
-		this.ctx.lineTo(x + 70, y);
+		this.ctx.lineTo(x + 50, y);
 		this.ctx.lineWidth = 13;
 		this.ctx.stroke();
 
 		this.ctx.beginPath();
-		this.ctx.moveTo(x, y + 125);
-		this.ctx.lineTo(x + 70, y + 125);
+		this.ctx.moveTo(x, y + 150);
+		this.ctx.lineTo(x + 50, y + 150);
 		this.ctx.lineWidth = 20;
 		this.ctx.stroke();
 
 		this.ctx.beginPath();
-		this.ctx.moveTo(x, y + 250);
-		this.ctx.lineTo(x + 70, y + 250);
+		this.ctx.moveTo(x, y + 300);
+		this.ctx.lineTo(x + 50, y + 300);
 		this.ctx.lineWidth = 27;
 		this.ctx.stroke();
 	}
@@ -113,25 +107,25 @@ class UserDraw {
 
 	drawLineWidthIndicator() {
 		const x = this.boxX + 550
-		const y = this.boxY + 125
+		const y = this.boxY + 100
 
 		const colorHolder = this.ctx.strokeStyle;
 		const widthHolder = this.ctx.lineWidth;
 
-		this.ctx.lineWidth = 3;
+		this.ctx.lineWidth = 4;
 		this.ctx.beginPath();
 		
 		if (widthHolder === 13) this.ctx.strokeStyle = "lightblue";
 		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y - 20, 110, 40);
+		this.ctx.strokeRect(x -20, y - 20, 90, 40);
 
 		if (widthHolder === 20) this.ctx.strokeStyle = "lightblue";
 		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y - 20+ 125, 110, 40);
+		this.ctx.strokeRect(x -20, y - 20+ 150, 90, 40);
 
 		if (widthHolder === 27) this.ctx.strokeStyle = "lightblue";
 		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y -20 + 250, 110, 40);
+		this.ctx.strokeRect(x -20, y -20 + 300, 90, 40);
 
 
 		this.ctx.strokeStyle = colorHolder;
@@ -170,7 +164,7 @@ class UserDraw {
 		const colorHolder = this.ctx.strokeStyle;
 		const widthHolder = this.ctx.lineWidth;
 
-		this.ctx.lineWidth = 3;
+		this.ctx.lineWidth = 4;
 		this.ctx.beginPath();
 	
 		if (colorHolder === "#ffffff") this.ctx.strokeStyle = "lightblue";
@@ -217,10 +211,10 @@ class UserDraw {
 
 
 	changeLineWidth(y) {
-		const yOffset = this.boxY + 135;
+		const yOffset = this.boxY + 110;
 		if (y >= yOffset-5 && y <= yOffset + 25) this.ctx.lineWidth = 13;
-		else if (y >= yOffset + 120 && y <= yOffset + 150) this.ctx.lineWidth = 20;
-		else if (y >= yOffset + 245 && y <= yOffset + 272) this.ctx.lineWidth = 27;
+		else if (y >= yOffset + 145 && y <= yOffset + 175) this.ctx.lineWidth = 20;
+		else if (y >= yOffset + 295 && y <= yOffset + 322) this.ctx.lineWidth = 27;
 
 		this.drawLineWidthIndicator();
 	}
