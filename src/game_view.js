@@ -157,13 +157,13 @@ class GameView {
 
 
 	chooseShip(x,y) {
-		if (y >= 540 && y <= 825) {
-			if (x >= 120 && x <= 414) {
+		if (y >= 517 && y <= 803) {
+			if (x >= 150 && x <= 444) {
 				this.gameOpening.setShipChoice(false);
 				this.gameOpening.setScenario(true);
 				this.enterprise = true;
 			}
-			else if (x >= 790 && x <= 1163) {
+			else if (x >= 760 && x <= 1133) {
 				this.gameOpening.setShipChoice(false);
 				this.userDraw = new UserDraw(this.ctx);
 				this.gameOpening.stepAndDraw(this.ctx);

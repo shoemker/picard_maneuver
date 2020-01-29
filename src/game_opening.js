@@ -106,8 +106,8 @@ class GameOpening {
 
 	drawShipChoice(ctx) {
 		const y = 540;
-		const x1 = 100;
-		const x2 = 810;
+		const x1 = 130;
+		const x2 = 780;
 
 		ctx.fillStyle = "lightblue";
 
@@ -129,7 +129,7 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("OR", 575, y+135);
+		ctx.fillText("OR", 570, y+135);
 
 		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, y + 28, 300, 150);
 		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, y+2, 300, 200);
