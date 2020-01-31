@@ -19,7 +19,7 @@ class Bird_of_Prey extends Ship {
 		this.torpedoReloadMax = 200;
 
 		this.phaserColor = "green";
-		this.beamPattern = [3, 2, 3, 20];
+		this.beamPattern = [3, 5, 3, 20];
 
 		this.phaserOffsetDistance = 20;
 		this.phaserOffsetAngle = 1.6*Math.PI;

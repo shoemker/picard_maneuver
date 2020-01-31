@@ -21,7 +21,7 @@ class Soyuz extends Ship {
 		this.phaserOffsetDistance = 13;
 		this.phaserOffsetAngle = 1.5 * Math.PI;
 		this.phaserColor = "red";
-		this.beamPattern = [3, 2, 3, 20];
+		this.beamPattern = [3, 5, 3, 20];
 
 		this.phaserDamage = 5;
 		this.hullIntegrityMax = 100;

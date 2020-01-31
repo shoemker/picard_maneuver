@@ -125,8 +125,8 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
-		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		ctx.beginPath();
+		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		ctx.moveTo(xProgress, yProgress);
 		ctx.lineTo(xStartingPoint, yStartingPoint);
 		ctx.strokeStyle = this.phaserColor;
