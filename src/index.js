@@ -20,21 +20,22 @@ document.addEventListener("DOMContentLoaded", function () {
 			torpSound: getSound("torpedo", audioCtx, gainNode),	
 			exploSound: getSound("explosion", audioCtx, gainNode), 
 			theme: getSound("theme", audioCtx, gainNode)
-		});
+	});
 
 	gv.start();
 
 	// this block is for the events for the user to draw a ship
-	let draw = false;
 	canvasEl.addEventListener('mousedown', () => { 
-		draw = true; 
+		if (gv.userDraw != null) gv.userDraw.setMouseDown(true); 
 	});
 	canvasEl.addEventListener('mousemove', (e) => {
-		if (gv.userDraw != null && draw) gv.userDraw.drawFromUser(e);
+		if (gv.userDraw != null && gv.userDraw.getMouseDown()) gv.userDraw.drawFromUser(e);
 	});
 	canvasEl.addEventListener('mouseup', () => {
-		draw = false;
-		if (gv.userDraw != null) gv.userDraw.setPrevToNull();
+		if (gv.userDraw != null) {
+			gv.userDraw.setMouseDown(false);
+			gv.userDraw.setPrevToNull();
+		}
 	});
 
 

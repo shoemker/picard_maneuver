@@ -14,13 +14,18 @@ class UserDraw {
 		this.ctx.lineCap = 'round';
 
 		this.setPrevToNull(); 
+		this.mouseDown = false;
 	}
+
+	getMouseDown() { return this.mouseDown; }
+	setMouseDown(val){ this.mouseDown = val; }
 
 	setPrevToNull() {
 		this.prevX = null;
 		this.prevY = null;
 	}
 	
+
 	draw() {
 		this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
@@ -306,7 +311,6 @@ class UserDraw {
 		virtualCanvas.width = this.boxWidth;
 		virtualCanvas.height = this.boxHeight;
 		const virtualCtx = virtualCanvas.getContext('2d');
-
 
 		virtualCtx.putImageData(imgData, 0, 0);
 		this.ssdImg = new Image();
