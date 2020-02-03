@@ -9,7 +9,6 @@ const Bird_of_Prey = require("./ships/bird_of_prey");
 const Utils = require("./utils");
 
 class GameView {
-
 	constructor(ctx, audioCtx, sounds) {
 
 		this.ctx = ctx;
