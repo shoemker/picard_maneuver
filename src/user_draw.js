@@ -6,6 +6,9 @@ class UserDraw {
 		this.boxWidth = 500;
 		this.boxHeight = 500;
 
+		this.strokeStyleFromUser = "white";
+		this.lineWidthFromUser = 20;
+
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
 		this.started = false;
@@ -41,8 +44,7 @@ class UserDraw {
 	
 
 	draw() {
-		const tempColor = this.ctx.strokeStyle;
-		const tempWidth = this.ctx.lineWidth;
+
 
 		this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
@@ -60,11 +62,11 @@ class UserDraw {
 
 		if (!this.started) this.drawInstructions();
 
-		this.ctx.strokeStyle = tempColor;
-		this.ctx.lineWidth = tempWidth;
-
 		this.drawColorIndicator();
 		this.drawLineWidthIndicator();
+
+		this.ctx.strokeStyle = this.strokeStyleFromUser;
+		this.ctx.lineWidth = this.lineWidthFromUser;
 
 		// draws the array holding the users drawing
 		for (let i = 0; i < this.allLines.length; i++) {
@@ -146,14 +148,11 @@ class UserDraw {
 		const x = this.boxX + 550
 		const y = this.boxY + 100
 
-		const colorHolder = this.ctx.strokeStyle;
-		const widthHolder = this.ctx.lineWidth;
-
 		this.ctx.lineWidth = 4;
 		this.ctx.beginPath();
 		this.ctx.strokeStyle = "lightblue";
 		
-		switch (widthHolder) {
+		switch (this.lineWidthFromUser) {
 			case 13:
 				this.ctx.strokeRect(x - 20, y - 20, 90, 40);
 				break;
@@ -164,16 +163,10 @@ class UserDraw {
 				this.ctx.strokeRect(x - 20, y - 20 + 300, 90, 40);
 				break;
 		}
-
-		this.ctx.strokeStyle = colorHolder;
-		this.ctx.lineWidth = widthHolder;
 	}
 
 	
 	drawColorChoices() {
-		const colorHolder = this.ctx.strokeStyle;
-		const widthHolder = this.ctx.lineWidth;
-
 		const x = this.boxX - 70;
 		const y = this.boxY + 33;
 
@@ -194,9 +187,6 @@ class UserDraw {
 
 		this.drawBlackRectangleWithBorder(x, y + 400, 30, 30);
 		this.ctx.strokeStyle = "white";
-
-		this.ctx.strokeStyle = colorHolder;
-		this.ctx.lineWidth = widthHolder;
 	}
 
 
@@ -204,56 +194,51 @@ class UserDraw {
 
 		const x = this.boxX - 70;
 		const y = this.boxY + 33;
-		const colorHolder = this.ctx.strokeStyle;
-		const widthHolder = this.ctx.lineWidth;
 
 		this.ctx.lineWidth = 4;
+		this.ctx.strokeStyle = "lightblue";
 		this.ctx.beginPath();
-		this.ctx.strokeStyle = "lightblue"
 	
-		switch(colorHolder) {
-			case "#ffffff":
+		switch(this.strokeStyleFromUser) {
+			case "white":
 				this.ctx.strokeRect(x - 4, y - 4, 38, 38);
 				break;
-			case "#ff0000":
+			case "red":
 				this.ctx.strokeRect(x - 4, y - 4 + 80, 38, 38);
 				break;
-			case "#0000ff":
+			case "blue":
 				this.ctx.strokeRect(x - 4, y - 4 + 160, 38, 38);
 				break;
-			case "#ffff00":
+			case "yellow":
 				this.ctx.strokeRect(x - 4, y - 4 + 240, 38, 38);
 				break;
-			case "#008000":
+			case "green":
 				this.ctx.strokeRect(x - 4, y - 4 + 320, 38, 38);
 				break;
-			case "#000000":
+			case "black":
 				this.ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
 				break;
 		}
-
-		this.ctx.strokeStyle = colorHolder;
-		this.ctx.lineWidth = widthHolder;
 	}
 
 
 	changeColor(y) {
 		const yOffset = this.boxY + 55;
 
-		if (y >= yOffset && y <= yOffset + 30) this.ctx.strokeStyle = "white";
-		else if (y >= yOffset + 80 && y <= yOffset + 110) this.ctx.strokeStyle = "red";
-		else if (y >= yOffset + 160 && y <= yOffset + 190) this.ctx.strokeStyle = "blue";
-		else if (y >= yOffset + 240 && y <= yOffset + 270) this.ctx.strokeStyle = "yellow";
-		else if (y >= yOffset + 320 && y <= yOffset + 350) this.ctx.strokeStyle = "green";
-		else if (y >= yOffset + 400 && y <= yOffset + 430) this.ctx.strokeStyle = "black";
+		if (y >= yOffset && y <= yOffset + 30) this.strokeStyleFromUser = "white";
+		else if (y >= yOffset + 80 && y <= yOffset + 110) this.strokeStyleFromUser = "red";
+		else if (y >= yOffset + 160 && y <= yOffset + 190) this.strokeStyleFromUser = "blue";
+		else if (y >= yOffset + 240 && y <= yOffset + 270) this.strokeStyleFromUser = "yellow";
+		else if (y >= yOffset + 320 && y <= yOffset + 350) this.strokeStyleFromUser = "green";
+		else if (y >= yOffset + 400 && y <= yOffset + 430) this.strokeStyleFromUser = "black";
 	}
 
 
 	changeLineWidth(y) {
 		const yOffset = this.boxY + 110;
-		if (y >= yOffset-5 && y <= yOffset + 25) this.ctx.lineWidth = 13;
-		else if (y >= yOffset + 145 && y <= yOffset + 175) this.ctx.lineWidth = 20;
-		else if (y >= yOffset + 295 && y <= yOffset + 322) this.ctx.lineWidth = 27;
+		if (y >= yOffset-5 && y <= yOffset + 25) this.lineWidthFromUser = 13;
+		else if (y >= yOffset + 145 && y <= yOffset + 175) this.lineWidthFromUser = 20;
+		else if (y >= yOffset + 295 && y <= yOffset + 322) this.lineWidthFromUser = 27;
 	}
 
 
