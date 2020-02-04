@@ -37,6 +37,9 @@ class UserDraw {
 	
 
 	draw() {
+		const tempColor = this.ctx.strokeStyle;
+		const tempWidth = this.ctx.lineWidth;
+
 		this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
 		this.drawAcceptButton();
@@ -49,16 +52,17 @@ class UserDraw {
 		this.ctx.font = "50px FINALOLD";
 
 		this.drawColorChoices();
-		this.drawColorIndicator();
 		this.drawLineWidthChoices();
 
-		this.ctx.lineWidth = 20;
+		if (!this.started) this.drawInstructions();
+
+		this.ctx.strokeStyle = tempColor;
+		this.ctx.lineWidth = tempWidth;
+
+		this.drawColorIndicator();
 		this.drawLineWidthIndicator();
-		this.drawInstructions();
 
-		this.ctx.strokeStyle = "white";
-		this.ctx.lineWidth = 20;
-
+		// draws the array holding the users drawing
 		for (let i = 0; i < this.allLines.length; i++) {
 			for (let j = 0; j < this.allLines[i].length - 1; j++) {
 				this.ctx.beginPath();
@@ -107,6 +111,7 @@ class UserDraw {
 
 
 	drawLineWidthChoices() {
+		
 		const x = this.boxX + 550
 		const y = this.boxY + 100
 		this.ctx.strokeStyle = "white";
@@ -132,6 +137,7 @@ class UserDraw {
 
 
 	drawLineWidthIndicator() {
+
 		const x = this.boxX + 550
 		const y = this.boxY + 100
 
@@ -140,19 +146,19 @@ class UserDraw {
 
 		this.ctx.lineWidth = 4;
 		this.ctx.beginPath();
+		this.ctx.strokeStyle = "lightblue";
 		
-		if (widthHolder === 13) this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y - 20, 90, 40);
-
-		if (widthHolder === 20) this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y - 20+ 150, 90, 40);
-
-		if (widthHolder === 27) this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x -20, y -20 + 300, 90, 40);
-
+		switch (widthHolder) {
+			case 13:
+				this.ctx.strokeRect(x - 20, y - 20, 90, 40);
+				break;
+			case 20:
+				this.ctx.strokeRect(x - 20, y - 20 + 150, 90, 40);
+				break;
+			case 27:
+				this.ctx.strokeRect(x - 20, y - 20 + 300, 90, 40);
+				break;
+		}
 
 		this.ctx.strokeStyle = colorHolder;
 		this.ctx.lineWidth = widthHolder;
@@ -192,30 +198,28 @@ class UserDraw {
 
 		this.ctx.lineWidth = 4;
 		this.ctx.beginPath();
+		this.ctx.strokeStyle = "lightblue"
 	
-		if (colorHolder === "#ffffff") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x - 4, y - 4, 38, 38);
-
-		if (colorHolder === "#ff0000") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x-4, y-4 + 80, 38, 38);
-
-		if (colorHolder === "#0000ff") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x-4, y-4 + 160, 38, 38);
-
-		if (colorHolder === "#ffff00") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x-4, y-4 + 240, 38, 38);
-
-		if (colorHolder === "#008000") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x-4, y-4 + 320, 38, 38);
-
-		if (colorHolder === "#000000") this.ctx.strokeStyle = "lightblue";
-		else this.ctx.strokeStyle = "black";
-		this.ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
+		switch(colorHolder) {
+			case "#ffffff":
+				this.ctx.strokeRect(x - 4, y - 4, 38, 38);
+				break;
+			case "#ff0000":
+				this.ctx.strokeRect(x - 4, y - 4 + 80, 38, 38);
+				break;
+			case "#0000ff":
+				this.ctx.strokeRect(x - 4, y - 4 + 160, 38, 38);
+				break;
+			case "#ffff00":
+				this.ctx.strokeRect(x - 4, y - 4 + 240, 38, 38);
+				break;
+			case "#008000":
+				this.ctx.strokeRect(x - 4, y - 4 + 320, 38, 38);
+				break;
+			case "#000000":
+				this.ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
+				break;
+		}
 
 		this.ctx.strokeStyle = colorHolder;
 		this.ctx.lineWidth = widthHolder;
@@ -231,8 +235,6 @@ class UserDraw {
 		else if (y >= yOffset + 240 && y <= yOffset + 270) this.ctx.strokeStyle = "yellow";
 		else if (y >= yOffset + 320 && y <= yOffset + 350) this.ctx.strokeStyle = "green";
 		else if (y >= yOffset + 400 && y <= yOffset + 430) this.ctx.strokeStyle = "black";
-
-		this.drawColorIndicator(this.ctx);
 	}
 
 
@@ -241,8 +243,6 @@ class UserDraw {
 		if (y >= yOffset-5 && y <= yOffset + 25) this.ctx.lineWidth = 13;
 		else if (y >= yOffset + 145 && y <= yOffset + 175) this.ctx.lineWidth = 20;
 		else if (y >= yOffset + 295 && y <= yOffset + 322) this.ctx.lineWidth = 27;
-
-		this.drawLineWidthIndicator();
 	}
 
 
@@ -256,14 +256,7 @@ class UserDraw {
 				e.offsetY <= this.boxY+this.boxHeight) {
 
 			// reddraw area without instructions
-			if (!this.started) {
-				const tempColor = this.ctx.strokeStyle;
-				const tempWidth = this.ctx.lineWidth;
-				this.started = true;
-				this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
-				this.ctx.strokeStyle = tempColor;
-				this.ctx.lineWidth = tempWidth;
-			}
+			if (!this.started) this.started = true;
 			
 			this.ctx.beginPath();
 			this.ctx.moveTo(this.prevX, this.prevY);
@@ -318,7 +311,7 @@ class UserDraw {
 			virtualCtx.restore();
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
-		
+
 		this.generateSSDImg(imgData);
 	}
 
