@@ -114,7 +114,7 @@ class GameView {
 			this.gameOpening.setScenario(true);
 			this.enterprise = false;
 
-			this.pauseGameToggle();
+			// this.pauseGameToggle();
 			this.gameOpening.setUserDraw(null);
 		}
 		else if (x >= 298 && x <= 330) this.gameOpening.getUserDraw().changeColor(y);

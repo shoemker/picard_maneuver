@@ -13,7 +13,6 @@ class UserDraw {
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
 
-		this.currentLine = [];
 		this.allLines = [];	
 
 		this.endLine(); 
@@ -21,13 +20,19 @@ class UserDraw {
 	}
 
 	getMouseDown() { return this.mouseDown; }
-	setMouseDown(val){ this.mouseDown = val; }
 
+	setMouseDown(val){ 
+		this.mouseDown = val; 
+		if (val) this.addLine();
+		else this.endLine();
+	}
+
+	addLine() { this.allLines.push([]); }
 	endLine() {
 		this.prevX = null;
 		this.prevY = null;
-		if (this.currentLine.length > 1) this.allLines.push(this.currentLine);
-		this.currentLine = [];
+		// if (this.currentLine.length > 1) this.allLines.push(this.currentLine);
+		// this.currentLine = [];
 	}
 	
 
@@ -266,12 +271,15 @@ class UserDraw {
 
 			if (this.prevX && this.prevY) this.ctx.stroke();
 
-			this.currentLine.push([e.offsetX, e.offsetY]);
+			this.allLines[this.allLines.length-1].push([e.offsetX, e.offsetY]);
 
 			this.prevX = e.offsetX;
 			this.prevY = e.offsetY;
 		}
-		else this.endLine();
+		else {
+			this.endLine();
+			this.addLine();
+		}
 	}
 
 
@@ -310,7 +318,7 @@ class UserDraw {
 			virtualCtx.restore();
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
-		debugger
+		
 		this.generateSSDImg(imgData);
 	}
 
