@@ -45,8 +45,6 @@ class UserDraw {
 	
 
 	draw() {
-
-
 		this.drawBlackRectangleWithBorder(this.boxX, this.boxY, this.boxWidth, this.boxHeight);
 		
 		this.drawAcceptButton();
@@ -65,9 +63,6 @@ class UserDraw {
 
 		this.drawColorIndicator();
 		this.drawLineWidthIndicator();
-
-		this.ctx.strokeStyle = this.strokeStyleFromUser;
-		this.ctx.lineWidth = this.lineWidthFromUser;
 
 		// draws the array holding the users drawing
 		for (let i = 0; i < this.allLines.length; i++) {
