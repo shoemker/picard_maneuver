@@ -25,7 +25,6 @@ class GameOpening {
 	setUserDraw(ud) { this.userDraw = ud; }
 	getUserDraw() { return this.userDraw; }
 
-
 	getShipChoice() { return this.shipChoice; }
 	setShipChoice(choice) { this.shipChoice = choice; }
 
@@ -74,6 +73,7 @@ class GameOpening {
 
 		if (this.shipChoice) this.drawShipChoice(ctx);
 		else if (this.scenario) this.drawScenario(ctx);
+		else if (this.getUserDraw()) this.userDraw.draw();
 	};
 
 

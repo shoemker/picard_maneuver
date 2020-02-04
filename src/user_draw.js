@@ -14,6 +14,8 @@ class UserDraw {
 		this.ctx.lineCap = 'round';
 
 		this.currentLine = [];
+		this.allLines = [];	
+
 		this.endLine(); 
 		this.mouseDown = false;
 	}
@@ -24,6 +26,8 @@ class UserDraw {
 	endLine() {
 		this.prevX = null;
 		this.prevY = null;
+		if (this.currentLine.length > 1) this.allLines.push(this.currentLine);
+		this.currentLine = [];
 	}
 	
 
@@ -49,6 +53,15 @@ class UserDraw {
 
 		this.ctx.strokeStyle = "white";
 		this.ctx.lineWidth = 20;
+
+		for (let i = 0; i < this.allLines.length; i++) {
+			for (let j = 0; j < this.allLines[i].length - 1; j++) {
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.allLines[i][j][0], this.allLines[i][j][1]);
+				this.ctx.lineTo(this.allLines[i][j+1][0], this.allLines[i][j+1][1]);
+				this.ctx.stroke();
+			}
+		}
 	};
 
 
@@ -78,6 +91,8 @@ class UserDraw {
 
 
 	drawAcceptButton(){
+		this.ctx.beginPath();
+
 		this.drawBlackRectangleWithBorder(500, 802, 210, 50, "lightblue", 3);
 		this.ctx.stroke();
 		this.ctx.fillStyle = "lightblue";
@@ -250,6 +265,9 @@ class UserDraw {
 			this.ctx.lineTo(e.offsetX, e.offsetY);
 
 			if (this.prevX && this.prevY) this.ctx.stroke();
+
+			this.currentLine.push([e.offsetX, e.offsetY]);
+
 			this.prevX = e.offsetX;
 			this.prevY = e.offsetY;
 		}
@@ -292,7 +310,7 @@ class UserDraw {
 			virtualCtx.restore();
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
-
+		debugger
 		this.generateSSDImg(imgData);
 	}
 
