@@ -88,7 +88,7 @@ class GameView {
 
 		if (this.gameOpening !== null) {
 			if (this.gameOpening.getShipChoice()) this.chooseShip(x,y);
-			else if(this.userDraw != null) this.drawingClick(x,y);
+			else if(this.gameOpening.getUserDraw() != null) this.drawingClick(x,y);
 			else this.chooseScenario(x,y,gainNode);	
 		}
 		// start again from scenario choice
@@ -106,19 +106,19 @@ class GameView {
 
 	drawingClick(x,y) {
 		if (x >= 517 && x <= 731 && y >= 818 && y <= 872) { // accept button
-			this.userDraw.acceptDrawing();
-			this.drawing = this.userDraw.getDrawing();
-			this.ssdPortrait = this.userDraw.getSSDportrait();
+			this.gameOpening.getUserDraw().acceptDrawing();
+			this.drawing = this.gameOpening.getUserDraw().getDrawing();
+			this.ssdPortrait = this.gameOpening.getUserDraw().getSSDportrait();
 			
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
 			this.enterprise = false;
 
 			this.pauseGameToggle();
-			this.userDraw = null;
+			this.gameOpening.setUserDraw(null);
 		}
-		else if (x >= 298 && x <= 330) this.userDraw.changeColor(y);
-		else if (x >= 910 && x <= 1000)	this.userDraw.changeLineWidth(y);
+		else if (x >= 298 && x <= 330) this.gameOpening.getUserDraw().changeColor(y);
+		else if (x >= 910 && x <= 1000)	this.gameOpening.getUserDraw().changeLineWidth(y);
 		
 	};
 
@@ -164,10 +164,10 @@ class GameView {
 			}
 			else if (x >= 760 && x <= 1133) {
 				this.gameOpening.setShipChoice(false);
-				this.userDraw = new UserDraw(this.ctx);
+				this.gameOpening.setUserDraw(new UserDraw(this.ctx));
 				this.gameOpening.stepAndDraw(this.ctx);
 				this.pause = true;
-				this.userDraw.draw();
+				this.gameOpening.getUserDraw().draw();
 			}
 		}
 	};

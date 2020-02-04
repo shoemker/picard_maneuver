@@ -7,7 +7,7 @@ class GameOpening {
 		this.canvas_height = Utils.getCanvasDim()[1];
 		this.shipChoice = true;
 		this.scenario = false;
-
+		this.userDraw = null;
 		this.max_depth = 32;
 
 		this.stars = new Array(512);
@@ -21,6 +21,10 @@ class GameOpening {
 		this.enterImg = Utils.loadImg('./images/uss-enterprise-png-choice.png');
 		
 	};
+
+	setUserDraw(ud) { this.userDraw = ud; }
+	getUserDraw() { return this.userDraw; }
+
 
 	getShipChoice() { return this.shipChoice; }
 	setShipChoice(choice) { this.shipChoice = choice; }

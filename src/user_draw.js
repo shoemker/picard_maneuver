@@ -13,14 +13,15 @@ class UserDraw {
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
 
-		this.setPrevToNull(); 
+		this.currentLine = [];
+		this.endLine(); 
 		this.mouseDown = false;
 	}
 
 	getMouseDown() { return this.mouseDown; }
 	setMouseDown(val){ this.mouseDown = val; }
 
-	setPrevToNull() {
+	endLine() {
 		this.prevX = null;
 		this.prevY = null;
 	}
@@ -252,7 +253,7 @@ class UserDraw {
 			this.prevX = e.offsetX;
 			this.prevY = e.offsetY;
 		}
-		else this.setPrevToNull();
+		else this.endLine();
 	}
 
 

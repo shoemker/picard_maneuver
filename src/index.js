@@ -26,15 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// this block is for the events for the user to draw a ship
 	canvasEl.addEventListener('mousedown', () => { 
-		if (gv.userDraw != null) gv.userDraw.setMouseDown(true); 
+		if (gv.gameOpening && gv.gameOpening.getUserDraw()) gv.gameOpening.getUserDraw().setMouseDown(true); 
 	});
 	canvasEl.addEventListener('mousemove', (e) => {
-		if (gv.userDraw != null && gv.userDraw.getMouseDown()) gv.userDraw.drawFromUser(e);
+		if (gv.gameOpening && gv.gameOpening.getUserDraw() && gv.gameOpening.getUserDraw().getMouseDown()) 
+				gv.gameOpening.getUserDraw().drawFromUser(e);
 	});
 	canvasEl.addEventListener('mouseup', () => {
-		if (gv.userDraw != null) {
-			gv.userDraw.setMouseDown(false);
-			gv.userDraw.setPrevToNull();
+		if (gv.gameOpening && gv.gameOpening.getUserDraw()) {
+			gv.gameOpening.getUserDraw().setMouseDown(false);
+			gv.gameOpening.getUserDraw().endLine();
 		}
 	});
 
