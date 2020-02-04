@@ -34,7 +34,8 @@ class UserDraw {
 
 	addLine() { 
 		this.allLines.push([]); 
-		this.colors.push(this.ctx.strokeStyle);
+		this.colors.push(this.strokeStyleFromUser);
+		this.widths.push(this.lineWidthFromUser);
 	}
 
 	endLine() {
@@ -70,7 +71,8 @@ class UserDraw {
 
 		// draws the array holding the users drawing
 		for (let i = 0; i < this.allLines.length; i++) {
-			// this.ctx.strokeStyle = this.colors[i];
+			this.ctx.strokeStyle = this.colors[i];
+			this.ctx.lineWidth = this.widths[i];
 			for (let j = 0; j < this.allLines[i].length - 1; j++) {
 				this.ctx.beginPath();
 				this.ctx.moveTo(this.allLines[i][j][0], this.allLines[i][j][1]);
@@ -200,21 +202,27 @@ class UserDraw {
 		this.ctx.beginPath();
 	
 		switch(this.strokeStyleFromUser) {
+			case "#ffffff":
 			case "white":
 				this.ctx.strokeRect(x - 4, y - 4, 38, 38);
 				break;
+			case "#ff0000":
 			case "red":
 				this.ctx.strokeRect(x - 4, y - 4 + 80, 38, 38);
 				break;
+			case "#0000ff":
 			case "blue":
 				this.ctx.strokeRect(x - 4, y - 4 + 160, 38, 38);
 				break;
+			case "#ffff00":
 			case "yellow":
 				this.ctx.strokeRect(x - 4, y - 4 + 240, 38, 38);
 				break;
+			case "#008000":
 			case "green":
 				this.ctx.strokeRect(x - 4, y - 4 + 320, 38, 38);
 				break;
+			case "#000000":
 			case "black":
 				this.ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
 				break;
@@ -308,6 +316,7 @@ class UserDraw {
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
 
+		// debugger
 		this.generateSSDImg(imgData);
 	}
 
