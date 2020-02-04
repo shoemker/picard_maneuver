@@ -13,7 +13,9 @@ class UserDraw {
 		this.ctx.lineJoin = 'round';
 		this.ctx.lineCap = 'round';
 
-		this.allLines = [];	
+		this.allLines = [];
+		this.colors = [];
+		this.widths = [];
 
 		this.endLine(); 
 		this.mouseDown = false;
@@ -27,12 +29,14 @@ class UserDraw {
 		else this.endLine();
 	}
 
-	addLine() { this.allLines.push([]); }
+	addLine() { 
+		this.allLines.push([]); 
+		this.colors.push(this.ctx.strokeStyle);
+	}
+
 	endLine() {
 		this.prevX = null;
 		this.prevY = null;
-		// if (this.currentLine.length > 1) this.allLines.push(this.currentLine);
-		// this.currentLine = [];
 	}
 	
 
@@ -64,6 +68,7 @@ class UserDraw {
 
 		// draws the array holding the users drawing
 		for (let i = 0; i < this.allLines.length; i++) {
+			// this.ctx.strokeStyle = this.colors[i];
 			for (let j = 0; j < this.allLines[i].length - 1; j++) {
 				this.ctx.beginPath();
 				this.ctx.moveTo(this.allLines[i][j][0], this.allLines[i][j][1]);
@@ -166,6 +171,9 @@ class UserDraw {
 
 	
 	drawColorChoices() {
+		const colorHolder = this.ctx.strokeStyle;
+		const widthHolder = this.ctx.lineWidth;
+
 		const x = this.boxX - 70;
 		const y = this.boxY + 33;
 
@@ -186,6 +194,9 @@ class UserDraw {
 
 		this.drawBlackRectangleWithBorder(x, y + 400, 30, 30);
 		this.ctx.strokeStyle = "white";
+
+		this.ctx.strokeStyle = colorHolder;
+		this.ctx.lineWidth = widthHolder;
 	}
 
 

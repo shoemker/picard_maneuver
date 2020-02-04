@@ -114,7 +114,6 @@ class GameView {
 			this.gameOpening.setScenario(true);
 			this.enterprise = false;
 
-			// this.pauseGameToggle();
 			this.gameOpening.setUserDraw(null);
 		}
 		else if (x >= 298 && x <= 330) this.gameOpening.getUserDraw().changeColor(y);
@@ -165,9 +164,6 @@ class GameView {
 			else if (x >= 760 && x <= 1133) {
 				this.gameOpening.setShipChoice(false);
 				this.gameOpening.setUserDraw(new UserDraw(this.ctx));
-				// this.gameOpening.stepAndDraw(this.ctx);
-				// this.pause = true;
-				// this.gameOpening.getUserDraw().draw();
 			}
 		}
 	};
