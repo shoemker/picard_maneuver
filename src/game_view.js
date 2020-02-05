@@ -117,7 +117,7 @@ class GameView {
 			this.gameOpening.setUserDraw(null);
 		}
 		else if (x >= 298 && x <= 330) this.gameOpening.getUserDraw().changeColor(y);
-		else if (x >= 910 && x <= 1000)	this.gameOpening.getUserDraw().changeLineWidth(y);
+		else if (x >= 896 && x <= 1013)	this.gameOpening.getUserDraw().changeLineWidth(y);
 		
 	};
 
