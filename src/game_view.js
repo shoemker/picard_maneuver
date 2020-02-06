@@ -94,7 +94,6 @@ class GameView {
 		// start again from scenario choice	
 		else if (this.game.win || this.game.lose) {
 			this.game = new Game(this.images);
-			gainNode.gain.value = .25;
 			this.gameOpening = new GameOpening();
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
@@ -175,14 +174,17 @@ class GameView {
 			if (x > 54 && x < 407) {
 				this.loadScenario1();
 				this.openingOff();
+				gainNode.gain.value = .25;
 			}
 			else if (x > 440 && x < 795) {
 				this.loadScenario2();
 				this.openingOff();
+				gainNode.gain.value = .25;
 			}
 			else if (x > 830 && x < 1184) {
 				this.loadScenario3();
 				this.openingOff();
+				gainNode.gain.value = .25;
 			}
 		}
 		// continuous demo mode
