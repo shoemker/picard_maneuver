@@ -24,24 +24,27 @@ class UserDraw {
 		this.mouseDown = false;
 	}
 
-	getMouseDown() { return this.mouseDown; }
+	getMouseDown() { return this.mouseDown; };
 
+	
 	setMouseDown(val) {
 		this.mouseDown = val;
 		if (val) this.addLine();
 		else this.endLine();
-	}
+	};
+
 
 	addLine() {
 		this.allLines.push([]);
 		this.colors.push(this.strokeStyleFromUser);
 		this.widths.push(this.lineWidthFromUser);
-	}
+	};
+
 
 	endLine() {
 		this.prevX = null;
 		this.prevY = null;
-	}
+	};
 
 
 	draw() {

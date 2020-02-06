@@ -91,9 +91,10 @@ class GameView {
 			else if(this.gameOpening.getUserDraw() != null) this.drawingClick(x,y);
 			else this.chooseScenario(x,y,gainNode);	
 		}
-		// start again from scenario choice
+		// start again from scenario choice	
 		else if (this.game.win || this.game.lose) {
 			this.game = new Game(this.images);
+			gainNode.gain.value = .25;
 			this.gameOpening = new GameOpening();
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
