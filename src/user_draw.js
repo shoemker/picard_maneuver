@@ -112,8 +112,8 @@ class UserDraw {
 		this.ctx.font = "20px FINALOLD";
 		this.ctx.fillStyle = "white";
 
-		this.ctx.fillText("Draw", x+27, y+65);
-		this.ctx.fillText("Circle", x + 25, y + 88);
+		this.ctx.fillText("Draw", x+29, y+65);
+		this.ctx.fillText("Circle", x + 27, y + 88);
 
 		this.drawBlackRectangleWithBorder(x,y +170, 90, 125, this.ctx.strokeStyle, this.lineWidthFromUser);
 
@@ -343,7 +343,6 @@ class UserDraw {
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
 
-		// debugger
 		this.generateSSDImg(imgData);
 	}
 
