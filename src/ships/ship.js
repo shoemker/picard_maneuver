@@ -136,7 +136,8 @@ class Ship extends SpaceObject{
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
-		if (this.phaserCounter === phaserDrawMax) this.targetShieldHP = this.ptarget.receivePhaserHit(this);
+		if (this.phaserCounter === phaserDrawMax) 
+			this.targetShieldHP = this.ptarget.receivePhaserHit(this,xProgress,yProgress);
 
 		if (this.phaserCounter > phaserDrawMax) {
 			if (this.targetShieldHP > 0) {
@@ -198,8 +199,6 @@ class Ship extends SpaceObject{
 			[1.25, 1.75]
 		];
 
-		if (!startAndEnd[shieldNum]) debugger
-
 		ctx.beginPath();
 		ctx.arc(
 			this.center()[0],
@@ -248,7 +247,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	receivePhaserHit(attacker) {
+	receivePhaserHit(attacker, xHit, yHit) {
 		return this.takeDamage(attacker, attacker.phaserDamage);
 	};
 

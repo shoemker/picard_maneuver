@@ -193,7 +193,7 @@ class GameView {
 			this.loadScenario4();
 			this.openingOff();
 		}
-	}
+	};
 
 	
 	loadScenario1(){

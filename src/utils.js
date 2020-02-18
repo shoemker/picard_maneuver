@@ -11,17 +11,25 @@ const Utils = {
 		const xDelta = otherShip.center()[0] - ship.center()[0];
 		const yDelta = otherShip.center()[1] - ship.center()[1];
 
-		// find the angle between the 2 objects
-		const arcTangent = Math.atan(yDelta / xDelta);
-		if(xDelta < 0) angle = arcTangent + Math.PI;
-		else if(xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
-		else angle = arcTangent;
-
+		let angle = this.findAngle(xDelta,yDelta);
+		
 		// take the rotation of the hit ship into account
 		angle -= ship.getRotation();
 		if (angle < 0) angle += Math.PI * 2;
 		return angle;
 	},
+
+	
+	// find the angle between the 2 objects
+	findAngle(xDelta, yDelta) {
+		const arcTangent = Math.atan(yDelta / xDelta);
+		if (xDelta < 0) angle = arcTangent + Math.PI;
+		else if (xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
+		else angle = arcTangent;
+
+		return angle;
+	},
+
 
 	loadImg(file) {
 		let img = new Image();
