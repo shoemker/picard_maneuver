@@ -23,6 +23,8 @@ const Utils = {
 	// find the angle between the 2 objects
 	findAngle(xDelta, yDelta) {
 		const arcTangent = Math.atan(yDelta / xDelta);
+		let angle;
+		
 		if (xDelta < 0) angle = arcTangent + Math.PI;
 		else if (xDelta > 0 && yDelta < 0) angle = arcTangent + Math.PI * 2;
 		else angle = arcTangent;
