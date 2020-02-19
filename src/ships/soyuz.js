@@ -23,7 +23,7 @@ class Soyuz extends Ship {
 		this.phaserColor = "red";
 		this.beamPattern = [3, 5, 3, 20];
 
-		this.phaserDamage = 5;
+		this.phaserDamage = 10;
 		this.hullIntegrityMax = 100;
 		this.hullIntegrity = this.hullIntegrityMax;
 
@@ -56,7 +56,7 @@ class Soyuz extends Ship {
 
 		// fires a 2nd phaser line from other side
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, 2*Math.PI - this.phaserOffsetAngle);
+			this.drawPhaser(ctx, 2*Math.PI - this.phaserOffsetAngle, 0);
 
 		super.draw(ctx, target);
 	};

@@ -24,7 +24,7 @@ class Bird_of_Prey extends Ship {
 		this.phaserOffsetDistance = 20;
 		this.phaserOffsetAngle = 1.6*Math.PI;
 
-		this.phaserDamage = 5;
+		this.phaserDamage = 10;
 		this.hullIntegrityMax = 100;
 		this.hullIntegrity = this.hullIntegrityMax;
 
@@ -57,7 +57,7 @@ class Bird_of_Prey extends Ship {
 
 		// fires a 2nd disruptor line from other wing
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle);
+			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0);
 ;
 
 		super.draw(ctx, target);

@@ -38,6 +38,7 @@ class Ship extends SpaceObject{
 		this.increment = Math.PI / 36;
 
 		this.ssd;
+		this.phaserDamageTokens = [];
 
 		if (options.phaserRecharge) this.phaserRecharge = options.phaserRecharge;
 		else this.phaserRecharge = 0;
@@ -80,7 +81,7 @@ class Ship extends SpaceObject{
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, this.phaserOffsetAngle);
+			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -93,12 +94,14 @@ class Ship extends SpaceObject{
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 
+		if (this.phaserDamageTokens.length > 0) this.drawPhaserDamageTokens(ctx);
+
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx, angle) {
+	drawPhaser(ctx, angle, damage) {
 
 		const phaserDrawMax = 16;
 
@@ -136,10 +139,12 @@ class Ship extends SpaceObject{
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
-		if (this.phaserCounter === phaserDrawMax) 
-			this.targetShieldHP = this.ptarget.receivePhaserHit(this,xProgress,yProgress);
+		if (this.phaserCounter === phaserDrawMax && damage > 0) {
+			this.targetShieldHP = this.ptarget.receivePhaserHit(this, damage,
+					[xProgress-this.ptarget.center()[0],yProgress-this.ptarget.center()[1]]);
+		}
 
-		if (this.phaserCounter > phaserDrawMax) {
+		if (this.phaserCounter > phaserDrawMax && damage > 0) {
 			if (this.targetShieldHP > 0) {
 				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
 			}
@@ -212,12 +217,26 @@ class Ship extends SpaceObject{
 
 		ctx.strokeStyle = "#ADD8E6";
 		ctx.stroke();
-	
 	};
 
 
 	drawShipExplosion(ctx) {
 		return this.explosion.draw(ctx, this.center());
+	};
+
+	
+	drawPhaserDamageTokens(ctx) {
+		this.phaserDamageTokens.forEach((token, i) => {
+			
+			ctx.fillStyle = token[2];
+			ctx.font = "20px FINALOLD"; 
+			ctx.fillText("-" + token[1], 
+				this.center()[0] + token[0][0] * 1.2, 
+				this.center()[1] +token[0][1] * 1.2);
+
+			token[3]--;
+			if (token[3] === 0) this.phaserDamageTokens.splice(i, 1);
+		})
 	};
 
 
@@ -247,8 +266,16 @@ class Ship extends SpaceObject{
 	};
 
 
-	receivePhaserHit(attacker, xHit, yHit) {
-		return this.takeDamage(attacker, attacker.phaserDamage);
+	receivePhaserHit(attacker, damage, hitCoords) {
+		let colorOfToken;
+		const hp = this.takeDamage(attacker, damage);
+
+		if (hp > 0) colorOfToken = "#ADD8E6";
+		else colorOfToken = "red";
+
+		this.phaserDamageTokens.push([hitCoords, damage, colorOfToken, 30]);
+
+		return hp;
 	};
 
 
