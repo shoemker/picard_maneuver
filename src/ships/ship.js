@@ -255,7 +255,7 @@ class Ship extends SpaceObject{
 			
 			ctx.font = 20*factor + "px FINALOLD"; 
 			ctx.fillText("-" + token.damage, 
-				this.center()[0] + token.hitCoords[0] * 1.1, 
+				(this.center()[0] + token.hitCoords[0] * 1.1) -10, 
 				this.center()[1] + token.hitCoords[1] * 1.1);
 
 			token.time++;
