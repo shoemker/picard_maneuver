@@ -245,7 +245,7 @@ class Ship extends SpaceObject{
 
 	
 	drawDamageTokens(ctx) {
-		const enlargeStop = 10;
+		const enlargeStop = 15;
 		let factor = 1;
 
 		this.damageTokens.forEach((token, i) => {
@@ -259,7 +259,7 @@ class Ship extends SpaceObject{
 				this.center()[1] + token.hitCoords[1] * 1.1);
 
 			token.time++;
-			if (token.time === 30) this.damageTokens.splice(i, 1);
+			if (token.time === 35) this.damageTokens.splice(i, 1);
 		})
 	};
 
