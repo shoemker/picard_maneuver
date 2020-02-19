@@ -33,12 +33,12 @@ class Ship extends SpaceObject{
 		this.phaserDamage = 18;
 		this.torpedoDamage = 20;
 		this.targetShieldHP = 1;
-		
+
 		this.direction = this.calcDirection(this.rotationOffset);
 		this.increment = Math.PI / 36;
 
 		this.ssd;
-		this.phaserDamageTokens = [];
+		this.damageTokens = [];
 
 		if (options.phaserRecharge) this.phaserRecharge = options.phaserRecharge;
 		else this.phaserRecharge = 0;
@@ -62,6 +62,7 @@ class Ship extends SpaceObject{
 	getHull() { return this.hullIntegrity; }
 	getTarget() { return this.target; }
 	getTurnRadius() { return this.turnRadius; }
+	getTorpedoDamage() { return this.torpedoDamage; }
 	isGone() { return this.shipExplosionCounter >= 33; }
 	isEnemy() { return this.enemy; }
 
@@ -94,7 +95,7 @@ class Ship extends SpaceObject{
 			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
 		}
 
-		if (this.phaserDamageTokens.length > 0) this.drawPhaserDamageTokens(ctx);
+		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	}
@@ -175,6 +176,7 @@ class Ship extends SpaceObject{
 	drawTorpExplosion(ctx) {	
 		let x;
 		let y;
+		let colorOfToken;
 
 		// if it hits a shield, it explodes there
 		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
@@ -185,11 +187,29 @@ class Ship extends SpaceObject{
 			x = this.center()[0] - 5 + xDelta * percentage;
 			y = this.center()[1] - 8 + yDelta * percentage;
 
+			colorOfToken = "#ADD8E6";
 			this.drawShieldOnHit(ctx, this.shieldHit);
 		}
 		else {
 			x =	this.center()[0];
 			y =	this.center()[1] - 5;
+			colorOfToken = "red";
+		}
+		
+	
+		if (this.torpExplosionCounter === 1) {
+
+			let hitCoords = [x - this.center()[0], y - this.center()[1]] ;
+			if (colorOfToken === "red") {
+				hitCoords[0] = hitCoords[0] *4;
+				hitCoords[1] = hitCoords[1] * 4;
+			};
+			let damage = this.attacker.getTorpedoDamage();
+			let time = 30;
+			let last = this.damageTokens.length - 1;
+			if (last > -1 && this.damageTokens[last].key === this.torpHitKey) 
+				this.damageTokens[last].damage += damage;
+			else this.damageTokens.push({ hitCoords, damage, colorOfToken, time, key:this.torpHitKey });
 		}
 
 		ctx.drawImage(this.images.explosionImg, 606, 295, 100, 100, x, y, 10, 10);
@@ -225,17 +245,16 @@ class Ship extends SpaceObject{
 	};
 
 	
-	drawPhaserDamageTokens(ctx) {
-		this.phaserDamageTokens.forEach((token, i) => {
-			
-			ctx.fillStyle = token[2];
+	drawDamageTokens(ctx) {
+		this.damageTokens.forEach((token, i) => {
+			ctx.fillStyle = token.colorOfToken;
 			ctx.font = "20px FINALOLD"; 
-			ctx.fillText("-" + token[1], 
-				this.center()[0] + token[0][0] * 1.2, 
-				this.center()[1] +token[0][1] * 1.2);
+			ctx.fillText("-" + token.damage, 
+				this.center()[0] + token.hitCoords[0] * 1.1, 
+				this.center()[1] + token.hitCoords[1] * 1.1);
 
-			token[3]--;
-			if (token[3] === 0) this.phaserDamageTokens.splice(i, 1);
+			token.time--;
+			if (token.time === 0) this.damageTokens.splice(i, 1);
 		})
 	};
 
@@ -268,20 +287,25 @@ class Ship extends SpaceObject{
 
 	receivePhaserHit(attacker, damage, hitCoords) {
 		let colorOfToken;
+		const time = 30
 		const hp = this.takeDamage(attacker, damage);
 
 		if (hp > 0) colorOfToken = "#ADD8E6";
 		else colorOfToken = "red";
 
-		this.phaserDamageTokens.push([hitCoords, damage, colorOfToken, 30]);
+		this.damageTokens.push({hitCoords, damage, colorOfToken, time});
 
 		return hp;
 	};
 
 
 	receiveTorpHit(torpedo) {
-		this.takeDamage(torpedo.getLauncher(), this.torpedoDamage);
+		let damage = torpedo.getLauncher().getTorpedoDamage();
+
+		this.takeDamage(torpedo.getLauncher(),damage);
+		
 		this.torpExplosionCounter = 1;
+		this.torpHitKey = torpedo.getKey();
 	};
 
 

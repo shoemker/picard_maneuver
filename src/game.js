@@ -25,6 +25,8 @@ class Game {
 
 		this.keyMap = {};
 
+		this.torpedoKey = 0;
+
 		this.createStarField();
 
 		this.turnCounter = 0;
@@ -240,14 +242,16 @@ class Game {
 	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
 
-			this.torpedoes.push(new Torpedo(ship, this.images,
+			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
 				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 
-			this.torpedoes.push(new Torpedo(ship, this.images, 
+			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
 				ship.getDirection() ));
 
-			this.torpedoes.push(new Torpedo(ship, this.images,
+			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
 				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
+
+			this.torpedoKey++;
 		}
 	};
 
