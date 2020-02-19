@@ -205,11 +205,10 @@ class Ship extends SpaceObject{
 				hitCoords[1] = hitCoords[1] * 4;
 			};
 			let damage = this.attacker.getTorpedoDamage();
-			let time = 30;
 			let last = this.damageTokens.length - 1;
 			if (last > -1 && this.damageTokens[last].key === this.torpHitKey) 
 				this.damageTokens[last].damage += damage;
-			else this.damageTokens.push({ hitCoords, damage, colorOfToken, time, key:this.torpHitKey });
+			else this.damageTokens.push({ hitCoords, damage, colorOfToken, time:0, key:this.torpHitKey });
 		}
 
 		ctx.drawImage(this.images.explosionImg, 606, 295, 100, 100, x, y, 10, 10);
@@ -246,15 +245,21 @@ class Ship extends SpaceObject{
 
 	
 	drawDamageTokens(ctx) {
+		const enlargeStop = 10;
+		let factor = 1;
+
 		this.damageTokens.forEach((token, i) => {
 			ctx.fillStyle = token.colorOfToken;
-			ctx.font = "20px FINALOLD"; 
+
+			if (token.time < enlargeStop) factor = token.time/enlargeStop;
+			
+			ctx.font = 20*factor + "px FINALOLD"; 
 			ctx.fillText("-" + token.damage, 
 				this.center()[0] + token.hitCoords[0] * 1.1, 
 				this.center()[1] + token.hitCoords[1] * 1.1);
 
-			token.time--;
-			if (token.time === 0) this.damageTokens.splice(i, 1);
+			token.time++;
+			if (token.time === 30) this.damageTokens.splice(i, 1);
 		})
 	};
 
@@ -287,13 +292,12 @@ class Ship extends SpaceObject{
 
 	receivePhaserHit(attacker, damage, hitCoords) {
 		let colorOfToken;
-		const time = 30
 		const hp = this.takeDamage(attacker, damage);
 
 		if (hp > 0) colorOfToken = "#ADD8E6";
 		else colorOfToken = "red";
 
-		this.damageTokens.push({hitCoords, damage, colorOfToken, time});
+		this.damageTokens.push({hitCoords, damage, colorOfToken, time:0});
 
 		return hp;
 	};
