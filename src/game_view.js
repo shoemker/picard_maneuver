@@ -228,7 +228,7 @@ class GameView {
 		this.addSoyuz([600, 450], [1064, 618, .6, false], true, Math.PI,50,50);
 		this.addBop([0, 300], [104, 475, .6, false], true, 0, 80, 100);
 		this.addBop([0, 100], [104, 618, .6, false], true, 0);
-		this.addD7([0, 200], [100, 765, .7, true], true, .1*Math.PI);
+		this.addD7([0, 200], [100, 765, .7, true], true, .1*Math.PI,80);
 
 		this.game.main.setTarget(this.game.randomTarget(this.game.main));
 	};

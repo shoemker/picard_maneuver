@@ -57,25 +57,28 @@ const Utils = {
 	}, 
 
 
-	drawLine(ctx, startingPoint, endingPoint){
-		ctx.moveTo(endingPoint.x, endingPoint.y);
-		ctx.lineTo(startingPoint.x, startingPoint.y);
+	drawLine(ctx, from, to){
+		ctx.moveTo(to.x, to.y);
+		ctx.lineTo(from.x, from.y);
 	},
 
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
 	drawWavyLine(ctx, from, to, totalDistance) {
-		const frequency = 8;
-		const amplitude = 6;
+		// ctx.setLineDash([2,10]);
 		let cx = 0;
 		let cy = 0;
 		let waveOffsetLength = 0;
 
 		const ang = Math.atan2(to.y - from.y, to.x - from.x);
 		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y));
+		
+		const frequency = totalDistance / 8;
+		const amplitude = 4;
+
 		const f = Math.PI * frequency *distance/totalDistance;
 
-		let step = 4;
+		let step = 1;	// lower step makes curve smoother
 		for (let i = 0; i <= distance; i += step) {
 			waveOffsetLength = Math.sin((i / distance) * f) * amplitude;
 			cx = from.x + Math.cos(ang) * i + Math.cos(ang - Math.PI / 2) * waveOffsetLength;
