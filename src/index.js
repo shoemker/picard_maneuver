@@ -68,6 +68,3 @@ function getSound(id, audioCtx, gainNode) {
 	track.connect(gainNode).connect(audioCtx.destination);
 	return sound;
 };
-
-
-

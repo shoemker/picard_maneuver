@@ -131,7 +131,7 @@ class GameView {
 
 	openingOff() {
 		this.gameOpening = null;
-		// this.audioCtx.resume().then(() => { return true; });
+		this.audioCtx.resume().then(() => { return true; });
 		this.sounds.theme.play();
 	};
 	

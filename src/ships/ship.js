@@ -69,7 +69,7 @@ class Ship extends SpaceObject{
 	setTarget(target) { this.target = target; }
 	setLabels(val) { this.ssd.setLabels(val); }
 	
-	draw(ctx, target) {
+	draw(ctx, callback, target) {
 		//draw ship systems display
 		this.ssd.draw(ctx,
 			this.phaserRecharge / this.phaserRechargeMax,
@@ -82,7 +82,7 @@ class Ship extends SpaceObject{
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage);
+			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage, callback);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -102,7 +102,7 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx, angle, damage) {
+	drawPhaser(ctx, angle, damage, callback) {
 
 		const phaserDrawMax = 16;
 
@@ -129,14 +129,12 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
-		ctx.beginPath();
-		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
-		ctx.moveTo(xProgress, yProgress);
-		ctx.lineTo(xStartingPoint, yStartingPoint);
+
+
 		ctx.strokeStyle = this.phaserColor;
-		ctx.lineWidth = 3;
+		ctx.beginPath();
+		callback(ctx, { x: xProgress, y: yProgress }, { x: xStartingPoint, y: yStartingPoint }, this.beamPattern);
 		ctx.stroke();
-		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
@@ -171,7 +169,19 @@ class Ship extends SpaceObject{
 			this.targetShieldHP = 1;
 		}
 	};
-	
+
+
+
+	// drawPhaser(ctx, angle, damage) {
+
+	// 	let xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * 50;
+	// 	let yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * 50;
+
+	// 	const angleToTarget = Utils.angleToOtherShip(this, this.ptarget);
+	// 	ctx.beginPath();
+	// 	ctx.ellipse(xStartingPoint, yStartingPoint, 10, 20, angleToTarget, 0, 2 * Math.PI);
+	// 	ctx.stroke();
+	// }
 
 	drawTorpExplosion(ctx) {	
 		let x;
@@ -252,6 +262,7 @@ class Ship extends SpaceObject{
 			ctx.fillStyle = token.colorOfToken;
 
 			if (token.time < enlargeStop) factor = token.time/enlargeStop;
+			else factor = 1;
 			
 			ctx.font = 20*factor + "px FINALOLD"; 
 			ctx.fillText("-" + token.damage, 

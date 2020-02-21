@@ -54,6 +54,39 @@ const Utils = {
 		ctx.lineTo(x + size, y);
 		
 		ctx.stroke();
+	}, 
+
+
+	drawLine(ctx, startingPoint, endingPoint, beamPattern){
+		ctx.setLineDash(beamPattern);  // bop beam is a dotted line
+		ctx.moveTo(endingPoint.x, endingPoint.y);
+		ctx.lineTo(startingPoint.x, startingPoint.y);
+		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
+	},
+
+
+	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
+	drawwWavyLine(ctx, from, to) {
+		const frequency = 8;
+		const amplitude = 12;
+		const step = 4;
+		const negative = false;
+		let cx = 0;
+		let cy = 0;
+		let i;
+		let waveOffsetLength = 0;
+
+		const ang = Math.atan2(to.y - from.y, to.x - from.x);
+		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y));
+		const a = amplitude * (!negative ? 1 : -1);
+		const f = Math.PI * frequency;
+
+		for (i = 0; i <= distance; i += step) {
+			waveOffsetLength = Math.sin((i / distance) * f) * a;
+			cx = from.x + Math.cos(ang) * i + Math.cos(ang - Math.PI / 2) * waveOffsetLength;
+			cy = from.y + Math.sin(ang) * i + Math.sin(ang - Math.PI / 2) * waveOffsetLength;
+			i > 0 ? ctx.lineTo(cx, cy) : ctx.moveTo(cx, cy);
+		}
 	},
 
 	getCanvasDim() { return [1200, 900]; }

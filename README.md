@@ -11,11 +11,11 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <br>
 <h2>Features</h2>
 <ol>
-	<li>Ability to doodle ship with cursor and play as that ship if desired.</li>
+	<li>Option to draw your own ship with cursor and play as that ship if desired.</li>
 	<li>Control over main ship (speed, direction, weapons).</li>
 	<li>Ship AI for enemies and allies</li>
 	<li>Optional autopilot of the main ship if you just want to watch.</li>
-	<li>Option to fight either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
+	<li>Option to fight against either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
 	<li>Visuals for beam weapons, torpedos, and cannons.</li>
 	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>
