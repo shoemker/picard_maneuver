@@ -114,10 +114,11 @@ class Ship extends SpaceObject{
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;
 
 		// beam should stop if it hits a shield
+		let distance = Utils.distance(this, this.ptarget);
 		if (this.targetShieldHP > 0) {
-			const distance = Utils.distance(this, this.ptarget);
 			if (distance > 35 ) {
-				const distanceRatio = (distance - 35) / distance
+				const distanceRatio = (distance - 35) / distance;
+				distance -= 35;
 				xDelta = xDelta * distanceRatio;
 				yDelta = yDelta * distanceRatio;
 			}
@@ -134,7 +135,11 @@ class Ship extends SpaceObject{
 		ctx.lineWidth = 3;
 		
 		// this callback draws the beam which can be straight or wavy depending on the callback
-		callback(ctx, { x: xProgress, y: yProgress }, { x: xStartingPoint, y: yStartingPoint }, this.beamPattern);
+		callback(ctx, 
+			{ x: xStartingPoint, y: yStartingPoint }, 
+			{ x: xProgress, y: yProgress }, 
+			this.beamPattern, distance);
+
 		ctx.stroke();
 		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
 
