@@ -1,5 +1,6 @@
 const Ship = require("./ship");
 const SSD = require("../ssd");
+const Utils = require("../utils");
 
 class DrawnShip extends Ship {
 	constructor(options, drawing, ssdImg) {

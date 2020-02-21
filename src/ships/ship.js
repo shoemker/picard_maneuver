@@ -133,12 +133,13 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = this.phaserColor;
 		ctx.beginPath();
 		ctx.lineWidth = 3;
+		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		
 		// this callback draws the beam which can be straight or wavy depending on the callback
 		callback(ctx, 
 			{ x: xStartingPoint, y: yStartingPoint }, 
 			{ x: xProgress, y: yProgress }, 
-			this.beamPattern, distance);
+			distance);
 
 		ctx.stroke();
 		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
