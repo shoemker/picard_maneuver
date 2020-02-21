@@ -66,11 +66,11 @@ const Utils = {
 
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
-	drawwWavyLine(ctx, from, to) {
+	drawWavyLine(ctx, from, to) {
 		const frequency = 8;
 		const amplitude = 6;
 		const step = 4;
-		const negative = false;
+		// const negative = true;
 		let cx = 0;
 		let cy = 0;
 		let i;
@@ -78,11 +78,10 @@ const Utils = {
 
 		const ang = Math.atan2(to.y - from.y, to.x - from.x);
 		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y));
-		const a = amplitude * (!negative ? 1 : -1);
 		const f = Math.PI * frequency;
 
 		for (i = 0; i <= distance; i += step) {
-			waveOffsetLength = Math.sin((i / distance) * f) * a;
+			waveOffsetLength = Math.sin((i / distance) * f) * amplitude;
 			cx = from.x + Math.cos(ang) * i + Math.cos(ang - Math.PI / 2) * waveOffsetLength;
 			cy = from.y + Math.sin(ang) * i + Math.sin(ang - Math.PI / 2) * waveOffsetLength;
 			i > 0 ? ctx.lineTo(cx, cy) : ctx.moveTo(cx, cy);
