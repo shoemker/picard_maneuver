@@ -58,17 +58,17 @@ const Utils = {
 
 
 	drawLine(ctx, startingPoint, endingPoint, beamPattern){
+		ctx.beginPath();
 		ctx.setLineDash(beamPattern);  // bop beam is a dotted line
 		ctx.moveTo(endingPoint.x, endingPoint.y);
 		ctx.lineTo(startingPoint.x, startingPoint.y);
-		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
 	},
 
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
 	drawwWavyLine(ctx, from, to) {
 		const frequency = 8;
-		const amplitude = 12;
+		const amplitude = 6;
 		const step = 4;
 		const negative = false;
 		let cx = 0;

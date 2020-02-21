@@ -1,5 +1,6 @@
 const Ship = require("./ship");
 const SSD = require("../ssd");
+const Utils = require("../utils");
 
 class DrawnShip extends Ship {
 	constructor(options, drawing, ssdImg) {
@@ -45,7 +46,7 @@ class DrawnShip extends Ship {
 
 		ctx.restore();
 
-		super.draw(ctx);
+		super.draw(ctx, Utils.drawLine);
 	};
 }
 

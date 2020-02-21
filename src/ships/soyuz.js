@@ -40,7 +40,7 @@ class Soyuz extends Ship {
 	};
 
 
-	draw(ctx, target) {
+	draw(ctx) {
 		ctx.save();
 
 		this.rotateCanvas(ctx);
@@ -56,9 +56,9 @@ class Soyuz extends Ship {
 
 		// fires a 2nd phaser line from other side
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, 2*Math.PI - this.phaserOffsetAngle, 0);
+			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, Utils.drawLine);
 
-		super.draw(ctx, target);
+		super.draw(ctx, Utils.drawLine);
 	};
 
 	// soyuz can only fire beams if target is in front

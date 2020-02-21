@@ -129,12 +129,15 @@ class Ship extends SpaceObject{
 		const xProgress = increasingRatio * xDelta + xStartingPoint;
 		const yProgress = increasingRatio * yDelta + yStartingPoint;
 
-
-
 		ctx.strokeStyle = this.phaserColor;
 		ctx.beginPath();
+		ctx.lineWidth = 3;
+		
+		// this callback draws the beam which can be straight or wavy depending on the callback
 		callback(ctx, { x: xProgress, y: yProgress }, { x: xStartingPoint, y: yStartingPoint }, this.beamPattern);
 		ctx.stroke();
+		ctx.setLineDash([]);	// in case line was dotted, this sets it back to solid
+
 
 		if (angle === this.phaserOffsetAngle) this.phaserCounter++;
 
@@ -169,7 +172,6 @@ class Ship extends SpaceObject{
 			this.targetShieldHP = 1;
 		}
 	};
-
 
 
 	// drawPhaser(ctx, angle, damage) {
