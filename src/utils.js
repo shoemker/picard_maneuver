@@ -58,7 +58,6 @@ const Utils = {
 
 
 	drawLine(ctx, startingPoint, endingPoint, beamPattern){
-		ctx.beginPath();
 		ctx.setLineDash(beamPattern);  // bop beam is a dotted line
 		ctx.moveTo(endingPoint.x, endingPoint.y);
 		ctx.lineTo(startingPoint.x, startingPoint.y);

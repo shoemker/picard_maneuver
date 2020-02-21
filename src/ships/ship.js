@@ -115,6 +115,7 @@ class Ship extends SpaceObject{
 
 		// beam should stop if it hits a shield
 		if (this.targetShieldHP > 0) {
+			const distance = Utils.distance(this, this.ptarget);
 			if (distance > 35 ) {
 				const distanceRatio = (distance - 35) / distance
 				xDelta = xDelta * distanceRatio;

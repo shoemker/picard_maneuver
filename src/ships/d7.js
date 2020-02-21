@@ -46,7 +46,7 @@ class D7 extends Ship {
 
 		ctx.restore();
    
-		super.draw(ctx, target);
+		super.draw(ctx, Utils.drawWavyLine, target);
 	};
 
 	// when beam is drawn, it could be drawn from either side depending on where target it
