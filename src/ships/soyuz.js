@@ -1,12 +1,11 @@
-const Ship = require("./ship");
+const Frigate = require("./frigate");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class Soyuz extends Ship {
+class Soyuz extends Frigate {
 	constructor(options) {
 		super(options);
 
-		this.turnRadius = 3;
 		this.enemy = false;
 
 		this.width = 35;
@@ -21,7 +20,6 @@ class Soyuz extends Ship {
 		this.phaserOffsetDistance = 13;
 		this.phaserOffsetAngle = 1.5 * Math.PI;
 		this.phaserColor = "red";
-		this.beamPattern = [3, 5, 3, 20];
 
 		this.phaserDamage = 10;
 		this.hullIntegrityMax = 100;
@@ -60,12 +58,6 @@ class Soyuz extends Ship {
 
 		super.draw(ctx, Utils.drawLine, target);
 	};
-
-	// soyuz can only fire beams if target is in front
-	firePhasers() {
-		const angle = Utils.angleToOtherShip(this, this.target)
-		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
-	}
 }
 
 module.exports = Soyuz;

@@ -1,12 +1,11 @@
-const Ship = require("./ship");
+const Cruiser = require("./cruiser");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class Enterprise extends Ship {
+class Enterprise extends Cruiser {
 	constructor(options) {
 		super(options);
  
-		this.turnRadius = 4;
 		this.enemy = false;
 
 		this.beamSound = options.sounds.phasSound;
@@ -18,7 +17,6 @@ class Enterprise extends Ship {
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
 		this.phaserColor = "red";
-		this.beamPattern = [];
 
 		// this.hullIntegrityMax = 1000;
 		// this.hullIntegrity = this.hullIntegrityMax;
@@ -55,4 +53,4 @@ class Enterprise extends Ship {
 }
 
 
-module.exports = Enterprise
+module.exports = Enterprise;

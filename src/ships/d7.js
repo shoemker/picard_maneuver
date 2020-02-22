@@ -1,12 +1,11 @@
-const Ship = require("./ship");
+const Cruiser = require("./cruiser");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class D7 extends Ship {
+class D7 extends Cruiser {
 	constructor(options) {
 		super(options);
 
-		this.turnRadius = 4;
 		this.enemy = true;
 
 		this.beamSound = options.sounds.disruptSound;
@@ -16,7 +15,6 @@ class D7 extends Ship {
 		this.torpedoReloadMax = 190;
 
 		this.phaserColor = "green";
-		this.beamPattern = [];
 		this.phaserOffsetDistance = 16;
 
 		// ssd is the ship systems display in the corner of the screen
@@ -60,4 +58,4 @@ class D7 extends Ship {
 }
 
 
-module.exports = D7
+module.exports = D7;

@@ -180,17 +180,6 @@ class Ship extends SpaceObject{
 	};
 
 
-	// drawPhaser(ctx, angle, damage) {
-
-	// 	let xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset) * 50;
-	// 	let yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset) * 50;
-
-	// 	const angleToTarget = Utils.angleToOtherShip(this, this.ptarget);
-	// 	ctx.beginPath();
-	// 	ctx.ellipse(xStartingPoint, yStartingPoint, 10, 20, angleToTarget, 0, 2 * Math.PI);
-	// 	ctx.stroke();
-	// }
-
 	drawTorpExplosion(ctx) {	
 		let x;
 		let y;

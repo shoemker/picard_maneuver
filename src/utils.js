@@ -65,13 +65,13 @@ const Utils = {
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
 	drawWavyLine(ctx, from, to, totalDistance) {
-		// ctx.setLineDash([2,10]);
 		let cx = 0;
 		let cy = 0;
 		let waveOffsetLength = 0;
 
 		const ang = Math.atan2(to.y - from.y, to.x - from.x);
-		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y));
+		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + 
+			(from.y - to.y) * (from.y - to.y));
 		
 		const frequency = totalDistance / 8;
 		const amplitude = 4;

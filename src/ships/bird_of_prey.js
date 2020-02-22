@@ -1,12 +1,11 @@
-const Ship = require("./ship");
+const Frigate = require("./frigate");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class Bird_of_Prey extends Ship {
+class Bird_of_Prey extends Frigate {
 	constructor(options) {
 		super(options);
 
-		this.turnRadius = 3;
 		this.enemy = true;
 
 		this.width = 30;
@@ -19,7 +18,6 @@ class Bird_of_Prey extends Ship {
 		this.torpedoReloadMax = 200;
 
 		this.phaserColor = "green";
-		this.beamPattern = [3, 5, 3, 20];
 
 		this.phaserOffsetDistance = 20;
 		this.phaserOffsetAngle = 1.6*Math.PI;
@@ -63,11 +61,6 @@ class Bird_of_Prey extends Ship {
 		super.draw(ctx, Utils.drawLine, target);
 	};
 
-	// bird of prey can only fire beams if target is in front
-	firePhasers(){
-		const angle = Utils.angleToOtherShip(this, this.target)
-		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
-	}
 }
 
 module.exports = Bird_of_Prey;

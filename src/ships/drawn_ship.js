@@ -1,13 +1,12 @@
-const Ship = require("./ship");
+const Cruiser = require("./cruiser");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class DrawnShip extends Ship {
+class DrawnShip extends Cruiser {
 	constructor(options, drawing, ssdImg) {
 		super(options);
 
 		this.image = drawing;
-		this.turnRadius = 4;
 		this.enemy = false;
 
 		this.width = 50;
@@ -17,7 +16,6 @@ class DrawnShip extends Ship {
 		this.torpSound = options.sounds.torpSound;
 
 		this.phaserColor = "red";
-		this.beamPattern = [];
 
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
