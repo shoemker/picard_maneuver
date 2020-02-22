@@ -30,21 +30,9 @@ class DrawnShip extends Cruiser {
 	};
 
 
-	draw(ctx, ) {
-		ctx.save();
-
-		this.rotateCanvas(ctx);
-
-		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.image, 1, 1, 498, 498,
-				this.pos[0], this.pos[1], this.width, this.height
-			);
-		}
-
-		ctx.restore();
-
-		super.draw(ctx, Utils.drawLine);
+	draw(ctx) {
+		super.draw(ctx, Utils.drawLine,
+			{ image: this.image, x: 1, y: 1, width: 498, height: 498 });
 	};
 }
 

@@ -31,21 +31,11 @@ class D7 extends Cruiser {
 
 
 	draw(ctx, target) {
-		ctx.save();
-
-		this.rotateCanvas(ctx);
-
-		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.images.d7Img, 0, 0, 380, 275,
-				this.pos[0], this.pos[1], this.width, this.height
-			);
-		}
-
-		ctx.restore();
-   
-		super.draw(ctx, Utils.drawWavyLine, target);
+		super.draw(ctx, Utils.drawWavyLine,
+			{ image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 },
+			target);
 	};
+
 
 	// when beam is drawn, it could be drawn from either side depending on where target it
 	firePhasers() {

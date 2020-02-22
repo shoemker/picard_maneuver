@@ -40,26 +40,11 @@ class Bird_of_Prey extends Frigate {
 
 
 	draw(ctx, target) {
-		ctx.save();
-
-		this.rotateCanvas(ctx);
-
-		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.images.bopImg, 0, 0, 267, 300,
-				this.pos[0], this.pos[1], this.width, this.height
-			);
-		}
-
-		ctx.restore();
-
-		// fires a 2nd disruptor line from other wing
-		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, Utils.drawLine);
-;
-
-		super.draw(ctx, Utils.drawLine, target);
+		super.draw(ctx, Utils.drawLine,
+			{ image: this.images.bopImg, x: 0, y: 0, width: 267, height: 300 },
+			target);
 	};
+
 
 }
 

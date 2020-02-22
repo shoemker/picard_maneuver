@@ -18,9 +18,6 @@ class Enterprise extends Cruiser {
 		this.phaserOffsetDistance = 18;
 		this.phaserColor = "red";
 
-		// this.hullIntegrityMax = 1000;
-		// this.hullIntegrity = this.hullIntegrityMax;
-
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
@@ -34,23 +31,11 @@ class Enterprise extends Cruiser {
 	};
 	
 
-	draw(ctx, ) {
-		ctx.save();
-
-		this.rotateCanvas(ctx);
-
-		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.images.enterpriseImg, 22, 0, 660, 300,
-				this.pos[0], this.pos[1], this.width, this.height
-			);
-		}
-
-		ctx.restore();
-		
-		super.draw(ctx, Utils.drawLine);
+	draw(ctx) {
+		super.draw(ctx, Utils.drawLine, 
+			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300});
 	};
 }
 
 
-module.exports = Enterprise;
+module.exports = Enterprise

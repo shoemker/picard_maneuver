@@ -38,25 +38,9 @@ class Soyuz extends Frigate {
 	};
 
 
-	draw(ctx, target) {
-		ctx.save();
-
-		this.rotateCanvas(ctx);
-
-		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.images.soyuzImg, 0, 0, 362, 237,
-				this.pos[0], this.pos[1], this.width, this.height
-			);
-		}
-
-		ctx.restore();
-
-		// fires a 2nd phaser line from other side
-		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, Utils.drawLine);
-
-		super.draw(ctx, Utils.drawLine, target);
+	draw(ctx) {
+		super.draw(ctx, Utils.drawLine,
+			{ image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 });
 	};
 }
 

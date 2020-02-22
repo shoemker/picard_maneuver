@@ -69,7 +69,10 @@ class Ship extends SpaceObject{
 	setTarget(target) { this.target = target; }
 	setLabels(val) { this.ssd.setLabels(val); }
 	
-	draw(ctx, callback, target) {
+	draw(ctx, callback, shipImage, target) {
+
+		this.drawShip(ctx, shipImage);
+
 		//draw ship systems display
 		this.ssd.draw(ctx,
 			this.phaserRecharge / this.phaserRechargeMax,
@@ -98,7 +101,25 @@ class Ship extends SpaceObject{
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
-	}
+	};
+
+
+	drawShip(ctx, shipImage){
+			ctx.save();
+
+			this.rotateCanvas(ctx);
+
+			//draw ship
+			if (this.shipExplosionCounter < 34) {
+				ctx.drawImage(shipImage.image, shipImage.x, shipImage.y, 
+					shipImage.width, shipImage.height,
+					this.pos[0], this.pos[1], this.width, this.height
+				);
+			}
+
+			ctx.restore();
+	};
+
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
