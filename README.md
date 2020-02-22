@@ -16,7 +16,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Ship AI for enemies and allies</li>
 	<li>Optional autopilot of the main ship if you just want to watch.</li>
 	<li>Option to fight against either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
-	<li>Visuals for beam weapons, torpedos, and cannons.</li>
+	<li>Visuals for 4 different beam weapons for the different as well as torpedos.</li>
 	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>

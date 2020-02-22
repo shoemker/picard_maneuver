@@ -6,7 +6,7 @@ class Cruiser extends Ship {
 
 		this.beamPattern = [];
 		this.turnRadius = 4;
-	}
+	};
 }
 
 module.exports = Cruiser;

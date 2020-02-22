@@ -8,10 +8,8 @@ const Utils = {
 	},
 
 	angleToOtherShip(ship, otherShip) {
-		const xDelta = otherShip.center()[0] - ship.center()[0];
-		const yDelta = otherShip.center()[1] - ship.center()[1];
 
-		let angle = this.findAngle(xDelta,yDelta);
+		let angle = this.findAngle(ship.center(),otherShip.center());
 		
 		// take the rotation of the hit ship into account
 		angle -= ship.getRotation();
@@ -21,7 +19,10 @@ const Utils = {
 
 	
 	// find the angle between the 2 objects
-	findAngle(xDelta, yDelta) {
+	findAngle(point1, point2) {
+		const xDelta = point2[0] - point1[0];
+		const yDelta = point2[1] - point1[1];
+
 		const arcTangent = Math.atan(yDelta / xDelta);
 		let angle;
 		
@@ -39,6 +40,7 @@ const Utils = {
 		img.src = file;
 		return img;
 	},
+
 
 	// draw a red circle with a vert and a horiz line
 	drawTarget(ctx, x, y, size, lw) {
@@ -87,7 +89,34 @@ const Utils = {
 		}
 	},
 
-	getCanvasDim() { return [1200, 900]; }
+
+	drawCircleBeam(ctx, from, to) {
+		const separation = 15;
+		let ratio;
+		const xDelta = to.x - from.x;
+		const yDelta = to.y - from.y;
+		const distance = Math.sqrt(xDelta*xDelta + yDelta*yDelta)
+
+
+		const angle = Utils.findAngle([from.x, from.y], [to.x, to.y] );
+
+		ctx.lineWidth = 1;
+		
+		for(let i = 0; i <= distance; i += separation) {
+			ratio = i / distance;
+			ctx.beginPath();
+			ctx.ellipse(from.x+ xDelta*ratio,
+				from.y +yDelta*ratio, 
+				ratio*3, 
+				ratio*7, 
+				angle, 0, 2 * Math.PI);
+			ctx.stroke();
+		}
+
+	},
+
+
+	getCanvasDim() { return [1200, 900]; },
 }
 
 module.exports = Utils;

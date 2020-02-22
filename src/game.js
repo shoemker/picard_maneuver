@@ -70,6 +70,8 @@ class Game {
 
 
 	step() {
+		// console.log((Utils.findAngle(this.main.center(), this.enemies[0].center())) / Math.PI *180);
+
 		// gets user input
 		this.turnCounter++;
 		if (this.turnCounter === this.turnCounterMax) {

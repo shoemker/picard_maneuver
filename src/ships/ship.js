@@ -14,6 +14,7 @@ class Ship extends SpaceObject{
 		this.target = options.target;
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
+		this.callback;
 
 		this.beamSound;
 		this.torpSound;
@@ -50,7 +51,7 @@ class Ship extends SpaceObject{
 
 		this.hullIntegrityMax = 200;
 		this.hullIntegrity = this.hullIntegrityMax;
-	}
+	};
 
 	// getter methods
 	getDirection() { return this.direction; }
@@ -66,6 +67,7 @@ class Ship extends SpaceObject{
 	isGone() { return this.shipExplosionCounter >= 33; }
 	isEnemy() { return this.enemy; }
 
+	// setter methods
 	setTarget(target) { this.target = target; }
 	setLabels(val) { this.ssd.setLabels(val); }
 	
@@ -113,8 +115,7 @@ class Ship extends SpaceObject{
 			if (this.shipExplosionCounter < 34) {
 				ctx.drawImage(shipImage.image, shipImage.x, shipImage.y, 
 					shipImage.width, shipImage.height,
-					this.pos[0], this.pos[1], this.width, this.height
-				);
+					this.pos[0], this.pos[1], this.width, this.height);
 			}
 
 			ctx.restore();
@@ -383,8 +384,7 @@ class Ship extends SpaceObject{
 
 	calcDirection(rotationOffset) {
 		return [Math.cos(rotationOffset) * 7, Math.sin(rotationOffset) * -7];
-	}
-
+	};
 }
 
 module.exports = Ship

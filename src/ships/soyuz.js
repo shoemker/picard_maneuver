@@ -10,6 +10,7 @@ class Soyuz extends Frigate {
 
 		this.width = 35;
 		this.height = 28;
+		this.beamPattern = [];
 
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.torpSound;
@@ -39,8 +40,12 @@ class Soyuz extends Frigate {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine,
+		super.draw(ctx, Utils.drawCircleBeam,
 			{ image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 });
+
+		// fires a 2nd disruptor line from other wing
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
+			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, Utils.drawCircleBeam);
 	};
 }
 

@@ -33,7 +33,7 @@ class Enterprise extends Cruiser {
 
 	draw(ctx) {
 		super.draw(ctx, Utils.drawLine, 
-			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300});
+			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300 });
 	};
 }
 
