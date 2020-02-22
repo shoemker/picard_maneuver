@@ -11,7 +11,7 @@ class Frigate extends Ship {
 
 
 	draw(ctx, callback, image, target) {
-		super.draw(ctx,callback,image, target)
+		super.draw(ctx,callback,image, target);
 
 		// fires a 2nd disruptor line from other wing
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
