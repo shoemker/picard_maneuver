@@ -8,7 +8,16 @@ class Frigate extends Ship {
 		this.beamPattern = [3, 5, 3, 20];
 		this.turnRadius = 3;
 	};
-	
+
+
+	draw(ctx, callback, imagePojo, target){
+		super.draw(ctx, callback, imagePojo, target)
+
+		// fires a 2nd disruptor line from other wing
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
+			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, callback);
+	};
+
 
 	// frigate can only fire beams if target is in front
 	firePhasers() {

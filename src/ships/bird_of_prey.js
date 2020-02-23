@@ -43,10 +43,6 @@ class Bird_of_Prey extends Frigate {
 		super.draw(ctx, Utils.drawLine,
 			{ image: this.images.bopImg, x: 0, y: 0, width: 267, height: 300 },
 			target);
-
-		// fires a 2nd disruptor line from other wing
-		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, Utils.drawLine);
 	};
 
 
