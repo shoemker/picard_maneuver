@@ -5,6 +5,7 @@ class BridgeView {
 		this.width = 200;
 		this.height = 150;
 		this.bridgeImage = images.bridge;
+		// this.bridgeShaken = images.bridgeShaken;
 	}
 
 	draw(ctx) {
@@ -19,7 +20,10 @@ class BridgeView {
 		ctx.lineTo(x-lineWidth/2, this.height+lineWidth/2);
 		ctx.lineTo(Utils.getCanvasDim()[0], this.height + lineWidth/2);
 		ctx.stroke();
+		// ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380, x - 210, 0, this.width, this.height);
+
 	}
 }
 
 module.exports = BridgeView;
+

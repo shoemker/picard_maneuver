@@ -296,16 +296,16 @@ class GameView {
 
 	loadImages() {
 		return {
-			bopSsdImg: Utils.loadImg('./images/bop-ssd.png'),
-			d7SsdImg: Utils.loadImg('./images/d7-ssd.png'),
-			soyuzSsdImg: Utils.loadImg('./images/soyuz-ssd2.png'),
-			entSsdImg: Utils.loadImg('./images/enterprise-ssd.png'),
+			bopSsdImg: Utils.loadImg('./images/ssds/bop-ssd.png'),
+			d7SsdImg: Utils.loadImg('./images/ssds/d7-ssd.png'),
+			soyuzSsdImg: Utils.loadImg('./images/ssds/soyuz-ssd2.png'),
+			entSsdImg: Utils.loadImg('./images/ssds/enterprise-ssd.png'),
 			sparksImg: Utils.loadImg('./images/sparks.png'),
 			explosionImg: Utils.loadImg('./images/explosion-sprite-sheet.png'),
-			bopImg: Utils.loadImg('./images/bop.png'),
-			d7Img: Utils.loadImg('./images/D7.png'),
-			soyuzImg: Utils.loadImg('./images/soyuz.png'),
-			enterpriseImg: Utils.loadImg('./images/uss-enterprise-png-view-original-669.png'),
+			bopImg: Utils.loadImg('./images/ships/bop.png'),
+			d7Img: Utils.loadImg('./images/ships/D7.png'),
+			soyuzImg: Utils.loadImg('./images/ships/soyuz.png'),
+			enterpriseImg: Utils.loadImg('./images/ships/uss-enterprise-png-view-original-669.png'),
 			torpImg: Utils.loadImg('./images/torpedo.png'),
 			kTorpImg: Utils.loadImg('./images/many_torpedos.png'),		
 			moon_01: Utils.loadImg('./images/planets/moon_01.png'),
@@ -313,6 +313,7 @@ class GameView {
 			planet_08: Utils.loadImg('./images/planets/planet_08.png'),
 			planet_03: Utils.loadImg('./images/planets/planet_03.png'),
 			bridge: Utils.loadImg('./images/bridge.png'),
+			bridgeShaken: Utils.loadImg('./images/bridge_shaken.png'),
 		}
 	};
 }
