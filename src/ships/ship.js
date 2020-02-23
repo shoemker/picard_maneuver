@@ -224,7 +224,6 @@ class Ship extends SpaceObject{
 			colorOfToken = "red";
 		}
 		
-	
 		if (this.torpExplosionCounter === 1) {
 
 			let hitCoords = [x - this.center()[0], y - this.center()[1]] ;
