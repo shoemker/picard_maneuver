@@ -137,7 +137,7 @@ class GameView {
 	
 
 	muteAndAutopilotBoxes(x, y, gainNode){
-		if (x > 1085 && x < 1112) {
+		if (x > 35 && x < 65) {
 			if (y > 46 && y < 71) {
 				this.game.muteToggle(gainNode);
 
@@ -312,6 +312,7 @@ class GameView {
 			moon_03: Utils.loadImg('./images/planets/moon_03.png'),
 			planet_08: Utils.loadImg('./images/planets/planet_08.png'),
 			planet_03: Utils.loadImg('./images/planets/planet_03.png'),
+			bridge: Utils.loadImg('./images/bridge.png'),
 		}
 	};
 }

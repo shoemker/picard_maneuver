@@ -23,7 +23,7 @@ class Frigate extends Ship {
 	firePhasers() {
 		const angle = Utils.angleToOtherShip(this, this.target)
 		if ((angle > (2 * Math.PI - Math.PI / 9)) || (angle < Math.PI / 9)) super.firePhasers();
-	};
+	}
 }
 
 module.exports = Frigate;
