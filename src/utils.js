@@ -66,7 +66,7 @@ const Utils = {
 
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
-	drawWavyLine(ctx, from, to, totalDistance) {
+	drawWavyLine(ctx, from, to) {
 		let cx = 0;
 		let cy = 0;
 		let waveOffsetLength = 0;
@@ -75,10 +75,10 @@ const Utils = {
 		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + 
 			(from.y - to.y) * (from.y - to.y));
 		
-		const frequency = totalDistance / 8;
+		const frequency = 1/ 8;
 		const amplitude = 4;
 
-		const f = Math.PI * frequency *distance/totalDistance;
+		const f = Math.PI * frequency *distance;
 
 		let step = 1;	// lower step makes curve smoother
 		for (let i = 0; i <= distance; i += step) {
@@ -97,7 +97,6 @@ const Utils = {
 		const yDelta = to.y - from.y;
 		const distance = Math.sqrt(xDelta*xDelta + yDelta*yDelta)
 
-
 		const angle = Utils.findAngle([from.x, from.y], [to.x, to.y] );
 
 		ctx.lineWidth = 1;
@@ -105,14 +104,10 @@ const Utils = {
 		for(let i = 0; i <= distance; i += separation) {
 			ratio = i / distance;
 			ctx.beginPath();
-			ctx.ellipse(from.x+ xDelta*ratio,
-				from.y +yDelta*ratio, 
-				ratio*3, 
-				ratio*7, 
-				angle, 0, 2 * Math.PI);
+			ctx.ellipse(from.x + xDelta*ratio, from.y + yDelta*ratio, 
+				ratio*3, ratio*7, angle, 0, 2 * Math.PI);
 			ctx.stroke();
 		}
-
 	},
 
 
