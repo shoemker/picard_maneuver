@@ -304,7 +304,9 @@ class Ship extends SpaceObject{
 			this.ptarget = this.target;
 			this.phaserRecharge = 0;
 			this.beamSound.play();
+			return true;
 		}
+		return false;
 	};
 
 

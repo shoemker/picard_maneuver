@@ -8,16 +8,29 @@ class BridgeView {
 		this.bridgeShaken = images.bridgeShaken;
 
 		this.bridgePos = { x: Utils.getCanvasDim()[0] - this.width, y: 0}
+
 		this.shakeCounter = 0;
-		
+		this.phaserCounter = 0;
+		this.torpedoCounter = 0;
+
 		this.alive = true;
 	}
 
-	destroyed() { this.alive = false;}
+	destroyed() { this.alive = false; }
+	shakeOn() { this.shakeCounter = 1; }
+	phasersBubbleOn() { this.phaserCounter = 1; }
+	torpedosBubbleOn() { this.torpedoCounter = 1; }
+
 
 	step() {
 		if (this.shakeCounter > 0) this.shakeCounter++;
 		if (this.shakeCounter === 30) this.shakeCounter = 0;
+
+		if (this.phaserCounter > 0) this.phaserCounter++;
+		if (this.phaserCounter === 30) this.phaserCounter = 0;
+
+		if (this.torpedoCounter > 0) this.torpedoCounter++;
+		if (this.torpedoCounter === 30) this.torpedoCounter = 0;
 	}
 
 
@@ -25,12 +38,23 @@ class BridgeView {
 		if (this.alive) {
 			let lineWidth = 10;
 
-			if (this.shakeCounter === 0) 
+			if (this.shakeCounter !== 0) this.shakeBridge(ctx);
+			else {
 				ctx.drawImage(this.bridgeImage, 0,0, 1022, 765, 
 					this.bridgePos.x, this.bridgePos.y,this.width, this.height);
-			else {	// when hit, the bridge shakes 
-				this.shakeBridge(ctx)
+					
+				if (this.phaserCounter > 0) {
+					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 70, y: 10, width: 50, height: 15 },
+						{ x: this.bridgePos.x + 103, y: 67 });	
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 110, 18, "Fire Phasers")
+				}
+				else if (this.torpedoCounter > 0) {
+					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 70, y: 10, width: 50, height: 15 },
+						{ x: this.bridgePos.x + 103, y: 67 });
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 113, 17, "Fire Torpedos.")					
+				}
 			}
+
 
 			ctx.lineWidth = lineWidth;
 			ctx.strokeStyle = "grey";
@@ -44,8 +68,20 @@ class BridgeView {
 	}
 
 
-	shakeOn() {
-		this.shakeCounter = 1;
+	shakeBridge(ctx) {
+		ctx.save();
+
+		ctx.translate(Math.random() * 7, Math.random() * 7);
+
+		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
+			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
+
+		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
+			{ x: this.bridgePos.x + 125, y: 50 });
+
+		this.drawText(ctx, Utils.getCanvasDim()[0] - 83, 18, "Direct Hit!")
+
+		ctx.restore();
 	}
 	 
 
@@ -67,23 +103,6 @@ class BridgeView {
 		ctx.fillStyle = "black";
 		ctx.font = "20px FINALOLD";
 		ctx.fillText(message, x, y);
-
-	}
-
-	shakeBridge(ctx) {
-		ctx.save();
-
-		ctx.translate(Math.random() * 7, Math.random() * 7);
-
-		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
-			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
-
-		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
-			{ x: this.bridgePos.x + 125, y: 50 });
-
-		this.drawText(ctx, Utils.getCanvasDim()[0] - 83, 18, "Direct Hit!")
-
-		ctx.restore();
 	}
 }
 

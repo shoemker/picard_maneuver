@@ -16,11 +16,21 @@ class MainShip extends Ship {
 	}
 
 	draw(ctx, callback, shipImage) {
-		if (this.shipExplosionCounter == 1) this.bridgeView.destroyed()
+		if (this.shipExplosionCounter == 1) this.bridgeView.destroyed();
 		super.draw(ctx, callback, shipImage);
 	}
 
-	
+	firePhasers(){
+		let returnValue = super.firePhasers();
+		if (returnValue) this.bridgeView.phasersBubbleOn();
+		return returnValue;
+	}
+
+	fireTorpedos() {
+		let returnValue = super.fireTorpedos();
+		if (returnValue) this.bridgeView.torpedosBubbleOn();
+		return returnValue;
+	}
 }
 
 module.exports = MainShip;
