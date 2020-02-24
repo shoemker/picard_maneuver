@@ -45,18 +45,16 @@ class BridgeView {
 				if (this.phaserCounter > 0) {
 					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60, width: 50, height: 15 },
 						{ x: this.bridgePos.x + 63, y: 85 });	
-					this.drawText(ctx, this.bridgePos.x + 5, 67, "Phasers Fired");
+					this.drawText(ctx, this.bridgePos.x + 5, 66, "Firing Phasers", 14);
 				}
 				else if (this.torpedoCounter > 0) {
 					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107, width: 55, height: 15 },
 						{ x: this.bridgePos.x + 177, y: 131 });
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 96, 113, "Torpedos Away", 19);				
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 98, 112, "Torpedos Away", 14);				
 				}
 			}
 
 			this.drawBorder(ctx);
-
-
 		}
 	}
 
@@ -71,7 +69,7 @@ class BridgeView {
 		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
 			{ x: this.bridgePos.x + 125, y: 50 });
 
-		this.drawText(ctx, Utils.getCanvasDim()[0] - 83, 18, "Direct Hit!")
+		this.drawText(ctx, Utils.getCanvasDim()[0] - 84, 16, "Direct Hit!")
 
 		ctx.restore();
 	}
@@ -103,9 +101,9 @@ class BridgeView {
 	}
 
 
-	drawText(ctx, x, y, message, size = 20){
+	drawText(ctx, x, y, message, size = 16){
 		ctx.fillStyle = "black";
-		ctx.font = size +"px FINALOLD";
+		ctx.font = size +"px Arial";
 		ctx.fillText(message, x, y);
 	}
 }
