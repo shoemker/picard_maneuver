@@ -19,6 +19,8 @@ class MainShip extends Ship {
 		if (this.shipExplosionCounter == 1) this.bridgeView.destroyed()
 		super.draw(ctx, callback, shipImage);
 	}
+
+	
 }
 
 module.exports = MainShip;
