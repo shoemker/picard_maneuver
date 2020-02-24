@@ -27,10 +27,10 @@ class BridgeView {
 		if (this.shakeCounter === 30) this.shakeCounter = 0;
 
 		if (this.phaserCounter > 0) this.phaserCounter++;
-		if (this.phaserCounter === 30) this.phaserCounter = 0;
+		if (this.phaserCounter === 40) this.phaserCounter = 0;
 
 		if (this.torpedoCounter > 0) this.torpedoCounter++;
-		if (this.torpedoCounter === 30) this.torpedoCounter = 0;
+		if (this.torpedoCounter === 40) this.torpedoCounter = 0;
 	}
 
 
