@@ -326,7 +326,7 @@ class Ship extends SpaceObject{
 		else colorOfToken = "red";
 
 		this.damageTokens.push({hitCoords, damage, colorOfToken, time:0});
-
+		
 		return hp;
 	};
 

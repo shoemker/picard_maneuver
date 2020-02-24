@@ -1,8 +1,8 @@
-const Cruiser = require("./cruiser");
+const Main = require("./main_ship");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class Enterprise extends Cruiser {
+class Enterprise extends Main {
 	constructor(options) {
 		super(options);
  

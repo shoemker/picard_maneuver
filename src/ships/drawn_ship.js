@@ -1,8 +1,8 @@
-const Cruiser = require("./cruiser");
+const MainShip = require("./main_ship");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class DrawnShip extends Cruiser {
+class DrawnShip extends MainShip {
 	constructor(options, drawing, ssdImg) {
 		super(options);
 
@@ -37,4 +37,4 @@ class DrawnShip extends Cruiser {
 }
 
 
-module.exports = DrawnShip
+module.exports = DrawnShip;

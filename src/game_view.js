@@ -248,7 +248,8 @@ class GameView {
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
-			torpedoReload 
+			torpedoReload,
+			bridgeView: this.game.getBridge()
 		}
 
 		if (this.enterprise) {

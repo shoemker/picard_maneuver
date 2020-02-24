@@ -35,7 +35,8 @@ class Game {
 		this.bridgeView = new BridgeView(images);
 	}
 
-	getKeyMap() { return this.keyMap; }
+	getKeyMap() { return this.keyMap; };
+	getBridge() { return this.bridgeView; };
 
 	addMainShip(ship, aiTargeting){
 		this.main = ship;
@@ -94,6 +95,8 @@ class Game {
 			this.mainAI.consultAI(this.main.getTarget().onscreen());
 
 		this.checkTorpCollisions();
+
+		this.bridgeView.step();
 	};
 
 

@@ -1,12 +1,15 @@
-const Cruiser = require("./cruiser");
+const Ship = require("./ship");
 const SSD = require("../ssd");
 const Utils = require("../utils");
 
-class D7 extends Cruiser {
+class D7 extends Ship {
 	constructor(options) {
 		super(options);
 
 		this.enemy = true;
+
+		this.beamPattern = [];
+		this.turnRadius = 4;
 
 		this.beamSound = options.sounds.disruptSound;
 		this.torpSound = options.sounds.kTorpSound;
