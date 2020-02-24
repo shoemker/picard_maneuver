@@ -36,7 +36,6 @@ class BridgeView {
 
 	draw(ctx) {
 		if (this.alive) {
-			let lineWidth = 10;
 
 			if (this.shakeCounter !== 0) this.shakeBridge(ctx);
 			else {
@@ -44,25 +43,19 @@ class BridgeView {
 					this.bridgePos.x, this.bridgePos.y,this.width, this.height);
 					
 				if (this.phaserCounter > 0) {
-					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 70, y: 10, width: 50, height: 15 },
-						{ x: this.bridgePos.x + 103, y: 67 });	
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 110, 18, "Fire Phasers")
+					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60, width: 50, height: 15 },
+						{ x: this.bridgePos.x + 63, y: 85 });	
+					this.drawText(ctx, this.bridgePos.x + 5, 67, "Phasers Fired");
 				}
 				else if (this.torpedoCounter > 0) {
-					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 70, y: 10, width: 50, height: 15 },
-						{ x: this.bridgePos.x + 103, y: 67 });
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 113, 17, "Fire Torpedos.")					
+					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107, width: 55, height: 15 },
+						{ x: this.bridgePos.x + 177, y: 131 });
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 96, 113, "Torpedos Away", 19);				
 				}
 			}
 
+			this.drawBorder(ctx);
 
-			ctx.lineWidth = lineWidth;
-			ctx.strokeStyle = "grey";
-			ctx.beginPath();
-			ctx.moveTo(this.bridgePos.x - lineWidth/2, this.bridgePos.y);
-			ctx.lineTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y + this.height+lineWidth/2);
-			ctx.lineTo(Utils.getCanvasDim()[0], this.bridgePos.y + this.height + lineWidth/2);
-			ctx.stroke();
 
 		}
 	}
@@ -70,7 +63,6 @@ class BridgeView {
 
 	shakeBridge(ctx) {
 		ctx.save();
-
 		ctx.translate(Math.random() * 7, Math.random() * 7);
 
 		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
@@ -84,6 +76,18 @@ class BridgeView {
 		ctx.restore();
 	}
 	 
+
+	drawBorder(ctx) {
+		let lineWidth = 10;
+		ctx.lineWidth = lineWidth;
+		ctx.strokeStyle = "grey";
+		ctx.beginPath();
+		ctx.moveTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y);
+		ctx.lineTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y + this.height + lineWidth / 2);
+		ctx.lineTo(Utils.getCanvasDim()[0], this.bridgePos.y + this.height + lineWidth / 2);
+		ctx.stroke();
+	}
+
 
 	drawBubble(ctx, bub, speaker) {
 		ctx.beginPath();
@@ -99,12 +103,11 @@ class BridgeView {
 	}
 
 
-	drawText(ctx, x, y, message){
+	drawText(ctx, x, y, message, size = 20){
 		ctx.fillStyle = "black";
-		ctx.font = "20px FINALOLD";
+		ctx.font = size +"px FINALOLD";
 		ctx.fillText(message, x, y);
 	}
 }
 
 module.exports = BridgeView;
-

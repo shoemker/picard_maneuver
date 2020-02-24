@@ -260,6 +260,7 @@ class Game {
 				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
 
 			this.torpedoKey++;
+			if (this.torpedoKey === 100) this.torpedoKey = 0;
 		}
 	};
 
