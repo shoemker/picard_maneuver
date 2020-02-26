@@ -75,11 +75,15 @@ class BridgeView {
 			this.drawOneLight(ctx, this.bridgePos.x+7, 28, "red");
 			this.drawOneLight(ctx, this.bridgePos.x + 37, 14, "yellow");
 			this.drawOneLight(ctx, this.bridgePos.x + 140, 18, "yellow");
+			this.drawOneLight(ctx, this.bridgePos.x + 190, 80, "yellow");
+			this.drawOneLight(ctx, this.bridgePos.x + 193, 145, "red");
+
 		}
 		else {
 			this.drawOneLight(ctx, this.bridgePos.x + 22,21, "lightgreen");
 			this.drawOneLight(ctx, this.bridgePos.x + 150, 28, "lightgreen");
 			this.drawOneLight(ctx, this.bridgePos.x + 176, 46, "red");
+			this.drawOneLight(ctx, this.bridgePos.x + 193, 135, "lightgreen");
 
 		}
 	}
