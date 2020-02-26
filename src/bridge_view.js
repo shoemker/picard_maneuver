@@ -31,6 +31,8 @@ class BridgeView {
 
 		if (this.torpedoCounter > 0) this.torpedoCounter++;
 		if (this.torpedoCounter === 40) this.torpedoCounter = 0;
+
+		this.toggleLights();
 	}
 
 
@@ -45,34 +47,29 @@ class BridgeView {
 				if (this.phaserCounter > 0) {
 					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60, width: 50, height: 15 },
 						{ x: this.bridgePos.x + 63, y: 85 });	
-					this.drawText(ctx, this.bridgePos.x + 5, 66, "Firing Phasers", 14);
+					this.drawText(ctx, this.bridgePos.x + 6, 65, "Firing Phasers", 13);
 				}
 				else if (this.torpedoCounter > 0) {
 					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107, width: 55, height: 15 },
 						{ x: this.bridgePos.x + 177, y: 131 });
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 98, 112, "Torpedos Away", 14);				
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 97, 112, "Torpedos Away", 13);				
 				}
 			}
 
 			this.drawBorder(ctx);
+
+			this.drawLights(ctx);
 		}
 	}
 
-
-	shakeBridge(ctx) {
-		ctx.save();
-		ctx.translate(Math.random() * 7, Math.random() * 7);
-
-		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
-			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
-
-		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
-			{ x: this.bridgePos.x + 125, y: 50 });
-
-		this.drawText(ctx, Utils.getCanvasDim()[0] - 84, 16, "Direct Hit!")
-
-		ctx.restore();
+	toggleLights(ctx){
+		
 	}
+
+	drawLights(ctx) {
+		
+	}
+
 	 
 
 	drawBorder(ctx) {
@@ -105,6 +102,23 @@ class BridgeView {
 		ctx.fillStyle = "black";
 		ctx.font = size +"px Arial";
 		ctx.fillText(message, x, y);
+	}
+
+
+	// this function makes the bridge view shake when ship is hit
+	shakeBridge(ctx) {
+		ctx.save();
+		ctx.translate(Math.random() * 7, Math.random() * 7);
+
+		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
+			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
+
+		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
+			{ x: this.bridgePos.x + 125, y: 50 });
+
+		this.drawText(ctx, Utils.getCanvasDim()[0] - 84, 16, "Direct Hit!")
+
+		ctx.restore();
 	}
 }
 
