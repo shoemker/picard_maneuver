@@ -14,6 +14,7 @@ class BridgeView {
 		this.torpedoCounter = 0;
 
 		this.alive = true;
+		this.lights = 0;
 	}
 
 	destroyed() { this.alive = false; }
@@ -32,7 +33,7 @@ class BridgeView {
 		if (this.torpedoCounter > 0) this.torpedoCounter++;
 		if (this.torpedoCounter === 40) this.torpedoCounter = 0;
 
-		this.toggleLights();
+		this.stepLights();
 	}
 
 
@@ -54,23 +55,41 @@ class BridgeView {
 						{ x: this.bridgePos.x + 177, y: 131 });
 					this.drawText(ctx, Utils.getCanvasDim()[0] - 97, 112, "Torpedos Away", 13);				
 				}
+
+				this.drawLights(ctx);
 			}
 
 			this.drawBorder(ctx);
 
-			this.drawLights(ctx);
 		}
 	}
 
-	toggleLights(ctx){
-		
+	stepLights(){
+		this.lights++;
+		if (this.lights > 40) this.lights = 0;
 	}
+
 
 	drawLights(ctx) {
-		
+		if (this.lights < 20) {
+			this.drawOneLight(ctx, this.bridgePos.x+7, 28, "red");
+			this.drawOneLight(ctx, this.bridgePos.x + 37, 14, "yellow");
+			this.drawOneLight(ctx, this.bridgePos.x + 140, 18, "yellow");
+		}
+		else {
+			this.drawOneLight(ctx, this.bridgePos.x + 22,21, "lightgreen");
+			this.drawOneLight(ctx, this.bridgePos.x + 150, 28, "lightgreen");
+			this.drawOneLight(ctx, this.bridgePos.x + 176, 46, "red");
+
+		}
 	}
 
-	 
+	drawOneLight(ctx, x, y, color) {
+		ctx.beginPath();
+		ctx.arc(x,y, 1, 0, 360);
+		ctx.fillStyle = color;
+		ctx.fill();
+	}
 
 	drawBorder(ctx) {
 		let lineWidth = 10;
