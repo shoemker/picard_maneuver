@@ -256,7 +256,7 @@ class Ship extends SpaceObject{
 
 		const gradient = ctx.createRadialGradient(
 			this.center()[0], this.center()[1], 21, 
-			this.center()[0], this.center()[1], 35);
+			this.center()[0], this.center()[1], 37);
 
 		gradient.addColorStop(1, color);
 		gradient.addColorStop(0, "transparent");
