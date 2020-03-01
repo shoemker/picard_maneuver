@@ -220,7 +220,7 @@ class Ship extends SpaceObject{
 			y = this.center()[1] - 8 + yDelta * percentage;
 
 			colorOfToken = "#ADD8E6";
-			this.drawShieldOnHit(ctx, this.shieldHit, "gold");
+			this.drawShieldOnHit(ctx, this.shieldHit, "#a17f1a");
 		}
 		else {
 			x =	this.center()[0];
