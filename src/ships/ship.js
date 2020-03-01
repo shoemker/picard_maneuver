@@ -194,7 +194,7 @@ class Ship extends SpaceObject{
 		}
 
 		// zeros the counter and ends the beam effect
-		if (this.phaserCounter > (phaserDrawMax+10)) {
+		if (this.phaserCounter > (phaserDrawMax+15)) {
 			this.phaserCounter = 0;
 			this.targetShieldHP = 1;
 		}
@@ -216,7 +216,7 @@ class Ship extends SpaceObject{
 			y = this.center()[1] - 8 + yDelta * percentage;
 
 			colorOfToken = "#ADD8E6";
-			this.drawShieldOnHit(ctx, this.shieldHit, "#ADD8E6");
+			this.drawShieldOnHit(ctx, this.shieldHit, "grey");
 		}
 		else {
 			x =	this.center()[0];
@@ -250,6 +250,15 @@ class Ship extends SpaceObject{
 			[1.25, 1.75]
 		];
 
+		const gradient = ctx.createRadialGradient(
+			this.center()[0], this.center()[1], 
+			20, 
+			this.center()[0], this.center()[1], 
+			35);
+
+		gradient.addColorStop(1, color);
+		gradient.addColorStop(0, "transparent");
+		
 		ctx.beginPath();
 		ctx.arc(
 			this.center()[0],
@@ -259,10 +268,9 @@ class Ship extends SpaceObject{
 			startAndEnd[shieldNum][1] * Math.PI + this.rotationOffset
 		);
 
-		ctx.lineWidth = 1;
 
-		ctx.strokeStyle = color;
-		ctx.stroke();
+		ctx.fillStyle = gradient;
+		ctx.fill();
 	};
 
 
