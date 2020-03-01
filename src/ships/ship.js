@@ -71,6 +71,7 @@ class Ship extends SpaceObject{
 	setTarget(target) { this.target = target; }
 	setLabels(val) { this.ssd.setLabels(val); }
 	
+
 	draw(ctx, callback, shipImage, target) {
 
 		this.drawShip(ctx, shipImage);
@@ -107,18 +108,21 @@ class Ship extends SpaceObject{
 
 
 	drawShip(ctx, shipImage){
-			ctx.save();
+		ctx.save();
 
-			this.rotateCanvas(ctx);
+		// rotate
+		ctx.translate(this.center()[0], this.center()[1]);
+		ctx.rotate(this.rotationOffset);
+		ctx.translate(-(this.center()[0]), -(this.center()[1]));
 
-			//draw ship
-			if (this.shipExplosionCounter < 34) {
-				ctx.drawImage(shipImage.image, shipImage.x, shipImage.y, 
-					shipImage.width, shipImage.height,
-					this.pos[0], this.pos[1], this.width, this.height);
-			}
+		//draw ship
+		if (this.shipExplosionCounter < 34) {
+			ctx.drawImage(shipImage.image, shipImage.x, shipImage.y, 
+				shipImage.width, shipImage.height,
+				this.pos[0], this.pos[1], this.width, this.height);
+		}
 
-			ctx.restore();
+		ctx.restore();
 	};
 
 
@@ -216,7 +220,7 @@ class Ship extends SpaceObject{
 			y = this.center()[1] - 8 + yDelta * percentage;
 
 			colorOfToken = "#ADD8E6";
-			this.drawShieldOnHit(ctx, this.shieldHit, "grey");
+			this.drawShieldOnHit(ctx, this.shieldHit, "gold");
 		}
 		else {
 			x =	this.center()[0];
@@ -251,10 +255,8 @@ class Ship extends SpaceObject{
 		];
 
 		const gradient = ctx.createRadialGradient(
-			this.center()[0], this.center()[1], 
-			20, 
-			this.center()[0], this.center()[1], 
-			35);
+			this.center()[0], this.center()[1], 21, 
+			this.center()[0], this.center()[1], 35);
 
 		gradient.addColorStop(1, color);
 		gradient.addColorStop(0, "transparent");
@@ -267,7 +269,6 @@ class Ship extends SpaceObject{
 			startAndEnd[shieldNum][0] * Math.PI + this.rotationOffset,
 			startAndEnd[shieldNum][1] * Math.PI + this.rotationOffset
 		);
-
 
 		ctx.fillStyle = gradient;
 		ctx.fill();

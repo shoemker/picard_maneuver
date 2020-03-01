@@ -10,13 +10,6 @@ class SpaceObject {
 	};
 
 
-	rotateCanvas(ctx) {
-		ctx.translate(this.center()[0], this.center()[1]);
-		ctx.rotate(this.rotationOffset);
-		ctx.translate(-(this.center()[0]), -(this.center()[1]));
-	};
-
-
 	move(base_speed_inverse) {
 		this.pos[0] += (this.direction[0] / base_speed_inverse) * this.speed;
 		this.pos[1] -= (this.direction[1] / base_speed_inverse) * this.speed;
