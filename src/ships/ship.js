@@ -175,7 +175,7 @@ class Ship extends SpaceObject{
 
 		if (this.phaserCounter > phaserDrawMax && damage > 0) {
 			if (this.targetShieldHP > 0) {
-				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit);
+				this.ptarget.drawShieldOnHit(ctx, this.ptarget.shieldHit, this.phaserColor);
 			}
 
 			let sizeFactor = 1;
@@ -216,7 +216,7 @@ class Ship extends SpaceObject{
 			y = this.center()[1] - 8 + yDelta * percentage;
 
 			colorOfToken = "#ADD8E6";
-			this.drawShieldOnHit(ctx, this.shieldHit);
+			this.drawShieldOnHit(ctx, this.shieldHit, "#ADD8E6");
 		}
 		else {
 			x =	this.center()[0];
@@ -242,7 +242,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawShieldOnHit(ctx, shieldNum){
+	drawShieldOnHit(ctx, shieldNum, color){
 		const startAndEnd = [
 			[1.75,  .25],
 			[ .25,  .75],
@@ -261,7 +261,7 @@ class Ship extends SpaceObject{
 
 		ctx.lineWidth = 1;
 
-		ctx.strokeStyle = "#ADD8E6";
+		ctx.strokeStyle = color;
 		ctx.stroke();
 	};
 
