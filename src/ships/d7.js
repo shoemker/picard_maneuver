@@ -9,7 +9,7 @@ class D7 extends Ship {
 		this.enemy = true;
 
 		this.beamPattern = [];
-		this.turnRadius = 4;
+		this.turnRadius = 2;
 
 		this.beamSound = options.sounds.disruptSound;
 		this.torpSound = options.sounds.kTorpSound;

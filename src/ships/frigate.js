@@ -6,7 +6,7 @@ class Frigate extends Ship {
 		super(options);
 
 		this.beamPattern = [3, 5, 3, 20];
-		this.turnRadius = 3;
+		this.turnRadius = 1;
 	};
 
 

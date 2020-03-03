@@ -252,13 +252,11 @@ class GameView {
 			bridgeView: this.game.getBridge()
 		}
 
-		if (this.enterprise) {
-			this.game.addMainShip(new Enterprise(options), aiTargeting);
-		}
-		else {
+		if (this.enterprise) this.game.addMainShip(new Enterprise(options), aiTargeting);
+		else 
 			this.game.addMainShip(new DrawnShip(options, this.drawing, this.ssdPortrait), aiTargeting);
-		}
 	}
+	
 
 
 	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {

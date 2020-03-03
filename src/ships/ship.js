@@ -36,7 +36,6 @@ class Ship extends SpaceObject{
 		this.targetShieldHP = 1;
 
 		this.direction = this.calcDirection(this.rotationOffset);
-		this.increment = Math.PI / 36;
 
 		this.ssd;
 		this.damageTokens = [];
@@ -206,9 +205,9 @@ class Ship extends SpaceObject{
 
 
 	drawTorpExplosion(ctx) {	
-		let x;
-		let y;
-		let colorOfToken;
+		let x = this.center()[0];
+		let y = this.center()[1] - 5;
+		let colorOfToken = "red";
 
 		// if it hits a shield, it explodes there
 		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
@@ -222,15 +221,10 @@ class Ship extends SpaceObject{
 			colorOfToken = "#ADD8E6";
 			this.drawShieldOnHit(ctx, this.shieldHit, "#a17f1a");
 		}
-		else {
-			x =	this.center()[0];
-			y =	this.center()[1] - 5;
-			colorOfToken = "red";
-		}
 		
 		if (this.torpExplosionCounter === 1) {
-
 			let hitCoords = [x - this.center()[0], y - this.center()[1]] ;
+
 			if (colorOfToken === "red") {
 				hitCoords[0] = hitCoords[0] *4;
 				hitCoords[1] = hitCoords[1] * 4;
@@ -382,7 +376,9 @@ class Ship extends SpaceObject{
 
 
 	changeDirection(dir) { 
-		this.rotationOffset += dir*this.increment;
+		const increment = Math.PI / 72;
+
+		this.rotationOffset += dir*increment;
 
 		if (this.rotationOffset > 6.28) this.rotationOffset -= Math.PI *2;
 		else if (this.rotationOffset < -.000000001) this.rotationOffset += Math.PI * 2;

@@ -5,7 +5,7 @@ class MainShip extends Ship {
 		super(options);
 
 		this.beamPattern = [];
-		this.turnRadius = 4;
+		this.turnRadius = 2;
 
 		this.bridgeView = options.bridgeView;
 	};

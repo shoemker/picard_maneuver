@@ -76,7 +76,7 @@ const Utils = {
 			(from.y - to.y) * (from.y - to.y));
 		
 		const frequency = 1/ 8;
-		const amplitude = 4;
+		const amplitude = 3;
 
 		const f = Math.PI * frequency *distance;
 
@@ -105,7 +105,7 @@ const Utils = {
 			ratio = i / distance;
 			ctx.beginPath();
 			ctx.ellipse(from.x + xDelta*ratio, from.y + yDelta*ratio, 
-				ratio*3, ratio*7, angle, 0, 2 * Math.PI);
+				ratio*2, ratio*5, angle, 0, 2 * Math.PI);
 			ctx.stroke();
 		}
 	},
