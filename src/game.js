@@ -318,7 +318,6 @@ class Game {
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.main);
 
-		// acceleration/decceleration needs a longer turnCounter than turning
 		// w or up arrow
 		if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
 			this.main.power(1);
