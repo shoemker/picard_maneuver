@@ -31,7 +31,7 @@ class Game {
 		this.createStarField();
 
 		this.turnCounter = 0;
-		this.turnCounterMax = 6;
+		this.turnCounterMax = 12;
 		this.bridgeView = new BridgeView(images);
 	}
 
@@ -173,8 +173,10 @@ class Game {
 		ctx.font = "72px FINALOLD";
 		ctx.fillStyle = "#FAFAD2";
 
-		ctx.fillText(message, Utils.getCanvasDim()[0] / 2 - 315, Utils.getCanvasDim()[1] / 3 - 100);
-		ctx.fillText("Click to play again", Utils.getCanvasDim()[0] / 2 - 240, Utils.getCanvasDim()[1] / 3 - 20);
+		ctx.fillText(message, Utils.getCanvasDim()[0] / 2 - 315,
+			Utils.getCanvasDim()[1] / 3 - 100);
+		ctx.fillText("Click to play again", Utils.getCanvasDim()[0] / 2 - 240, 
+			Utils.getCanvasDim()[1] / 3 - 20);
 	};
 
 
@@ -278,7 +280,8 @@ class Game {
 
 		this.torpedoes.forEach((torpedo, i) => {
 			ships.forEach((ship) => {
-				if (ship.isEnemy() !== torpedo.getLauncher().isEnemy() && Utils.distance(ship, torpedo) < 30) {
+				if (ship.isEnemy() !== torpedo.getLauncher().isEnemy() 
+					&& Utils.distance(ship, torpedo) < 30) {
 					ship.receiveTorpHit(torpedo);
 					this.torpedoes.splice(i, 1);
 				}

@@ -197,7 +197,8 @@ class GameView {
 
 	
 	loadScenario1(){
-		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],this.images.moon_01 );
+		this.game.createPlanetAndMoon(this.images.planet_08, [0, 0, 480, 480],
+			this.images.moon_01 );
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
@@ -208,7 +209,8 @@ class GameView {
 
 
 	loadScenario2() {
-		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], this.images.moon_01);
+		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], 
+			this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
@@ -220,7 +222,8 @@ class GameView {
 
 
 	loadScenario3() {
-		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], this.images.moon_01);
+		this.game.createPlanetAndMoon(this.images.moon_03, [0, 0, 110, 110], 
+			this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1060, 765, .7, true], true, Math.PI);

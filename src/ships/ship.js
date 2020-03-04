@@ -132,8 +132,11 @@ class Ship extends SpaceObject{
 		const phaserDrawMax = 20;
 
 		// moves the starting point for the phaser(on the saucer for the enterprise, on the wing for bop)
-		let xStartingPoint = this.center()[0] + Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
-		let yStartingPoint = this.center()[1] + Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
+		let xStartingPoint = this.center()[0] + 
+			Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
+			
+		let yStartingPoint = this.center()[1] + 
+			Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
 
 		let xDelta = this.ptarget.center()[0] - xStartingPoint;
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;
@@ -233,7 +236,8 @@ class Ship extends SpaceObject{
 			let last = this.damageTokens.length - 1;
 			if (last > -1 && this.damageTokens[last].key === this.torpHitKey) 
 				this.damageTokens[last].damage += damage;
-			else this.damageTokens.push({ hitCoords, damage, colorOfToken, time:0, key:this.torpHitKey });
+			else this.damageTokens.push(
+				{ hitCoords, damage, colorOfToken, time:0, key:this.torpHitKey });
 		}
 
 		ctx.drawImage(this.images.explosionImg, 606, 295, 100, 100, x, y, 10, 10);

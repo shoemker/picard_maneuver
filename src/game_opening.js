@@ -116,10 +116,14 @@ class GameOpening {
 		ctx.fillStyle = "lightblue";
 
 		ctx.font = "132px FINALOLD";
-		ctx.fillText("The Picard Maneuver", this.canvas_width / 2 - 435, this.canvas_height /3-30);
+		ctx.fillText("The Picard Maneuver", 
+			this.canvas_width / 2 - 435, 
+			this.canvas_height /3-30);
 
 		ctx.font = "72px FINALOLD";
-		ctx.fillText("A Tactical Starship Combat Game", this.canvas_width / 2 - 380, this.canvas_height / 3+ 50);
+		ctx.fillText("A Tactical Starship Combat Game", 
+			this.canvas_width / 2 - 380, 
+			this.canvas_height / 3+ 50);
 
 		ctx.fillStyle = "#FAFAD2";
 
