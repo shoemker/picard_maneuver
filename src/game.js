@@ -38,12 +38,12 @@ class Game {
 	getKeyMap() { return this.keyMap; };
 	getBridge() { return this.bridgeView; };
 
-	addMainShip(ship, aiTargeting){
+	addMainShip(ship, aiTargeting) {
 		this.main = ship;
 		this.mainAI = new EnemyAI(ship, this, aiTargeting);
 	};
 
-	addEnemy(enemy, aiTargeting){
+	addEnemy(enemy, aiTargeting) {
 		this.enemies.push(enemy);
 		this.enemyAIs.push(new EnemyAI(enemy, this, aiTargeting));
 	};
@@ -54,11 +54,11 @@ class Game {
 	};
 
 	// factory method to create planet and moon objects
-	createPlanetAndMoon(planetImg, pCoords,	moonImg, mCoords = [3, 3, 58, 58]) {
+	createPlanetAndMoon(planetImg, pCoords, moonImg, mCoords = [3, 3, 58, 58]) {
 
 		this.planet = new Planet({
 			pos: [300, 300],
-			img:  planetImg,
+			img: planetImg,
 			width: 200, height: 200,
 			sheetCoords: pCoords
 		});
@@ -81,17 +81,17 @@ class Game {
 			this.turnCounter = 0;
 			this.checkKeyMap();
 		}
-		else if (this.turnCounter === this.turnCounterMax/2) this.checkKeyMap();
+		else if (this.turnCounter === this.turnCounterMax / 2) this.checkKeyMap();
 
 		this.moveObjects();
 
-		this.enemyAIs.forEach((AI, i) => 
+		this.enemyAIs.forEach((AI, i) =>
 			AI.consultAI(this.enemies[i].onscreen()));
 
 		this.allyAIs.forEach((AI, i) =>
 			AI.consultAI(this.allies[i].onscreen()));
 
-		if (this.autopilot && this.main.getTarget()) 
+		if (this.autopilot && this.main.getTarget())
 			this.mainAI.consultAI(this.main.getTarget().onscreen());
 
 		this.checkTorpCollisions();
@@ -100,7 +100,7 @@ class Game {
 	};
 
 
-	moveObjects() {		
+	moveObjects() {
 		this.shift();
 
 		// now give ships and objects their own movement
@@ -118,26 +118,26 @@ class Game {
 		const shift_y = this.main.getDirection()[1] / this.base_speed_inverse;
 
 		this.stars.forEach((star) =>
-					star.shift([shift_x , shift_y], this.main.getSpeed()));
+			star.shift([shift_x, shift_y], this.main.getSpeed()));
 
 		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], this.main.getSpeed()));
 		this.allies.forEach((ally) => ally.shift([shift_x, shift_y], this.main.getSpeed()));
 
-										
+
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet.shift(
-			[this.main.getDirection()[0] / (this.base_speed_inverse -2),
+			[this.main.getDirection()[0] / (this.base_speed_inverse - 2),
 			this.main.getDirection()[1] / (this.base_speed_inverse - 2)],
 			this.main.getSpeed());
-												
+
 		this.moon_01.shift(
 			[this.main.getDirection()[0] / (this.base_speed_inverse - 2.25),
 			this.main.getDirection()[1] / (this.base_speed_inverse - 2.25)],
-			this.main.getSpeed());	
+			this.main.getSpeed());
 	}
 
 
-	draw(ctx){
+	draw(ctx) {
 		// clear canvas and draw black background
 		ctx.beginPath();
 		ctx.clearRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
@@ -152,8 +152,8 @@ class Game {
 
 		this.main.draw(ctx);
 
-		this.enemies.forEach((enemy) =>{
-			if(this.enemies.length > 1) enemy.draw(ctx, enemy === this.main.getTarget());
+		this.enemies.forEach((enemy) => {
+			if (this.enemies.length > 1) enemy.draw(ctx, enemy === this.main.getTarget());
 			else enemy.draw(ctx);
 		});
 
@@ -173,7 +173,7 @@ class Game {
 		ctx.font = "72px FINALOLD";
 		ctx.fillStyle = "#FAFAD2";
 
-		ctx.fillText(message, Utils.getCanvasDim()[0]/2-315, Utils.getCanvasDim()[1]/3 - 100);
+		ctx.fillText(message, Utils.getCanvasDim()[0] / 2 - 315, Utils.getCanvasDim()[1] / 3 - 100);
 		ctx.fillText("Click to play again", Utils.getCanvasDim()[0] / 2 - 240, Utils.getCanvasDim()[1] / 3 - 20);
 	};
 
@@ -217,14 +217,14 @@ class Game {
 	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
 	createStarField() {
 		const starCount = 250;
-		const	colorrange = [0, 60, 240];
-		
+		const colorrange = [0, 60, 240];
+
 		for (let i = 0; i < starCount; i++) {
 			this.stars.push(new Star({
 				pos: [Math.random() * Utils.getCanvasDim()[0], Math.random() * Utils.getCanvasDim()[1]],
 				radius: Math.random() * 2.0,
 				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
-				sat: this.getRandom(50, 100),		
+				sat: this.getRandom(50, 100),
 			}))
 		}
 	};
@@ -254,10 +254,10 @@ class Game {
 				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 
 			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
-				ship.getDirection() ));
+				ship.getDirection()));
 
 			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
-				ship.calcDirection(ship.getRotation() + Math.PI / 18),));
+				ship.calcDirection(ship.getRotation() + Math.PI / 18)));
 
 			this.torpedoKey++;
 			if (this.torpedoKey === 100) this.torpedoKey = 0;
@@ -267,16 +267,16 @@ class Game {
 
 	firePhasers(ship) {
 		const enemyOnScreen = this.main.getTarget().onscreen();
-		if ((ship === this.main && enemyOnScreen) || 
-		  (ship !== this.main && ship.onscreen()))
-			 ship.firePhasers();
+		if ((ship === this.main && enemyOnScreen) ||
+			(ship !== this.main && ship.onscreen()))
+			ship.firePhasers();
 	};
 
 
 	checkTorpCollisions() {
 		const ships = this.enemies.concat(this.main).concat(this.allies);
 
-		this.torpedoes.forEach((torpedo,i) => {
+		this.torpedoes.forEach((torpedo, i) => {
 			ships.forEach((ship) => {
 				if (ship.isEnemy() !== torpedo.getLauncher().isEnemy() && Utils.distance(ship, torpedo) < 30) {
 					ship.receiveTorpHit(torpedo);
@@ -310,10 +310,10 @@ class Game {
 
 	checkKeyMap() {
 		// spacebar
-		if (this.keyMap["32"]) this.firePhasers(this.main); 
+		if (this.keyMap["32"]) this.firePhasers(this.main);
 
 		// t
-		if (this.keyMap["84"] && this.turnCounter === 0) this.changeMainTarget(); 
+		if (this.keyMap["84"] && this.turnCounter === 0) this.changeMainTarget();
 
 		// f or k
 		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.main);
@@ -325,7 +325,7 @@ class Game {
 		// s or down arrow
 		if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
 			this.main.power(-1);
-		
+
 		// a or left arrow
 		if (this.keyMap["65"] || this.keyMap["37"]) this.main.changeDirection(-1);
 
