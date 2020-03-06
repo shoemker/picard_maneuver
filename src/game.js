@@ -31,7 +31,7 @@ class Game {
 		this.createStarField();
 
 		this.turnCounter = 0;
-		this.turnCounterMax = 12;
+		this.turnCounterMax = 6;
 		this.bridgeView = new BridgeView(images);
 	}
 

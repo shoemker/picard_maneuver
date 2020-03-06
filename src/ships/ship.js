@@ -300,7 +300,7 @@ class Ship extends SpaceObject{
 
 
 	power(impulse) {
-		if (impulse > 0 && this.speed < 3) this.speed += impulse;
+		if (impulse > 0 && this.speed < 2) this.speed += impulse;
 		else if (impulse < 0 && this.speed > -1) this.speed += impulse;
 	};
 
