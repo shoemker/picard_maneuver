@@ -243,18 +243,19 @@ class Game {
 			endPoint[0] = + this.main.center()[0] - this.main.center()[1] / deltaY * deltaX;	
 		}
 
-		// const offsetRatio =  arrowLength / Utils.distance(this.main.center(), endPoint);
+		const distance = Utils.distance(this.main.center(), endPoint);
+		const offsetRatio =  (distance - arrowLength) / distance;
 
-		// startPoint[0] = (endPoint[0] - this.main.center()[0]) * offsetRatio + this.main.center()[0];
-		// startPoint[1] = (endPoint[1] - this.main.center()[1]) * offsetRatio + this.main.center()[1];
+		startPoint[0] = (endPoint[0] - this.main.center()[0]) * offsetRatio + this.main.center()[0];
+		startPoint[1] = (endPoint[1] - this.main.center()[1]) * offsetRatio + this.main.center()[1];
 
 
-		// ctx.lineWidth = 3;
-		// ctx.strokeStyle = "blue";
-		// ctx.beginPath();
-		// ctx.moveTo(startPoint[0], startPoint[1]);
-		// ctx.lineTo(endPoint[0], endPoint[1]);
-		// ctx.stroke();
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = "blue";
+		ctx.beginPath();
+		ctx.moveTo(startPoint[0], startPoint[1]);
+		ctx.lineTo(endPoint[0], endPoint[1]);
+		ctx.stroke();
 	}
 
 
