@@ -5,7 +5,7 @@ const Utils = require("../utils");
 class Ship extends SpaceObject{
 
 	constructor(options) {
-		super(options.pos);
+		super();
 
 		if (options.rotationOffset) this.rotationOffset = options.rotationOffset;
 		else this.rotationOffset = 0;
@@ -142,7 +142,7 @@ class Ship extends SpaceObject{
 		let yDelta = this.ptarget.center()[1] - yStartingPoint;
 
 		// beam should stop if it hits a shield
-		let distance = Utils.distance(this, this.ptarget);
+		let distance = Utils.distance(this.center(), this.ptarget.center());
 		if (this.targetShieldHP > 0) {
 			if (distance > 35 ) {
 				const distanceRatio = (distance - 35) / distance;

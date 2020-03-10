@@ -4,7 +4,7 @@ const Utils = require("../utils");
 class Frigate extends Ship {
 	constructor(options) {
 		super(options);
-
+		this.pos = options.pos;
 		this.beamPattern = [3, 5, 3, 20];
 		this.turnRadius = 1;
 	};

@@ -1,4 +1,5 @@
 const Ship = require("./ship");
+const Utils = require("../utils");
 
 class MainShip extends Ship {
 	constructor(options) {
@@ -6,6 +7,10 @@ class MainShip extends Ship {
 
 		this.beamPattern = [];
 		this.turnRadius = 2;
+
+		this.pos = [
+			Utils.getCanvasDim()[0] / 2 - this.width/2, 
+			Utils.getCanvasDim()[1] / 2 - this.height/2 - 40];
 
 		this.bridgeView = options.bridgeView;
 	};

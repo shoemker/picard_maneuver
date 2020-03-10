@@ -2,8 +2,7 @@ const Utils = require("../utils");
 
 class SpaceObject {
 	constructor(pos) {
-		this.pos = pos;
-
+		if (pos) this.pos = pos;
 		this.direction = [0,0];
 		this.width;
 		this.height;

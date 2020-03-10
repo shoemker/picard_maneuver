@@ -7,6 +7,7 @@ class D7 extends Ship {
 		super(options);
 
 		this.enemy = true;
+		this.pos = options.pos;
 
 		this.beamPattern = [];
 		this.turnRadius = 2;

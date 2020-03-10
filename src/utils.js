@@ -2,8 +2,8 @@
 const Utils = {
 
 	distance(obj1, obj2) {
-		let distance_x = obj1.center()[0] - obj2.center()[0];
-		let distance_y = obj1.center()[1] - obj2.center()[1];
+		let distance_x = obj1[0] - obj2[0];
+		let distance_y = obj1[1] - obj2[1];
 		return Math.sqrt(distance_x * distance_x + distance_y * distance_y);
 	},
 
@@ -108,6 +108,14 @@ const Utils = {
 				ratio*2, ratio*5, angle, 0, 2 * Math.PI);
 			ctx.stroke();
 		}
+	},
+	
+
+	drawFilledCircle(ctx, x, y, radius, color) {
+		ctx.beginPath();
+		ctx.arc(x, y, radius, 0, 360);
+		ctx.fillStyle = color;
+		ctx.fill();
 	},
 
 

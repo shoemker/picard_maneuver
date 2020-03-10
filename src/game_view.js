@@ -245,7 +245,6 @@ class GameView {
 
 	addMain(ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		const options = {
-			pos: [Utils.getCanvasDim()[0] / 2 - 50, Utils.getCanvasDim()[1] / 2 - 50], 
 			ssdPos,
 			rotationOffset,
 			images: this.images,
