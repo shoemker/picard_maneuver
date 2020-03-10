@@ -16,7 +16,7 @@ class EnemyAI  {
 	}
 
 	consultAI(onscreen){
-		if (!onscreen && !onscreen && this.aiShip !== this.game.main) this.beenOffScreen = true
+		if (!onscreen && this.aiShip !== this.game.main) this.beenOffScreen = true
 		if (this.targeting) this.changeTarget(onscreen);
 
 		if (this.aiShip.getTarget()) {
@@ -38,12 +38,14 @@ class EnemyAI  {
 		else if (onscreen && this.beenOffScreen) {
 			this.aiShip.setTarget(this.game.randomTarget(this.aiShip))
 			this.beenOffScreen = false;
+			if (!this.aiShip.isEnemy() && this.aiShip.getTarget() === this.game.main) debugger;
 		}
 		else {
 			const target = this.aiShip.getTarget()
 			if (!target || target.isGone() || !target.onscreen())
 					this.aiShip.setTarget(this.game.randomTarget(this.aiShip))
 
+			// if an enemy ship is in front of the ship in question, it becomes the target
 			if (this.aiShip.isEnemy()) potentialTargets = this.game.allies.concat(this.game.main);
 			else potentialTargets = this.game.enemies;
 			potentialTargets.forEach((target) => {

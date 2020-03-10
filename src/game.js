@@ -300,14 +300,22 @@ class Game {
 	};
 
 
+	// returns a new target
 	randomTarget(ship) {
 		let potentialTargets = [];
+
 		if (ship.isEnemy()) potentialTargets = this.allies.concat(this.main);
 		else potentialTargets = this.enemies;
 
-		let newIdx = Math.floor(Math.random() * potentialTargets.length)
+		const targets = potentialTargets.concat([]);
 
-		return potentialTargets[newIdx]
+		targets.forEach((target,i) => { if (!target.onscreen()) targets.splice(i,1)});
+
+	
+		if (targets.length > 0) return targets[Math.floor(Math.random() * targets.length)];
+		else if (!ship.getTarget() || (!ship.isEnemy() && ship.getTarget() === this.main))
+			return potentialTargets[Math.floor(Math.random() * potentialTargets.length)];
+		else return ship.target;
 	};
 
 
