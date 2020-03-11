@@ -240,43 +240,43 @@ class Game {
 
 		const distance = Utils.distance(this.main.center(), endPoint);
 		const offsetRatio =  (distance - arrowLength) / distance;
+		
+		for(let i = 0; i < 2; i++) {
+			startPoint[i] = (endPoint[i] - this.main.center()[i]) * offsetRatio + 
+				this.main.center()[i];
+		}
 
-		startPoint[0] = (endPoint[0] - this.main.center()[0]) * offsetRatio + 
-			this.main.center()[0];
-
-		startPoint[1] = (endPoint[1] - this.main.center()[1]) * offsetRatio + 
-			this.main.center()[1];
-
-		this.drawArrow(ctx, startPoint, endPoint, angle);
 		Utils.drawTarget(ctx, startPoint[0], startPoint[1], 5, 2);
+		this.drawArrow(ctx, startPoint, endPoint, angle);
 	}
 
 
-	drawArrow(ctx, startPoint, endPoint, angle) {
+	drawArrow(ctx, startPoint, endPoint, angle, color = "red", width = 3, 
+		headEdgeLength = 30, headAngle = Math.PI/9) {
 
-		ctx.lineWidth = 3;
-		ctx.strokeStyle = "red";
+		ctx.lineWidth = width;
+		ctx.strokeStyle = color;
+		// const angle = Utils.findAngle(startPoint, endPoint);
 
 		// this draws the main body of the arrow
 		ctx.beginPath();
 		ctx.moveTo(startPoint[0], startPoint[1]);
 		ctx.lineTo(endPoint[0], endPoint[1]);
 
-		const headEdgeLength = 30;
-		const headEdgeAngle1 = angle + Math.PI / 9;
-		const headEdgeAngle2 = angle - Math.PI / 9;
+		const headEdgeAngle1 = angle + headAngle;
+		const headEdgeAngle2 = angle - headAngle;
 
 		let xOffset = Math.cos(headEdgeAngle1) * headEdgeLength;
 		let yOffset = Math.sin(headEdgeAngle1) * headEdgeLength;
 
-		// this draws half of the head of the arrow
+		// this draws one edge of the arrowhead
 		ctx.lineTo(endPoint[0] - xOffset, endPoint[1] - yOffset);
 		ctx.moveTo(endPoint[0], endPoint[1]);
 
 		xOffset = Math.cos(headEdgeAngle2) * headEdgeLength;
 		yOffset = Math.sin(headEdgeAngle2) * headEdgeLength;
 
-		// this draws the other half of the head of the arrow
+		// this draws the other edge of the arrowhead
 		ctx.lineTo(endPoint[0] - xOffset, endPoint[1] - yOffset);
 		ctx.stroke();
 	}

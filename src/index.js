@@ -49,13 +49,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 	window.addEventListener('keydown', (e) => {
-		if (e.keyCode == 80 && e.target == document.body && !gv.gameOpening) gv.pauseGameToggle();
-		else {
-			// this line stops the spacebar from moving window
-			if (e.keyCode == 32 && e.target == document.body) e.preventDefault();
-			
-			gv.keyHandler(e);
+
+		if (e.target == document.body) {
+			switch (e.keyCode) {
+				case 80:
+					if (!gv.gameOpening) gv.pauseGameToggle(); // p pauses game
+					break;
+				// these lines stop the spacebar and arrow keys from moving window
+				case 32:
+				case 37:
+				case 38:
+				case 39:
+				case 40:
+					e.preventDefault();
+			}
 		}
+
+		gv.keyHandler(e);
+		
 	});
 
 

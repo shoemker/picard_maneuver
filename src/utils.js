@@ -43,10 +43,10 @@ const Utils = {
 
 
 	// draw a red circle with a vert and a horiz line
-	drawTarget(ctx, x, y, size, lw) {
+	drawTarget(ctx, x, y, size, lw, color = "red") {
 
 		ctx.beginPath();
-		ctx.strokeStyle = "red";
+		ctx.strokeStyle = color;
 		ctx.lineWidth = lw;
 		ctx.arc(x, y, size, 0, 2 * Math.PI);
 
