@@ -74,7 +74,7 @@ class EnemyAI  {
 	
 
 	turningAndTorpedoes(angleOfOpponent, onscreen) {
-		const turnCircleMax = 120;
+		const turnCircleMax = 180;
 		if (!onscreen || this.aiShip.torpedosReady()) {
 			if (angleOfOpponent > Math.PI /18 && angleOfOpponent <= Math.PI) {
 				if (this.turnCounter === this.turnCounterMax) {

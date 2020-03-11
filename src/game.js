@@ -31,7 +31,7 @@ class Game {
 		this.createStarField();
 
 		this.turnCounter = 0;
-		this.turnCounterMax = 6;
+		this.turnCounterMax = 4;
 		this.bridgeView = new BridgeView(images);
 	}
 
@@ -85,8 +85,8 @@ class Game {
 
 		this.moveObjects();
 
-		// this.enemyAIs.forEach((AI, i) =>
-		// 	AI.consultAI(this.enemies[i].onscreen()));
+		this.enemyAIs.forEach((AI, i) =>
+			AI.consultAI(this.enemies[i].onscreen()));
 
 		this.allyAIs.forEach((AI, i) =>
 			AI.consultAI(this.allies[i].onscreen()));
@@ -165,7 +165,7 @@ class Game {
 
 		this.bridgeView.draw(ctx);
 
-		if (!this.main.getTarget().onscreen()) 
+		if (this.main.getTarget() && !this.main.getTarget().onscreen()) 
 			this.drawTargetArrow(ctx);
 
 		if (this.lose) this.drawMessage(ctx, "Sorry, your ship exploded");
@@ -208,13 +208,11 @@ class Game {
 	};
 
 
+	// if the main ship's target is offscreen, draws an arrow
 	drawTargetArrow(ctx) {
-		// console.log(Utils.findAngle(this.main.center(), [0,0]));
-		// console.log(Utils.findAngle(this.main.center(), [1200, 0]));
-		// console.log(Utils.findAngle(this.main.center(), [1200, 900]));
-		// console.log(Utils.findAngle(this.main.center(), [0, 900]));
+
 		const angle = Utils.findAngle(this.main.center(), this.main.getTarget().center());
-		const arrowLength = 100;
+		const arrowLength = 80;
 		const upperLeftAngle = 3.741045138431531;
 		const upperRightAngle = 5.6837328223378485;
 		const lowerRightAngle = .6848212459426003;
@@ -229,7 +227,7 @@ class Game {
 		if (angle >= upperRightAngle || angle < lowerRightAngle) {
 			endPoint[0] = 1200;
 			endPoint[1] = this.main.center()[1] + (1200 - this.main.center()[0])/deltaX  * deltaY;
-		}
+		} 
 		else if (angle >= lowerRightAngle && angle < lowerLeftAngle) {
 			endPoint[1] = 900;
 			endPoint[0] = this.main.center()[0] + (900 - this.main.center()[1]) / deltaY * deltaX;
@@ -246,18 +244,43 @@ class Game {
 		const distance = Utils.distance(this.main.center(), endPoint);
 		const offsetRatio =  (distance - arrowLength) / distance;
 
-		startPoint[0] = (endPoint[0] - this.main.center()[0]) * offsetRatio + this.main.center()[0];
-		startPoint[1] = (endPoint[1] - this.main.center()[1]) * offsetRatio + this.main.center()[1];
+		startPoint[0] = (endPoint[0] - this.main.center()[0]) * offsetRatio + 
+			this.main.center()[0];
 
+		startPoint[1] = (endPoint[1] - this.main.center()[1]) * offsetRatio + 
+			this.main.center()[1];
+
+		this.drawArrow(ctx, startPoint, endPoint, angle);
+		Utils.drawTarget(ctx, startPoint[0], startPoint[1], 5, 2);
+	}
+
+
+	drawArrow(ctx, startPoint, endPoint, angle) {
 
 		ctx.lineWidth = 3;
-		ctx.strokeStyle = "blue";
+		ctx.strokeStyle = "red";
+
 		ctx.beginPath();
 		ctx.moveTo(startPoint[0], startPoint[1]);
 		ctx.lineTo(endPoint[0], endPoint[1]);
+
+		const headEdgeLength = 30;
+		const headEdgeAngle1 = angle + Math.PI/9;
+		const headEdgeAngle2 = angle - Math.PI / 9;
+
+		let xOffset = Math.cos(headEdgeAngle1) * headEdgeLength;
+		let yOffset = Math.sin(headEdgeAngle1) * headEdgeLength;
+
+		ctx.lineTo(endPoint[0]-xOffset, endPoint[1] -yOffset);
+		ctx.moveTo(endPoint[0], endPoint[1]);
+
+		xOffset = Math.cos(headEdgeAngle2) * headEdgeLength;
+		yOffset = Math.sin(headEdgeAngle2) * headEdgeLength;
+
+		ctx.lineTo(endPoint[0] - xOffset, endPoint[1] - yOffset);
 		ctx.stroke();
 	}
-
+	
 
 	muteToggle(gainNode) {
 		this.muted = this.muted === false;
@@ -354,16 +377,6 @@ class Game {
 		this.main.setTarget(this.enemies[newIdx]);
 	};
 
-	// old version
-	// randomTarget(ship) {
-	// 	let potentialTargets = [];
-	// 	if (ship.isEnemy()) potentialTargets = this.allies.concat(this.main);
-	// 	else potentialTargets = this.enemies;
-
-	// 	let newIdx = Math.floor(Math.random() * potentialTargets.length)
-
-	// 	return potentialTargets[newIdx]
-	// };
 
 	// returns a new target
 	randomTarget(ship) {
