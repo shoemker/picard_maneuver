@@ -147,8 +147,6 @@ class BridgeView {
 		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
 			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
 
-		// this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
-		// 	{ x: this.bridgePos.x + 125, y: 50 });
 		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 20},80,30, 
 			{ x: this.bridgePos.x + 125, y: 50 });
 
