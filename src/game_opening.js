@@ -53,7 +53,7 @@ class GameOpening {
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
 		if (this.scenario) 
-			ctx.drawImage(this.logoImg, 60, 0, 450, 512, 280, 25, 700, 850);
+			ctx.drawImage(this.logoImg, 60, 0, 450, 512, 294, 25, 700, 850);
 
 		this.stars.forEach((star) => {
 			star.z -= 0.1;
@@ -104,7 +104,7 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "80px FINALOLD";
-		ctx.fillText("Now Click a Scenario", this.canvas_width / 2 - 260, 200);
+		ctx.fillText("Now Click a Scenario", this.canvas_width / 2 - 270, 200);
 
 		ctx.font = "44px FINALOLD";
 		ctx.fillText("Fight a Cruiser", 110, 715);
