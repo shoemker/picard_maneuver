@@ -79,8 +79,6 @@ class GameOpening {
 		if (this.shipChoice) this.drawShipChoice(ctx);
 		else if (this.scenario) this.drawScenario(ctx);
 		else if (this.getUserDraw()) this.userDraw.draw();
-		
-
 	};
 
 

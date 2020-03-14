@@ -46,14 +46,16 @@ class BridgeView {
 					this.bridgePos.x, this.bridgePos.y,this.width, this.height);
 					
 				if (this.phaserCounter > 0) {
-					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60, width: 50, height: 15 },
-						{ x: this.bridgePos.x + 63, y: 85 });	
-					this.drawText(ctx, this.bridgePos.x + 6, 65, "Firing Phasers", 13);
+					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60}, 
+						100, 25, { x: this.bridgePos.x + 63, y: 85 });	
+
+					this.drawText(ctx, this.bridgePos.x + 7, 64, "Firing Phasers", 13);
 				}
 				else if (this.torpedoCounter > 0) {
-					this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107, width: 55, height: 15 },
-						{ x: this.bridgePos.x + 177, y: 131 });
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 97, 112, "Torpedos Away", 13);				
+					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107}, 
+						100,25, { x: this.bridgePos.x + 177, y: 131 });
+
+					this.drawText(ctx, Utils.getCanvasDim()[0] - 95, 111, "Torpedos Away", 13);				
 				}
 
 				this.drawLights(ctx);
@@ -103,16 +105,29 @@ class BridgeView {
 	}
 
 
-	drawBubble(ctx, bub, speaker) {
-		ctx.beginPath();
-		ctx.fillStyle = "white"
-		ctx.ellipse(bub.x, bub.y, bub.width, bub.height, 0, 0, 2 * Math.PI);
-		ctx.fill();
+	drawSpeachBubble(ctx, center, width, height, speaker) {
+		const top = { x: center.x, y: center.y - height / 2 };
+		const left = { x: center.x - width / 2, y: center.y }
+		const right = { x: center.x + width / 2, y: center.y }
+		const bottom = { x: center.x, y: center.y + height / 2 }
+
+		ctx.fillStyle = "white";
 
 		ctx.beginPath();
-		ctx.moveTo(bub.x-10, bub.y);
+		ctx.moveTo(top.x, top.y);
+
+		// quadraticCurveTo(cp1x, cp1y, x, y) cp1 is control point
+		ctx.quadraticCurveTo(left.x, top.y, left.x, left.y); // top to left
+		ctx.quadraticCurveTo(left.x, bottom.y, bottom.x,bottom.y); // left to bottom
+		ctx.quadraticCurveTo(right.x, bottom.y, right.x, right.y); // to right
+		ctx.quadraticCurveTo(right.x, top.y, top.x, top.y); // to top
+		ctx.fill();
+
+		// triange to speaker
+		ctx.beginPath();
+		ctx.moveTo(center.x - 10, center.y);
 		ctx.lineTo(speaker.x, speaker.y);
-		ctx.lineTo(bub.x+10, bub.y);
+		ctx.lineTo(center.x + 10, center.y);
 		ctx.fill();
 	}
 
@@ -132,10 +147,12 @@ class BridgeView {
 		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
 			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
 
-		this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
+		// this.drawBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 10, width: 50, height: 15 },
+		// 	{ x: this.bridgePos.x + 125, y: 50 });
+		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 20},80,30, 
 			{ x: this.bridgePos.x + 125, y: 50 });
 
-		this.drawText(ctx, Utils.getCanvasDim()[0] - 84, 16, "Direct Hit!")
+		this.drawText(ctx, Utils.getCanvasDim()[0] - 86, 26, "Direct Hit!")
 
 		ctx.restore();
 	}
