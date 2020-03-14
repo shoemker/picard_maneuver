@@ -14,12 +14,14 @@ class GameOpening {
 
 		this.createOpeningStarfield();
 
+		this.logoImg = Utils.loadImg('./images/st-logo.png');
+
+		this.sillyImg = Utils.loadImg('./images/sillyDrawing.png');
+		this.enterImg = Utils.loadImg('./images/uss-enterprise-png-choice.png');
+
 		this.bopScenImg = Utils.loadImg('./images/scenarios/bops_scenario.png');
 		this.d7ScenImg = Utils.loadImg('./images/scenarios/D7_scenario.png');
 		this.fleetScenImg = Utils.loadImg('./images/scenarios/fleet_scenario.png');
-		this.sillyImg = Utils.loadImg('./images/sillyDrawing.png');
-		this.enterImg = Utils.loadImg('./images/uss-enterprise-png-choice.png');
-		
 	};
 
 	setUserDraw(ud) { this.userDraw = ud; }
@@ -50,6 +52,9 @@ class GameOpening {
 		ctx.fillStyle = "rgb(0,0,0)";
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
+		if (this.scenario) 
+			ctx.drawImage(this.logoImg, 60, 0, 450, 512, 280, 25, 700, 850);
+
 		this.stars.forEach((star) => {
 			star.z -= 0.1;
 
@@ -74,6 +79,8 @@ class GameOpening {
 		if (this.shipChoice) this.drawShipChoice(ctx);
 		else if (this.scenario) this.drawScenario(ctx);
 		else if (this.getUserDraw()) this.userDraw.draw();
+		
+
 	};
 
 

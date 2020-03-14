@@ -55,12 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				case 80:
 					if (!gv.gameOpening) gv.pauseGameToggle(); // p pauses game
 					break;
-				// these lines stop the spacebar and arrow keys from moving window
-				case 32:
-				case 37:
-				case 38:
-				case 39:
-				case 40:
+				case 32: case 37: case 38: case 39: case 40:
+				// stops the spacebar and arrow keys from moving window
 					e.preventDefault();
 			}
 		}

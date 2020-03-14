@@ -111,15 +111,15 @@ const Utils = {
 	},
 	
 
-	drawFilledCircle(ctx, x, y, radius, color) {
+	drawFilledCircle(ctx, x, y, radius, fillStyle) {
 		ctx.beginPath();
 		ctx.arc(x, y, radius, 0, 360);
-		ctx.fillStyle = color;
+		ctx.fillStyle = fillStyle;
 		ctx.fill();
 	},
 
 
-	getCanvasDim() { return [1200, 900]; },
+	getCanvasDim() { return [1200, 900]; }
 }
 
 module.exports = Utils;

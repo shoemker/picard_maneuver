@@ -215,7 +215,7 @@ class GameView {
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
 		this.addBop([0, 400], [100, 630, .6, false], true, 0, 80, 100);
-		this.addBop([0, 50], [100, 775, .6, true], true, 0, 0, 0);
+		this.addBop([0, 100], [100, 775, .6, true], true, 0, 0, 0);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};

@@ -387,6 +387,7 @@ class Game {
 
 		const targets = potentialTargets.concat([]);
 
+		// eliminates offscreen targets
 		targets.forEach((target,i) => { if (!target.onscreen()) targets.splice(i,1)});
 
 	

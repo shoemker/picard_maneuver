@@ -10,12 +10,12 @@ class Star extends SpaceObject {
 		this.sat = options.sat;
 	};
 
+
 	draw(ctx) {
-		ctx.beginPath();
-		ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 360);
-		ctx.fillStyle = "hsl(" + this.hue + ", " + this.sat + "%, 88%)";
-		ctx.fill();
+		const fillStyle = "hsl(" + this.hue + ", " + this.sat + "%, 88%)";
+		Utils.drawFilledCircle(ctx, this.pos[0], this.pos[1], this.radius, fillStyle);
 	};
+	
 	
 	shift(direction, speed) {
 		super.shift(direction, speed);
