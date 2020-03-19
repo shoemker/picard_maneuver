@@ -119,7 +119,7 @@ const Utils = {
 	},
 
 
-	getCanvasDim() { return [1200, 900]; }
+	getCanvasDim() { return {x:1200, y:900}; }
 }
 
 module.exports = Utils;

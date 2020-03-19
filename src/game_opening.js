@@ -3,8 +3,8 @@ const Utils = require("./utils");
 class GameOpening {
 
 	constructor() {
-		this.canvas_width = Utils.getCanvasDim()[0];
-		this.canvas_height = Utils.getCanvasDim()[1];
+		this.canvas_width = Utils.getCanvasDim().x;
+		this.canvas_height = Utils.getCanvasDim().y;
 		this.shipChoice = true;
 		this.scenario = false;
 		this.userDraw = null;

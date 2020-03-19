@@ -7,7 +7,7 @@ class BridgeView {
 		this.bridgeImage = images.bridge;
 		this.bridgeShaken = images.bridgeShaken;
 
-		this.bridgePos = { x: Utils.getCanvasDim()[0] - this.width, y: 0}
+		this.bridgePos = { x: Utils.getCanvasDim().x - this.width, y: 0}
 
 		this.shakeCounter = 0;
 		this.phaserCounter = 0;
@@ -46,16 +46,16 @@ class BridgeView {
 					this.bridgePos.x, this.bridgePos.y,this.width, this.height);
 					
 				if (this.phaserCounter > 0) {
-					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 150, y: 60}, 
+					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 150, y: 60}, 
 						100, 25, { x: this.bridgePos.x + 63, y: 85 });	
 
 					this.drawText(ctx, this.bridgePos.x + 7, 64, "Firing Phasers", 13);
 				}
 				else if (this.torpedoCounter > 0) {
-					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 107}, 
+					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 50, y: 107}, 
 						100,25, { x: this.bridgePos.x + 177, y: 131 });
 
-					this.drawText(ctx, Utils.getCanvasDim()[0] - 95, 111, "Torpedos Away", 13);				
+					this.drawText(ctx, Utils.getCanvasDim().x - 95, 111, "Torpedos Away", 13);				
 				}
 
 				this.drawLights(ctx);
@@ -100,7 +100,7 @@ class BridgeView {
 		ctx.beginPath();
 		ctx.moveTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y);
 		ctx.lineTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y + this.height + lineWidth / 2);
-		ctx.lineTo(Utils.getCanvasDim()[0], this.bridgePos.y + this.height + lineWidth / 2);
+		ctx.lineTo(Utils.getCanvasDim().x, this.bridgePos.y + this.height + lineWidth / 2);
 		ctx.stroke();
 	}
 
@@ -147,10 +147,10 @@ class BridgeView {
 		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
 			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
 
-		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim()[0] - 50, y: 20},80,30, 
+		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 50, y: 20},80,30, 
 			{ x: this.bridgePos.x + 125, y: 50 });
 
-		this.drawText(ctx, Utils.getCanvasDim()[0] - 86, 26, "Direct Hit!")
+		this.drawText(ctx, Utils.getCanvasDim().x - 86, 26, "Direct Hit!")
 
 		ctx.restore();
 	}

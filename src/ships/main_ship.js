@@ -9,8 +9,8 @@ class MainShip extends Ship {
 		this.turnRadius = 2;
 
 		this.pos = [
-			Utils.getCanvasDim()[0] / 2 - this.width/2, 
-			Utils.getCanvasDim()[1] / 2 - this.height/2 - 40];
+			Utils.getCanvasDim().x / 2 - this.width/2, 
+			Utils.getCanvasDim().y / 2 - this.height/2 - 40];
 
 		this.bridgeView = options.bridgeView;
 	};

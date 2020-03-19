@@ -20,11 +20,11 @@ class Star extends SpaceObject {
 	shift(direction, speed) {
 		super.shift(direction, speed);
 
-		if (this.pos[0] > Utils.getCanvasDim()[0]) this.pos[0] = 0;
-		else if (this.pos[0] < 0) this.pos[0] = Utils.getCanvasDim()[0];
+		if (this.pos[0] > Utils.getCanvasDim().x) this.pos[0] = 0;
+		else if (this.pos[0] < 0) this.pos[0] = Utils.getCanvasDim().x;
 
-		if (this.pos[1] > Utils.getCanvasDim()[1]) this.pos[1] = 0;
-		else if (this.pos[1] < 0) this.pos[1] = Utils.getCanvasDim()[1];
+		if (this.pos[1] > Utils.getCanvasDim().y) this.pos[1] = 0;
+		else if (this.pos[1] < 0) this.pos[1] = Utils.getCanvasDim().y;
 	};
 
 }

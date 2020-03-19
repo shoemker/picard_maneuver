@@ -24,8 +24,8 @@ class SpaceObject {
 
 	onscreen() {
 		const center = this.center();
-		return (center[0] > 0 && center[0] < Utils.getCanvasDim()[0] &&
-			center[1] > 0 && center[1] < Utils.getCanvasDim()[1]);
+		return (center[0] > 0 && center[0] < Utils.getCanvasDim().x &&
+			center[1] > 0 && center[1] < Utils.getCanvasDim().y);
 	};
 
 	 

@@ -135,9 +135,9 @@ class Game {
 	draw(ctx) {
 		// clear canvas and draw black background
 		ctx.beginPath();
-		ctx.clearRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
+		ctx.clearRect(0, 0, Utils.getCanvasDim().x, Utils.getCanvasDim().y);
 		ctx.fillStyle = "black";
-		ctx.fillRect(0, 0, Utils.getCanvasDim()[0], Utils.getCanvasDim()[1]);
+		ctx.fillRect(0, 0, Utils.getCanvasDim().x, Utils.getCanvasDim().y);
 
 		// draw all of the objects
 		this.stars.forEach((star) => star.draw(ctx));
@@ -172,10 +172,10 @@ class Game {
 		ctx.font = "72px FINALOLD";
 		ctx.fillStyle = "#FAFAD2";
 
-		ctx.fillText(message, Utils.getCanvasDim()[0] / 2 - 315,
-			Utils.getCanvasDim()[1] / 3 - 100);
-		ctx.fillText("Click to play again", Utils.getCanvasDim()[0] / 2 - 240, 
-			Utils.getCanvasDim()[1] / 3 - 20);
+		ctx.fillText(message, Utils.getCanvasDim().x / 2 - 315,
+			Utils.getCanvasDim().y / 3 - 100);
+		ctx.fillText("Click to play again", Utils.getCanvasDim().x / 2 - 240, 
+			Utils.getCanvasDim().y / 3 - 20);
 	};
 
 
@@ -301,7 +301,7 @@ class Game {
 
 		for (let i = 0; i < starCount; i++) {
 			this.stars.push(new Star({
-				pos: [Math.random() * Utils.getCanvasDim()[0], Math.random() * Utils.getCanvasDim()[1]],
+				pos: [Math.random() * Utils.getCanvasDim().x, Math.random() * Utils.getCanvasDim().y],
 				radius: Math.random() * 2.0,
 				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
 				sat: this.getRandom(50, 100),
@@ -320,8 +320,8 @@ class Game {
 
 			// delete torpedo when it moves offscreen
 			let center = torpedo.center();
-			if (center[0] < 0 || center[0] > Utils.getCanvasDim()[0] ||
-				center[1] < 0 || center[1] > Utils.getCanvasDim()[1])
+			if (center[0] < 0 || center[0] > Utils.getCanvasDim().x ||
+				center[1] < 0 || center[1] > Utils.getCanvasDim().y)
 				this.torpedoes.splice(i, 1);
 		});
 	};
