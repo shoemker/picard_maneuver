@@ -392,7 +392,7 @@ class Ship extends SpaceObject{
 
 
 	calcDirection(rotationOffset) {
-		return [Math.cos(rotationOffset) * 7, Math.sin(rotationOffset) * -7];
+		return {x:Math.cos(rotationOffset) * 7, y:Math.sin(rotationOffset) * -7};
 	};
 }
 

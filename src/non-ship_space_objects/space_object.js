@@ -3,15 +3,15 @@ const Utils = require("../utils");
 class SpaceObject {
 	constructor(pos) {
 		if (pos) this.pos = pos;
-		this.direction = [0,0];
+		this.direction = {x:0,y:0};
 		this.width;
 		this.height;
 	};
 
 
 	move(base_speed_inverse) {
-		this.pos[0] += (this.direction[0] / base_speed_inverse) * this.speed;
-		this.pos[1] -= (this.direction[1] / base_speed_inverse) * this.speed;
+		this.pos[0] += (this.direction.x / base_speed_inverse) * this.speed;
+		this.pos[1] -= (this.direction.y / base_speed_inverse) * this.speed;
 	};
 
 

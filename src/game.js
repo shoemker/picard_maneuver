@@ -110,8 +110,8 @@ class Game {
 
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
-		const shift_x = this.main.getDirection()[0] / this.base_speed_inverse;
-		const shift_y = this.main.getDirection()[1] / this.base_speed_inverse;
+		const shift_x = this.main.getDirection().x / this.base_speed_inverse;
+		const shift_y = this.main.getDirection().y / this.base_speed_inverse;
 
 		this.stars.forEach((star) =>
 			star.shift([shift_x, shift_y], this.main.getSpeed()));
@@ -121,13 +121,13 @@ class Game {
 
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet.shift(
-			[this.main.getDirection()[0] / (this.base_speed_inverse - 2),
-			this.main.getDirection()[1] / (this.base_speed_inverse - 2)],
+			[this.main.getDirection().x / (this.base_speed_inverse - 2),
+			this.main.getDirection().y / (this.base_speed_inverse - 2)],
 			this.main.getSpeed());
 
 		this.moon_01.shift(
-			[this.main.getDirection()[0] / (this.base_speed_inverse - 2.25),
-			this.main.getDirection()[1] / (this.base_speed_inverse - 2.25)],
+			[this.main.getDirection().x / (this.base_speed_inverse - 2.25),
+			this.main.getDirection().y / (this.base_speed_inverse - 2.25)],
 			this.main.getSpeed());
 	}
 
