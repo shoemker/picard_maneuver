@@ -99,15 +99,15 @@ class GameOpening {
 
 	drawScenario(ctx) {
 		const drop = 150;
-		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 300 + drop,  350, 350);
-		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 300 + drop, 350, 350);
-		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 300 + drop, 350, 350);
+		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 450,  350, 350);
+		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 450, 350, 350);
+		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 450, 350, 350);
 
 		ctx.beginPath();
 
-		ctx.rect(37, 300 + drop, 350, 350);
-		ctx.rect(424, 300 + drop, 350, 350);
-		ctx.rect(813, 300 + drop, 350, 350);
+		ctx.rect(37, 450, 350, 350);
+		ctx.rect(424, 450, 350, 350);
+		ctx.rect(813, 450, 350, 350);
 
 		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
@@ -115,12 +115,12 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "80px FINALOLD";
-		ctx.fillText("Now Click a Scenario Below", 250, 250 + drop);
+		ctx.fillText("Now Click a Scenario Below", 250, 400);
 
 		ctx.font = "44px FINALOLD";
-		ctx.fillText("Fight a Cruiser", 110, 715 + drop);
-		ctx.fillText("2 Smaller Birds of Prey", 428, 715 + drop);
-		ctx.fillText("or in a Fleet Action", 850, 715 + drop);
+		ctx.fillText("Fight a Cruiser", 110, 865);
+		ctx.fillText("2 Smaller Birds of Prey", 428, 865);
+		ctx.fillText("or in a Fleet Action", 850, 865);
 	};
 
 

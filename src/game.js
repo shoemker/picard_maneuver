@@ -329,7 +329,7 @@ class Game {
 
 	fireTorpedoes(ship) {
 		if (ship.fireTorpedos()) {
-
+			
 			this.torpedoes.push(new Torpedo(ship, this.images, this.torpedoKey,
 				ship.calcDirection(ship.getRotation() - Math.PI / 18)));
 

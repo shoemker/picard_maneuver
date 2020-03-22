@@ -37,8 +37,8 @@ class Torpedo extends SpaceObject {
 
 
 	move() {
-		this.pos[0] += this.speed * this.direction[0];
-		this.pos[1] -= this.speed * this.direction[1];
+		this.pos[0] += this.speed * this.direction.x;
+		this.pos[1] -= this.speed * this.direction.y;
 	};
 
 };

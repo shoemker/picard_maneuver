@@ -94,7 +94,7 @@ class GameView {
 		// start again from scenario choice	
 		else if (this.game.win || this.game.lose) {
 			this.game = new Game(this.images);
-			this.gameOpening = new GameOpening();
+			this.gameOpening = new GameOpening(this.ctx);
 			this.gameOpening.setShipChoice(false);
 			this.gameOpening.setScenario(true);
 		}
