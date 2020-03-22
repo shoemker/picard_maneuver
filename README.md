@@ -16,6 +16,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Ship AI for enemies and allies</li>
 	<li>Optional autopilot of the main ship if you just want to watch.</li>
 	<li>Option to fight against either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
+	<li>Screen where scenario is chose features a detailed model of a solar system.</li>
 	<li>View of the bridge with flashing lights and shaking when ship is hit.</li>
 	<li>Visuals for 4 different beam weapons for the different as well as torpedos.</li>
 	<li>Shields show on hit (until they're down).</li>

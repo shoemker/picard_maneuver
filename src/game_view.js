@@ -21,7 +21,7 @@ class GameView {
 
 		this.images = this.loadImages();
 		this.game = new Game(this.images);
-		this.gameOpening = new GameOpening();
+		this.gameOpening = new GameOpening(ctx);
 		this.demo = false;
 	};
 	
@@ -170,7 +170,7 @@ class GameView {
 
 
 	chooseScenario(x,y,gainNode) {
-		if (y >= 317 && y <= 734) {
+		if (y >= 467 && y <= 884) {
 			if (x > 54 && x < 407) {
 				this.loadScenario1();
 				this.openingOff();

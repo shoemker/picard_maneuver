@@ -1,14 +1,20 @@
 const Utils = require("./utils");
+const SolarSystem = require("./solarSystem/solar_system");
+const SSData1 = require("./solarSystem/ss_data1");
 
 class GameOpening {
 
-	constructor() {
+	constructor(ctx) {
 		this.canvas_width = Utils.getCanvasDim().x;
 		this.canvas_height = Utils.getCanvasDim().y;
 		this.shipChoice = true;
 		this.scenario = false;
 		this.userDraw = null;
 		this.max_depth = 32;
+
+		this.centerOfSS = { x: Utils.getCanvasDim().x / 2, y: 170 };
+		this.ss = new SolarSystem(.294, this.centerOfSS);
+		SSData1.addDataToSS(ctx, this.ss, this.centerOfSS);
 
 		this.stars = new Array(512);
 
@@ -52,32 +58,36 @@ class GameOpening {
 		ctx.fillStyle = "rgb(0,0,0)";
 		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
 
-		if (this.scenario) 
-			ctx.drawImage(this.logoImg, 60, 0, 450, 512, 294, 25, 700, 850);
+		if (this.scenario) {
+			// ctx.drawImage(this.logoImg, 60, 0, 450, 512, 294, 25, 700, 850);
+			this.ss.step();
+			this.ss.draw(ctx);
+			this.drawScenario(ctx);
+		} else {
 
-		this.stars.forEach((star) => {
-			star.z -= 0.1;
+			this.stars.forEach((star) => {
+				star.z -= 0.1;
 
-			if (star.z <= 0) {
-				star.x = this.randomRange(-32, 32);
-				star.y = this.randomRange(-32, 32);
-				star.z = this.max_depth;
-			}
+				if (star.z <= 0) {
+					star.x = this.randomRange(-32, 32);
+					star.y = this.randomRange(-32, 32);
+					star.z = this.max_depth;
+				}
 
-			const k = 128.0 / star.z;
-			const px = star.x * k + halfWidth;
-			const py = star.y * k + halfHeight;
+				const k = 128.0 / star.z;
+				const px = star.x * k + halfWidth;
+				const py = star.y * k + halfHeight;
 
-			if (px >= 0 && px <= this.canvas_width && py >= 0 && py <= this.canvas_height) {
-				const size = (1 - star.z / 32.0) * 5;
-				const shade = parseInt((1 - star.z / 32.0) * 255);
-				ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
-				ctx.fillRect(px, py, size, size);
-			}
-		});
+				if (px >= 0 && px <= this.canvas_width && py >= 0 && py <= this.canvas_height) {
+					const size = (1 - star.z / 32.0) * 5;
+					const shade = parseInt((1 - star.z / 32.0) * 255);
+					ctx.fillStyle = "rgb(" + shade + "," + shade + "," + shade + ")";
+					ctx.fillRect(px, py, size, size);
+				}
+			});
+		}
 
 		if (this.shipChoice) this.drawShipChoice(ctx);
-		else if (this.scenario) this.drawScenario(ctx);
 		else if (this.getUserDraw()) this.userDraw.draw();
 	};
 
@@ -88,15 +98,16 @@ class GameOpening {
 
 
 	drawScenario(ctx) {
-		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 300,  350, 350);
-		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 300, 350, 350);
-		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 300, 350, 350);
+		const drop = 150;
+		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 300 + drop,  350, 350);
+		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 300 + drop, 350, 350);
+		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 300 + drop, 350, 350);
 
 		ctx.beginPath();
 
-		ctx.rect(37, 300, 350, 350);
-		ctx.rect(424, 300, 350, 350);
-		ctx.rect(813, 300, 350, 350);
+		ctx.rect(37, 300 + drop, 350, 350);
+		ctx.rect(424, 300 + drop, 350, 350);
+		ctx.rect(813, 300 + drop, 350, 350);
 
 		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
@@ -104,12 +115,12 @@ class GameOpening {
 
 		ctx.fillStyle = "lightblue";
 		ctx.font = "80px FINALOLD";
-		ctx.fillText("Now Click a Scenario", this.canvas_width / 2 - 270, 200);
+		ctx.fillText("Now Click a Scenario Below", 250, 250 + drop);
 
 		ctx.font = "44px FINALOLD";
-		ctx.fillText("Fight a Cruiser", 110, 715);
-		ctx.fillText("2 Smaller Birds of Prey", 428, 715);
-		ctx.fillText("or in a Fleet Action", 850, 715);
+		ctx.fillText("Fight a Cruiser", 110, 715 + drop);
+		ctx.fillText("2 Smaller Birds of Prey", 428, 715 + drop);
+		ctx.fillText("or in a Fleet Action", 850, 715 + drop);
 	};
 
 
