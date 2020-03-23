@@ -14,7 +14,7 @@ class SolarSystem {
 		this.tilt = tilt;
 		this.center = center;
 
-		this.stars = new Array(100);
+		this.stars = new Array(150);
 		for (let i = 0; i < this.stars.length; i++) {
 			const starData = Utils.createStarData(Utils.getCanvasDim().x, 340);
 			this.stars[i] = new Star(starData);
@@ -65,12 +65,6 @@ class SolarSystem {
 		moon.addSun(planet);
 
 		this.planets.push(planet);
-	};
-
-
-
-	getRandom(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
 
 

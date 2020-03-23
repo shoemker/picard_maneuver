@@ -5,7 +5,8 @@ const Utils = {
 		let distance_y = obj1[1] - obj2[1];
 		return Math.sqrt(distance_x * distance_x + distance_y * distance_y);
 	},
-
+	
+	
 	angleToOtherShip(ship, otherShip) {
 
 		let angle = this.findAngle(ship.center(),otherShip.center());

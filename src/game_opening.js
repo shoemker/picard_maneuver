@@ -57,7 +57,7 @@ class GameOpening {
 
 		ctx.clearRect(0, 0, Utils.getCanvasDim().x, Utils.getCanvasDim().y);
 		ctx.fillStyle = "rgb(0,0,0)";
-		ctx.fillRect(0, 0, this.canvas_width, this.canvas_height);
+		ctx.fillRect(0, 0, Utils.getCanvasDim().x, Utils.getCanvasDim().y);
 
 		if (this.scenario) {
 			// ctx.drawImage(this.logoImg, 60, 0, 450, 512, 294, 25, 700, 850);
