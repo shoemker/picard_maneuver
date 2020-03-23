@@ -1,9 +1,9 @@
-const Utils = require("../utils");
-// const Star = require("../star");
+const Star = require("../non-ship_space_objects/star");
 const SolarObject = require("./solar_object");
 const OrbitingPlanet = require("./orbiting_planet");
 const Comet = require("./comet");
 const Moon = require("./moon");
+const Utils = require("../utils");
 
 class SolarSystem {
 
@@ -13,13 +13,19 @@ class SolarSystem {
 
 		this.tilt = tilt;
 		this.center = center;
+
+		this.stars = new Array(100);
+		for (let i = 0; i < this.stars.length; i++) {
+			const starData = Utils.createStarData(Utils.getCanvasDim().x, 340);
+			this.stars[i] = new Star(starData);
+		};	
 	};
 
 	getTilt() { return this.tilt; };
 	setTilt(tilt) { this.tilt = tilt; };
 	getSuns() { return this.suns; };
 	getCenter() { return this.center; }
-	
+
 
 	addSun(ctx, options) {
 		const gradient = ctx.createRadialGradient(
@@ -62,6 +68,7 @@ class SolarSystem {
 	};
 
 
+
 	getRandom(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
@@ -73,6 +80,7 @@ class SolarSystem {
 
 
 	draw(ctx) {
+		this.stars.forEach((star) => star.draw(ctx));
 		this.suns.forEach((sun) => sun.draw(ctx));
 		this.planets.forEach((planet) => planet.draw(ctx, this.tilt));
 	};

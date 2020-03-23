@@ -99,6 +99,7 @@ class GameOpening {
 
 
 	drawScenario(ctx) {
+
 		ctx.drawImage(this.d7ScenImg, 0, 0, 350, 350,  37, 450,  350, 350);
 		ctx.drawImage(this.bopScenImg, 0, 0, 350, 350, 424, 450, 350, 350);
 		ctx.drawImage(this.fleetScenImg, 0, 0, 350, 350, 813, 450, 350, 350);
@@ -109,7 +110,6 @@ class GameOpening {
 		ctx.rect(424, 450, 350, 350);
 		ctx.rect(813, 450, 350, 350);
 
-		ctx.strokeStyle = "grey";
 		ctx.lineWidth = 3;
 		ctx.stroke();
 

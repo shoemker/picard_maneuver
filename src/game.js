@@ -22,14 +22,17 @@ class Game {
 		this.enemyAIs = [];
 		this.allyAIs = []
 		this.torpedoes = [];
-		this.stars = [];
 
 		this.keyMap = {};
 
 		this.torpedoKey = 0;
 
-		this.createStarField();
-
+		this.stars = new Array(250);
+		for (let i = 0; i < this.stars.length; i++) {
+			const starData = Utils.createStarData(Utils.getCanvasDim().x, Utils.getCanvasDim().y);
+			this.stars[i] = new Star(starData);
+		};
+			
 		this.turnCounter = 0;
 		this.turnCounterMax = 8;
 		this.bridgeView = new BridgeView(images);
@@ -291,26 +294,6 @@ class Game {
 
 	autoPilotToggle() {
 		this.autopilot = this.autopilot === false;
-	};
-
-	// factory method to create stars
-	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
-	createStarField() {
-		const starCount = 250;
-		const colorrange = [0, 60, 240];
-
-		for (let i = 0; i < starCount; i++) {
-			this.stars.push(new Star({
-				pos: [Math.random() * Utils.getCanvasDim().x, Math.random() * Utils.getCanvasDim().y],
-				radius: Math.random() * 2.0,
-				hue: colorrange[this.getRandom(0, colorrange.length - 1)],
-				sat: this.getRandom(50, 100),
-			}))
-		}
-	};
-
-	getRandom(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
 
 

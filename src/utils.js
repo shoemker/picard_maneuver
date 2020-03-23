@@ -1,4 +1,3 @@
-
 const Utils = {
 
 	distance(obj1, obj2) {
@@ -39,6 +38,23 @@ const Utils = {
 		img.onload = () => { return true; }
 		img.src = file;
 		return img;
+	},
+
+
+	// kind of a factory method to create a star
+	// a version of this came from http://thenewcode.com/81/Make-A-Starfield-Background-with-HTML5-Canvas
+	createStarData(xRange, yRange) {
+		const colorrange = [0, 60, 240];
+		return {
+				pos: [Math.random() * xRange, Math.random() *yRange],
+				radius: Math.random() * 2.0,
+				hue: colorrange[Utils.getRandom(0, colorrange.length - 1)],
+				sat: this.getRandom(50, 100),
+			};	
+	},
+	// helper method
+	getRandom(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	},
 
 
