@@ -7,16 +7,16 @@ const Utils = require("../utils");
 
 class SolarSystem {
 
-	constructor(tilt, center) {
+	constructor(tilt, center, starCount, bottomOfStarField) {
 		this.suns = [];
 		this.planets = [];
 
 		this.tilt = tilt;
 		this.center = center;
 
-		this.stars = new Array(150);
+		this.stars = new Array(starCount);
 		for (let i = 0; i < this.stars.length; i++) {
-			const starData = Utils.createStarData(Utils.getCanvasDim().x, 340);
+			const starData = Utils.createStarData(Utils.getCanvasDim().x, bottomOfStarField);
 			this.stars[i] = new Star(starData);
 		};	
 	};
