@@ -1,9 +1,10 @@
 const SSData1 = {
 
-	addDataToSS(ctx, ss, center) {
+	addDataToSS(ctx, ss) {
+		const center = ss.getCenter();
 
-		ss.addSun(ctx,
-			{pos: center,
+		ss.addSun(ctx, 
+			{ pos: center,
 			radius: 60,
 			mass: 300,
 			color: "yellow"
@@ -66,7 +67,7 @@ const SSData1 = {
 		const jupsMoon = {
 			pos: { x: jup.pos.x - 50, y: jup.pos.y },
 			radius: 2,
-			color: "red",
+			color: "brown",
 			mass: 1.5,
 			speed: 2,
 			dir: { x: 0, y: -1 },
@@ -80,8 +81,8 @@ const SSData1 = {
 		ss.addComet({
 			pos: { x: center.x + 150, y: center.y + 250 },
 			radius: 1.5,
-			// color: "rgb(255, 255, 204)",
-			color: "#9933ff",
+			color: "rgb(255, 255, 204)",
+			// color: "#9933ff",
 			mass: 1,
 			suns: ss.getSuns(),
 			speed: 1.8,

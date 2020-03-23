@@ -18,7 +18,8 @@ class SolarSystem {
 	getTilt() { return this.tilt; };
 	setTilt(tilt) { this.tilt = tilt; };
 	getSuns() { return this.suns; };
-
+	getCenter() { return this.center; }
+	
 
 	addSun(ctx, options) {
 		const gradient = ctx.createRadialGradient(
