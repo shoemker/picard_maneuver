@@ -11,7 +11,6 @@ class OrbitingPlanet extends SolarObject {
 		this.gradientColors = options.gradientColors;
 
 		this.rings = options.rings;
-		// this.ringsGradient = options.ringsGradient;
 		this.ringsColor = options.ringsColor;
 		this.yAfterTilt;
 	};
@@ -64,13 +63,8 @@ class OrbitingPlanet extends SolarObject {
 
 		this.radiusMult = this.radiusMult - this.radiusMult*tilt + 1;
 
-		// if (this.gradientColors) {
-		// 	this.color = this.generateGradient(ctx, this.pos.x, this.yAfterTilt, 
-		// 		this.radius*this.radiusMult);
-		// }
 
 		if (this.gradientColors) this.color = this.generateRGradient(ctx, this.gradientColors);
-		// if (this.ringsGradient) {this.ringsColor = this.generateRGradient(ctx, this.ringsGradient);
 		
 		// back of rings drawn
 		if (this.rings) 
@@ -102,15 +96,6 @@ class OrbitingPlanet extends SolarObject {
 
 		return gradient;
 	};
-
-
-	// generateGradient(ctx,x,y,radius){
-	// 	const gradient = ctx.createLinearGradient(x-radius, y, x+radius,y);
-	// 	gradient.addColorStop(0, this.gradientColors.a);
-	// 	gradient.addColorStop(1, this.gradientColors.b);
-
-	// 	return gradient;
-	// };
 
 
 	drawRings(ctx, ring, y, start) {
