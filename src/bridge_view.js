@@ -49,7 +49,7 @@ class BridgeView {
 					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 150, y: 60}, 
 						100, 25, { x: this.bridgePos.x + 63, y: 85 });	
 
-					this.drawText(ctx, this.bridgePos.x + 7, 64, "Firing Phasers", 13);
+					this.drawText(ctx, this.bridgePos.x + 7, 65, "Firing Phasers", 13);
 				}
 				else if (this.torpedoCounter > 0) {
 					this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 50, y: 107}, 
@@ -134,7 +134,7 @@ class BridgeView {
 
 	drawText(ctx, x, y, message, size = 16){
 		ctx.fillStyle = "black";
-		ctx.font = size +"px Arial";
+		ctx.font = size +"px ComicRelief";
 		ctx.fillText(message, x, y);
 	}
 
@@ -147,10 +147,10 @@ class BridgeView {
 		ctx.drawImage(this.bridgeShaken, 0, 0, 510, 380,
 			this.bridgePos.x, this.bridgePos.y, this.width, this.height);
 
-		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 50, y: 20},80,30, 
+		this.drawSpeachBubble(ctx, { x: Utils.getCanvasDim().x - 50, y: 20},90,30, 
 			{ x: this.bridgePos.x + 125, y: 50 });
 
-		this.drawText(ctx, Utils.getCanvasDim().x - 86, 26, "Direct Hit!")
+		this.drawText(ctx, Utils.getCanvasDim().x - 90, 26, "Direct Hit!")
 
 		ctx.restore();
 	}

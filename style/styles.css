@@ -7,6 +7,11 @@ body {
 	src: url('../fonts/FINALOLD.TTF');
 }
 
+@font-face {
+	font-family: 'ComicRelief';
+	src: url('../fonts/ComicRelief.ttf');
+}
+
 #outerDiv {
 	display: flex ;
 	flex-direction: row;

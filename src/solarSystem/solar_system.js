@@ -1,7 +1,4 @@
 const Star = require("../non-ship_space_objects/star");
-const SolarObject = require("./solar_object");
-const OrbitingPlanet = require("./orbiting_planet");
-const Comet = require("./comet");
 const Moon = require("./moon");
 const Utils = require("../utils");
 
@@ -13,6 +10,7 @@ class SolarSystem {
 
 		this.tilt = 1;
 		this.center = { x: Utils.getCanvasDim().x / 2, y: Utils.getCanvasDim().y / 2 };
+
 
 		this.stars = new Array(starCount);
 		for (let i = 0; i < this.stars.length; i++) {
@@ -78,10 +76,7 @@ class SolarSystem {
 	};
 
 	moveObjects(){
-		this.suns.forEach((sun) => {
-			// debugger
-			sun.move();
-		});
+		this.suns.forEach((sun) => sun.move());
 
 		this.planets.forEach((planet) => planet.move());
 	};
