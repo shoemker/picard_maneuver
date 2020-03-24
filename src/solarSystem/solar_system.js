@@ -7,11 +7,11 @@ const Utils = require("../utils");
 
 class SolarSystem {
 
-	constructor(tilt, starCount, bottomOfStarField) {
+	constructor(starCount, bottomOfStarField) {
 		this.suns = [];
 		this.planets = [];
 
-		this.tilt = tilt;
+		this.tilt = 1;
 		this.center = { x: Utils.getCanvasDim().x / 2, y: Utils.getCanvasDim().y / 2 };
 
 		this.stars = new Array(starCount);
@@ -28,44 +28,40 @@ class SolarSystem {
 	setCenter(center) { this.center = center; }
 
 
-	addSun(ctx, options) {
-		const gradient = ctx.createRadialGradient(
-			options.pos.x, options.pos.y, options.radius / 4,
-			options.pos.x, options.pos.y, options.radius);
+	addSun(ctx, color, sun) {
+		const pos = sun.getPosition();
+		const radius = sun.getRadius();
 
-		gradient.addColorStop(0, options.color);
+		const gradient = ctx.createRadialGradient(
+			pos.x, pos.y, radius / 4,
+			pos.x, pos.y, radius);
+
+		gradient.addColorStop(0, color);
 		gradient.addColorStop(1, "transparent");
 
-		options.color = gradient;
-		options.centerOfSS = this.center;
+		sun.setColor(gradient);
 
-		this.suns.push(new OrbitingPlanet(options));
+		this.suns.push(sun);
 	};
 
 
-	addPlanet(options) {
-		options.centerOfSS = this.center;
-		this.planets.push(new OrbitingPlanet(options));
-	};
+	addPlanet(planet) {
+		let moon;
 
-
-	addComet(options) {
-		options.centerOfSS = this.center;
-		this.planets.push(new Comet(options));
-	};
-
-
-	addPlanetWithMoon(planetOptions, moonOptions) {
-		moonOptions.centerOfSS = this.center;
-		planetOptions.centerOfSS = this.center
-
-		const moon = new Moon(moonOptions);
-		const planet = new OrbitingPlanet(planetOptions);
-
-		planet.addMoon(moon);
-		moon.addSun(planet);
-
+		// construct moons from data in the planet object
+		if (planet.getMoonData()) {
+			planet.getMoonData().forEach(data => {
+				moon = new Moon(data);
+				moon.addSun(planet);
+				planet.getMoons().push(moon);
+			})
+		}
 		this.planets.push(planet);
+	};
+
+
+	addComet(comet) {
+		this.planets.push(comet);
 	};
 
 
@@ -82,6 +78,11 @@ class SolarSystem {
 	};
 
 	moveObjects(){
+		this.suns.forEach((sun) => {
+			// debugger
+			sun.move();
+		});
+
 		this.planets.forEach((planet) => planet.move());
 	};
 }

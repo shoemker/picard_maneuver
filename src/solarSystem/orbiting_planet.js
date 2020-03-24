@@ -5,8 +5,9 @@ class OrbitingPlanet extends SolarObject {
 	constructor(options) {
 		super(options);
 		this.path = options.path;
-
+		this.moonData = options.moonData;
 		this.moons = [];
+		this.centerOfSS = options.center;
 
 		this.gradientColors = options.gradientColors;
 
@@ -16,7 +17,10 @@ class OrbitingPlanet extends SolarObject {
 	};
 
 	addMoon(moon) { this.moons.push(moon); };
-	
+	getMoons() { return this.moons; };
+	getMoonData() { return this.moonData; };
+	setColor(color) { this.color = color; };
+	addSun(sun) { this.suns.push(sun); };
 
 	move() {
 		this.suns.forEach(sun => {

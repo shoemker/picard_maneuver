@@ -1,12 +1,16 @@
-const Utils = require("../utils");
-const SolarObject = require("./solar_object");
+const OrbitingPlanet = require("./orbiting_planet");
+const Comet = require("./comet");
 
 const SSData1 = {
 	
 
 	addDataToSS(ctx, ss, center) {
+		ss.setTilt(.294);
+		
 		if (center) ss.setCenter(center);
 		else center = ss.getCenter();
+		let x;
+		let y;
 
 		// const o = new SolarObject( {
 		// 	pos: center,
@@ -15,30 +19,25 @@ const SSData1 = {
 		// 	color: "yellow"
 		// });
 
-		ss.addSun(ctx, 
-			{ pos: center,
-			radius: 60,
-			mass: 300,
-			color: "yellow",
-			speed: 0,
-			suns: [],
-			dir: {x:0, y:0}
-		});
+		ss.addSun(ctx, "yellow",
+			new OrbitingPlanet( { 
+				center,
+				pos: center,
+				radius: 60,
+				mass: 300,
+				speed: 0,
+				suns: [],
+				dir: {x:0, y:0}
+			})
+		);
 
 
-		const ven = {
-			pos: { x: center.x - 150, y: center.y },
-			radius: 6,
-			gradientColors: { a: "lightgreen", b: "darkgreen" },
-			mass: 8,
-			suns: ss.getSuns(),
-			speed: 4.98,
-			dir: { x: 0, y: 1 },
-			path: true
-		};
+		x = center.x - 150
+		y = center.y
 
 		const vensMoon = {
-			pos: { x: ven.pos.x - 15, y: ven.pos.y },
+			center,
+			pos: { x: x - 15, y:y },
 			radius: 1,
 			color: "lightgreen",
 			mass: .3,
@@ -47,11 +46,22 @@ const SSData1 = {
 			suns: []
 		};
 
-		ss.addPlanetWithMoon(ven, vensMoon);
+		ss.addPlanet(new OrbitingPlanet( {
+			center,
+			pos: { x, y },
+			radius: 6,
+			gradientColors: { a: "lightgreen", b: "darkgreen" },
+			mass: 8,
+			suns: ss.getSuns(),
+			speed: 4.98,
+			dir: { x: 0, y: 1 },
+			path: true,
+			moonData: [vensMoon]
+		}));
 
 
-
-		ss.addPlanet({
+		ss.addPlanet(new OrbitingPlanet({
+			center,
 			pos: { x: center.x + 250, y: center.y },
 			radius: 9,
 			gradientColors: { a: "lightblue", b: "blue" },
@@ -65,10 +75,11 @@ const SSData1 = {
 			rings: [{radius: 18, angle: Math.PI / 6, thickness: 2 },
 				{radius: 15, angle: Math.PI / 6, thickness: 2 },
 				{radius: 12, angle: Math.PI / 6, thickness: 2 }]
-		});
+		}));
 
 
-		// ss.addPlanet({
+		// ss.addPlanet(new OrbitingPlanet({
+		// 	center,
 		// 	pos: { x: center.x -300, y: center.y },
 		// 	radius: 3,
 		// 	gradientColors: {a: "#cc66ff", b: "#9900cc" },
@@ -77,36 +88,42 @@ const SSData1 = {
 		// 	speed: 2.5,
 		// 	dir: { x: 0, y: 1 },
 		// 	path: true,
-		// });
+		// }));
 
 
+		x = center.x + 400;
+		y = center.y;
 
+		const jupsMoon = {
+			center,
+			pos: { x: x - 50, y },
+			radius: 2,
+			color: "brown",
+			mass: 1.5,
+			speed: 2,
+			dir: { x: 0, y: -1 },
+			center,
+			suns: []
+		};
 
-		const jup = {
-			pos: { x: center.x + 400, y: center.y },
+		ss.addPlanet(new OrbitingPlanet({
+			center,
+			pos: { x: x, y: y },
 			radius: 12,
 			gradientColors: { a: "rgb(255, 153, 51)", b: "darkred" },
 			mass: 40,
 			suns: ss.getSuns(),
 			speed: 1.90,
 			dir: { x: 0, y: -1 },
-			path: true
-		};
-
-		const jupsMoon = {
-			pos: { x: jup.pos.x - 50, y: jup.pos.y },
-			radius: 2,
-			color: "brown",
-			mass: 1.5,
-			speed: 2,
-			dir: { x: 0, y: -1 },
-			suns: []
-		};
-
-		ss.addPlanetWithMoon(jup, jupsMoon);
+			center,
+			path: true,
+			moonData: [jupsMoon]
+		}));
 
 
-		ss.addComet({
+
+		ss.addComet(new Comet({
+			center,
 			pos: { x: center.x + 150, y: center.y + 250 },
 			radius: 1.5,
 			color: "rgb(255, 255, 204)",
@@ -114,8 +131,8 @@ const SSData1 = {
 			mass: 1,
 			suns: ss.getSuns(),
 			speed: 1.8,
-			dir: { x: 0, y: -1 },
-		});
+			dir: { x: 0, y: -1 }
+		}));
 	}
 };
 
