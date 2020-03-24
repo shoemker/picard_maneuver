@@ -1,14 +1,54 @@
-const SSData1 = {
+const Utils = require("../utils");
+const SolarObject = require("./solar_object");
 
-	addDataToSS(ctx, ss) {
-		const center = ss.getCenter();
+const SSData1 = {
+	
+
+	addDataToSS(ctx, ss, center) {
+		if (center) ss.setCenter(center);
+		else center = ss.getCenter();
+
+		// const o = new SolarObject( {
+		// 	pos: center,
+		// 	radius: 60,
+		// 	mass: 300,
+		// 	color: "yellow"
+		// });
 
 		ss.addSun(ctx, 
 			{ pos: center,
 			radius: 60,
 			mass: 300,
-			color: "yellow"
+			color: "yellow",
+			speed: 0,
+			suns: [],
+			dir: {x:0, y:0}
 		});
+
+
+		const ven = {
+			pos: { x: center.x - 150, y: center.y },
+			radius: 6,
+			gradientColors: { a: "lightgreen", b: "darkgreen" },
+			mass: 8,
+			suns: ss.getSuns(),
+			speed: 4.98,
+			dir: { x: 0, y: 1 },
+			path: true
+		};
+
+		const vensMoon = {
+			pos: { x: ven.pos.x - 15, y: ven.pos.y },
+			radius: 1,
+			color: "lightgreen",
+			mass: .3,
+			speed: 1,
+			dir: { x: 0, y: -1 },
+			suns: []
+		};
+
+		ss.addPlanetWithMoon(ven, vensMoon);
+
 
 
 		ss.addPlanet({
@@ -28,29 +68,18 @@ const SSData1 = {
 		});
 
 
-		const ven = {
-			pos: { x: center.x - 150, y: center.y },
-			radius: 6,
-			gradientColors: { a: "lightgreen", b: "darkgreen" },
-			mass: 8,
-			suns: ss.getSuns(),
-			speed: 5,
-			dir: { x: 0, y: 1 },
-			path: true
-		};
-
-		const vensMoon = {
-			pos: { x: ven.pos.x - 15, y: ven.pos.y },
-			radius: 1,
-			color: "lightgreen",
-			mass: .3,
-			speed: 1,
-			dir: { x: 0, y: -1 },
-			suns: []
-		};
+		// ss.addPlanet({
+		// 	pos: { x: center.x -300, y: center.y },
+		// 	radius: 3,
+		// 	gradientColors: {a: "#cc66ff", b: "#9900cc" },
+		// 	mass: 6,
+		// 	suns: ss.getSuns(),
+		// 	speed: 2.5,
+		// 	dir: { x: 0, y: 1 },
+		// 	path: true,
+		// });
 
 
-		ss.addPlanetWithMoon(ven, vensMoon);
 
 
 		const jup = {
@@ -59,7 +88,7 @@ const SSData1 = {
 			gradientColors: { a: "rgb(255, 153, 51)", b: "darkred" },
 			mass: 40,
 			suns: ss.getSuns(),
-			speed: 1.95,
+			speed: 1.90,
 			dir: { x: 0, y: -1 },
 			path: true
 		};
@@ -73,7 +102,6 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			suns: []
 		};
-
 
 		ss.addPlanetWithMoon(jup, jupsMoon);
 

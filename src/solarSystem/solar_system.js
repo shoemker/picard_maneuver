@@ -7,12 +7,12 @@ const Utils = require("../utils");
 
 class SolarSystem {
 
-	constructor(tilt, center, starCount, bottomOfStarField) {
+	constructor(tilt, starCount, bottomOfStarField) {
 		this.suns = [];
 		this.planets = [];
 
 		this.tilt = tilt;
-		this.center = center;
+		this.center = { x: Utils.getCanvasDim().x / 2, y: Utils.getCanvasDim().y / 2 };
 
 		this.stars = new Array(starCount);
 		for (let i = 0; i < this.stars.length; i++) {
@@ -25,6 +25,7 @@ class SolarSystem {
 	setTilt(tilt) { this.tilt = tilt; };
 	getSuns() { return this.suns; };
 	getCenter() { return this.center; }
+	setCenter(center) { this.center = center; }
 
 
 	addSun(ctx, options) {
@@ -38,7 +39,7 @@ class SolarSystem {
 		options.color = gradient;
 		options.centerOfSS = this.center;
 
-		this.suns.push(new SolarObject(options));
+		this.suns.push(new OrbitingPlanet(options));
 	};
 
 
@@ -75,7 +76,8 @@ class SolarSystem {
 
 	draw(ctx) {
 		this.stars.forEach((star) => star.draw(ctx));
-		this.suns.forEach((sun) => sun.draw(ctx));
+		this.suns.forEach((sun) => sun.draw(ctx, this.tilt));
+		this.planets.forEach((planet) => planet.drawPath(ctx, this.tilt));
 		this.planets.forEach((planet) => planet.draw(ctx, this.tilt));
 	};
 

@@ -52,8 +52,6 @@ class OrbitingPlanet extends SolarObject {
 
 	draw(ctx, tilt) {
 
-		if (this.path) this.drawPath(ctx, tilt);
-
 		let orbitingPosY = this.centerOfSS.y;
 
 		const distanceFromSunY = this.pos.y - orbitingPosY;
@@ -110,13 +108,16 @@ class OrbitingPlanet extends SolarObject {
 	};
 
 
+
 	drawPath(ctx, tilt) {
-		ctx.beginPath();
-		ctx.lineWidth = 1;
-		ctx.strokeStyle = "white";
-		ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
-			this.distance, this.distance * tilt, 0, 0, 2 * Math.PI);
-		ctx.stroke();
+		if (this.path) {
+			ctx.beginPath();
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = "white";
+			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
+				this.distance, this.distance * tilt, 0, 0, 2 * Math.PI);
+			ctx.stroke();
+		}
 	};
 }
 
