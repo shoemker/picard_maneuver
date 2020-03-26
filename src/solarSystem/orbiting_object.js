@@ -1,9 +1,18 @@
-const SolarObject = require("./solar_object");
 const Utils = require("../utils");
 
-class OrbitingPlanet extends SolarObject {
+class OrbitingObject {
 	constructor(options) {
-		super(options);
+		this.pos = options.pos;
+		this.radius = options.radius;
+		this.mass = options.mass;
+		this.color = options.color;
+		this.dir = options.dir;
+		this.speed = options.speed;
+
+		if (options.suns) this.suns = options.suns;
+		else this.suns = [];
+
+		this.centerOfSS = options.centerOfSS;		
 		this.path = options.path;
 		this.moonData = options.moonData;
 		this.moons = [];
@@ -15,6 +24,10 @@ class OrbitingPlanet extends SolarObject {
 		this.ringsColor = options.ringsColor;
 		this.yAfterTilt;
 	};
+
+	getPosition() { return this.pos; };
+	getMass() { return this.mass; };
+	getRadius() { return this.radius; };
 
 	addMoon(moon) { this.moons.push(moon); };
 	getMoons() { return this.moons; };
@@ -88,15 +101,22 @@ class OrbitingPlanet extends SolarObject {
 	generateRGradient(ctx, colors) {
 		const distance = Utils.distance([this.pos.x, this.yAfterTilt], 
 			[this.centerOfSS.x,this.centerOfSS.y]);
-		
+
+		let radius1 = distance - this.radius * .9;
+		if (radius1 < 0) radius1 = 0;
+
+		let radius2 = distance + this.radius * 2;
+		if (radius2 < 0) radius2 = 0;
+
 		const gradient = ctx.createRadialGradient(
-			this.centerOfSS.x, this.centerOfSS.y-distance/8, distance-distance/10,
-			this.centerOfSS.x, this.centerOfSS.y-distance/8, distance+this.radius*2);
+			this.centerOfSS.x, this.centerOfSS.y-distance/5,radius1,
+			this.centerOfSS.x, this.centerOfSS.y-distance/5, radius2);
 
 		gradient.addColorStop(0, colors.a);
 		gradient.addColorStop(1, colors.b);
 
 		return gradient;
+
 	};
 
 
@@ -125,4 +145,4 @@ class OrbitingPlanet extends SolarObject {
 	};
 }
 
-module.exports = OrbitingPlanet
+module.exports = OrbitingObject;

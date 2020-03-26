@@ -1,7 +1,7 @@
-const OrbitingPlanet = require("./orbiting_planet");
+const OrbitingObject = require("./orbiting_object");
 const Utils = require("../utils");
 
-class Comet extends OrbitingPlanet {
+class Comet extends OrbitingObject {
 	constructor(options) {
 		super(options);
 		this.tailLength = 100;
@@ -15,8 +15,8 @@ class Comet extends OrbitingPlanet {
 		const orbitRad = this.suns[0].radius;
 
 		// hopefully comet isn't drawn when it's behind sun
-		if (this.pos.x > orbitPos.x + orbitRad/3 || 
-			this.pos.x < orbitPos.x - orbitRad/3 ||
+		if (this.pos.x > orbitPos.x + orbitRad/4 || 
+			this.pos.x < orbitPos.x - orbitRad/4 ||
 			this.pos.y > orbitPos.y) {
 					
 			super.draw(ctx, tilt);
