@@ -45,11 +45,6 @@ class SolarSystem {
 	};
 
 
-	// addComet(comet) {
-	// 	this.planets.push(comet);
-	// };
-
-
 	step() {
 		this.moveObjects();
 	};
@@ -63,10 +58,7 @@ class SolarSystem {
 	};
 
 	moveObjects(){
-		this.suns.forEach((sun) => {
-			// debugger
-			sun.move();
-		});
+		this.suns.forEach((sun) => sun.move());
 
 		this.planets.forEach((planet) => planet.move());
 	};

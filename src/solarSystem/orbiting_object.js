@@ -42,6 +42,8 @@ class OrbitingObject {
 			this.distance = Utils.distance([this.pos.x, this.pos.y],
 				[sun.getPosition().x, sun.getPosition().y]);
 
+			// console.log(this.distance)
+
 			const deltaX = sun.getPosition().x - this.pos.x;
 			const deltaY = sun.getPosition().y - this.pos.y;
 
@@ -80,7 +82,13 @@ class OrbitingObject {
 
 
 		if (this.gradientColors) this.color = this.generateRGradient(ctx, this.gradientColors);
-		
+
+		// draw moon if it's in back of planet
+		this.moons.forEach(moon => {
+			if (moon.getPosition().y < this.pos.y) 
+				moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult);
+		});
+
 		// back of rings drawn
 		if (this.rings) 
 			this.rings.forEach((ring)=> this.drawRings(ctx, ring, this.yAfterTilt, Math.PI));
@@ -94,7 +102,13 @@ class OrbitingObject {
 		if (this.rings)
 			this.rings.forEach((ring) => this.drawRings(ctx, ring, this.yAfterTilt, 0));
 
-		this.moons.forEach(moon => moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult));
+		// draw moon if it's in front of planet
+		this.moons.forEach(moon => {
+			if (moon.getPosition().y >= this.pos.y)
+				moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult);
+		});
+
+	//	this.moons.forEach(moon => moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult));
 	};
 
 

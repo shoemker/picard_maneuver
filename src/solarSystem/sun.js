@@ -1,13 +1,13 @@
 const OrbitingObject = require("./orbiting_object");
 
-const Utils = require("../utils");
-
 class Sun extends OrbitingObject{
 	constructor(options) {
 		super(options);
 		this.gradientColor = options.gradientColor;
+		// this.lastPos;
 	};
 
+	// getLastPos() { return this.lastPositon; };
 
 	draw(ctx, tilt) {
 
@@ -22,6 +22,13 @@ class Sun extends OrbitingObject{
 		super.draw(ctx, tilt);
 	};
 
+	// move(i) {
+		// if (i != 0) super.move(true);
+		// else {
+		// 	this.lastPos = this.pos;
+			// super.move();
+		// }
+	// }
 
 }
 
