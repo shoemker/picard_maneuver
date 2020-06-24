@@ -107,8 +107,6 @@ class OrbitingObject {
 			if (moon.getPosition().y >= this.pos.y)
 				moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult);
 		});
-
-	//	this.moons.forEach(moon => moon.draw(ctx, tilt, this.yAfterTilt, this.radiusMult));
 	};
 
 
