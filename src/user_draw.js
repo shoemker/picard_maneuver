@@ -243,10 +243,9 @@ class UserDraw {
 
 
 	changeLineWidth(y) {
-		const yOffset = this.boxY + 110;
-		if (y >= yOffset - 5 && y <= yOffset + 25) this.lineWidthFromUser = 13;
-		else if (y >= yOffset + 145 && y <= yOffset + 175) this.lineWidthFromUser = 20;
-		else if (y >= yOffset + 295 && y <= yOffset + 322) this.lineWidthFromUser = 27;
+		if (y >= 170 && y < 330) this.lineWidthFromUser = 13;
+		else if (y >= 330 && y < 490) this.lineWidthFromUser = 20;
+		else if (y >= 490 && y < 670) this.lineWidthFromUser = 27;
 	}
 
 
