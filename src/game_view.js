@@ -50,17 +50,14 @@ class GameView {
 					this.game.enemies.forEach((enemy, i) => {
 						if (enemy.isGone()){
 							this.game.enemies.splice(i, 1);
-							this.game.enemyAIs.splice(i, 1);
-							if(this.game.main.getTarget() === enemy) this.game.changeMainTarget();
+							
+ 							if(this.game.main.getTarget() === enemy) this.game.changeMainTarget();
 							if(this.game.enemies.length > 0) 
 								this.game.enemies[this.game.enemies.length - 1].setLabels(true);
 						} 
 					})
 					this.game.allies.forEach((ally, i) => {
-						if (ally.isGone()) {
-							this.game.allies.splice(i, 1);
-							this.game.allyAIs.splice(i, 1);
-						}
+						if (ally.isGone()) this.game.allies.splice(i, 1);
 					})
 					this.game.step();
 				}
@@ -245,53 +242,61 @@ class GameView {
 
 	addMain(ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		const options = {
+			game: this.game,
 			ssdPos,
 			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
 			torpedoReload,
+			aiTargeting,
 			bridgeView: this.game.getBridge()
 		}
 
-		if (this.enterprise) this.game.addMainShip(new Enterprise(options), aiTargeting);
+		if (this.enterprise) this.game.addMainShip(new Enterprise(options));
 		else 
-			this.game.addMainShip(new DrawnShip(options, this.drawing, this.ssdPortrait), aiTargeting);
+			this.game.addMainShip(new DrawnShip(options, this.drawing, this.ssdPortrait));
 	}
 	
 
 
 	addBop(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new Bird_of_Prey({
+			game: this.game,
 			pos, ssdPos,
 			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
+			torpedoReload,
+			aiTargeting
+		}));
 	};
 
 	addSoyuz(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addAlly(new Soyuz({
+			game: this.game,
 			pos, ssdPos,
 			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
+			torpedoReload,
+			aiTargeting
+		}));
 	};
 
 	addD7(pos, ssdPos, aiTargeting, rotationOffset, phaserRecharge, torpedoReload) {
 		this.game.addEnemy(new D7({
+			game: this.game,
 			pos, ssdPos,
 			rotationOffset,
 			images: this.images,
 			sounds: this.sounds,
 			phaserRecharge,
-			torpedoReload
-		}), aiTargeting);
+			torpedoReload, 
+			aiTargeting
+		}));
 	};
 
 

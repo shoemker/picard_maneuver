@@ -1,5 +1,7 @@
 const SpaceObject = require("../non-ship_space_objects/space_object");
-const Explosion = require("../explosion")
+const Explosion = require("../explosion");
+const EnemyAI = require("../enemyAI");
+
 const Utils = require("../utils");
 
 class Ship extends SpaceObject{
@@ -12,6 +14,8 @@ class Ship extends SpaceObject{
 		
 		this.images = options.images;
 		this.target = options.target;
+		
+		this.AI= new EnemyAI(this, options.game, options.aiTargeting);
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
 		this.callback;
@@ -296,6 +300,11 @@ class Ship extends SpaceObject{
 			token.time++;
 			if (token.time === 40) this.damageTokens.splice(i, 1);
 		})
+	};
+
+
+	consultAI(onscreen) {
+		this.AI.consultAI(onscreen);
 	};
 
 

@@ -292,7 +292,8 @@ class UserDraw {
 		for (let index = 0; index < imgData.data.length; index += 4) {
 			if (imgData.data[index] === 0 &&
 				imgData.data[index + 1] === 0 &&
-				imgData.data[index + 2] === 0)
+				imgData.data[index + 2] === 0
+				)
 				imgData.data[index + 3] = 0;
 		}
 

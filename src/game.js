@@ -1,6 +1,5 @@
 const Star = require("./non-ship_space_objects/star");
 const Planet = require("./non-ship_space_objects/planet");
-const EnemyAI = require("./enemyAI");
 const Torpedo = require("./non-ship_space_objects/torpedo");
 const BridgeView = require("./bridge_view");
 const Utils = require("./utils");
@@ -19,8 +18,6 @@ class Game {
 
 		this.enemies = [];
 		this.allies = [];
-		this.enemyAIs = [];
-		this.allyAIs = []
 		this.torpedoes = [];
 
 		this.keyMap = {};
@@ -41,20 +38,10 @@ class Game {
 	getKeyMap() { return this.keyMap; };
 	getBridge() { return this.bridgeView; };
 
-	addMainShip(ship, aiTargeting) {
-		this.main = ship;
-		this.mainAI = new EnemyAI(ship, this, aiTargeting);
-	};
+	addMainShip(ship) {	this.main = ship;	};
+	addEnemy(enemy) { this.enemies.push(enemy); };
+	addAlly(ship) { this.allies.push(ship); };
 
-	addEnemy(enemy, aiTargeting) {
-		this.enemies.push(enemy);
-		this.enemyAIs.push(new EnemyAI(enemy, this, aiTargeting));
-	};
-
-	addAlly(ship, aiTargeting) {
-		this.allies.push(ship);
-		this.allyAIs.push(new EnemyAI(ship, this, aiTargeting));
-	};
 
 	// factory method to create planet and moon objects
 	createPlanetAndMoon(planetImg, pCoords, moonImg, mCoords = [3, 3, 58, 58]) {
@@ -86,12 +73,11 @@ class Game {
 
 		this.moveObjects();
 
-		this.enemyAIs.forEach((AI, i) => AI.consultAI(this.enemies[i].onscreen()));
-
-		this.allyAIs.forEach((AI, i) =>	AI.consultAI(this.allies[i].onscreen()));
+		this.enemies.forEach((enemy) => enemy.consultAI(enemy.onscreen()));
+		this.allies.forEach((ally) => ally.consultAI(ally.onscreen()));
 
 		if (this.autopilot && this.main.getTarget())
-			this.mainAI.consultAI(this.main.getTarget().onscreen());
+			this.main.consultAI(this.main.getTarget().onscreen());
 
 		this.checkTorpCollisions();
 

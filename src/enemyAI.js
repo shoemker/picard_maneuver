@@ -5,7 +5,7 @@ class EnemyAI  {
 		this.aiShip = aiShip;
 		this.game = game;
 		this.targeting = targeting
-		this.turnCounterMax = aiShip.getTurnRadius();
+		// this.aiShip.getTurnRadius() = this.aiShip.getTurnRadius();
 		this.beenOffScreen = false;
 
 		this.turnLeftLength = 0;
@@ -38,7 +38,7 @@ class EnemyAI  {
 		else if (onscreen && this.beenOffScreen) {
 			this.aiShip.setTarget(this.game.randomTarget(this.aiShip))
 			this.beenOffScreen = false;
-			if (!this.aiShip.isEnemy() && this.aiShip.getTarget() === this.game.main) debugger;
+			// if (!this.aiShip.isEnemy() && this.aiShip.getTarget() === this.game.main) debugger;
 		}
 		else {
 			const target = this.aiShip.getTarget()
@@ -74,10 +74,11 @@ class EnemyAI  {
 	
 
 	turningAndTorpedoes(angleOfOpponent, onscreen) {
+		// if (this.aiShip.torpedosReady()) debugger;
 		const turnCircleMax = 180;
 		if (!onscreen || this.aiShip.torpedosReady()) {
 			if (angleOfOpponent > Math.PI /18 && angleOfOpponent <= Math.PI) {
-				if (this.turnCounter === this.turnCounterMax) {
+				if (this.turnCounter === this.aiShip.getTurnRadius()) {
 					if (this.turnRightLength < turnCircleMax) {
 						this.aiShip.changeDirection(1);
 						this.turnRightLength++;
@@ -87,7 +88,7 @@ class EnemyAI  {
 				}
 			}
 			else if (angleOfOpponent < Math.PI * 1.9444 && angleOfOpponent > Math.PI) {
-				if (this.turnCounter === this.turnCounterMax) {
+				if (this.turnCounter === this.aiShip.getTurnRadius()) {
 					if (this.turnLeftLength < turnCircleMax) {
 						this.aiShip.changeDirection(-1);
 						this.turnLeftLength++;
@@ -106,7 +107,7 @@ class EnemyAI  {
 		}
 
 		this.turnCounter++;
-		if (this.turnCounter > this.turnCounterMax) this.turnCounter = 0;
+		if (this.turnCounter > this.aiShip.getTurnRadius()) this.turnCounter = 0;
 	}
 
 

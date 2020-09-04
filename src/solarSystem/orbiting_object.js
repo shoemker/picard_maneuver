@@ -148,7 +148,7 @@ class OrbitingObject {
 	drawPath(ctx, tilt) {
 		if (this.path) {
 			ctx.beginPath();
-			ctx.lineWidth = 1;
+			ctx.lineWidth = .5;
 			ctx.strokeStyle = "white";
 			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
 				this.distance, this.distance * tilt, 0, 0, 2 * Math.PI);
