@@ -9,7 +9,7 @@ class Comet extends OrbitingObject {
 
 
 	draw(ctx, tilt) {
-		tilt -= .1;
+		tilt -= .12;
 
 		const orbitPos = this.suns[0].getPosition();
 		const orbitRad = this.suns[0].radius;

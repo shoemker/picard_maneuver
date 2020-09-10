@@ -24,8 +24,8 @@ class OrbitingObject {
 		this.ringsColor = options.ringsColor;
 		this.yAfterTilt;
 
-		this.farAwayMultiplier = .7;
-		this.closeMultiplier = 1.2
+		this.farAwayMultiplier = .75;
+		this.closeMultiplier = 1.25;
 	};
 
 	getPosition() { return this.pos; };
