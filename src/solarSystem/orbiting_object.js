@@ -23,6 +23,9 @@ class OrbitingObject {
 		this.rings = options.rings;
 		this.ringsColor = options.ringsColor;
 		this.yAfterTilt;
+
+		this.farAwayMultiplier = .7;
+		this.closeMultiplier = 1.2
 	};
 
 	getPosition() { return this.pos; };
@@ -71,10 +74,14 @@ class OrbitingObject {
 
 	draw(ctx, tilt) {
 
-		let orbitingPosY = this.centerOfSS.y;
 
-		const distanceFromSunY = this.pos.y - orbitingPosY;
-		this.yAfterTilt =  distanceFromSunY*tilt +orbitingPosY ;
+		let distanceFromSunY = this.pos.y - this.centerOfSS.y;
+
+		// objects above sun are closer together on tilt
+		if (distanceFromSunY < 0) distanceFromSunY *= this.farAwayMultiplier;
+		if (distanceFromSunY > 0) distanceFromSunY *= this.closeMultiplier;
+
+		this.yAfterTilt =  distanceFromSunY*tilt +this.centerOfSS.y ;
 
 		this.radiusMult = 1 +  distanceFromSunY/300;
 
@@ -151,8 +158,12 @@ class OrbitingObject {
 			ctx.lineWidth = .5;
 			ctx.strokeStyle = "white";
 			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
-				this.distance, this.distance * tilt, 0, 0, 2 * Math.PI);
+				this.distance, this.distance * tilt* this.closeMultiplier, 0, 0, Math.PI);
+			// ctx.stroke();
+			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
+				this.distance, this.distance * tilt * this.farAwayMultiplier, 0, Math.PI,0);			
 			ctx.stroke();
+
 		}
 	};
 }

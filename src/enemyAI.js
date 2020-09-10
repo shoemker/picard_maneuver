@@ -5,7 +5,6 @@ class EnemyAI  {
 		this.aiShip = aiShip;
 		this.game = game;
 		this.targeting = targeting
-		// this.aiShip.getTurnRadius() = this.aiShip.getTurnRadius();
 		this.beenOffScreen = false;
 
 		this.turnLeftLength = 0;
