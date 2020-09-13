@@ -8,6 +8,7 @@ class SSD {
 		this.ssd_y = options.ssdPos[1];
 		this.scale = options.ssdPos[2];
 		this.labels = options.ssdPos[3];
+		this.engineDamageDim = options.engineDamageDim;
 		
 		this.ssd_total_width = 70 * this.scale;
 		this.ssd_total_height = 120 * this.scale;
@@ -101,6 +102,8 @@ class SSD {
 
 		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
+
+		this.drawEngineDamage(ctx);
 	};
 
 
@@ -151,7 +154,44 @@ class SSD {
 		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
 		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
 	};
+	// {left_x:13, right_x: 39, y:68, width:4, height: 53}
 
+
+	drawEngineDamage(ctx) {
+		let x_coord = this.ssd_x + this.engineDamageDim.left_x * this.scale;
+		let y_coord = this.ssd_y + this.engineDamageDim.y * this.scale;
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+
+		ctx.rect(
+			x_coord, 
+			y_coord, 
+			this.engineDamageDim.width * this.scale, 
+			this.engineDamageDim.height * this.scale);
+
+		ctx.rect(
+			x_coord + this.engineDamageDim.right_x * this.scale, 
+			y_coord, 
+			this.engineDamageDim.width * this.scale, 
+			this.engineDamageDim.height * this.scale);
+			
+		ctx.fill();
+
+	};
+
+	// drawEngineDamage(ctx) {
+	// 	let x_coord = this.ssd_x + 13 * this.scale;
+	// 	let y_coord = this.ssd_y + 68 * this.scale;
+
+	// 	ctx.beginPath();
+	// 	ctx.fillStyle = "yellow";
+
+	// 	ctx.rect(x_coord, y_coord, 4 * this.scale, 53 * this.scale);
+	// 	ctx.rect(x_coord + 39 * this.scale, y_coord, 4 * this.scale, 53 * this.scale);
+	// 	ctx.fill();
+
+	// };
 
 	// factory method to create shield objects
 	raiseShields() {

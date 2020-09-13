@@ -34,7 +34,8 @@ class Soyuz extends Frigate {
 			img: this.images.soyuzSsdImg,
 			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 202, 298],
-			shieldStrength: 40
+			shieldStrength: 40,
+			engineDamageDim: { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 }
 		});
 	};
 

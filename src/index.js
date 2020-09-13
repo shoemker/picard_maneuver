@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			kTorpSound: getSound("klingonTorpedo", audioCtx, gainNode), 
 			torpSound: getSound("torpedo", audioCtx, gainNode),	
 			exploSound: getSound("explosion", audioCtx, gainNode), 
-			theme: getSound("theme", audioCtx, gainNode)
+			// theme: getSound("theme", audioCtx, gainNode)
 	});
 
 	gv.start();

@@ -26,6 +26,7 @@ class DrawnShip extends MainShip {
 			beamWeaponName: "Phaser",
 			imgCoords: [0, 0, 500, 500],
 			shieldStrength: 100,
+			engineDamageDim: { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 }
 		});
 	};
 

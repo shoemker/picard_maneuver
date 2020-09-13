@@ -29,7 +29,8 @@ class D7 extends Ship {
 			img: this.images.d7SsdImg,
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 207, 287],
-			shieldStrength: 100
+			shieldStrength: 100,
+			engineDamageDim: { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 }
 		});
 	};
 

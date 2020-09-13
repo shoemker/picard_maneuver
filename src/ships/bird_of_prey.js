@@ -34,7 +34,8 @@ class Bird_of_Prey extends Frigate {
 			img: this.images.bopSsdImg,
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 350, 240],
-			shieldStrength: 45
+			shieldStrength: 45,
+			engineDamageDim: { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 }
 		});
 	};
 
