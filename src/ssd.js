@@ -103,7 +103,7 @@ class SSD {
 		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
 
-		this.drawEngineDamage(ctx);
+		// this.drawEngineDamage(ctx);
 	};
 
 
