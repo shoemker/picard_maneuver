@@ -154,7 +154,6 @@ class SSD {
 		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
 		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
 	};
-	// {left_x:13, right_x: 39, y:68, width:4, height: 53}
 
 
 	drawEngineDamage(ctx) {
@@ -180,18 +179,6 @@ class SSD {
 
 	};
 
-	// drawEngineDamage(ctx) {
-	// 	let x_coord = this.ssd_x + 13 * this.scale;
-	// 	let y_coord = this.ssd_y + 68 * this.scale;
-
-	// 	ctx.beginPath();
-	// 	ctx.fillStyle = "yellow";
-
-	// 	ctx.rect(x_coord, y_coord, 4 * this.scale, 53 * this.scale);
-	// 	ctx.rect(x_coord + 39 * this.scale, y_coord, 4 * this.scale, 53 * this.scale);
-	// 	ctx.fill();
-
-	// };
 
 	// factory method to create shield objects
 	raiseShields() {
