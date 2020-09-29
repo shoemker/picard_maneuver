@@ -14,6 +14,8 @@ class Bird_of_Prey extends Frigate {
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.kTorpSound;
 
+		this.engineDamageDim = { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 };
+
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
 
@@ -41,7 +43,7 @@ class Bird_of_Prey extends Frigate {
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawLine,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawSquaresOnSSD,
 			{ image: this.images.bopImg, x: 0, y: 0, width: 267, height: 300 },
 			target);
 	};

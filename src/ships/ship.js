@@ -18,15 +18,9 @@ class Ship extends SpaceObject{
 		this.AI= new EnemyAI(this, options.game, options.aiTargeting);
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
-		this.callback;
 
-		this.beamSound;
-		this.torpSound;
-		this.shipImg;
-		this.beamPattern;
-		this.enemy;
-		this.phaserColor;
-		this.turnRadius;
+		this.beamPattern = [];
+
 		this.speed = 0;
 		this.width = 60;
 		this.height = 30;
@@ -38,6 +32,8 @@ class Ship extends SpaceObject{
 		this.phaserDamage = 18;
 		this.torpedoDamage = 20;
 		this.targetShieldHP = 1;
+		this.ssdPos = options.ssdPos;
+
 
 		this.direction = this.calcDirection(this.rotationOffset);
 
@@ -75,7 +71,7 @@ class Ship extends SpaceObject{
 	setLabels(val) { this.ssd.setLabels(val); }
 	
 
-	draw(ctx, callback, shipImage, target) {
+	draw(ctx, beamCallback, engineDamageCallback, shipImage, target) {
 
 		this.drawShip(ctx, shipImage);
 
@@ -86,12 +82,13 @@ class Ship extends SpaceObject{
 			this.hullIntegrity / this.hullIntegrityMax,
 			target
 		);
+		engineDamageCallback(ctx, this.engineDamageDim, this.ssdPos);
 
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage, callback);
+			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage, beamCallback);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;

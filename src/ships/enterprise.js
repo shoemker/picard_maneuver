@@ -10,6 +10,8 @@ class Enterprise extends Main {
 
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
+
+		this.engineDamageDim = {left_x: 13, right_x: 39, y: 68, width: 4, height: 53};
 		
 		this.width = 60;
 		this.height = 30;
@@ -27,13 +29,12 @@ class Enterprise extends Main {
 			beamWeaponName: "Phaser",
 			imgCoords: [0, 0, 110, 257],
 			shieldStrength: 100,
-			engineDamageDim:{left_x:13, right_x: 39, y:68, width:4, height: 53}
 		});
 	};
 	
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, 
+		super.draw(ctx, Utils.drawLine, this.ssd.drawSquaresOnSSD,
 			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300 });
 	};
 }

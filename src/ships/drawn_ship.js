@@ -15,6 +15,8 @@ class DrawnShip extends MainShip {
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
 
+		this.engineDamageDim = { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 };
+
 		this.phaserColor = "red";
 
 		// ssd is the ship systems display in the corner of the screen
@@ -32,7 +34,7 @@ class DrawnShip extends MainShip {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawSquaresOnSSD,
 			{ image: this.image, x: 1, y: 1, width: 498, height: 498 });
 	};
 }

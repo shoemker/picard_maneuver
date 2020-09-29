@@ -103,7 +103,6 @@ class SSD {
 		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
 
-		// this.drawEngineDamage(ctx);
 	};
 
 
@@ -155,25 +154,28 @@ class SSD {
 		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
 	};
 
-
-	drawEngineDamage(ctx) {
-		let x_coord = this.ssd_x + this.engineDamageDim.left_x * this.scale;
-		let y_coord = this.ssd_y + this.engineDamageDim.y * this.scale;
-
+	
+	// used as a callback to indicate damage, so can't use 'this'
+	drawSquaresOnSSD(ctx, engineDamageDim, ssdPos) {
+	
+		let scale = ssdPos[2];
+		let x_coord = ssdPos[0] + engineDamageDim.left_x * scale;
+		let y_coord = ssdPos[1] + engineDamageDim.y * scale;
+	
 		ctx.beginPath();
 		ctx.fillStyle = "yellow";
 
 		ctx.rect(
 			x_coord, 
 			y_coord, 
-			this.engineDamageDim.width * this.scale, 
-			this.engineDamageDim.height * this.scale);
+			engineDamageDim.width * scale, 
+			engineDamageDim.height * scale);
 
 		ctx.rect(
-			x_coord + this.engineDamageDim.right_x * this.scale, 
+			x_coord + engineDamageDim.right_x * scale, 
 			y_coord, 
-			this.engineDamageDim.width * this.scale, 
-			this.engineDamageDim.height * this.scale);
+			engineDamageDim.width * scale, 
+			engineDamageDim.height * scale);
 			
 		ctx.fill();
 

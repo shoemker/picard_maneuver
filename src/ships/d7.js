@@ -9,11 +9,12 @@ class D7 extends Ship {
 		this.enemy = true;
 		this.pos = options.pos;
 
-		this.beamPattern = [];
 		this.turnRadius = 2;
 
 		this.beamSound = options.sounds.disruptSound;
 		this.torpSound = options.sounds.kTorpSound;
+
+		this.engineDamageDim = {left_x: 0, right_x: 66, y: 82, width: 3, height: 32};
 
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
@@ -30,13 +31,12 @@ class D7 extends Ship {
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 207, 287],
 			shieldStrength: 100,
-			engineDamageDim: { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 }
 		});
 	};
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawWavyLine,
+		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawSquaresOnSSD,
 			{ image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 },
 			target);
 	};
