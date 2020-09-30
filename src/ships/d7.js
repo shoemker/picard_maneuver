@@ -41,7 +41,7 @@ class D7 extends Ship {
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawSquares, this.ssd.drawEllipses,
+		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawRects, this.ssd.drawEllipses,
 			{ image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 },
 			target);
 	};

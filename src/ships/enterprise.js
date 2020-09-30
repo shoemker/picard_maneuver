@@ -36,7 +36,7 @@ class Enterprise extends Main {
 	
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawEllipses,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawRects, this.ssd.drawEllipses,
 			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300 });
 	};
 }

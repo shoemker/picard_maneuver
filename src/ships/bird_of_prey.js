@@ -44,7 +44,7 @@ class Bird_of_Prey extends Frigate {
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawSquares,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawRects, this.ssd.drawRects,
 			{ image: this.images.bopImg, x: 0, y: 0, width: 267, height: 300 },
 			target);
 	};

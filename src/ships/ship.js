@@ -34,6 +34,11 @@ class Ship extends SpaceObject{
 		this.targetShieldHP = 1;
 		this.ssdPos = options.ssdPos;
 
+		this.engineDamCount = 0;
+		this.beamDamCount = 0; 
+		this.torpDamCount = 0;
+		this.damageCountMax = 500;
+
 		this.direction = this.calcDirection(this.rotationOffset);
 
 		this.ssd;
@@ -100,20 +105,6 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawSSD(ctx, engineDamCallback, beamDamCallback, target){
-		this.ssd.draw(ctx,
-			this.phaserRecharge / this.phaserRechargeMax,
-			this.torpedoReload / this.torpedoReloadMax,
-			this.hullIntegrity / this.hullIntegrityMax,
-			target
-		);
-
-		// engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
-		// beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
-		// this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
-	};
-
-
 	drawShip(ctx, shipImage){
 		ctx.save();
 
@@ -130,6 +121,44 @@ class Ship extends SpaceObject{
 		}
 
 		ctx.restore();
+	};
+
+
+	drawSSD(ctx, engineDamCallback, beamDamCallback, target) {
+		this.ssd.draw(ctx,
+			this.phaserRecharge / this.phaserRechargeMax,
+			this.torpedoReload / this.torpedoReloadMax,
+			this.hullIntegrity / this.hullIntegrityMax,
+			target
+		);
+
+		// this block displays engine damage on ssd 
+		if (this.engineDamCount === this.damageCountMax) {
+			this.engineDamCount = 0;
+		}
+		else if (this.engineDamCount > 0) {
+			this.engineDamCount++;
+			if (this.engineDamCount % 40 > 10) engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+		}
+
+		// this block displays damage to the beam weapon on ssd 
+		if (this.beamDamCount === this.damageCountMax) {
+			this.beamDamCount = 0;
+		}
+		else if (this.beamDamCount > 0) {
+			this.beamDamCount++;
+			if (this.beamDamCount % 40 > 10) beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+		}
+
+		// this block displays damage to the torpedo launcher on ssd 
+		if (this.torpDamCount === this.damageCountMax) {
+			this.torpDamCount = 0;
+		}
+		else if (this.torpDamCount > 0) {
+			this.torpDamCount++;
+			if (this.torpDamCount % 40 > 10)
+				this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
+		}
 	};
 
 

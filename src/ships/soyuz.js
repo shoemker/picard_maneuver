@@ -44,7 +44,7 @@ class Soyuz extends Frigate {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawCircleBeam, this.ssd.drawSquares, this.ssd.drawSquares,
+		super.draw(ctx, Utils.drawCircleBeam, this.ssd.drawRects, this.ssd.drawRects,
 			{ image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 });
 	};
 }

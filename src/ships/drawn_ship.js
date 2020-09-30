@@ -35,7 +35,7 @@ class DrawnShip extends MainShip {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawEllipses,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawRects, this.ssd.drawEllipses,
 			{ image: this.image, x: 1, y: 1, width: 498, height: 498 });
 	};
 }

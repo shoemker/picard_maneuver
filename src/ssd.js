@@ -150,13 +150,16 @@ class SSD {
 		ctx.fillText(this.beamWeaponName, x_coord, y_coord + 150 * this.scale);
 		ctx.fillText("Recharge", this.ssd_x - 95, y_coord + 15 + 160 * this.scale);
 
-		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, y_coord + 150 * this.scale);
-		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, y_coord + 15 + 160 * this.scale);
+		ctx.fillText("Torpedo", this.ssd_x + this.ssd_total_width + 20, 
+			y_coord + 150 * this.scale);
+
+		ctx.fillText("Reload", this.ssd_x + this.ssd_total_width + 25, 
+			y_coord + 15 + 160 * this.scale);
 	};
 
 	
 	// used as a callback to indicate damage, so can't use 'this'
-	drawSquares(ctx, damageDim, ssdPos) {
+	drawRects(ctx, damageDim, ssdPos) {
 		let scale = ssdPos[2];
 		let y_coord = ssdPos[1] + damageDim.y * scale;
 	
