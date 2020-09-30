@@ -159,7 +159,6 @@ class OrbitingObject {
 			ctx.strokeStyle = "white";
 			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
 				this.distance, this.distance * tilt* this.closeMultiplier, 0, 0, Math.PI);
-			// ctx.stroke();
 			ctx.ellipse(this.centerOfSS.x, this.centerOfSS.y,
 				this.distance, this.distance * tilt * this.farAwayMultiplier, 0, Math.PI,0);			
 			ctx.stroke();

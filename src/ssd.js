@@ -156,29 +156,54 @@ class SSD {
 
 	
 	// used as a callback to indicate damage, so can't use 'this'
-	drawSquaresOnSSD(ctx, engineDamageDim, ssdPos) {
-	
+	drawSquares(ctx, damageDim, ssdPos) {
 		let scale = ssdPos[2];
-		let x_coord = ssdPos[0] + engineDamageDim.left_x * scale;
-		let y_coord = ssdPos[1] + engineDamageDim.y * scale;
+		let y_coord = ssdPos[1] + damageDim.y * scale;
 	
 		ctx.beginPath();
 		ctx.fillStyle = "yellow";
 
 		ctx.rect(
-			x_coord, 
+			ssdPos[0] + damageDim.left_x * scale, 
 			y_coord, 
-			engineDamageDim.width * scale, 
-			engineDamageDim.height * scale);
+			damageDim.width * scale, 
+			damageDim.height * scale);
 
 		ctx.rect(
-			x_coord + engineDamageDim.right_x * scale, 
+			ssdPos[0] + damageDim.right_x * scale, 
 			y_coord, 
-			engineDamageDim.width * scale, 
-			engineDamageDim.height * scale);
+			damageDim.width * scale, 
+			damageDim.height * scale);
 			
 		ctx.fill();
+	};
 
+
+	// used as a callback to indicate damage, so can't use 'this'
+	drawEllipses(ctx, damageDim, ssdPos) {
+		let scale = ssdPos[2];
+		let y_coord = ssdPos[1] + damageDim.y * scale;
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+
+		ctx.ellipse(
+			ssdPos[0] + damageDim.left_x * scale,
+			y_coord,
+			damageDim.width * scale,
+			damageDim.height * scale,
+			0,
+			0, 2 * Math.PI);
+
+		ctx.ellipse(
+			ssdPos[0] + damageDim.right_x * scale,
+			y_coord,
+			damageDim.width * scale,
+			damageDim.height * scale,
+			0,
+			0, 2 * Math.PI);
+
+		ctx.fill();
 	};
 
 

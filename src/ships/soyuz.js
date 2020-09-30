@@ -15,7 +15,8 @@ class Soyuz extends Frigate {
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.torpSound;
 
-		this.engineDamageDim = { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 };
+		this.engineDamageDim = {left_x: 7, right_x: 60, y: 78, width: 3, height: 35};
+		this.beamDamageDim = { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 };
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
@@ -37,13 +38,12 @@ class Soyuz extends Frigate {
 			beamWeaponName: 'Phaser',
 			imgCoords: [0, 0, 202, 298],
 			shieldStrength: 40,
-			engineDamageDim: { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 }
 		});
 	};
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawCircleBeam, this.ssd.drawSquaresOnSSD,
+		super.draw(ctx, Utils.drawCircleBeam, this.ssd.drawSquares, this.ssd.drawSquares,
 			{ image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 });
 	};
 }

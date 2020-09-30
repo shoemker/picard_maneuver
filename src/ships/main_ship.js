@@ -19,9 +19,9 @@ class MainShip extends Ship {
 		return super.takeDamage(attacker, damage);
 	};
 
-	draw(ctx, beamCallback, engineDamageCallback, shipImage) {
+	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, shipImage) {
 		if (this.shipExplosionCounter == 1) this.bridgeView.destroyed();
-		super.draw(ctx, beamCallback, engineDamageCallback, shipImage);
+		super.draw(ctx, beamCallback, engineDamCallback, beamDamCallback, shipImage);
 	};
 
 	firePhasers(){

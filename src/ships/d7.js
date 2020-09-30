@@ -15,6 +15,7 @@ class D7 extends Ship {
 		this.torpSound = options.sounds.kTorpSound;
 
 		this.engineDamageDim = {left_x: 0, right_x: 66, y: 82, width: 3, height: 32};
+		this.beamDamageDim = { left_x: 1, right_x: 67, y: 77, width: 7, height: 4 };
 
 		this.phaserRechargeMax = 200;
 		this.torpedoReloadMax = 190;
@@ -36,7 +37,7 @@ class D7 extends Ship {
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawSquaresOnSSD,
+		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawSquares, this.ssd.drawEllipses,
 			{ image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 },
 			target);
 	};

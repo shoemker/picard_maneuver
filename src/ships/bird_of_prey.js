@@ -14,7 +14,8 @@ class Bird_of_Prey extends Frigate {
 		this.beamSound = options.sounds.disrupt2Sound;
 		this.torpSound = options.sounds.kTorpSound;
 
-		this.engineDamageDim = { left_x: 0, right_x: 66, y: 82, width: 3, height: 32 };
+		this.engineDamageDim = {left_x: 27, right_x: 35, y: 90, width: 8, height: 15};
+		this.beamDamageDim = {left_x: 13, right_x: 39, y: 68, width: 4, height: 53};
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
@@ -37,13 +38,12 @@ class Bird_of_Prey extends Frigate {
 			beamWeaponName: 'Disruptor',
 			imgCoords: [0, 0, 350, 240],
 			shieldStrength: 45,
-			engineDamageDim: { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 }
 		});
 	};
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawSquaresOnSSD,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawSquares,
 			{ image: this.images.bopImg, x: 0, y: 0, width: 267, height: 300 },
 			target);
 	};

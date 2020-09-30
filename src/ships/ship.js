@@ -34,7 +34,6 @@ class Ship extends SpaceObject{
 		this.targetShieldHP = 1;
 		this.ssdPos = options.ssdPos;
 
-
 		this.direction = this.calcDirection(this.rotationOffset);
 
 		this.ssd;
@@ -71,8 +70,8 @@ class Ship extends SpaceObject{
 	setLabels(val) { this.ssd.setLabels(val); }
 	
 
-	draw(ctx, beamCallback, engineDamageCallback, shipImage, target) {
-
+	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, shipImage, target) {
+		// debugger
 		this.drawShip(ctx, shipImage);
 
 		//draw ship systems display
@@ -82,7 +81,9 @@ class Ship extends SpaceObject{
 			this.hullIntegrity / this.hullIntegrityMax,
 			target
 		);
-		engineDamageCallback(ctx, this.engineDamageDim, this.ssdPos);
+
+		engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+		beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
 
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
