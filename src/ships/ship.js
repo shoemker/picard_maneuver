@@ -108,9 +108,9 @@ class Ship extends SpaceObject{
 			target
 		);
 
-		engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
-		beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
-		this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
+		// engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+		// beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+		// this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
 	};
 
 
