@@ -22,7 +22,7 @@ class Ship extends SpaceObject{
 		this.beamPattern = [];
 
 		this.speed = 0;
-		this.width = 60;
+		this.width = 60; 		// height and width need to be here
 		this.height = 30;
 		this.phaserOffsetDistance = 0;
 		this.phaserOffsetAngle = 0;
@@ -75,15 +75,7 @@ class Ship extends SpaceObject{
 		this.drawShip(ctx, shipImage);
 
 		//draw ship systems display
-		this.ssd.draw(ctx,
-			this.phaserRecharge / this.phaserRechargeMax,
-			this.torpedoReload / this.torpedoReloadMax,
-			this.hullIntegrity / this.hullIntegrityMax,
-			target
-		);
-
-		engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
-		beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+		this.drawSSD(ctx, engineDamCallback, beamDamCallback, target);
 
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
@@ -105,6 +97,20 @@ class Ship extends SpaceObject{
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
+	};
+
+
+	drawSSD(ctx, engineDamCallback, beamDamCallback, target){
+		this.ssd.draw(ctx,
+			this.phaserRecharge / this.phaserRechargeMax,
+			this.torpedoReload / this.torpedoReloadMax,
+			this.hullIntegrity / this.hullIntegrityMax,
+			target
+		);
+
+		engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+		beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+		this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
 	};
 
 

@@ -199,8 +199,8 @@ class GameView {
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
-		// this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
-		this.addSoyuz([0, 100], [100, 710, 1, true], false, 0, 0, 0);
+		this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
+		// this.addBop([0, 100], [100, 710, 1, true], false, 0, 0, 0);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
@@ -321,6 +321,7 @@ class GameView {
 			planet_03: Utils.loadImg('./images/planets/planet_03.png'),
 			bridge: Utils.loadImg('./images/bridge.png'),
 			bridgeShaken: Utils.loadImg('./images/bridge_shaken.png'),
+			torpIcon: Utils.loadImg('./images/torpIcon.png'),
 		}
 	};
 }

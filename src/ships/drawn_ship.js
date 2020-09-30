@@ -15,8 +15,9 @@ class DrawnShip extends MainShip {
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
 
-		this.engineDamageDim = {left_x: 7, right_x: 60, y: 78, width: 3, height: 35};
-		this.beamDamageDim = { left_x: 13, right_x: 39, y: 68, width: 4, height: 53 };
+		this.engineDamageDim = { left_x: 7, right_x: 60, y: 78, width: 3, height: 35 };
+		this.beamDamageDim = { left_x: 34, right_x: 34, y: 22, width: 7, height: 4 };
+		this.torpImgOnSSD = { x: 30, y: 50 };
 
 		this.phaserColor = "red";
 
@@ -34,7 +35,7 @@ class DrawnShip extends MainShip {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawSquares,
+		super.draw(ctx, Utils.drawLine, this.ssd.drawSquares, this.ssd.drawEllipses,
 			{ image: this.image, x: 1, y: 1, width: 498, height: 498 });
 	};
 }

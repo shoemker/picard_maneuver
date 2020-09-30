@@ -13,6 +13,7 @@ class Enterprise extends Main {
 
 		this.engineDamageDim = {left_x: 13, right_x: 52, y: 68, width: 4, height: 53};
 		this.beamDamageDim = { left_x: 34, right_x: 34, y: 22, width: 7, height: 4 };
+		this.torpImgOnSSD = {x: 30, y: 50};
 
 		this.width = 60;
 		this.height = 30;

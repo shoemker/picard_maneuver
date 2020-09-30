@@ -46,7 +46,7 @@ class SSD {
 			0, 0, this.img_size_x, this.img_size_y);
 
 		this.captureImage();
-	}
+	};
 
 	// this function gets the ssd imageData from the virtual canvas after it's drawn
 	// it then sets the black pixels to transparent
@@ -204,6 +204,15 @@ class SSD {
 			0, 2 * Math.PI);
 
 		ctx.fill();
+	};
+
+
+	drawTorpIcon(ctx, torpImage, torpPos) {
+		ctx.drawImage(torpImage, 
+			this.ssd_x + torpPos.x * this.scale, 
+			this.ssd_y + torpPos.y * this.scale,  
+			10*this.scale, 20*this.scale);
+
 	};
 
 

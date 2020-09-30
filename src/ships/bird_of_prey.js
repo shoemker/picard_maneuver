@@ -16,6 +16,7 @@ class Bird_of_Prey extends Frigate {
 
 		this.engineDamageDim = {left_x: 27, right_x: 35, y: 90, width: 8, height: 15};
 		this.beamDamageDim = { left_x: -25, right_x: 92, y: 45, width: 3, height: 25 };
+		this.torpImgOnSSD = { x: 30, y: 15 };
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;

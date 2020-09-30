@@ -17,6 +17,7 @@ class Soyuz extends Frigate {
 
 		this.engineDamageDim = {left_x: 7, right_x: 60, y: 78, width: 3, height: 35};
 		this.beamDamageDim = { left_x: -5, right_x: 72, y: 44, width: 3, height: 20};
+		this.torpImgOnSSD = { x: 30, y: 55 };
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
