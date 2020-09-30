@@ -379,11 +379,11 @@ class Game {
 
 		// w or up arrow
 		if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
-			this.main.power(1);
+			this.main.power(.5);
 
 		// s or down arrow
 		if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
-			this.main.power(-1);
+			this.main.power(-.5);
 
 		// a or left arrow
 		if (this.keyMap["65"] || this.keyMap["37"]) this.main.changeDirection(-1);
