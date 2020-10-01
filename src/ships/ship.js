@@ -37,7 +37,7 @@ class Ship extends SpaceObject{
 		this.engineDamCount = 0;
 		this.beamDamCount = 0; 
 		this.torpDamCount = 0;
-		this.damageCountMax = 500;
+		this.damageCountMax = 480;
 
 		this.direction = this.calcDirection(this.rotationOffset);
 
@@ -62,7 +62,7 @@ class Ship extends SpaceObject{
 	getRotation() { return this.rotationOffset; }
 	getSSD() { return this.ssd; }
 	phaserReady() { return this.phaserRecharge === this.phaserRechargeMax; }
-	torpedosReady() { return this.torpedoReload === this.torpedoReloadMax; }
+	torpedosReady() { return this.torpedoReload >= this.torpedoReloadMax; }
 	getHull() { return this.hullIntegrity; }
 	getTarget() { return this.target; }
 	getTurnRadius() { return this.turnRadius; }
@@ -90,7 +90,7 @@ class Ship extends SpaceObject{
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
-		if (this.torpedoReload !== this.torpedoReloadMax) this.torpedoReload++;
+		if (this.torpedoReload < this.torpedoReloadMax) this.torpedoReload++;
 
 		//shows torpedo hit
 		if (this.torpExplosionCounter) {
@@ -144,6 +144,7 @@ class Ship extends SpaceObject{
 		// this block displays damage to the beam weapon on ssd 
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
+			this.phaserDamage = this.phaserDamage * 2;
 		}
 		else if (this.beamDamCount > 0) {
 			this.beamDamCount++;
@@ -153,6 +154,10 @@ class Ship extends SpaceObject{
 		// this block displays damage to the torpedo launcher on ssd 
 		if (this.torpDamCount === this.damageCountMax) {
 			this.torpDamCount = 0;
+			this.torpedoReloadMax = this.torpedoReloadMax / 2;
+
+			if (this.torpedoReload > this.torpedoReloadMax) 
+				this.torpedoReload = this.torpedoReloadMax;
 		}
 		else if (this.torpDamCount > 0) {
 			this.torpDamCount++;
@@ -198,6 +203,7 @@ class Ship extends SpaceObject{
 		ctx.strokeStyle = this.phaserColor;
 		ctx.beginPath();
 		ctx.lineWidth = 3;
+		if (this.beamDamCount > 0) ctx.lineWidth = 1;
 		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		
 		// this callback draws the beam which can be straight, wavy, or circles depending on the callback
@@ -343,8 +349,14 @@ class Ship extends SpaceObject{
 
 
 	power(impulse) {
-		if (impulse > 0 && this.speed < 2) this.speed += impulse;
-		else if (impulse < 0 && this.speed > -1) this.speed += impulse;
+		if (impulse > 0 && this.speed < 2) {
+			// next line takes engine damage into account
+			if (this.engineDamCount === 0 || this.speed < .5) this.speed += impulse;
+		}
+		else if (impulse < 0 && this.speed > -1) {
+			// next line takes engine damage into account
+			if (this.engineDamCount === 0 || this.speed > -.5) this.speed += impulse;
+		}
 	};
 
 
@@ -361,7 +373,7 @@ class Ship extends SpaceObject{
 
 
 	fireTorpedos() {
-		if (this.torpedoReload === this.torpedoReloadMax && this.onscreen()) {
+		if (this.torpedoReload >= this.torpedoReloadMax && this.onscreen()) {
 			this.torpedoReload = 0;
 			this.torpSound.play();
 			return true;
@@ -404,11 +416,32 @@ class Ship extends SpaceObject{
 		else {
 			this.hullIntegrity -= damage;
 			if (this.hullIntegrity < 0) this.hullIntegrity = 0;
+			else this.determineSystemDamage();
 
 			this.ssd.updateImg(this.hullIntegrity / this.hullIntegrityMax);
 		}
 
 		return hp;
+	};
+
+	
+	determineSystemDamage() {
+		const rand = Math.random();
+		console.log(rand);
+
+		if (this.engineDamCount === 0 && rand < .2) {
+			this.engineDamCount = 1;
+			if (this.speed > .5) this.speed = .5;
+			else if (this.speed < -.5) this.speed = -.5;
+		}
+		else if (this.beamDamCount === 0 && rand >= .2 && rand < .4) {
+			this.beamDamCount = 1;
+			this.phaserDamage = this.phaserDamage / 2;
+		}
+		else if (this.torpDamCount === 0 && rand >= .4 && rand < .6) {
+			this.torpDamCount = 1;
+			this.torpedoReloadMax = this.torpedoReloadMax * 2;
+		}
 	};
 
 	
