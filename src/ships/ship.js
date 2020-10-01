@@ -132,37 +132,58 @@ class Ship extends SpaceObject{
 			target
 		);
 
-		// this block displays engine damage on ssd 
+		this.drawEngineDamageOnSSD(ctx, engineDamCallback);
+		this.drawBeamDamageOnSSD(ctx, beamDamCallback);
+		this.drawTorpDamageOnSSD(ctx);
+	};
+
+
+	drawEngineDamageOnSSD(ctx, engineDamCallback) {
 		if (this.engineDamCount === this.damageCountMax) {
 			this.engineDamCount = 0;
 		}
 		else if (this.engineDamCount > 0) {
 			this.engineDamCount++;
-			if (this.engineDamCount % 40 > 10) engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
-		}
+			this.ssd.drawDamageLabel(ctx, "Repairing Engines", 0);
 
-		// this block displays damage to the beam weapon on ssd 
+			if (this.engineDamCount % 40 > 10) {
+				engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+			}
+		}
+	};
+
+
+	drawBeamDamageOnSSD(ctx, beamDamCallback) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
 			this.phaserDamage = this.phaserDamage * 2;
 		}
 		else if (this.beamDamCount > 0) {
-			this.beamDamCount++;
-			if (this.beamDamCount % 40 > 10) beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
-		}
+			this.beamDamCount++;	
+			this.ssd.drawDamageLabel(ctx, "Repairing " + this.ssd.getBeamName() + "s", 50);
 
-		// this block displays damage to the torpedo launcher on ssd 
+			if (this.beamDamCount % 40 > 10) {
+				beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+			}
+		}
+	};
+
+
+	drawTorpDamageOnSSD(ctx) {
 		if (this.torpDamCount === this.damageCountMax) {
 			this.torpDamCount = 0;
 			this.torpedoReloadMax = this.torpedoReloadMax / 2;
 
-			if (this.torpedoReload > this.torpedoReloadMax) 
+			if (this.torpedoReload > this.torpedoReloadMax)
 				this.torpedoReload = this.torpedoReloadMax;
 		}
 		else if (this.torpDamCount > 0) {
 			this.torpDamCount++;
-			if (this.torpDamCount % 40 > 10)
+			this.ssd.drawDamageLabel(ctx, "Repairing Torpedos", 100);
+
+			if (this.torpDamCount % 40 > 10) {
 				this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
+			}
 		}
 	};
 

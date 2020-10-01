@@ -142,7 +142,7 @@ class UserDraw {
 		this.ctx.lineTo(x + 50, y + 300);
 		this.ctx.lineWidth = 27;
 		this.ctx.stroke();
-	}
+	};
 
 
 	drawLineWidthIndicator() {
@@ -165,7 +165,7 @@ class UserDraw {
 				this.ctx.strokeRect(x - 20, y - 20 + 300, 90, 40);
 				break;
 		}
-	}
+	};
 
 
 	drawColorChoices() {
@@ -189,7 +189,7 @@ class UserDraw {
 
 		this.drawBlackRectangleWithBorder(x, y + 400, 30, 30);
 		this.ctx.strokeStyle = "white";
-	}
+	};
 
 
 	drawColorIndicator() {
@@ -227,7 +227,7 @@ class UserDraw {
 				this.ctx.strokeRect(x - 4, y - 4 + 400, 38, 38);
 				break;
 		}
-	}
+	};
 
 
 	changeColor(y) {
@@ -239,14 +239,14 @@ class UserDraw {
 		else if (y >= yOffset + 240 && y <= yOffset + 270) this.strokeStyleFromUser = "yellow";
 		else if (y >= yOffset + 320 && y <= yOffset + 350) this.strokeStyleFromUser = "green";
 		else if (y >= yOffset + 400 && y <= yOffset + 430) this.strokeStyleFromUser = "black";
-	}
+	};
 
 
 	changeLineWidth(y) {
 		if (y >= 170 && y < 330) this.lineWidthFromUser = 13;
 		else if (y >= 330 && y < 490) this.lineWidthFromUser = 20;
 		else if (y >= 490 && y < 670) this.lineWidthFromUser = 27;
-	}
+	};
 
 
 	// this was adapted from http://www.mattmorgante.com/technology/javascript-draw-html5-canvas
@@ -276,7 +276,7 @@ class UserDraw {
 			this.endLine();
 			this.addLine();
 		}
-	}
+	};
 
 
 	// take user drawn picture
@@ -316,9 +316,8 @@ class UserDraw {
 			this.img.src = virtualCanvas.toDataURL();
 		}, 1);
 
-		// debugger
 		this.generateSSDImg(imgData);
-	}
+	};
 
 
 	// this generates the ssd portrait from user drawn picture
@@ -341,12 +340,11 @@ class UserDraw {
 		this.ssdImg = new Image();
 
 		this.ssdImg.src = virtualCanvas.toDataURL();
-	}
+	};
 
 	getDrawing() { return this.img; }
 
 	getSSDportrait() { return this.ssdImg; }
-
 }
 
 module.exports = UserDraw;

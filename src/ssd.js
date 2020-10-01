@@ -31,6 +31,7 @@ class SSD {
 	};
 
 
+	getBeamName() { return this.beamWeaponName; };
 	getShields() { return this.shields; };
 	setLabels(val) { this.labels = val; };
 
@@ -215,7 +216,22 @@ class SSD {
 			this.ssd_x + torpPos.x * this.scale, 
 			this.ssd_y + torpPos.y * this.scale,  
 			10*this.scale, 20*this.scale);
+	};
 
+
+	drawDamageLabel(ctx, label, y_addition) {
+		ctx.font = "12px Arial";
+		ctx.fillStyle = "yellow";
+		ctx.globalAlpha = 0.3;
+		
+		const y_coord = this.ssd_y + 12 + y_addition * this.scale;
+		let x_coord;
+
+		if (this.ssd_x < 150) x_coord = this.ssd_x + 90 + 50*this.scale;
+		else x_coord = this.ssd_x - 170;
+
+		ctx.fillText(label, x_coord, y_coord);
+		ctx.globalAlpha = 1;
 	};
 
 
