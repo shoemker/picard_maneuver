@@ -16,14 +16,15 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Ship AI for enemies and allies</li>
 	<li>Optional autopilot of the main ship if you just want to watch.</li>
 	<li>Option to fight against either one cruiser, 2 birds of prey, or fight in a fleet action.</li>
-	<li>Screen where scenario is chose features a detailed model of a solar system with day/night lighting of planets.</li>
+	<li>Screen where scenario is chosen features a detailed model of a solar system with day/night lighting of planets.</li>
 	<li>View of the bridge with flashing lights and shaking when ship is hit.</li>
-	<li>Visuals for 4 different beam weapons for the different as well as torpedos.</li>
+	<li>Visuals for 4 different beam weapons of the 4 ships featured in the game.</li>
 	<li>Shields show on hit (until they're down).</li>
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>
 	<li>Moving starfield to indicate main ship movement.</li>
 	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity and weapon recharge status. Shield strength is indicated by size of shield. Transparent portrait of ship turns red as ship is damaged to indicate hull integrity.</li>
+	<li>When shot through a downed shield, there is a chance to temporarily damage engines, beam weapon, or torpedo weapon, all of which are indicated on the SSD. With damaged engines, ship's top speed is reduced. Damaged beam weapon results in weaker, thinner beam. A damaged torpedo system doubles reload time for torpedos.</li>
 	<li>When facing multiple enemies, a red target symbol appears on the ship that main ship is targeting, and a corresponding target appears on the enemy's Ship Systems Display. This is the ship that the 360 degree beam weapon will fire at. Target can be changed by player.</li>
 	<li>Arrow appears at edge of screen when main ship's target is offscreen.</li>
 </ol>
