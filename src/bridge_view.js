@@ -12,6 +12,9 @@ class BridgeView {
 		this.shakeCounter = 0;
 		this.phaserCounter = 0;
 		this.torpedoCounter = 0;
+		// this.engineDamCounter = 0;
+		// this.beamDamCounter = 0;
+		// this.torpDamCounter = 0;
 
 		this.alive = true;
 		this.lights = 0;
@@ -22,6 +25,23 @@ class BridgeView {
 	phasersBubbleOn() { this.phaserCounter = 1; }
 	torpedosBubbleOn() { this.torpedoCounter = 1; }
 
+	// enginDamBubbleOn() { 
+	// 	this.engineDamCounter = 1; 
+	// 	this.beamDamCounter = 0;
+	// 	this.torpDamCounter = 0;
+	// };
+
+	// beamDamBubbleOn() {
+	// 	this.engineDamCounter = 0;
+	// 	this.beamDamCounter = 1;
+	// 	this.torpDamCounter = 0;
+	// };
+
+	// torpDamBubbleOn() { t
+	// 	this.engineDamCounter = 0;
+	// 	this.beamDamCounter = 0;
+	// 	this.torpDamCounter = 1;
+	// };
 
 	step() {
 		if (this.shakeCounter > 0) this.shakeCounter++;

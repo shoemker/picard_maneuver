@@ -1,7 +1,7 @@
 const SpaceObject = require("../non-ship_space_objects/space_object");
 const Explosion = require("../explosion");
+const Fire = require("../fire");
 const EnemyAI = require("../enemyAI");
-
 const Utils = require("../utils");
 
 class Ship extends SpaceObject{
@@ -18,6 +18,7 @@ class Ship extends SpaceObject{
 		this.AI= new EnemyAI(this, options.game, options.aiTargeting);
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
+		// this.fire = new Fire(options.images.fireImg);
 
 		this.beamPattern = [];
 
@@ -102,6 +103,8 @@ class Ship extends SpaceObject{
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
+
+		// this.fire.draw(ctx, {x:this.pos[0],y:this.pos[1] + 20});
 	};
 
 
@@ -448,7 +451,6 @@ class Ship extends SpaceObject{
 	
 	determineSystemDamage() {
 		const rand = Math.random();
-		console.log(rand);
 
 		if (this.engineDamCount === 0 && rand < .2) {
 			this.engineDamCount = 1;

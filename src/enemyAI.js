@@ -115,14 +115,14 @@ class EnemyAI  {
 
 		const targetSpeed = this.aiShip.getTarget().getSpeed();
 		if (this.reverseCount !== 0) {
-			this.aiShip.power(-1);
+			this.aiShip.power(-.5);
 			this.reverseCount++;
 			if (this.reverseCount >= this.reverseCountMax) this.reverseCount = 0;
 		}
 		else if ((speed < 2 && speed < targetSpeed) || speed < 1) {
-			this.aiShip.power(1);
+			this.aiShip.power(.5);
 		}
-		else if ((speed > targetSpeed) && speed > 1) this.aiShip.power(-1);
+		else if ((speed > targetSpeed) && speed > 1) this.aiShip.power(-.5);
 	}
 }
 

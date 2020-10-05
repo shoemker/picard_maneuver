@@ -63,7 +63,6 @@ class GameView {
 				}
 				this.game.draw(this.ctx);
 			}
-
 			// every call to animate requests causes another call to animate
 			requestAnimationFrame(this.animate.bind(this));
 		}
@@ -129,7 +128,7 @@ class GameView {
 	openingOff() {
 		this.gameOpening = null;
 		this.audioCtx.resume().then(() => { return true; });
-		this.sounds.theme.play();
+		// this.sounds.theme.play();
 	};
 	
 
@@ -322,6 +321,7 @@ class GameView {
 			bridge: Utils.loadImg('./images/bridge.png'),
 			bridgeShaken: Utils.loadImg('./images/bridge_shaken.png'),
 			torpIcon: Utils.loadImg('./images/torpIcon.png'),
+			fireImg: Utils.loadImg('./images/sprite-sheet-fire.png'),
 		}
 	};
 }

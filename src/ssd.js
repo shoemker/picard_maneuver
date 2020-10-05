@@ -222,7 +222,7 @@ class SSD {
 	drawDamageLabel(ctx, label, y_addition) {
 		ctx.font = "12px Arial";
 		ctx.fillStyle = "yellow";
-		ctx.globalAlpha = 0.3;
+		ctx.globalAlpha = 0.4;
 		
 		const y_coord = this.ssd_y + 12 + y_addition * this.scale;
 		let x_coord;

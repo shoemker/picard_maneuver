@@ -7,6 +7,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <ol>
 	<li>JavaScript: This game is written entirely in JavaScript.</li>
 	<li>Canvas: And rendered with the Canvas element.</li>
+	<li>No libraries are used.</li>
 </ol>
 <br>
 <h2>Features</h2>
@@ -23,10 +24,11 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>Game music and sound effects.</li>
 	<li>Mute and pause options.</li>
 	<li>Moving starfield to indicate main ship movement.</li>
-	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity and weapon recharge status. Shield strength is indicated by size of shield. Transparent portrait of ship turns red as ship is damaged to indicate hull integrity.</li>
-	<li>When shot through a downed shield, there is a chance to temporarily damage engines, beam weapon, or torpedo weapon, all of which are indicated on the SSD. With damaged engines, ship's top speed is reduced. Damaged beam weapon results in weaker, thinner beam. A damaged torpedo system doubles reload time for torpedos.</li>
-	<li>When facing multiple enemies, a red target symbol appears on the ship that main ship is targeting, and a corresponding target appears on the enemy's Ship Systems Display. This is the ship that the 360 degree beam weapon will fire at. Target can be changed by player.</li>
+	<li>Ship Systems Display (of adjustable size) in corner to indicate shield strength, hull integrity, weapon recharge status and damage to systems. Shield strength is indicated by size of shield. Transparent portrait of ship turns red as ship is damaged to indicate hull integrity.</li>
+	<li>When shot through a downed shield, there is a chance to temporarily damage engines, beam weapon, or torpedo weapon. With damaged engines, ship's top speed is reduced. Damaged beam weapon results in weaker, thinner beam. A damaged torpedo system doubles reload time for torpedos.</li>
+	<li>When facing multiple enemies, a red target symbol appears on the ship that main ship is targeting with its phasors, and a corresponding target appears on the enemy's Ship Systems Display. This is the ship that the 360 degree beam weapon will fire at. Target can be changed by player.</li>
 	<li>Arrow appears at edge of screen when main ship's target is offscreen.</li>
+	<li>When ships have zero hull integrity there is a visible explosion.</li>
 </ol>
 <br>
 <a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>
