@@ -18,7 +18,7 @@ class Ship extends SpaceObject{
 		this.AI= new EnemyAI(this, options.game, options.aiTargeting);
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
-		this.fire = new Fire(options.images.fireImg);
+		this.engineFire = new Fire(options.images.fireImg);
 
 		this.beamPattern = [];
 
@@ -103,7 +103,17 @@ class Ship extends SpaceObject{
 
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 
-		this.fire.draw(ctx, {x:this.pos[0],y:this.pos[1] + 20}, this.shiftDir);
+		if (this.engineFire) {
+			const xcoord = this.center()[0] +
+				Math.cos(this.rotationOffset + 9 / 10 * Math.PI)*30 - this.engineFire.getWidth()/2;
+
+			const ycoord = this.center()[1] +
+				Math.sin(this.rotationOffset + 9 / 10 * Math.PI)*30 - this.engineFire.getWidth()/2;
+
+			this.engineFire.draw(ctx, { x: xcoord, y: ycoord }, this.shiftDir);
+		}
+
+		// this.engineFire.draw(ctx, {x:this.pos[0],y:this.pos[1] + 20}, this.shiftDir);
 	};
 
 

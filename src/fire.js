@@ -23,6 +23,9 @@ class Fire {
 		];
 	};
 
+
+	getWidth() { return this.width; };
+
 	draw(ctx, pos, shiftDir) {
 
 		ctx.drawImage(

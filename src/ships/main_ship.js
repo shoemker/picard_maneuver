@@ -19,7 +19,7 @@ class MainShip extends Ship {
 		this.shiftDir = {
 			x: this.getDirection().x, 
 			y: this.getDirection().y, 
-			speed: this.getSpeed() / 3};
+			speed: this.getSpeed() / 4};
 
 		return {
 			x: this.getDirection().x,
