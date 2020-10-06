@@ -6,6 +6,8 @@ class SpaceObject {
 		this.direction = {x:0,y:0};
 		this.width;
 		this.height;
+
+		this.shiftDir = {x:0, y:0, speed: 0};
 	};
 
 
@@ -17,6 +19,8 @@ class SpaceObject {
 
 	// shifts to account for main ship movement
 	shift(direction, speed) {
+		this.shiftDir = {x:direction[0], y:direction[1], speed: speed};
+
 		this.pos[0] -= speed * direction[0];
 		this.pos[1] += speed * direction[1];
 	};

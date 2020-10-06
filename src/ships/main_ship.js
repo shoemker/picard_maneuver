@@ -14,6 +14,20 @@ class MainShip extends Ship {
 		this.bridgeView = options.bridgeView;
 	};
 
+
+	getShift() {
+		this.shiftDir = {
+			x: this.getDirection().x, 
+			y: this.getDirection().y, 
+			speed: this.getSpeed() / 3};
+
+		return {
+			x: this.getDirection().x,
+			y: this.getDirection().y,
+			speed: this.getSpeed()};
+	};
+
+
 	takeDamage(attacker, damage) {
 		this.bridgeView.shakeOn();
 		let returnValue = super.takeDamage(attacker, damage);

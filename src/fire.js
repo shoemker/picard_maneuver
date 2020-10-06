@@ -3,9 +3,10 @@ class Fire {
 		this.imageSheet = img;
 
 		this.trailCounter = 0;
-		this.trailCountMax = 10;
+		this.trailCountMax = 40;
 		this.trailPoints = new Array(this.trailCountMax);
 
+		this.width = 12;
 
 		this.spriteIndex = 0;
 		this.sheet = [
@@ -22,13 +23,7 @@ class Fire {
 		];
 	};
 
-	draw(ctx, pos) {
-
-		// ctx.beginPath();
-		// ctx.fillStyle = '#ff0000';
-		// ctx.moveTo(pos[0], pos[1]);
-		// ctx.arc(pos[0], pos[1], 3, 0, Math.PI * 2, true);
-		// ctx.fill();
+	draw(ctx, pos, shiftDir) {
 
 		ctx.drawImage(
 			this.imageSheet,
@@ -36,29 +31,40 @@ class Fire {
 			this.sheet[this.spriteIndex][1],
 			90, 90,
 			pos.x, pos.y,
-			12, 12
+			this.width, this.width
 		);
 
 		this.spriteIndex++;
 		if (this.spriteIndex === 10) this.spriteIndex = 0;
 
-		// this.trailPoints[this.trailCounter] = pos;
-		// let i = this.trailCounter + 1;
-		// let count = 0;
+		
+		this.trailPoints[this.trailCounter] = 
+			{ x: pos.x + this.width / 2, y: pos.y + this.width / 2 };
 
-		// while (i != this.trailCounter) {
-		// 	if (i === this.trailCountMax) i = 0;
+		let i = this.trailCounter + 6;
+		if (i >= this.trailCountMax) i = i%this.trailCountMax;
 
-		// 	if (this.trailPoints[i]) {
-		// 		ctx.fillStyle = "hsl(232, 100%," + count / this.trailCountMax * 100 + "%)";
-		// 		ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y, 2, 0, 2*Math.PI);
-	
-		// 	}
-		// 	count++;
-		// 	i++;
-		// }
+		let count = 0;
+		while (i !== this.trailCounter) {
 
-		// this.trailCounter++;
+			if (this.trailPoints[i]) {
+				this.trailPoints[i].x -= shiftDir.x * shiftDir.speed;
+				this.trailPoints[i].y += shiftDir.y * shiftDir.speed;
+
+				ctx.beginPath();
+				ctx.fillStyle = "hsl(0, 100%," + count / this.trailCountMax * 100 + "%)";
+				ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y, 
+					2 * count / this.trailCountMax, 0, 2*Math.PI);
+
+				ctx.fill();
+			}
+			count++;
+			i++;
+			if (i >= this.trailCountMax) i = i % this.trailCountMax;
+		}
+
+		this.trailCounter++;
+		if (this.trailCounter === this.trailCountMax) this.trailCounter = 0;
 
 	};
 

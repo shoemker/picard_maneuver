@@ -99,25 +99,27 @@ class Game {
 
 	// shift moves everything but main ship to show main ship's movement
 	shift() {
-		const shift_x = this.main.getDirection().x / this.base_speed_inverse;
-		const shift_y = this.main.getDirection().y / this.base_speed_inverse;
+		const shift = this.main.getShift();
+
+		const shift_x = shift.x / this.base_speed_inverse;
+		const shift_y = shift.y / this.base_speed_inverse;
 
 		this.stars.forEach((star) =>
-			star.shift([shift_x, shift_y], this.main.getSpeed()));
+			star.shift([shift_x, shift_y], shift.speed));
 
-		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], this.main.getSpeed()));
-		this.allies.forEach((ally) => ally.shift([shift_x, shift_y], this.main.getSpeed()));
+		this.enemies.forEach((enemy) => enemy.shift([shift_x, shift_y], shift.speed));
+		this.allies.forEach((ally) => ally.shift([shift_x, shift_y], shift.speed));
 
 		// the planet and moon shift differently than the stars to give a layered background
 		this.planet.shift(
-			[this.main.getDirection().x / (this.base_speed_inverse - 2),
-			this.main.getDirection().y / (this.base_speed_inverse - 2)],
-			this.main.getSpeed());
+			[shift.x / (this.base_speed_inverse - 2),
+			shift.y / (this.base_speed_inverse - 2)],
+			shift.speed);
 
 		this.moon_01.shift(
-			[this.main.getDirection().x / (this.base_speed_inverse - 2.25),
-			this.main.getDirection().y / (this.base_speed_inverse - 2.25)],
-			this.main.getSpeed());
+			[shift.x / (this.base_speed_inverse - 2.25),
+			shift.y / (this.base_speed_inverse - 2.25)],
+			shift.speed);
 	}
 
 
