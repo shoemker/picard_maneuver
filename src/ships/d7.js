@@ -19,6 +19,8 @@ class D7 extends Ship {
 		this.torpImgOnSSD = { x: 30, y: 5 };
 
 		this.engineFireLoc = { angle: 1.16 * Math.PI, distance: 27 };
+		this.beamFireLoc = { angle: .78 * Math.PI, distance: 18 };
+		this.torpFireLoc = { angle: 0, distance: 25 };
 
 		this.width = 60;
 		this.height = 30;

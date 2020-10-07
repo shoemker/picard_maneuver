@@ -198,15 +198,15 @@ class GameView {
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)
 		this.addMain([1040, 710, 1, true], false, Math.PI, 0, 0);
-		// this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
-		this.addSoyuz([0, 100], [100, 710, 1, true], false, 0, 0, 0);
+		this.addD7([0, 100], [100, 710, 1, true], false, 0, 0, 0);
+		// this.addSoyuz([0, 100], [100, 710, 1, true], false, 0, 0, 0);
 
 		this.game.main.setTarget(this.game.enemies[0]);
 	};
 
 
 	loadScenario2() {
-		this.game.createPlanetAndMoon(this.imaages.planet_03, [0, 0, 480, 480], 
+		this.game.createPlanetAndMoon(this.images.planet_03, [0, 0, 480, 480], 
 			this.images.moon_01);
 
 		// this.addShip([shipXpos, shipYpos],[ssdXpos, ssdYpos, ssdScale, ssdLabels], aiTargeting, rotation, phaserRecharge, torpedoReload)

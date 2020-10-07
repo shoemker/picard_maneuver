@@ -19,6 +19,11 @@ class DrawnShip extends MainShip {
 		this.beamDamageDim = { left_x: 34, right_x: 34, y: 22, width: 7, height: 4 };
 		this.torpImgOnSSD = { x: 30, y: 50 };
 
+		this.engineFireLoc = { angle: 1.18 * Math.PI, distance: 18 };
+		this.beamFireLoc = { angle: .5 * Math.PI, distance: 14 };
+		this.torpFireLoc = { angle: 0, distance: 10 };
+
+
 		this.phaserColor = "red";
 
 		// ssd is the ship systems display in the corner of the screen

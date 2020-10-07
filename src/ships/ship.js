@@ -20,7 +20,8 @@ class Ship extends SpaceObject{
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
 
 		this.engineFire = new Fire(options.images.fireImg);
-		this.engineFireLoc = {angle: 1.18 * Math.PI, distance: 18};
+		this.beamFire = new Fire(options.images.fireImg);
+		this.torpFire = new Fire(options.images.fireImg);
 
 		this.beamPattern = [];
 
@@ -106,6 +107,9 @@ class Ship extends SpaceObject{
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 
 		if (this.engineFire) this.drawDamageFire(ctx, this.engineFire, this.engineFireLoc); 
+		if (this.beamFire) this.drawDamageFire(ctx, this.beamFire, this.beamFireLoc); 
+		if (this.torpFire) this.drawDamageFire(ctx, this.torpFire, this.torpFireLoc); 
+
 	};
 
 

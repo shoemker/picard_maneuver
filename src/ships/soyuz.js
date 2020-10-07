@@ -20,6 +20,8 @@ class Soyuz extends Frigate {
 		this.torpImgOnSSD = { x: 30, y: 55 };
 
 		this.engineFireLoc = { angle: 1.18 * Math.PI, distance: 18 };
+		this.beamFireLoc = { angle: .5 * Math.PI, distance: 14 };
+		this.torpFireLoc = { angle: 0, distance: 0 };
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;

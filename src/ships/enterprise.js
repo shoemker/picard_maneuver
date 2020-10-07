@@ -16,6 +16,8 @@ class Enterprise extends Main {
 		this.torpImgOnSSD = {x: 30, y: 50};
 
 		this.engineFireLoc = { angle: .86 * Math.PI, distance: 25 };
+		this.beamFireLoc = { angle: 0, distance: 20 };
+		this.torpFireLoc = { angle: 0, distance: 0 };
 
 		this.width = 60;
 		this.height = 30;

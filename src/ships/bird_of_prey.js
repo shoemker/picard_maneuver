@@ -19,6 +19,8 @@ class Bird_of_Prey extends Frigate {
 		this.torpImgOnSSD = { x: 30, y: 15 };
 
 		this.engineFireLoc = { angle: .95 * Math.PI, distance: 12 };
+		this.beamFireLoc = { angle: 1.5 * Math.PI, distance: 18 };
+		this.torpFireLoc = { angle: 0, distance: 10 };
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;

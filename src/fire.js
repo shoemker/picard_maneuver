@@ -30,7 +30,7 @@ class Fire {
 
 		this.drawFlames(ctx, pos);
 
-		// add current location to array for trail, in array implementing queue
+		// add current location (overwriting oldest) for trail in array implementing queue
 		this.trailPoints[this.trailCounter] = 
 			{ x: pos.x + this.width / 2, y: pos.y + this.width / 2 };
 
@@ -40,7 +40,7 @@ class Fire {
 		let count = 0;
 		while (i !== this.trailCounter) {
 
-			// shift all points to account for screen shifting to keep main ship
+			// shift all points to account for screen shifting that keeps main ship
 			// in the center
 			if (this.trailPoints[i]) {
 				this.trailPoints[i].x -= shiftDir.x * shiftDir.speed;
