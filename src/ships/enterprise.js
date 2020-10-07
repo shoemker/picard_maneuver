@@ -15,6 +15,8 @@ class Enterprise extends Main {
 		this.beamDamageDim = { left_x: 34, right_x: 34, y: 22, width: 7, height: 4 };
 		this.torpImgOnSSD = {x: 30, y: 50};
 
+		this.engineFireLoc = { angle: .86 * Math.PI, distance: 25 };
+
 		this.width = 60;
 		this.height = 30;
 		

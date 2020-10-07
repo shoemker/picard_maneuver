@@ -28,19 +28,9 @@ class Fire {
 
 	draw(ctx, pos, shiftDir) {
 
-		ctx.drawImage(
-			this.imageSheet,
-			this.sheet[this.spriteIndex][0],
-			this.sheet[this.spriteIndex][1],
-			90, 90,
-			pos.x, pos.y,
-			this.width, this.width
-		);
+		this.drawFlames(ctx, pos);
 
-		this.spriteIndex++;
-		if (this.spriteIndex === 10) this.spriteIndex = 0;
-
-		
+		// add current location to array for trail, in array implementing queue
 		this.trailPoints[this.trailCounter] = 
 			{ x: pos.x + this.width / 2, y: pos.y + this.width / 2 };
 
@@ -50,11 +40,15 @@ class Fire {
 		let count = 0;
 		while (i !== this.trailCounter) {
 
+			// shift all points to account for screen shifting to keep main ship
+			// in the center
 			if (this.trailPoints[i]) {
 				this.trailPoints[i].x -= shiftDir.x * shiftDir.speed;
 				this.trailPoints[i].y += shiftDir.y * shiftDir.speed;
 
-				ctx.beginPath();
+				ctx.beginPath(); 
+
+				// lightness trails off toward the end of the tail
 				ctx.fillStyle = "hsl(0, 100%," + count / this.trailCountMax * 100 + "%)";
 				ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y, 
 					2 * count / this.trailCountMax, 0, 2*Math.PI);
@@ -70,6 +64,21 @@ class Fire {
 		if (this.trailCounter === this.trailCountMax) this.trailCounter = 0;
 
 	};
+
+	// cycle through sprite sheet to draw flames
+	drawFlames(ctx, pos) {
+		ctx.drawImage(
+			this.imageSheet,
+			this.sheet[this.spriteIndex][0],
+			this.sheet[this.spriteIndex][1],
+			90, 90,
+			pos.x, pos.y,
+			this.width, this.width
+		);
+
+		this.spriteIndex++;
+		if (this.spriteIndex === 10) this.spriteIndex = 0;
+	}
 
 };
 module.exports = Fire;

@@ -18,6 +18,8 @@ class D7 extends Ship {
 		this.beamDamageDim = { left_x: 1, right_x: 67, y: 77, width: 7, height: 4 };
 		this.torpImgOnSSD = { x: 30, y: 5 };
 
+		this.engineFireLoc = { angle: 1.16 * Math.PI, distance: 27 };
+
 		this.width = 60;
 		this.height = 30;
 
