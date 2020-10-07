@@ -48,7 +48,7 @@ class Fire {
 
 				ctx.beginPath(); 
 
-				// lightness trails off toward the end of the tail
+				// lightness and radius trail off toward the end of the tail
 				ctx.fillStyle = "hsl(0, 100%," + count / this.trailCountMax * 100 + "%)";
 				ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y, 
 					2 * count / this.trailCountMax, 0, 2*Math.PI);

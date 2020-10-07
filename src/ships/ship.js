@@ -19,9 +19,9 @@ class Ship extends SpaceObject{
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
 
-		this.engineFire = new Fire(options.images.fireImg);
-		this.beamFire = new Fire(options.images.fireImg);
-		this.torpFire = new Fire(options.images.fireImg);
+		this.engineFire = null;
+		this.beamFire = null;
+		this.torpFire = null;
 
 		this.beamPattern = [];
 
@@ -149,6 +149,7 @@ class Ship extends SpaceObject{
 	drawEngineDamageOnSSD(ctx, engineDamCallback) {
 		if (this.engineDamCount === this.damageCountMax) {
 			this.engineDamCount = 0;
+			this.engineFire = null;
 		}
 		else if (this.engineDamCount > 0) {
 			this.engineDamCount++;
@@ -164,6 +165,7 @@ class Ship extends SpaceObject{
 	drawBeamDamageOnSSD(ctx, beamDamCallback) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
+			this.beamFire = null;
 			this.phaserDamage = this.phaserDamage * 2;
 		}
 		else if (this.beamDamCount > 0) {
@@ -180,6 +182,7 @@ class Ship extends SpaceObject{
 	drawTorpDamageOnSSD(ctx) {
 		if (this.torpDamCount === this.damageCountMax) {
 			this.torpDamCount = 0;
+			this.torpFire = null;
 			this.torpedoReloadMax = this.torpedoReloadMax / 2;
 
 			if (this.torpedoReload > this.torpedoReloadMax)
@@ -472,16 +475,21 @@ class Ship extends SpaceObject{
 
 		if (this.engineDamCount === 0 && rand < .2) {
 			this.engineDamCount = 1;
+
 			if (this.speed > .5) this.speed = .5;
-			else if (this.speed < -.5) this.speed = -.5;
+			else if (this.speed < -.5) this.speed = -.5;	
+
+			this.engineFire = new Fire(this.images.fireImg);
 		}
 		else if (this.beamDamCount === 0 && rand >= .2 && rand < .4) {
 			this.beamDamCount = 1;
 			this.phaserDamage = this.phaserDamage / 2;
+			this.beamFire = new Fire(this.images.fireImg);
 		}
 		else if (this.torpDamCount === 0 && rand >= .4 && rand < .6) {
 			this.torpDamCount = 1;
 			this.torpedoReloadMax = this.torpedoReloadMax * 2;
+			this.torpFire = new Fire(this.images.fireImg);
 		}
 	};
 
