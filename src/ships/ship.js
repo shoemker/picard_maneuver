@@ -38,12 +38,9 @@ class Ship extends SpaceObject{
 		this.targetShieldHP = 1;
 		this.ssdPos = options.ssdPos;
 
-		// this.engineDamCount = 0;
-		// this.beamDamCount = 0; 
-		// this.torpDamCount = 0;
-		this.engineDamCount = 1;
-		this.beamDamCount = 1;
-		this.torpDamCount = 1;
+		this.engineDamCount = 0;
+		this.beamDamCount = 0; 
+		this.torpDamCount = 0;
 		this.damageCountMax = 480;
 
 		this.direction = this.calcDirection(this.rotationOffset);

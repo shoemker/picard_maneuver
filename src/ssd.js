@@ -228,19 +228,18 @@ class SSD {
 		let x_clock;
 
 		if (this.ssd_x < 150) {
-			x_text = this.ssd_x + 112 + 50*this.scale;
-			x_clock = x_text - 13;
+			x_text = this.ssd_x + 90 + 74*this.scale;
+			x_clock = x_text - 15;
 		}
 		else {
-			x_text = this.ssd_x - 195;
+			x_text = this.ssd_x - 197;
 			x_clock = this.ssd_x - 80;
 		}
 
 		ctx.fillText(label, x_text, y_coord);
+		ctx.globalAlpha = 1;
 
 		this.drawClock(ctx, x_clock, y_coord -5, 8*this.scale, ratio);
-
-		ctx.globalAlpha = 1;
 	};
 
 
@@ -249,16 +248,24 @@ class SSD {
 		const start = Math.PI * -.5;
 		const end = Math.PI * (-.5 + ratio * 2);
 
-		ctx.beginPath();
 		ctx.fillStyle = "yellow";
 		ctx.strokeStyle = "yellow";
 
+		// circle on outside of clock
+		ctx.globalAlpha = 0.3;
+		ctx.beginPath();
+		ctx.arc(x, y, radius+2, 0, 2 * Math.PI);
+		ctx.stroke();
+
+		// pie that fills in as time advances
+		ctx.beginPath();
 		ctx.moveTo(x, y);
 		ctx.arc(x, y, radius, start, end );
 		ctx.lineTo(x, y);
 		ctx.stroke();
-
 		ctx.fill();
+		
+		ctx.globalAlpha = 1;
 	};
 	
 
