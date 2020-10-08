@@ -15,7 +15,7 @@ class Ship extends SpaceObject{
 		this.images = options.images;
 		this.target = options.target;
 		
-		this.AI= new EnemyAI(this, options.game, options.aiTargeting);
+		this.AI = new EnemyAI(this, options.game, options.aiTargeting);
 
 		this.explosion = new Explosion(this.images.explosionImg, options.sounds.exploSound);
 

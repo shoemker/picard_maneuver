@@ -250,10 +250,11 @@ class SSD {
 
 		ctx.fillStyle = "yellow";
 		ctx.strokeStyle = "yellow";
+		ctx.globalAlpha = 0.3;
 
 		// circle on outside of clock
-		ctx.globalAlpha = 0.3;
 		ctx.beginPath();
+		ctx.lineWidth = 2;
 		ctx.arc(x, y, radius+2, 0, 2 * Math.PI);
 		ctx.stroke();
 
@@ -262,9 +263,9 @@ class SSD {
 		ctx.moveTo(x, y);
 		ctx.arc(x, y, radius, start, end );
 		ctx.lineTo(x, y);
-		ctx.stroke();
+		// ctx.stroke();
 		ctx.fill();
-		
+
 		ctx.globalAlpha = 1;
 	};
 	
