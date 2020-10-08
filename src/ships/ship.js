@@ -83,7 +83,7 @@ class Ship extends SpaceObject{
 
 	// shifts to account for main ship movement
 	shift(direction, speed) {
-		
+
 		// saves the shift to apply to damage fire trail in class Fire
 		this.shiftDir = { x: direction[0], y: direction[1], speed: speed };
 

@@ -27,42 +27,8 @@ class Fire {
 	getWidth() { return this.width; };
 
 	draw(ctx, pos, shiftDir) {
-
 		this.drawFlames(ctx, pos);
-
-		// add current location (overwriting oldest) for trail in array implementing queue
-		this.trailPoints[this.trailCounter] = 
-			{ x: pos.x + this.width / 2, y: pos.y + this.width / 2 };
-
-		let i = this.trailCounter + 6;
-		if (i >= this.trailCountMax) i = i%this.trailCountMax;
-
-		let count = 0;
-		while (i !== this.trailCounter) {
-
-			// shift all points to account for screen shifting that keeps main ship
-			// in the center
-			if (this.trailPoints[i]) {
-				this.trailPoints[i].x -= shiftDir.x * shiftDir.speed;
-				this.trailPoints[i].y += shiftDir.y * shiftDir.speed;
-
-				ctx.beginPath(); 
-
-				// lightness and radius trail off toward the end of the tail
-				ctx.fillStyle = "hsl(0, 100%," + count / this.trailCountMax * 100 + "%)";
-				ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y, 
-					2 * count / this.trailCountMax, 0, 2*Math.PI);
-
-				ctx.fill();
-			}
-			count++;
-			i++;
-			if (i >= this.trailCountMax) i = i % this.trailCountMax;
-		}
-
-		this.trailCounter++;
-		if (this.trailCounter === this.trailCountMax) this.trailCounter = 0;
-
+		this.drawTrail(ctx, pos, shiftDir);
 	};
 
 	
@@ -79,7 +45,45 @@ class Fire {
 
 		this.spriteIndex++;
 		if (this.spriteIndex === 10) this.spriteIndex = 0;
-	}
+	};
+
+
+	// keeps an array with adjusted locations of the fire to create a fiery trail
+	drawTrail(ctx, pos, shiftDir) {
+
+		// add current location (overwriting oldest) for trail in array implementing queue
+		this.trailPoints[this.trailCounter] =
+			{ x: pos.x + this.width / 2, y: pos.y + this.width / 2 };
+
+		let i = this.trailCounter + 6;
+		if (i >= this.trailCountMax) i = i % this.trailCountMax;
+
+		let count = 0;
+		while (i !== this.trailCounter) {
+
+			// shift all points to account for screen shifting that keeps main ship
+			// in the center
+			if (this.trailPoints[i]) {
+				this.trailPoints[i].x -= shiftDir.x * shiftDir.speed;
+				this.trailPoints[i].y += shiftDir.y * shiftDir.speed;
+
+				ctx.beginPath();
+
+				// lightness and radius trail off toward the end of the tail
+				ctx.fillStyle = "hsl(0, 100%," + count / this.trailCountMax * 100 + "%)";
+				ctx.arc(this.trailPoints[i].x, this.trailPoints[i].y,
+					2 * count / this.trailCountMax, 0, 2 * Math.PI);
+
+				ctx.fill();
+			}
+			count++;
+			i++;
+			if (i >= this.trailCountMax) i = i % this.trailCountMax;
+		}
+
+		this.trailCounter++;
+		if (this.trailCounter === this.trailCountMax) this.trailCounter = 0;
+	};
 
 };
 module.exports = Fire;

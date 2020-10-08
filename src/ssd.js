@@ -137,6 +137,7 @@ class SSD {
 	};
 
 
+	// draws labels for weapons recharge, reload indicators
 	drawLabels(ctx) {
 		ctx.font = "18px Arial";
 		ctx.fillStyle = "#FAFAD2";
@@ -218,6 +219,7 @@ class SSD {
 	};
 
 
+	// draws system damage message
 	drawDamageLabel(ctx, label, y_addition, ratio) {
 		ctx.font = "12px Arial";
 		ctx.fillStyle = "yellow";
@@ -263,7 +265,6 @@ class SSD {
 		ctx.moveTo(x, y);
 		ctx.arc(x, y, radius, start, end );
 		ctx.lineTo(x, y);
-		// ctx.stroke();
 		ctx.fill();
 
 		ctx.globalAlpha = 1;
