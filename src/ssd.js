@@ -103,7 +103,6 @@ class SSD {
 
 		if (target) Utils.drawTarget(ctx, this.ssd_x - 30 + 0 * this.scale, 
 			this.ssd_y +10 - 20 * this.scale, 15 * this.scale, 2);
-
 	};
 
 
@@ -219,21 +218,49 @@ class SSD {
 	};
 
 
-	drawDamageLabel(ctx, label, y_addition) {
+	drawDamageLabel(ctx, label, y_addition, ratio) {
 		ctx.font = "12px Arial";
 		ctx.fillStyle = "yellow";
 		ctx.globalAlpha = 0.4;
 		
 		const y_coord = this.ssd_y + 12 + y_addition * this.scale;
-		let x_coord;
+		let x_text;
+		let x_clock;
 
-		if (this.ssd_x < 150) x_coord = this.ssd_x + 90 + 50*this.scale;
-		else x_coord = this.ssd_x - 170;
+		if (this.ssd_x < 150) {
+			x_text = this.ssd_x + 112 + 50*this.scale;
+			x_clock = x_text - 13;
+		}
+		else {
+			x_text = this.ssd_x - 195;
+			x_clock = this.ssd_x - 80;
+		}
 
-		ctx.fillText(label, x_coord, y_coord);
+		ctx.fillText(label, x_text, y_coord);
+
+		this.drawClock(ctx, x_clock, y_coord -5, 8*this.scale, ratio);
+
 		ctx.globalAlpha = 1;
 	};
 
+
+	// draws the little clock that tells when system repairs are done
+	drawClock(ctx, x, y, radius, ratio) {
+		const start = Math.PI * -.5;
+		const end = Math.PI * (-.5 + ratio * 2);
+
+		ctx.beginPath();
+		ctx.fillStyle = "yellow";
+		ctx.strokeStyle = "yellow";
+
+		ctx.moveTo(x, y);
+		ctx.arc(x, y, radius, start, end );
+		ctx.lineTo(x, y);
+		ctx.stroke();
+
+		ctx.fill();
+	};
+	
 
 	// factory method to create shield objects
 	raiseShields() {

@@ -38,9 +38,12 @@ class Ship extends SpaceObject{
 		this.targetShieldHP = 1;
 		this.ssdPos = options.ssdPos;
 
-		this.engineDamCount = 0;
-		this.beamDamCount = 0; 
-		this.torpDamCount = 0;
+		// this.engineDamCount = 0;
+		// this.beamDamCount = 0; 
+		// this.torpDamCount = 0;
+		this.engineDamCount = 1;
+		this.beamDamCount = 1;
+		this.torpDamCount = 1;
 		this.damageCountMax = 480;
 
 		this.direction = this.calcDirection(this.rotationOffset);
@@ -104,12 +107,11 @@ class Ship extends SpaceObject{
 
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
-		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
-
 		if (this.engineFire) this.drawDamageFire(ctx, this.engineFire, this.engineFireLoc); 
 		if (this.beamFire) this.drawDamageFire(ctx, this.beamFire, this.beamFireLoc); 
 		if (this.torpFire) this.drawDamageFire(ctx, this.torpFire, this.torpFireLoc); 
 
+		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	};
 
 
@@ -152,8 +154,9 @@ class Ship extends SpaceObject{
 			this.engineFire = null;
 		}
 		else if (this.engineDamCount > 0) {
+			const ratio = this.engineDamCount / this.damageCountMax;
 			this.engineDamCount++;
-			this.ssd.drawDamageLabel(ctx, "Repairing Engines", 0);
+			this.ssd.drawDamageLabel(ctx, "Repairing Engines", 0, ratio);
 
 			if (this.engineDamCount % 40 > 10) {
 				engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
@@ -169,8 +172,10 @@ class Ship extends SpaceObject{
 			this.phaserDamage = this.phaserDamage * 2;
 		}
 		else if (this.beamDamCount > 0) {
+			const ratio = this.beamDamCount / this.damageCountMax;
 			this.beamDamCount++;	
-			this.ssd.drawDamageLabel(ctx, "Repairing " + this.ssd.getBeamName() + "s", 50);
+			this.ssd.drawDamageLabel(ctx, "Repairing " + this.ssd.getBeamName() + "s", 
+				50, ratio);
 
 			if (this.beamDamCount % 40 > 10) {
 				beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
@@ -189,8 +194,9 @@ class Ship extends SpaceObject{
 				this.torpedoReload = this.torpedoReloadMax;
 		}
 		else if (this.torpDamCount > 0) {
+			const ratio = this.torpDamCount / this.damageCountMax;
 			this.torpDamCount++;
-			this.ssd.drawDamageLabel(ctx, "Repairing Torpedos", 100);
+			this.ssd.drawDamageLabel(ctx, "Repairing Torpedos", 100, ratio);
 
 			if (this.torpDamCount % 40 > 10) {
 				this.ssd.drawTorpIcon(ctx, this.images.torpIcon, this.torpImgOnSSD);
@@ -199,6 +205,7 @@ class Ship extends SpaceObject{
 	};
 
 
+	// draws a fire on the ship after system damage
 	drawDamageFire(ctx, fire, loc){
 		const offsetOfFire = fire.getWidth()/2;
 

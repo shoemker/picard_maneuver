@@ -45,7 +45,6 @@ class Game {
 
 	// factory method to create planet and moon objects
 	createPlanetAndMoon(planetImg, pCoords, moonImg, mCoords = [3, 3, 58, 58]) {
-
 		this.planet = new Planet({
 			pos: [300, 300],
 			img: planetImg,

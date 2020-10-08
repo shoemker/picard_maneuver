@@ -65,6 +65,7 @@ class Fire {
 
 	};
 
+	
 	// cycle through sprite sheet to draw flames
 	drawFlames(ctx, pos) {
 		ctx.drawImage(
