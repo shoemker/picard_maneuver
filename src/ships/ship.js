@@ -25,6 +25,8 @@ class Ship extends SpaceObject{
 
 		this.beamPattern = [];
 
+		this.shiftDir = { x: 0, y: 0, speed: 0 };
+
 		this.speed = 0;
 		this.width = 60; 		// height and width need to be here
 		this.height = 30;
@@ -78,6 +80,16 @@ class Ship extends SpaceObject{
 	setTarget(target) { this.target = target; }
 	setLabels(val) { this.ssd.setLabels(val); }
 	
+
+	// shifts to account for main ship movement
+	shift(direction, speed) {
+		
+		// saves the shift to apply to damage fire trail in class Fire
+		this.shiftDir = { x: direction[0], y: direction[1], speed: speed };
+
+		super.shift(direction, speed);
+	};
+
 
 	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, shipImage, target) {
 		this.drawShip(ctx, shipImage);

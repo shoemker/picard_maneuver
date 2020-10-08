@@ -16,6 +16,7 @@ class MainShip extends Ship {
 
 
 	getShift() {
+		// this is saved for the main ship for the damage fire trail in class Fire
 		this.shiftDir = {
 			x: this.getDirection().x, 
 			y: this.getDirection().y, 

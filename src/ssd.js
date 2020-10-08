@@ -239,7 +239,7 @@ class SSD {
 		ctx.fillText(label, x_text, y_coord);
 		ctx.globalAlpha = 1;
 
-		this.drawClock(ctx, x_clock, y_coord -5, 8*this.scale, ratio);
+		this.drawClock(ctx, x_clock, y_coord -5, 8, ratio);
 	};
 
 
@@ -255,7 +255,7 @@ class SSD {
 		// circle on outside of clock
 		ctx.beginPath();
 		ctx.lineWidth = 2;
-		ctx.arc(x, y, radius+2, 0, 2 * Math.PI);
+		ctx.arc(x, y, radius + 2, 0, 2 * Math.PI);
 		ctx.stroke();
 
 		// pie that fills in as time advances
