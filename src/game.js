@@ -93,7 +93,7 @@ class Game {
 		this.allies.forEach((ally) => ally.move(this.base_speed_inverse));
 
 		this.moveTorpedos();
-	}
+	};
 
 
 	// shift moves everything but main ship to show main ship's movement
@@ -119,7 +119,7 @@ class Game {
 			[shift.x / (this.base_speed_inverse - 2.25),
 			shift.y / (this.base_speed_inverse - 2.25)],
 			shift.speed);
-	}
+	};
 
 
 	draw(ctx) {
@@ -238,7 +238,7 @@ class Game {
 
 		Utils.drawTarget(ctx, startPoint[0], startPoint[1], 5, 2);
 		this.drawArrow(ctx, startPoint, endPoint, angle);
-	}
+	};
 
 
 	drawArrow(ctx, startPoint, endPoint, angle, color = "red", width = 3, 

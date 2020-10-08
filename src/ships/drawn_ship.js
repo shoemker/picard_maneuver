@@ -20,8 +20,8 @@ class DrawnShip extends MainShip {
 		this.torpImgOnSSD = { x: 30, y: 50 };
 
 		this.engineFireLoc = { angle: 1.18 * Math.PI, distance: 18 };
-		this.beamFireLoc = { angle: .5 * Math.PI, distance: 14 };
-		this.torpFireLoc = { angle: 0, distance: 10 };
+		this.beamFireLoc = { angle: 0, distance: 20 };
+		this.torpFireLoc = { angle: 0, distance: 0 };
 
 
 		this.phaserColor = "red";
