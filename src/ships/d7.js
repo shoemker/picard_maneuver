@@ -9,6 +9,9 @@ class D7 extends Ship {
 		this.enemy = true;
 		this.pos = options.pos;
 
+		this.shipImg = {
+			image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 };
+			
 		this.turnRadius = 2;
 
 		this.beamSound = options.sounds.disruptSound;
@@ -45,8 +48,7 @@ class D7 extends Ship {
 
 
 	draw(ctx, target) {
-		super.draw(ctx, Utils.drawWavyLine, this.ssd.drawRects, this.ssd.drawEllipses,
-			{ image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 },
+		super.draw(ctx, Utils.drawWavyLine, Utils.drawRect, Utils.drawEllipse,
 			target);
 	};
 

@@ -86,7 +86,7 @@ const Utils = {
 	drawWavyLine(ctx, from, to) {
 		let cx = 0;
 		let cy = 0;
-		let waveOffsetLength = 0;
+		let waveOffsetLength;
 
 		const ang = Math.atan2(to.y - from.y, to.x - from.x);
 		const distance = Math.sqrt((from.x - to.x) * (from.x - to.x) + 
@@ -133,6 +133,18 @@ const Utils = {
 		ctx.arc(x, y, radius, 0, 360);
 		ctx.fillStyle = fillStyle;
 		ctx.fill();
+	},
+
+
+	// wrapper so that I can use ellipse as a callback
+	drawEllipse(ctx, x, y, width, height) {
+		ctx.ellipse(x, y, width, height, 0, 0, Math.PI * 2);
+	},
+
+
+	// wrapper so that I can use ctx.rect as a callback
+	drawRect(ctx, x, y, width, height) {
+		ctx.rect(x, y, width, height);
 	},
 
 

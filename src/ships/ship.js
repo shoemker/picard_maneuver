@@ -91,8 +91,8 @@ class Ship extends SpaceObject{
 	};
 
 
-	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, shipImage, target) {
-		this.drawShip(ctx, shipImage);
+	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, target) {
+		this.drawShip(ctx);
 
 		//draw ship systems display
 		this.drawSSD(ctx, engineDamCallback, beamDamCallback, target);
@@ -111,11 +111,12 @@ class Ship extends SpaceObject{
 		if (this.torpExplosionCounter) {
 			this.drawTorpExplosion(ctx);
 			this.torpExplosionCounter++;
-			if (this.torpExplosionCounter > 10) this.torpExplosionCounter = 0;
+			if (this.torpExplosionCounter > 15) this.torpExplosionCounter = 0;
 		}
 
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
+		// displays plasma fires resulting from system damage
 		if (this.engineFire) this.drawDamageFire(ctx, this.engineFire, this.engineFireLoc); 
 		if (this.beamFire) this.drawDamageFire(ctx, this.beamFire, this.beamFireLoc); 
 		if (this.torpFire) this.drawDamageFire(ctx, this.torpFire, this.torpFireLoc); 
@@ -124,7 +125,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawShip(ctx, shipImage){
+	drawShip(ctx){
 		ctx.save();
 
 		// rotate
@@ -134,8 +135,8 @@ class Ship extends SpaceObject{
 
 		//draw ship
 		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(shipImage.image, shipImage.x, shipImage.y, 
-				shipImage.width, shipImage.height,
+			ctx.drawImage(this.shipImg.image, this.shipImg.x, this.shipImg.y, 
+				this.shipImg.width, this.shipImg.height,
 				this.pos[0], this.pos[1], this.width, this.height);
 		}
 
@@ -157,7 +158,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawEngineDamageOnSSD(ctx, engineDamCallback) {
+	drawEngineDamageOnSSD(ctx, callback) {
 		if (this.engineDamCount === this.damageCountMax) {
 			this.engineDamCount = 0;
 			this.engineFire = null;
@@ -168,13 +169,13 @@ class Ship extends SpaceObject{
 			this.ssd.drawDamageLabel(ctx, "Repairing Engines", 0, ratio);
 
 			if (this.engineDamCount % 40 > 10) {
-				engineDamCallback(ctx, this.engineDamageDim, this.ssdPos);
+				this.ssd.drawSysDamageOnSSD(ctx, this.engineDamageDim, callback);
 			}
 		}
 	};
 
 
-	drawBeamDamageOnSSD(ctx, beamDamCallback) {
+	drawBeamDamageOnSSD(ctx, callback) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
 			this.beamFire = null;
@@ -187,7 +188,7 @@ class Ship extends SpaceObject{
 				50, ratio);
 
 			if (this.beamDamCount % 40 > 10) {
-				beamDamCallback(ctx, this.beamDamageDim, this.ssdPos);
+				this.ssd.drawSysDamageOnSSD(ctx, this.beamDamageDim, callback);	
 			}
 		}
 	};
@@ -235,10 +236,10 @@ class Ship extends SpaceObject{
 		const phaserDrawMax = 20;
 
 		// moves the starting point for the phaser(on the saucer for the enterprise, on the wing for bop)
-		let xStartingPoint = this.center()[0] + 
+		const xStartingPoint = this.center()[0] + 
 			Math.cos(this.rotationOffset + angle) * this.phaserOffsetDistance;
 			
-		let yStartingPoint = this.center()[1] + 
+		const yStartingPoint = this.center()[1] + 
 			Math.sin(this.rotationOffset + angle) * this.phaserOffsetDistance;
 
 		let xDelta = this.ptarget.center()[0] - xStartingPoint;
@@ -320,7 +321,7 @@ class Ship extends SpaceObject{
 		if (this.ssd.getShields()[this.shieldHit].getHitpoints() > 0) {
 			const xDelta = this.attacker.center()[0] - this.center()[0];
 			const yDelta = this.attacker.center()[1] - this.center()[1];
-			const distance = Utils.distance(this, this.attacker);
+			const distance = Utils.distance(this.center(), this.attacker.center());
 			const percentage = 35 / distance;
 			x = this.center()[0] - 5 + xDelta * percentage;
 			y = this.center()[1] - 8 + yDelta * percentage;
@@ -535,6 +536,6 @@ class Ship extends SpaceObject{
 	calcDirection(rotationOffset) {
 		return {x:Math.cos(rotationOffset) * 7, y:Math.sin(rotationOffset) * -7};
 	};
-}
+};
 
 module.exports = Ship

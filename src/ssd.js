@@ -159,54 +159,27 @@ class SSD {
 	};
 
 	
-	// used as a callback to indicate damage, so can't use 'this'
-	drawRects(ctx, damageDim, ssdPos) {
-		let scale = ssdPos[2];
-		let y_coord = ssdPos[1] + damageDim.y * scale;
+	// displays engine and beam damage, takes ellipse or rect from util as callbacks
+	drawSysDamageOnSSD(ctx, damageDim, callback) {
+		let y_coord = this.ssd_y + damageDim.y * this.scale;
 	
 		ctx.beginPath();
 		ctx.fillStyle = "yellow";
 
-		ctx.rect(
-			ssdPos[0] + damageDim.left_x * scale, 
+		callback(
+			ctx,
+			this.ssd_x + damageDim.left_x * this.scale, 
 			y_coord, 
-			damageDim.width * scale, 
-			damageDim.height * scale);
+			damageDim.width * this.scale, 
+			damageDim.height * this.scale);
 
-		ctx.rect(
-			ssdPos[0] + damageDim.right_x * scale, 
+		callback(
+			ctx,
+			this.ssd_x + damageDim.right_x * this.scale, 
 			y_coord, 
-			damageDim.width * scale, 
-			damageDim.height * scale);
+			damageDim.width * this.scale, 
+			damageDim.height * this.scale);
 			
-		ctx.fill();
-	};
-
-
-	// used as a callback to indicate damage, so can't use 'this'
-	drawEllipses(ctx, damageDim, ssdPos) {
-		let scale = ssdPos[2];
-		let y_coord = ssdPos[1] + damageDim.y * scale;
-
-		ctx.beginPath();
-		ctx.fillStyle = "yellow";
-
-		ctx.ellipse(
-			ssdPos[0] + damageDim.left_x * scale,
-			y_coord,
-			damageDim.width * scale,
-			damageDim.height * scale,
-			0,
-			0, 2 * Math.PI);
-
-		ctx.ellipse(
-			ssdPos[0] + damageDim.right_x * scale,
-			y_coord,
-			damageDim.width * scale,
-			damageDim.height * scale,
-			0,
-			0, 2 * Math.PI);
-
 		ctx.fill();
 	};
 

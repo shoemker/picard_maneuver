@@ -8,6 +8,9 @@ class Enterprise extends Main {
  
 		this.enemy = false;
 
+		this.shipImg = {
+			image: this.images.enterpriseImg, x:22, y:0, width:660, height:300 };
+
 		this.beamSound = options.sounds.phasSound;
 		this.torpSound = options.sounds.torpSound;
 
@@ -40,8 +43,7 @@ class Enterprise extends Main {
 	
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawRects, this.ssd.drawEllipses,
-			{ image:this.images.enterpriseImg, x:22, y:0, width:660, height:300 });
+		super.draw(ctx, Utils.drawLine, Utils.drawRect, Utils.drawEllipse);
 	};
 }
 

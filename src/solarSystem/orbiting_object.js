@@ -45,8 +45,6 @@ class OrbitingObject {
 			this.distance = Utils.distance([this.pos.x, this.pos.y],
 				[sun.getPosition().x, sun.getPosition().y]);
 
-			// console.log(this.distance)
-
 			const deltaX = sun.getPosition().x - this.pos.x;
 			const deltaY = sun.getPosition().y - this.pos.y;
 

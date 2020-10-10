@@ -6,7 +6,8 @@ class DrawnShip extends MainShip {
 	constructor(options, drawing, ssdImg) {
 		super(options);
 
-		this.image = drawing;
+		this.shipImg = { image:drawing, x: 1, y: 1, width: 498, height: 498 };
+
 		this.enemy = false;
 
 		this.width = 50;
@@ -40,8 +41,7 @@ class DrawnShip extends MainShip {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, this.ssd.drawRects, this.ssd.drawEllipses,
-			{ image: this.image, x: 1, y: 1, width: 498, height: 498 });
+		super.draw(ctx, Utils.drawLine, Utils.drawRect, Utils.drawEllipse);
 	};
 }
 

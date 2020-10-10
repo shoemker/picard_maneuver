@@ -8,6 +8,9 @@ class Soyuz extends Frigate {
 
 		this.enemy = false;
 
+		this.shipImg = { 
+			image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 };
+			
 		this.width = 35;
 		this.height = 28;
 		this.beamPattern = [];
@@ -48,8 +51,7 @@ class Soyuz extends Frigate {
 
 
 	draw(ctx) {
-		super.draw(ctx, Utils.drawCircleBeam, this.ssd.drawRects, this.ssd.drawRects,
-			{ image: this.images.soyuzImg, x: 0, y: 0, width: 362, height: 237 });
+		super.draw(ctx, Utils.drawCircleBeam, Utils.drawRect, Utils.drawRect);
 	};
 }
 
