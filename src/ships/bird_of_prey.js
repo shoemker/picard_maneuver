@@ -24,6 +24,12 @@ class Bird_of_Prey extends Frigate {
 		this.engineFireLoc = { angle: .95 * Math.PI, distance: 12 };
 		this.beamFireLoc = { angle: 1.5 * Math.PI, distance: 18 };
 		this.torpFireLoc = { angle: 0, distance: 10 };
+		
+		this.callbacks = {
+			beamDrawCB: Utils.drawLine,
+			engineDamCB: Utils.drawRect,
+			beamDamCB: Utils.drawRect
+		};
 
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
@@ -48,13 +54,6 @@ class Bird_of_Prey extends Frigate {
 			shieldStrength: 45,
 		});
 	};
-
-
-	draw(ctx, target) {
-		super.draw(ctx, Utils.drawLine, Utils.drawRect, Utils.drawRect, target);
-	};
-
-
-}
+};
 
 module.exports = Bird_of_Prey;

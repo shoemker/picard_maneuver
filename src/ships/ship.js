@@ -7,7 +7,7 @@ const Utils = require("../utils");
 class Ship extends SpaceObject{
 
 	constructor(options) {
-		super();
+		super(options.pos);
 
 		if (options.rotationOffset) this.rotationOffset = options.rotationOffset;
 		else this.rotationOffset = 0;
@@ -91,17 +91,17 @@ class Ship extends SpaceObject{
 	};
 
 
-	draw(ctx, beamCallback, engineDamCallback, beamDamCallback, target) {
+	draw(ctx, target) {
 		this.drawShip(ctx);
 
 		//draw ship systems display
-		this.drawSSD(ctx, engineDamCallback, beamDamCallback, target);
+		this.drawSSD(ctx, target);
 
 		// if there are multiple enemies, the current target gets a target draw on on it
 		if (target) Utils.drawTarget(ctx, this.center()[0], this.center()[1], 7,1);
 
-		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone()) 
-			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage, beamCallback);
+		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
+			this.drawPhaser(ctx, this.phaserOffsetAngle, this.phaserDamage);
 
 		// recharge weapons
 		if (this.phaserRecharge !== this.phaserRechargeMax) this.phaserRecharge++;
@@ -152,13 +152,13 @@ class Ship extends SpaceObject{
 			target
 		);
 
-		this.drawEngineDamageOnSSD(ctx, engineDamCallback);
-		this.drawBeamDamageOnSSD(ctx, beamDamCallback);
+		this.drawEngineDamageOnSSD(ctx);
+		this.drawBeamDamageOnSSD(ctx);
 		this.drawTorpDamageOnSSD(ctx);
 	};
 
 
-	drawEngineDamageOnSSD(ctx, callback) {
+	drawEngineDamageOnSSD(ctx) {
 		if (this.engineDamCount === this.damageCountMax) {
 			this.engineDamCount = 0;
 			this.engineFire = null;
@@ -169,7 +169,8 @@ class Ship extends SpaceObject{
 			this.ssd.drawDamageLabel(ctx, "Repairing Engines", 0, ratio);
 
 			if (this.engineDamCount % 40 > 10) {
-				this.ssd.drawSysDamageOnSSD(ctx, this.engineDamageDim, callback);
+				this.ssd.drawSysDamageOnSSD(ctx, this.engineDamageDim, 
+					this.callbacks.engineDamCB);
 			}
 		}
 	};
@@ -188,7 +189,8 @@ class Ship extends SpaceObject{
 				50, ratio);
 
 			if (this.beamDamCount % 40 > 10) {
-				this.ssd.drawSysDamageOnSSD(ctx, this.beamDamageDim, callback);	
+				this.ssd.drawSysDamageOnSSD(ctx, this.beamDamageDim, 
+					this.callbacks.beamDamCB);	
 			}
 		}
 	};
@@ -231,7 +233,7 @@ class Ship extends SpaceObject{
 
 	// draw the phaser fire. The line extends toward the target over phaserDrawMax frames,
 	// then stays there for a few frames
-	drawPhaser(ctx, angle, damage, callback) {
+	drawPhaser(ctx, angle, damage) {
 
 		const phaserDrawMax = 20;
 
@@ -269,7 +271,7 @@ class Ship extends SpaceObject{
 		ctx.setLineDash(this.beamPattern);  // bop beam is a dotted line
 		
 		// this callback draws the beam which can be straight, wavy, or circles depending on the callback
-		callback(ctx, 
+		this.callbacks.beamDrawCB(ctx, 
 			{ x: xStartingPoint, y: yStartingPoint }, 
 			{ x: xProgress, y: yProgress });
 

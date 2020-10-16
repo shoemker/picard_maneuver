@@ -4,18 +4,17 @@ const Utils = require("../utils");
 class Frigate extends Ship {
 	constructor(options) {
 		super(options);
-		this.pos = options.pos;
 		this.beamPattern = [3, 5, 3, 20];
 		this.turnRadius = 1;
 	};
 
 
-	draw(ctx, callback, callback2, callback3, imagePojo, target){
-		super.draw(ctx, callback, callback2, callback3, imagePojo, target)
+	draw(ctx, target){
+		super.draw(ctx, target)
 
 		// fires a 2nd disruptor line from other wing
 		if (this.phaserCounter > 0 && this.ptarget && !this.ptarget.isGone())
-			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0, callback);
+			this.drawPhaser(ctx, 2 * Math.PI - this.phaserOffsetAngle, 0);
 	};
 
 

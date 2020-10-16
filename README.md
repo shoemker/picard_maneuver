@@ -14,6 +14,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 <ol>
 	<li>Option to draw your own ship with cursor and play as that ship if desired.</li>
 	<li>Control over main ship (speed, direction, weapons).</li>
+	<li>Each ship has a beam weapon which, for the main ship, has a 360 degree firing arc and a spread of 3 torpedos which fire forward from the ship.</li>
 	<li>Ship AI for enemies and allies</li>
 	<li>Optional autopilot of the main ship if you just want to watch.</li>
 	<li>Option to fight against either one cruiser, 2 birds of prey, or fight in a fleet action.</li>

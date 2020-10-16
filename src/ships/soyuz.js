@@ -26,6 +26,12 @@ class Soyuz extends Frigate {
 		this.beamFireLoc = { angle: .5 * Math.PI, distance: 14 };
 		this.torpFireLoc = { angle: 0, distance: 0 };
 
+		this.callbacks = {
+			beamDrawCB: Utils.drawCircleBeam,
+			engineDamCB: Utils.drawRect,
+			beamDamCB: Utils.drawRect
+		};
+
 		this.phaserRechargeMax = 170;
 		this.torpedoReloadMax = 200;
 
@@ -47,11 +53,6 @@ class Soyuz extends Frigate {
 			imgCoords: [0, 0, 202, 298],
 			shieldStrength: 40,
 		});
-	};
-
-
-	draw(ctx) {
-		super.draw(ctx, Utils.drawCircleBeam, Utils.drawRect, Utils.drawRect);
 	};
 }
 

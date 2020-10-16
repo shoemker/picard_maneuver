@@ -59,7 +59,7 @@ const Utils = {
 	},
 
 
-	// draw a red circle with a vert and a horiz line
+	// draw a red circle with a vert and a horiz line like crosshairs
 	drawTarget(ctx, x, y, size, lw, color = "red") {
 
 		ctx.beginPath();
@@ -76,6 +76,7 @@ const Utils = {
 	}, 
 
 
+	// callback for ship beam effect
 	drawLine(ctx, from, to){
 		ctx.moveTo(to.x, to.y);
 		ctx.lineTo(from.x, from.y);
@@ -83,6 +84,7 @@ const Utils = {
 
 
 	// a version of this came from https://codepen.io/alexkulagin/pen/wGwpdx
+	// callback for ship beam effect
 	drawWavyLine(ctx, from, to) {
 		let cx = 0;
 		let cy = 0;
@@ -107,6 +109,7 @@ const Utils = {
 	},
 
 
+	// callback for ship beam effect
 	drawCircleBeam(ctx, from, to) {
 		const separation = 15;
 		let ratio;
@@ -136,7 +139,7 @@ const Utils = {
 	},
 
 
-	// wrapper so that I can use ellipse as a callback
+	// wrapper so that I can use ctx.ellipse as a callback
 	drawEllipse(ctx, x, y, width, height) {
 		ctx.ellipse(x, y, width, height, 0, 0, Math.PI * 2);
 	},

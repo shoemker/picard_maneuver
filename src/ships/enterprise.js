@@ -22,6 +22,11 @@ class Enterprise extends Main {
 		this.beamFireLoc = { angle: 0, distance: 20 };
 		this.torpFireLoc = { angle: 0, distance: 0 };
 
+		this.callbacks = { 
+			beamDrawCB: Utils.drawLine, 
+			engineDamCB: Utils.drawRect,
+			beamDamCB: Utils.drawEllipse };
+
 		this.width = 60;
 		this.height = 30;
 		
@@ -39,11 +44,6 @@ class Enterprise extends Main {
 			imgCoords: [0, 0, 110, 257],
 			shieldStrength: 100,
 		});
-	};
-	
-
-	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, Utils.drawRect, Utils.drawEllipse);
 	};
 }
 

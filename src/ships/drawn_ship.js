@@ -24,6 +24,11 @@ class DrawnShip extends MainShip {
 		this.beamFireLoc = { angle: 0, distance: 20 };
 		this.torpFireLoc = { angle: 0, distance: 0 };
 
+		this.callbacks = {
+			beamDrawCB: Utils.drawLine,
+			engineDamCB: Utils.drawRect,
+			beamDamCB: Utils.drawEllipse
+		};
 
 		this.phaserColor = "red";
 
@@ -38,12 +43,6 @@ class DrawnShip extends MainShip {
 			shieldStrength: 100,
 		});
 	};
-
-
-	draw(ctx) {
-		super.draw(ctx, Utils.drawLine, Utils.drawRect, Utils.drawEllipse);
-	};
-}
-
+};
 
 module.exports = DrawnShip;

@@ -7,7 +7,6 @@ class D7 extends Ship {
 		super(options);
 
 		this.enemy = true;
-		this.pos = options.pos;
 
 		this.shipImg = {
 			image: this.images.d7Img, x: 0, y: 0, width: 380, height: 275 };
@@ -24,6 +23,12 @@ class D7 extends Ship {
 		this.engineFireLoc = { angle: 1.16 * Math.PI, distance: 27 };
 		this.beamFireLoc = { angle: .78 * Math.PI, distance: 18 };
 		this.torpFireLoc = { angle: 0, distance: 25 };
+
+		this.callbacks = {
+			beamDrawCB: Utils.drawWavyLine,
+			engineDamCB: Utils.drawRect,
+			beamDamCB: Utils.drawEllipse
+		};
 
 		this.width = 60;
 		this.height = 30;
@@ -44,12 +49,6 @@ class D7 extends Ship {
 			imgCoords: [0, 0, 207, 287],
 			shieldStrength: 100,
 		});
-	};
-
-
-	draw(ctx, target) {
-		super.draw(ctx, Utils.drawWavyLine, Utils.drawRect, Utils.drawEllipse,
-			target);
 	};
 
 
