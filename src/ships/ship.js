@@ -30,8 +30,7 @@ class Ship extends SpaceObject{
 		this.speed = 0;
 		this.width = 60; 		// height and width need to be here
 		this.height = 30;
-		this.phaserOffsetDistance = 0;
-		this.phaserOffsetAngle = 0;
+
 		this.phaserCounter = 0;
 		this.torpExplosionCounter = 0;
 		this.shipExplosionCounter = 0;
@@ -47,7 +46,6 @@ class Ship extends SpaceObject{
 
 		this.direction = this.calcDirection(this.rotationOffset);
 
-		this.ssd;
 		this.damageTokens = [];
 
 		if (options.phaserRecharge) this.phaserRecharge = options.phaserRecharge;
@@ -144,7 +142,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawSSD(ctx, engineDamCallback, beamDamCallback, target) {
+	drawSSD(ctx, target) {
 		this.ssd.draw(ctx,
 			this.phaserRecharge / this.phaserRechargeMax,
 			this.torpedoReload / this.torpedoReloadMax,
@@ -176,7 +174,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawBeamDamageOnSSD(ctx, callback) {
+	drawBeamDamageOnSSD(ctx) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
 			this.beamFire = null;

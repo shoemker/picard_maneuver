@@ -32,6 +32,7 @@ class Enterprise extends Main {
 		
 		// phaser animation starts from middle of saucer instead of center of ship
 		this.phaserOffsetDistance = 18;
+		this.phaserOffsetAngle = 0;
 		this.phaserColor = "red";
 
 		// ssd is the ship systems display in the corner of the screen
