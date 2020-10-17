@@ -37,7 +37,6 @@ class Ship extends SpaceObject{
 		this.phaserDamage = 18;
 		this.torpedoDamage = 20;
 		this.targetShieldHP = 1;
-		this.ssdPos = options.ssdPos;
 
 		this.engineDamCount = 0;
 		this.beamDamCount = 0; 
@@ -109,7 +108,7 @@ class Ship extends SpaceObject{
 		if (this.torpExplosionCounter) {
 			this.drawTorpExplosion(ctx);
 			this.torpExplosionCounter++;
-			if (this.torpExplosionCounter > 15) this.torpExplosionCounter = 0;
+			if (this.torpExplosionCounter > 11) this.torpExplosionCounter = 0;
 		}
 
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
@@ -174,7 +173,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawBeamDamageOnSSD(ctx) {
+	drawBeamDamageOnSSD(ctx, callback) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
 			this.beamFire = null;

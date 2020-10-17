@@ -12,9 +12,7 @@ class BridgeView {
 		this.shakeCounter = 0;
 		this.phaserCounter = 0;
 		this.torpedoCounter = 0;
-		// this.engineDamCounter = 0;
-		// this.beamDamCounter = 0;
-		// this.torpDamCounter = 0;
+		this.damageBubble = false;
 
 		this.alive = true;
 		this.lights = 0;
@@ -25,28 +23,38 @@ class BridgeView {
 	phasersBubbleOn() { this.phaserCounter = 1; }
 	torpedosBubbleOn() { this.torpedoCounter = 1; }
 
-	// enginDamBubbleOn() { 
-	// 	this.engineDamCounter = 1; 
-	// 	this.beamDamCounter = 0;
-	// 	this.torpDamCounter = 0;
-	// };
+	enginDamBubbleOn() { 
+		this.damageBubble = true;
+		this.bubData = {
+			bubbleX: Utils.getCanvasDim().x - 140, bubbleW: 120,
+			messageX: Utils.getCanvasDim().x - 194, message: "Engines Damaged!"
+		};
+	};
 
-	// beamDamBubbleOn() {
-	// 	this.engineDamCounter = 0;
-	// 	this.beamDamCounter = 1;
-	// 	this.torpDamCounter = 0;
-	// };
+	beamDamBubbleOn() {
+		this.damageBubble = true;
+		this.bubData = {
+			bubbleX: Utils.getCanvasDim().x - 120, bubbleW: 180,
+			messageX: Utils.getCanvasDim().x - 194, message: "Phasers at 1/2 Strength!"
+		};
+	};
 
-	// torpDamBubbleOn() { t
-	// 	this.engineDamCounter = 0;
-	// 	this.beamDamCounter = 0;
-	// 	this.torpDamCounter = 1;
-	// };
+	torpDamBubbleOn() { 
+		this.damageBubble = true;
+		this.bubData = {
+			bubbleX: Utils.getCanvasDim().x - 110, bubbleW: 180,
+			messageX: Utils.getCanvasDim().x - 189, message: "Torpedo Loader Damaged!"
+		};
+	};
+
 
 	step() {
 		if (this.shakeCounter > 0) this.shakeCounter++;
-		if (this.shakeCounter === 30) this.shakeCounter = 0;
+		if (this.shakeCounter === 30) {
+			this.shakeCounter = 0;
+			this.damageBubble = false;
 
+		}
 		if (this.phaserCounter > 0) this.phaserCounter++;
 		if (this.phaserCounter === 40) this.phaserCounter = 0;
 
@@ -54,7 +62,7 @@ class BridgeView {
 		if (this.torpedoCounter === 40) this.torpedoCounter = 0;
 
 		this.stepLights();
-	}
+	};
 
 
 	draw(ctx) {
@@ -83,13 +91,13 @@ class BridgeView {
 
 			this.drawBorder(ctx);
 		}
-	}
+	};
 
 
 	stepLights(){
 		this.lights++;
 		if (this.lights > 40) this.lights = 0;
-	}
+	};
 
 
 	drawLights(ctx) {
@@ -110,7 +118,7 @@ class BridgeView {
 			Utils.drawFilledCircle(ctx, this.bridgePos.x + 193, 135, 1,"lightgreen");
 			Utils.drawFilledCircle(ctx, this.bridgePos.x + 87, 123, 1, "red");
 		}
-	}
+	};
 
 
 	drawBorder(ctx) {
@@ -122,7 +130,7 @@ class BridgeView {
 		ctx.lineTo(this.bridgePos.x - lineWidth / 2, this.bridgePos.y + this.height + lineWidth / 2);
 		ctx.lineTo(Utils.getCanvasDim().x, this.bridgePos.y + this.height + lineWidth / 2);
 		ctx.stroke();
-	}
+	};
 
 
 	drawSpeachBubble(ctx, center, width, height, speaker) {
@@ -149,14 +157,14 @@ class BridgeView {
 		ctx.lineTo(speaker.x, speaker.y);
 		ctx.lineTo(center.x + 10, center.y);
 		ctx.fill();
-	}
+	};
 
 
 	drawText(ctx, x, y, message, size = 16){
 		ctx.fillStyle = "black";
 		ctx.font = size +"px ComicRelief";
 		ctx.fillText(message, x, y);
-	}
+	};
 
 
 	// this function makes the bridge view shake when ship is hit
@@ -171,9 +179,15 @@ class BridgeView {
 			{ x: this.bridgePos.x + 125, y: 50 });
 
 		this.drawText(ctx, Utils.getCanvasDim().x - 90, 26, "Direct Hit!")
+	
+		if (this.damageBubble) {
+			this.drawSpeachBubble(ctx, { x:this.bubData.bubbleX, y: 137 },
+				this.bubData.bubbleW, 25, { x: this.bridgePos.x + 35, y: 105 });
+			this.drawText(ctx, this.bubData.messageX, 142, this.bubData.message, 13);	
+		}
 
 		ctx.restore();
-	}
-}
+	};
+};
 
 module.exports = BridgeView;

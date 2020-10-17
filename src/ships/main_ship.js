@@ -33,9 +33,9 @@ class MainShip extends Ship {
 		this.bridgeView.shakeOn();
 		let returnValue = super.takeDamage(attacker, damage);
 
-		// if (this.engineDamCount === 1) this.bridgeView.enginDamBubbleOn();
-		// else if (this.beamDamCount === 1) this.bridgeView.beamDamBubbleOn();
-		// else if (this.torpDamCount === 1) this.bridgeView.torpDamBubbleOn();
+		if (this.engineDamCount === 1) this.bridgeView.enginDamBubbleOn();
+		else if (this.beamDamCount === 1) this.bridgeView.beamDamBubbleOn();
+		else if (this.torpDamCount === 1) this.bridgeView.torpDamBubbleOn();
 		return returnValue;
 	};
 
