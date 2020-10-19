@@ -89,7 +89,14 @@ class Ship extends SpaceObject{
 
 
 	draw(ctx, target) {
-		this.drawShip(ctx);
+		if (this.shipExplosionCounter < 34) {
+			this.drawShip(ctx);
+
+			// displays plasma fires resulting from system damage
+			if (this.engineFire) this.drawDamageFire(ctx, this.engineFire, this.engineFireLoc);
+			if (this.beamFire) this.drawDamageFire(ctx, this.beamFire, this.beamFireLoc);
+			if (this.torpFire) this.drawDamageFire(ctx, this.torpFire, this.torpFireLoc); 
+		}
 
 		//draw ship systems display
 		this.drawSSD(ctx, target);
@@ -113,11 +120,6 @@ class Ship extends SpaceObject{
 
 		if (this.damageTokens.length > 0) this.drawDamageTokens(ctx);
 
-		// displays plasma fires resulting from system damage
-		if (this.engineFire) this.drawDamageFire(ctx, this.engineFire, this.engineFireLoc); 
-		if (this.beamFire) this.drawDamageFire(ctx, this.beamFire, this.beamFireLoc); 
-		if (this.torpFire) this.drawDamageFire(ctx, this.torpFire, this.torpFireLoc); 
-
 		if (this.hullIntegrity === 0) this.shipExplosionCounter = this.drawShipExplosion(ctx);
 	};
 
@@ -131,11 +133,9 @@ class Ship extends SpaceObject{
 		ctx.translate(-(this.center()[0]), -(this.center()[1]));
 
 		//draw ship
-		if (this.shipExplosionCounter < 34) {
-			ctx.drawImage(this.shipImg.image, this.shipImg.x, this.shipImg.y, 
-				this.shipImg.width, this.shipImg.height,
-				this.pos[0], this.pos[1], this.width, this.height);
-		}
+		ctx.drawImage(this.shipImg.image, this.shipImg.x, this.shipImg.y, 
+			this.shipImg.width, this.shipImg.height,
+			this.pos[0], this.pos[1], this.width, this.height);
 
 		ctx.restore();
 	};
@@ -173,7 +173,7 @@ class Ship extends SpaceObject{
 	};
 
 
-	drawBeamDamageOnSSD(ctx, callback) {
+	drawBeamDamageOnSSD(ctx) {
 		if (this.beamDamCount === this.damageCountMax) {
 			this.beamDamCount = 0;
 			this.beamFire = null;

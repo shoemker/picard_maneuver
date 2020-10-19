@@ -16,12 +16,13 @@ class BridgeView {
 
 		this.alive = true;
 		this.lights = 0;
-	}
+	};
 
-	destroyed() { this.alive = false; }
-	shakeOn() { this.shakeCounter = 1; }
-	phasersBubbleOn() { this.phaserCounter = 1; }
-	torpedosBubbleOn() { this.torpedoCounter = 1; }
+	destroyed() { this.alive = false; };
+	shakeOn() { this.shakeCounter = 1; };
+	phasersBubbleOn() { this.phaserCounter = 1; };
+	torpedosBubbleOn() { this.torpedoCounter = 1; };
+
 
 	enginDamBubbleOn() { 
 		this.damageBubble = true;
@@ -53,8 +54,8 @@ class BridgeView {
 		if (this.shakeCounter === 30) {
 			this.shakeCounter = 0;
 			this.damageBubble = false;
-
 		}
+
 		if (this.phaserCounter > 0) this.phaserCounter++;
 		if (this.phaserCounter === 40) this.phaserCounter = 0;
 
@@ -180,6 +181,7 @@ class BridgeView {
 
 		this.drawText(ctx, Utils.getCanvasDim().x - 90, 26, "Direct Hit!")
 	
+		// if there's system damage, there's a speech bubble for that
 		if (this.damageBubble) {
 			this.drawSpeachBubble(ctx, { x:this.bubData.bubbleX, y: 137 },
 				this.bubData.bubbleW, 25, { x: this.bridgePos.x + 35, y: 105 });
