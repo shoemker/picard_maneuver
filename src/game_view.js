@@ -133,7 +133,7 @@ class GameView {
 	
 
 	muteAndAutopilotBoxes(x, y, gainNode){
-		if (x > 35 && x < 65) {
+		if (x > 265 && x < 295) {
 			if (y > 46 && y < 71) {
 				this.game.muteToggle(gainNode);
 

@@ -3,6 +3,7 @@ const Planet = require("./non-ship_space_objects/planet");
 const Torpedo = require("./non-ship_space_objects/torpedo");
 const BridgeView = require("./bridge_view");
 const Utils = require("./utils");
+const RadarScreen = require("./radar_screen");
 
 class Game {
 
@@ -33,6 +34,7 @@ class Game {
 		this.turnCounter = 0;
 		this.turnCounterMax = 8;
 		this.bridgeView = new BridgeView(images);
+		this.radarScreen = new RadarScreen();
 	}
 
 	getKeyMap() { return this.keyMap; };
@@ -145,10 +147,11 @@ class Game {
 		this.allies.forEach((ally) => ally.draw(ctx));
 
 		// draw mute and autopilot box
-		this.drawCheckBox(ctx, 20, 30, "Mute", this.muted);
-		this.drawCheckBox(ctx, 20, 70, "Autopilot", this.autopilot);
+		this.drawCheckBox(ctx, 250, 30, "Mute", this.muted);
+		this.drawCheckBox(ctx, 250, 70, "Autopilot", this.autopilot);
 
 		this.bridgeView.draw(ctx);
+		this.radarScreen.draw(ctx, this.main, this.allies, this.enemies);
 
 		if (this.main.getTarget() && !this.main.getTarget().onscreen()) 
 			this.drawTargetArrow(ctx);
