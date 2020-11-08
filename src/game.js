@@ -147,8 +147,8 @@ class Game {
 		this.allies.forEach((ally) => ally.draw(ctx));
 
 		// draw mute and autopilot box
-		this.drawCheckBox(ctx, 250, 30, "Mute", this.muted);
-		this.drawCheckBox(ctx, 250, 70, "Autopilot", this.autopilot);
+		this.drawCheckBox(ctx, 220, 30, "Mute", this.muted);
+		this.drawCheckBox(ctx, 220, 70, "Autopilot", this.autopilot);
 
 		this.bridgeView.draw(ctx);
 		this.radarScreen.draw(ctx, this.main, this.allies, this.enemies);
