@@ -31,7 +31,9 @@ class DrawnShip extends MainShip {
 		};
 
 		this.phaserColor = "red";
-
+		this.phaserOffsetDistance = 18;
+		this.phaserOffsetAngle = 0;
+		
 		// ssd is the ship systems display in the corner of the screen
 		this.ssd = new SSD({
 			ssdPos: options.ssdPos,
