@@ -76,6 +76,29 @@ const Utils = {
 	}, 
 
 
+	drawArrowEdges(ctx, pos, angle, edgeAngle, length, color, lineWidth) {
+
+		ctx.beginPath();
+		ctx.strokeStyle = color;
+		ctx.lineWidth = lineWidth;
+
+		const edgeAngles = [edgeAngle, -edgeAngle];
+
+		// each loop draws one edge of the arrowhead
+		for (let i = 0; i < 2; i++) {
+			let angleSum = angle + edgeAngles[i];
+
+			let xOffset = Math.cos(angleSum) * length;
+			let yOffset = Math.sin(angleSum) * length;
+
+			ctx.moveTo(pos.x - xOffset, pos.y - yOffset);
+			ctx.lineTo(pos.x, pos.y);
+
+			ctx.stroke();
+		}
+	},
+
+
 	// callback for ship beam effect
 	drawLine(ctx, from, to){
 		ctx.moveTo(to.x, to.y);

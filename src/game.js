@@ -255,24 +255,11 @@ class Game {
 		ctx.beginPath();
 		ctx.moveTo(startPoint[0], startPoint[1]);
 		ctx.lineTo(endPoint[0], endPoint[1]);
-
-		const headEdgeAngle1 = angle + headAngle;
-		const headEdgeAngle2 = angle - headAngle;
-
-		let xOffset = Math.cos(headEdgeAngle1) * headEdgeLength;
-		let yOffset = Math.sin(headEdgeAngle1) * headEdgeLength;
-
-		// this draws one edge of the arrowhead
-		ctx.lineTo(endPoint[0] - xOffset, endPoint[1] - yOffset);
-		ctx.moveTo(endPoint[0], endPoint[1]);
-
-		xOffset = Math.cos(headEdgeAngle2) * headEdgeLength;
-		yOffset = Math.sin(headEdgeAngle2) * headEdgeLength;
-
-		// this draws the other edge of the arrowhead
-		ctx.lineTo(endPoint[0] - xOffset, endPoint[1] - yOffset);
 		ctx.stroke();
-	}
+
+		Utils.drawArrowEdges(ctx, { x: endPoint[0], y: endPoint[1] },
+			angle, headAngle, headEdgeLength, color, width);
+	};
 	
 
 	muteToggle(gainNode) {
