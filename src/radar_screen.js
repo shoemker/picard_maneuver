@@ -28,13 +28,12 @@ class RadarScreen {
 			const deltaX = (ship.center()[0] - main.center()[0]) * this.scale;
 			const deltaY = (ship.center()[1] - main.center()[1]) * this.scale;
 
-			// if (Math.sqrt(deltaX*deltaX + deltaY*deltaY)) {
-				const posX = deltaX + this.screenCenter.x;
-				const posY = deltaY + this.screenCenter.y;
+			if (Math.sqrt(deltaX*deltaX + deltaY*deltaY) < this.radius) {
+				const x = deltaX + this.screenCenter.x;
+				const y = deltaY + this.screenCenter.y;
 
-				Utils.drawArrowEdges(ctx, {x: posX, y: posY},
-					ship.getRotation(), Math.PI / 9, 7, color, 2);
-			// }		
+				Utils.drawArrowEdges(ctx, {x, y}, ship.getRotation(), Math.PI/9, 7, color, 2);
+			}		
 		});
 	};
 };
