@@ -213,14 +213,14 @@ class Game {
 		let startPoint = [0,0]; 
 
 		if (angle >= upperRightAngle || angle < lowerRightAngle) {
-			endPoint[0] = 1200;
+			endPoint[0] = Utils.getCanvasDim().x;
 			endPoint[1] = this.main.center()[1] + 
-				(1200 - this.main.center()[0])/deltaX  * deltaY;
+				(Utils.getCanvasDim().x - this.main.center()[0])/deltaX  * deltaY;
 		} 
 		else if (angle >= lowerRightAngle && angle < lowerLeftAngle) {
-			endPoint[1] = 900;
+			endPoint[1] = Utils.getCanvasDim().y;
 			endPoint[0] = this.main.center()[0] + 
-				(900 - this.main.center()[1]) / deltaY * deltaX;
+				(Utils.getCanvasDim().y - this.main.center()[1]) / deltaY * deltaX;
 		}
 		else if (angle >= lowerLeftAngle && angle < upperLeftAngle){
 			endPoint[0] = 0;

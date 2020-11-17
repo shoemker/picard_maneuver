@@ -82,7 +82,7 @@ const Utils = {
 		ctx.strokeStyle = color;
 		ctx.lineWidth = lineWidth;
 
-		// each loop draws one edge of the arrowhead
+		// each time thru loop draws one edge of the arrowhead
 		[angle + edgeAngle, angle - edgeAngle].forEach((angleSum) => {
 
 			let xOffset = Math.cos(angleSum) * length;
