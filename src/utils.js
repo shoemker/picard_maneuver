@@ -76,17 +76,14 @@ const Utils = {
 	}, 
 
 
+	// draws edges of an arrowhead, used in radarScreen and arrow for offscreen target
 	drawArrowEdges(ctx, pos, angle, edgeAngle, length, color, lineWidth) {
-
 		ctx.beginPath();
 		ctx.strokeStyle = color;
 		ctx.lineWidth = lineWidth;
 
-		const edgeAngles = [edgeAngle, -edgeAngle];
-
 		// each loop draws one edge of the arrowhead
-		for (let i = 0; i < 2; i++) {
-			let angleSum = angle + edgeAngles[i];
+		[angle + edgeAngle, angle - edgeAngle].forEach((angleSum) => {
 
 			let xOffset = Math.cos(angleSum) * length;
 			let yOffset = Math.sin(angleSum) * length;
@@ -95,7 +92,7 @@ const Utils = {
 			ctx.lineTo(pos.x, pos.y);
 
 			ctx.stroke();
-		}
+		});
 	},
 
 
