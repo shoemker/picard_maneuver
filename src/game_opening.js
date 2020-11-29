@@ -4,7 +4,7 @@ const SSData1 = require("./solarSystem/ss_data1");
 
 class GameOpening {
 
-	constructor(ctx) {
+	constructor() {
 		this.canvas_width = Utils.getCanvasDim().x;
 		this.canvas_height = Utils.getCanvasDim().y;
 		this.shipChoice = true;
@@ -60,7 +60,6 @@ class GameOpening {
 		ctx.fillRect(0, 0, Utils.getCanvasDim().x, Utils.getCanvasDim().y);
 
 		if (this.scenario) {
-			// ctx.drawImage(this.logoImg, 60, 0, 450, 512, 294, 25, 700, 850);
 			this.ss.step();
 			this.ss.draw(ctx);
 			this.drawScenario(ctx);

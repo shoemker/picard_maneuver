@@ -21,7 +21,7 @@ class GameView {
 
 		this.images = this.loadImages();
 		this.game = new Game(this.images);
-		this.gameOpening = new GameOpening(ctx);
+		this.gameOpening = new GameOpening();
 		this.demo = false;
 	};
 	

@@ -85,8 +85,8 @@ const Utils = {
 		// each time thru loop draws one edge of the arrowhead
 		[angle + edgeAngle, angle - edgeAngle].forEach((angleSum) => {
 
-			let xOffset = Math.cos(angleSum) * length;
-			let yOffset = Math.sin(angleSum) * length;
+			const xOffset = Math.cos(angleSum) * length;
+			const yOffset = Math.sin(angleSum) * length;
 
 			ctx.moveTo(pos.x - xOffset, pos.y - yOffset);
 			ctx.lineTo(pos.x, pos.y);
