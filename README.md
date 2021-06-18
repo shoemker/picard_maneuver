@@ -72,40 +72,35 @@ to a POJO</p>
 
 ```
 keyHandler(e) {
-	if (e.type == 'keydown') this.game.getKeyMap()[e.keyCode] = true;
-	else this.game.getKeyMap()[e.keyCode] = false;	
+	if (e.type == 'keydown') this.game.getKeyMap()[e.key] = true;
+	else this.game.getKeyMap()[e.key] = false;	
 };
 ```
 
-<p>Here, keyHandler, a function in the game_view.js class uses the event keyCode as a key in the keyMap POJO from the game.js
+<p>Here, keyHandler, a function in the game_view.js class uses the event key as a key in the keyMap POJO from the game.js
 class. If the event.type is keydown, the value in the POJO is set to true, and if it's keyup, the value is set to false.</p>
 <br>
 
 ```
 checkKeyMap() {
-	// spacebar
-	if (this.keyMap["32"]) this.firePhasers(this.enterprise); 
+		if (this.keyMap[" "]) this.firePhasers(this.main);
 
-	// f or k
-	if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.enterprise);
+		if (this.keyMap["t"] && this.turnCounter === 0) this.changeMainTarget();
 
-	// acceleration/decceleration needs a longer turnCounter than turning
-	// w or up arrow
-	if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
-		this.enterprise.power(1);
+		if (this.keyMap["f"] || this.keyMap["k"]) this.fireTorpedoes(this.main);
 
-	// s or down arrow
-	if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
-		this.enterprise.power(-1);
-	
-	// a or left arrow
-	if (this.keyMap["65"] || this.keyMap["37"]) this.enterprise.changeDirection(-1);
+		if ((this.keyMap["w"] || this.keyMap["ArrowUp"]) && this.turnCounter === 0)
+			this.main.power(.5);
 
-	// d or right arrow
-	if (this.keyMap["68"] || this.keyMap["39"]) this.enterprise.changeDirection(1);
+		if ((this.keyMap["s"] || this.keyMap["ArrowDown"]) && this.turnCounter === 0)
+			this.main.power(-.5);
+
+		if (this.keyMap["a"] || this.keyMap["ArrowLeft"]) this.main.changeDirection(-1);
+
+		if (this.keyMap["d"] || this.keyMap["ArrowRight"]) this.main.changeDirection(1);
 };
 ```
-<p>checkKeyMap is a function in the game.js class that is called every few frames. If any of the keyCode keys
+<p>checkKeyMap is a function in the game.js class that is called every few frames. If any of the keys
 have true values, the associated actions are taken. These true values correspond to keys that are 
 currently pressed down, allowing things like firing while turning to be possible. When the keys are
 no longer pressed, a keyup event is handled, the value is set to false, and no action is taken for that key. </p>

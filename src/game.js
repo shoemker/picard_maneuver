@@ -359,28 +359,21 @@ class Game {
 
 
 	checkKeyMap() {
-		// spacebar
-		if (this.keyMap["32"]) this.firePhasers(this.main);
+		if (this.keyMap[" "]) this.firePhasers(this.main);
 
-		// t
-		if (this.keyMap["84"] && this.turnCounter === 0) this.changeMainTarget();
+		if (this.keyMap["t"] && this.turnCounter === 0) this.changeMainTarget();
 
-		// f or k
-		if (this.keyMap["75"] || this.keyMap["70"]) this.fireTorpedoes(this.main);
+		if (this.keyMap["f"] || this.keyMap["k"]) this.fireTorpedoes(this.main);
 
-		// w or up arrow
-		if ((this.keyMap["87"] || this.keyMap["38"]) && this.turnCounter === 0)
+		if ((this.keyMap["w"] || this.keyMap["ArrowUp"]) && this.turnCounter === 0)
 			this.main.power(.5);
 
-		// s or down arrow
-		if ((this.keyMap["83"] || this.keyMap["40"]) && this.turnCounter === 0)
+		if ((this.keyMap["s"] || this.keyMap["ArrowDown"]) && this.turnCounter === 0)
 			this.main.power(-.5);
 
-		// a or left arrow
-		if (this.keyMap["65"] || this.keyMap["37"]) this.main.changeDirection(-1);
+		if (this.keyMap["a"] || this.keyMap["ArrowLeft"]) this.main.changeDirection(-1);
 
-		// d or right arrow
-		if (this.keyMap["68"] || this.keyMap["39"]) this.main.changeDirection(1);
+		if (this.keyMap["d"] || this.keyMap["ArrowRight"]) this.main.changeDirection(1);
 	};
 
 }

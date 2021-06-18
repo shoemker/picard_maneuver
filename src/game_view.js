@@ -70,8 +70,8 @@ class GameView {
 
 	
 	keyHandler(e) {
-		if (e.type == 'keydown') this.game.getKeyMap()[e.keyCode] = true;
-		else this.game.getKeyMap()[e.keyCode] = false;			
+		if (e.type == 'keydown') this.game.getKeyMap()[e.key] = true;
+		else this.game.getKeyMap()[e.key] = false;			
 	};
 
 	// get ship choice, 

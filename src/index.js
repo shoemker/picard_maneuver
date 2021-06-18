@@ -51,13 +51,18 @@ document.addEventListener("DOMContentLoaded", function () {
  
 
 	window.addEventListener('keydown', (e) => {
-
+		
 		if (e.target == document.body) {
-			switch (e.keyCode) {
-				case 80:
+			switch (e.key) {
+				case "p":
 					if (!gv.gameOpening) gv.pauseGameToggle(); // p pauses game
 					break;
-				case 32: case 37: case 38: case 39: case 40:
+					
+				case " ": 
+				case "ArrowUp": 
+				case "ArrowDown": 
+				case "ArrowLeft": 
+				case "ArrowRight":
 				// stops the spacebar and arrow keys from moving window
 					e.preventDefault();
 			}
