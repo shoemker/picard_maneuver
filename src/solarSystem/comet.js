@@ -14,14 +14,9 @@ class Comet extends OrbitingObject {
 		const orbitPos = this.suns[0].getPosition();
 		const orbitRad = this.suns[0].radius;
 
-		// hopefully comet isn't drawn when it's behind sun
-		if (this.pos.x > orbitPos.x + orbitRad/4 || 
-			this.pos.x < orbitPos.x - orbitRad/4 ||
-			this.pos.y > orbitPos.y) {
-					
-			super.draw(ctx, tilt);
-			this.drawTail(ctx,tilt);
-		}
+		super.draw(ctx, tilt);
+		this.drawTail(ctx,tilt);
+		
 	};
 
 

@@ -52,9 +52,16 @@ class SolarSystem {
 
 	draw(ctx) {
 		this.stars.forEach((star) => star.draw(ctx));
-		this.suns.forEach((sun) => sun.draw(ctx, this.tilt));
-		this.planets.forEach((planet) => planet.drawPath(ctx, this.tilt));
-		this.planets.forEach((planet) => planet.draw(ctx, this.tilt));
+		
+
+		// the sun and planets are sorted before they are drawn so that 
+		// they are drawn correctly when they move in front of each other
+		let all = this.suns.concat(this.planets);
+		let cb = ((a, b) => (a.getPosition().y - b.getPosition().y));
+		all.sort(cb);
+
+		all.forEach((ele) => ele.drawPath(ctx, this.tilt));
+		all.forEach((ele) => ele.draw(ctx, this.tilt));
 	};
 
 	moveObjects(){
