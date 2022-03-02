@@ -155,6 +155,13 @@ class GameOpening {
 		ctx.font = "72px FINALOLD";
 		ctx.fillText("OR", 570, y+135);
 
+		ctx.fillStyle = "white";
+		ctx.font = "20px FINALOLD";
+		ctx.globalAlpha = 0.7;
+		ctx.fillText("Loading", x1+110, y+110);
+		ctx.fillText("Loading", x2+120, y+110);
+		ctx.globalAlpha = 1;
+
 		ctx.drawImage(this.enterImg, 22, 0, 660, 300, x1, y + 28, 300, 150);
 		ctx.drawImage(this.sillyImg, 0, 50, 490, 350, x2, y+2, 300, 200);
 	}
