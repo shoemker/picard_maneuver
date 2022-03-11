@@ -142,7 +142,7 @@ class GameOpening {
 			this.canvas_height / 3+ 50);
 
 		ctx.fillStyle = "#FAFAD2";
-
+ 
 		ctx.font = "54px FINALOLD"; 
 		ctx.fillText("Play as This Ship", x1, y);
 		ctx.fillText("Doodle Your Own Ship", x2-40, y);
@@ -155,6 +155,7 @@ class GameOpening {
 		ctx.font = "72px FINALOLD";
 		ctx.fillText("OR", 570, y+135);
 
+		// puts loading which images will overwrite when laoded
 		ctx.fillStyle = "white";
 		ctx.font = "20px FINALOLD";
 		ctx.globalAlpha = 0.7;
