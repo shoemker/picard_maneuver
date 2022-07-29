@@ -32,7 +32,7 @@ You are in control of a starship thrust into combat with an enemy. By controllin
 	<li>When facing multiple enemies, a red target symbol appears on the ship that main ship is targeting with its phasors, and a corresponding target appears on the enemy's Ship Systems Display. This is the ship that the 360 degree beam weapon will fire at. Target can be changed by player.</li>
 	<li>Arrow appears at edge of screen when main ship's target is offscreen.</li>
 	<li>When ships have zero hull integrity there is a visible explosion.</li>
-</ol>
+</ol> 
 <br>
 <a href="https://shoemker.github.io/picard_maneuver/"><img src="./images/screenshots/pm_Screenshot.jpg"></a>
 <br>
