@@ -1,11 +1,16 @@
 const GameView = require("./game_view");
 const Utils = require("./utils");
+// const CanvasGifEncoder = require('canvas-gif-encoder');
+// const fs = require('fs-extra');
 
 document.addEventListener("DOMContentLoaded", function () {
 	const canvasEl = document.getElementsByTagName("canvas")[0];
 	canvasEl.width = Utils.getCanvasDim().x;
 	canvasEl.height = Utils.getCanvasDim().y;
 	const ctx = canvasEl.getContext("2d");
+	// const encoder = new CanvasGifEncoder(1200, 900);
+	// let stream = fs.createWriteStream('output.gif');
+	// encoder.createReadStream().pipe(stream);
 
 	// sounds
 	const audioCtx = new AudioContext();
@@ -23,6 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	gv.start();
+
+	// encoder.begin(); 
+
+	// encoder.addFrame(ctx, 250);
+
+	
+	// for (let i = 0; i < 20; ++i) {
+	// 	encoder.addFrame(ctx, 250);
+	// }
+
+	// encoder.end();
+
+
 
 	// this block is for the events for the user to draw a ship
 	canvasEl.addEventListener('mousedown', () => { 

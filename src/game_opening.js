@@ -12,7 +12,7 @@ class GameOpening {
 		this.userDraw = null;
 		this.max_depth = 32;
 
-		this.centerOfSS = { x: Utils.getCanvasDim().x / 2, y: 145 };
+		this.centerOfSS = { x: Utils.getCanvasDim().x / 2, y: 175 };
 		this.ss = new SolarSystem(150, 340);
 		SSData1.addDataToSS(this.ss, this.centerOfSS,);
 
