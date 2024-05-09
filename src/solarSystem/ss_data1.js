@@ -118,7 +118,7 @@ const SSData1 = {
 			speed: 2.5,
 			dir: { x: 0, y: 1 },
 			center,
-			offplane: .7,
+			offplane: 1,
 			suns: []
 		};
 
