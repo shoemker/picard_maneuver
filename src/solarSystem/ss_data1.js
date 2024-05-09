@@ -96,17 +96,17 @@ const SSData1 = {
 		x = center.x + 400;
 		y = center.y;
 
-		const jupsMoon1 = {
-			center,
-			pos: { x: x - 50, y },
-			radius: 2.5,
-			color: "brown",
-			mass: 1.5,
-			speed: 2,
-			dir: { x: 0, y: -1 },
-			center,
-			suns: []
-		};
+		// const jupsMoon1 = {
+		// 	center,
+		// 	pos: { x: x - 50, y },
+		// 	radius: 2.5,
+		// 	color: "brown",
+		// 	mass: 1.5,
+		// 	speed: 2,
+		// 	dir: { x: 0, y: -1 },
+		// 	center,
+		// 	suns: []
+		// };
 
 
 		const jupsMoon2 = {
@@ -133,7 +133,7 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			center,
 			path: true,
-			moonData: [jupsMoon1, jupsMoon2]
+			moonData: [jupsMoon2]
 		}));
 
 
