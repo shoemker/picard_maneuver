@@ -95,6 +95,7 @@ const SSData1 = {
 
 		x = center.x + 400;
 		y = center.y;
+		let moonData = [];
 
 		// const jupsMoon1 = {
 		// 	center,
@@ -107,6 +108,7 @@ const SSData1 = {
 		// 	center,
 		// 	suns: []
 		// };
+		// moonData.push(jupsMoon1)
 
 
 		const jupsMoon2 = {
@@ -121,6 +123,8 @@ const SSData1 = {
 			offplane: 1,
 			suns: []
 		};
+		moonData.push(jupsMoon2)
+
 
 		ss.addPlanet(new OrbitingObject({
 			center,
@@ -133,7 +137,7 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			center,
 			path: true,
-			moonData: [jupsMoon2]
+			moonData
 		}));
 
 
