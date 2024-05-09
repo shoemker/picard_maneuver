@@ -4,9 +4,10 @@ const Utils = require("../utils");
 class Moon extends OrbitingObject {
 	constructor(options) {
 		super(options);
-
+		// debugger
 		// putting moon orbit on different plane is not currently used
-		this.moonPlane = 1;
+		if (options.offplane) this.offplane = options.offplane;
+		else this.offplane = 0;
 	};
 
 	addSun(sun) { this.suns.push(sun); };
@@ -20,11 +21,12 @@ class Moon extends OrbitingObject {
 	draw(ctx, tilt, orbitCenterY, mult) {
 		let positionOffsetX = (this.pos.x - this.suns[0].getPosition().x) * mult;
 		let positionOffsetY = (this.pos.y - this.suns[0].getPosition().y) * tilt *mult;
+
 		
 			// putting moon orbit on different plane is not currently used
-		// const a = positionOffsetX - (positionOffsetX*this.moonPlane);
-		// positionOffsetX -= a;
-		// positionOffsetY += a;
+		positionOffsetY += positionOffsetX* this.offplane;
+
+
 
 		const newX = this.suns[0].getPosition().x + positionOffsetX;
 

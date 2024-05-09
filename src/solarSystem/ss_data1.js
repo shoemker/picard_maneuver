@@ -24,7 +24,7 @@ const SSData1 = {
 		ss.addSun(new Sun( { 
 				center,
 				pos: center,
-				radius: 90,
+				radius: 110,
 				gradientColor: "yellow",
 				mass: 300,
 				speed: 0,
@@ -96,15 +96,29 @@ const SSData1 = {
 		x = center.x + 400;
 		y = center.y;
 
-		const jupsMoon = {
+		const jupsMoon1 = {
 			center,
 			pos: { x: x - 50, y },
-			radius: 2,
+			radius: 2.5,
 			color: "brown",
 			mass: 1.5,
 			speed: 2,
 			dir: { x: 0, y: -1 },
 			center,
+			suns: []
+		};
+
+
+		const jupsMoon2 = {
+			center,
+			pos: { x: x + 38, y },
+			radius: 2,
+			color: "purple",
+			mass: 1.5,
+			speed: 2.5,
+			dir: { x: 0, y: 1 },
+			center,
+			offplane: .7,
 			suns: []
 		};
 
@@ -119,7 +133,7 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			center,
 			path: true,
-			moonData: [jupsMoon]
+			moonData: [jupsMoon1, jupsMoon2]
 		}));
 
 
