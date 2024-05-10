@@ -14,12 +14,6 @@ const SSData1 = {
 		let x;
 		let y;
 
-		// const o = new SolarObject( {
-		// 	pos: center,
-		// 	radius: 60,
-		// 	mass: 300,
-		// 	color: "yellow"
-		// });
 
 		ss.addSun(new Sun( { 
 				center,
@@ -44,6 +38,7 @@ const SSData1 = {
 			color: "pink",
 			mass: .3,
 			speed: 1,
+			offplane: -.5,
 			dir: { x: 0, y: -1 },
 			suns: []
 		};
@@ -106,10 +101,10 @@ const SSData1 = {
 		// 	speed: 2,
 		// 	dir: { x: 0, y: -1 },
 		// 	center,
-		// 	offplane: -1,
+		// 	offplane: 0,
 		// 	suns: []
 		// };
-		// moonData.push(jupsMoon1)
+		// moonData.push(jupsMoon1);
 
 
 		const jupsMoon2 = {
@@ -121,10 +116,10 @@ const SSData1 = {
 			speed: 2.5,
 			dir: { x: 0, y: 1 },
 			center,
-			offplane: 1,
+			offplane: .7,
 			suns: []
 		};
-		moonData.push(jupsMoon2)
+		moonData.push(jupsMoon2);
 
 
 		ss.addPlanet(new OrbitingObject({
