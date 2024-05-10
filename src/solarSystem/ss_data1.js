@@ -106,6 +106,7 @@ const SSData1 = {
 		// 	speed: 2,
 		// 	dir: { x: 0, y: -1 },
 		// 	center,
+		// 	offplane: -1,
 		// 	suns: []
 		// };
 		// moonData.push(jupsMoon1)

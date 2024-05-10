@@ -24,8 +24,14 @@ class Moon extends OrbitingObject {
 		
 		// putting moon orbit on different plane 
 		if (this.offplane) {
-			positionOffsetX = positionOffsetX * Math.cos(this.offplane);
-			positionOffsetY = positionOffsetY + positionOffsetX;
+			let off = Math.cos(this.offplane);
+			if (this.offplane < 0) {
+				off *= -1;
+				debugger;
+			}
+			positionOffsetX = positionOffsetX * off;
+			if (this.offplane > 0) positionOffsetY = positionOffsetY + positionOffsetX;
+			else positionOffsetY = positionOffsetY - positionOffsetX;
 		}
 
 		const newX = this.suns[0].getPosition().x + positionOffsetX;
