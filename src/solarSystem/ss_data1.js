@@ -38,7 +38,7 @@ const SSData1 = {
 			color: "pink",
 			mass: .3,
 			speed: 1,
-			offplane: -.5,
+			offplane: -.5, // angle in radians off solar system plane
 			dir: { x: 0, y: -1 },
 			suns: []
 		};
@@ -116,7 +116,7 @@ const SSData1 = {
 			speed: 2.5,
 			dir: { x: 0, y: 1 },
 			center,
-			offplane: .7,
+			offplane: .7, // angle in radians off solar system plane
 			suns: []
 		};
 		moonData.push(jupsMoon2);
