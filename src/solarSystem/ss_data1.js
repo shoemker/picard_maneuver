@@ -30,6 +30,7 @@ const SSData1 = {
 
 		x = center.x - 150
 		y = center.y
+		let moonData = [];
 
 		const vensMoon = {
 			center,
@@ -42,6 +43,7 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			suns: []
 		};
+		moonData.push(vensMoon);
 
 		ss.addPlanet(new OrbitingObject( {
 			center,
@@ -53,14 +55,14 @@ const SSData1 = {
 			speed: 4.98,
 			dir: { x: 0, y: 1 },
 			path: true,
-			moonData: [vensMoon]
+			moonData
 		}));
 
 
 		ss.addPlanet(new OrbitingObject({
 			center,
 			pos: { x: center.x + 250, y: center.y },
-			radius: 9,
+			radius: 7.5,
 			gradientColors: { a: "lightblue", b: "blue" },
 			mass: 10,
 			suns: ss.getSuns(),
@@ -70,8 +72,8 @@ const SSData1 = {
 			ringsColor: "darkblue",
 			// ringsGradient: { a: "blue", b: "darkblue" },
 			rings: [{radius: 18, angle: Math.PI / 6, thickness: 2 },
-				{radius: 15, angle: Math.PI / 6, thickness: 2 },
-				{radius: 12, angle: Math.PI / 6, thickness: 2 }]
+				{radius: 14, angle: Math.PI / 6, thickness: 2 },
+				{radius: 11, angle: Math.PI / 6, thickness: 2 }]
 		}));
 
 
@@ -90,7 +92,7 @@ const SSData1 = {
 
 		x = center.x + 400;
 		y = center.y;
-		let moonData = [];
+		moonData = [];
 
 		// const jupsMoon1 = {
 		// 	center,
@@ -148,6 +150,59 @@ const SSData1 = {
 			speed: 1.8,
 			dir: { x: 0, y: -1 }
 		}));
+
+		
+		// adding asteroids
+		ss.addPlanet(new OrbitingObject({
+			center,
+			pos: { x: center.x -300, y: center.y },
+			radius: .8,
+			gradientColors: {a: "lightgray", b: "gray" },
+			mass: .2,
+			suns: ss.getSuns(),
+			speed: 2.5,
+			dir: { x: 0, y: 1 },
+			path: false
+		}));
+
+
+		ss.addPlanet(new OrbitingObject({
+			center,
+			pos: { x: center.x + 320, y: center.y },
+			radius: .8,
+			gradientColors: { a: "lightgray", b: "gray" },
+			mass: .2,
+			suns: ss.getSuns(),
+			speed: 2.4,
+			dir: { x: 0, y: -1 },
+			path: false
+		}));
+
+
+		ss.addPlanet(new OrbitingObject({
+			center,
+			pos: { x: center.x - 200, y: center.y },
+			radius: .8,
+			gradientColors: { a: "lightgray", b: "gray" },
+			mass: .2,
+			suns: ss.getSuns(),
+			speed: 3.5,
+			dir: { x: 0, y: 1 },
+			path: false
+		}));
+
+		ss.addPlanet(new OrbitingObject({
+			center,
+			pos: { x: center.x - 440, y: center.y},
+			radius: .8,
+			gradientColors: { a: "lightgray", b: "gray" },
+			mass: .2,
+			suns: ss.getSuns(),
+			speed: 1.78,
+			dir: { x: 0, y:1 },
+			path: false
+		}));
+
 	}
 };
 
