@@ -202,7 +202,6 @@ const SSData1 = {
 			dir: { x: 0, y:1 },
 			path: false
 		}));
-
 	}
 };
 
