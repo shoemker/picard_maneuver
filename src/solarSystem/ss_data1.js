@@ -143,7 +143,7 @@ const SSData1 = {
 		ss.addPlanet(new Comet({
 			center,
 			pos: { x: center.x + 150, y: center.y + 250 },
-			radius: 1.5,
+			radius: 1.2,
 			color: "rgb(255, 255, 204)",
 			mass: 1,
 			suns: ss.getSuns(),
@@ -165,7 +165,6 @@ const SSData1 = {
 			path: false
 		}));
 
-
 		ss.addPlanet(new OrbitingObject({
 			center,
 			pos: { x: center.x + 320, y: center.y },
@@ -177,7 +176,6 @@ const SSData1 = {
 			dir: { x: 0, y: -1 },
 			path: false
 		}));
-
 
 		ss.addPlanet(new OrbitingObject({
 			center,
