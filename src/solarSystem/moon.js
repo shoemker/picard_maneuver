@@ -19,9 +19,9 @@ class Moon extends OrbitingObject {
 	}
 
 	draw(ctx, tilt, orbitCenterY, mult) {
+		
 		let positionOffsetX = (this.pos.x - this.suns[0].getPosition().x) * mult;
 		let positionOffsetY = (this.pos.y - this.suns[0].getPosition().y) * tilt *mult;
-
 
 		// putting moon orbit on different plane from solar system plane
 		positionOffsetX = positionOffsetX * Math.cos(this.offplane);
