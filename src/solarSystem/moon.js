@@ -24,15 +24,14 @@ class Moon extends OrbitingObject {
 		let positionOffsetX = (this.pos.x - this.suns[0].getPosition().x) * mult;
 		let positionOffsetY = distanceFromPlanetY * tilt *mult;
 
+		// putting moon orbit on different plane from solar system plane
+		positionOffsetY += positionOffsetX * Math.sin(this.offplane);
+		positionOffsetX = positionOffsetX * Math.cos(this.offplane);
+
 		// the moon needs to change size from its orbit, not just planet's orbit
 		let moonOrbitRadiusMult = 1 + distanceFromPlanetY / 300;
 		let radius = moonOrbitRadiusMult * this.radius * mult;
 
-		// putting moon orbit on different plane from solar system plane
-		positionOffsetX = positionOffsetX * Math.cos(this.offplane);
-		positionOffsetY += positionOffsetX * Math.sin(this.offplane);
-		
-		
 		const newX = this.suns[0].getPosition().x + positionOffsetX;
 	
 		Utils.drawFilledCircle(ctx, newX, orbitCenterY + positionOffsetY, radius, this.color);

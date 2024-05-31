@@ -11,8 +11,6 @@ const SSData1 = {
 		
 		if (center) ss.setCenter(center);
 		else center = ss.getCenter();
-		let x;
-		let y;
 
 
 		ss.addSun(new Sun( { 
@@ -28,8 +26,8 @@ const SSData1 = {
 		);
 
 
-		x = center.x - 150
-		y = center.y
+		let x = center.x - 150
+		let y = center.y
 		let moonData = [];
 
 		const vensMoon = {
@@ -118,7 +116,7 @@ const SSData1 = {
 			speed: 2.5,
 			dir: { x: 0, y: 1 },
 			center,
-			offplane: .7, // angle in radians off solar system plane
+			offplane: .6, // angle in radians off solar system plane
 			suns: []
 		};
 		moonData.push(jupsMoon2);
