@@ -36,7 +36,7 @@ const SSData1 = {
 			radius: 1,
 			color: "pink",
 			mass: .3,
-			speed: 1,
+			speed: 1.2,
 			offplane: -.5, // angle in radians off solar system plane
 			dir: { x: 0, y: -1 },
 			suns: []
